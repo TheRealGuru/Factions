@@ -1,7 +1,16 @@
 package gg.revival.factions.tools;
 
+import com.google.common.base.Joiner;
 import gg.revival.factions.file.FileManager;
+import gg.revival.factions.obj.Faction;
+import gg.revival.factions.obj.PlayerFaction;
+import gg.revival.factions.obj.ServerFaction;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+
+import java.text.DecimalFormat;
+import java.util.*;
 
 public class Messages {
 
@@ -133,5 +142,99 @@ public class Messages {
     public static String unfrozenRequired() { return getValue("errors.unfrozen-required"); }
 
     public static String notInFaction() { return getValue("errors.not-in-faction"); }
+
+    public static String factionInfo(PlayerFaction faction, Player displayedTo) {
+        StringBuilder info = new StringBuilder();
+        DecimalFormat format = new DecimalFormat("#,###.00");
+        Map<UUID, String> namedRoster = new HashMap<UUID, String>();
+
+        try {
+            namedRoster = new NameFetcher(faction.getRoster(false)).call();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        info.append(
+                ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "----------------" +
+                        ChatColor.GOLD + "" + ChatColor.BOLD + "[" + ChatColor.YELLOW + faction.getDisplayName() + ChatColor.GOLD + "" + ChatColor.BOLD + "]" +
+                        ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "----------------" + "\n");
+
+        if(faction.getRoster(false).contains(displayedTo.getUniqueId()) && faction.getAnnouncement() != null) {
+            info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Announcement" + ChatColor.WHITE + ": " + faction.getAnnouncement() + "\n");
+        }
+
+        info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Deaths Until Raidable" + ChatColor.WHITE + ": ");
+
+        if(faction.getDtr().doubleValue() < 0.0) {
+            info.append(ChatColor.DARK_RED + "" + Math.round(faction.getDtr().doubleValue()));
+        } else if (faction.getDtr().doubleValue() < 1.0) {
+            info.append(ChatColor.RED + "" + Math.round(faction.getDtr().doubleValue()));
+        } else {
+            info.append(Math.round(faction.getDtr().doubleValue()));
+        }
+
+        if(faction.isFrozen()) {
+            info.append(ChatColor.GRAY + " (Frozen)" + "\n");
+        } else if (faction.getDtr().doubleValue() == faction.getMaxDTR()) {
+            info.append(ChatColor.BLUE + "(Max)" + "\n");
+        } else {
+            info.append("\n");
+        }
+
+        info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Balance" + ChatColor.WHITE + ": $" + format.format(faction.getBalance()));
+
+        info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Leader" + ChatColor.WHITE + ": " + namedRoster.get(faction.getLeader()));
+
+        List<String> onlineOfficers = new ArrayList<String>();
+        List<String> onlineMembers = new ArrayList<String>();
+        List<String> offlineOfficers = new ArrayList<String>();
+        List<String> offlineMembers = new ArrayList<String>();
+
+        for(UUID officerID : faction.getOfficers()) {
+            if(Bukkit.getPlayer(officerID) != null && Bukkit.getPlayer(officerID).isOnline()) {
+                onlineOfficers.add(ChatColor.GREEN + "*" + namedRoster.get(officerID));
+            } else {
+                offlineOfficers.add(ChatColor.GRAY + "*" + namedRoster.get(officerID));
+            }
+        }
+
+        for(UUID memberID : faction.getMembers()) {
+            if(Bukkit.getPlayer(memberID) != null && Bukkit.getPlayer(memberID).isOnline()) {
+                onlineMembers.add(ChatColor.GREEN + namedRoster.get(memberID));
+            } else {
+                offlineMembers.add(ChatColor.GRAY + namedRoster.get(memberID));
+            }
+        }
+
+        info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Officers" + ChatColor.WHITE + ": " + Joiner.on(ChatColor.WHITE + ", ").join(onlineOfficers));
+        info.append(Joiner.on(ChatColor.WHITE + ", ").join(offlineOfficers) + "\n");
+        info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Members" + ChatColor.WHITE + ": " + Joiner.on(ChatColor.WHITE + ", ").join(onlineMembers));
+        info.append(Joiner.on(ChatColor.WHITE + ", ").join(offlineMembers) + "\n");
+
+        if(faction.isFrozen()) {
+            int seconds = 0, minutes = 0, hours = 0;
+            long dur = faction.getUnfreezeTime() - System.currentTimeMillis();
+
+            seconds = (int)dur / 1000;
+            minutes = seconds / 60;
+            hours = minutes / 60;
+
+            String unfreezeTime = null;
+
+            if(hours > 0) {
+                unfreezeTime = hours + " hours";
+            } else if(minutes > 0) {
+                unfreezeTime = minutes + " minutes";
+            } else {
+                unfreezeTime = seconds + " seconds";
+            }
+
+            info.append("     " + "\n");
+            info.append(ChatColor.GOLD + "This faction will begin regenerating DTR in " + ChatColor.WHITE + unfreezeTime + "\n");
+            info.append(ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "----------------------------------------");
+        }
+
+        return info.toString();
+    }
 
 }
