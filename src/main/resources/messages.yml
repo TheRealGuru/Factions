@@ -1,0 +1,41 @@
+notifications:
+  member-online: '&aMember Online&f: %player%'
+  member-offline: '&cMember Offline&f: %player%'
+  friendly-fire: '&cCombat between &fFaction Members &chas been disabled'
+  ally-fire: '&cWarning, you are attacking an &dally'
+  entering-claim: '&eYou are now entering &r%claim%'
+  leaving-claim: '&eYou are now leaving &r%claim%'
+  subclaim-deleted: '&eRemoved subclaim'
+  subclaim-deleted-faction: '&2%player% &eremoved a subclaim'
+
+chat-formatting:
+  global-faction-member: '&2[%fac%] &r%player%&f: %msg%'
+  global-ally-member: '&d[%fac%] &r%player%&f: %msg%'
+  global-enemy: '&c[%fac%] &r%player%&f: %msg%'
+  faction-chat: '&2[&6FC&2][%fac%] &r%player%&f: &2%msg%'
+  ally-chat: '&d[&6AC&d][%fac%] &r%player%&f: &d%msg%'
+
+broadcasts:
+  fac-created: '&6%fac% &ehas been &acreated &eby &9%player%'
+  fac-disbanded: '&6%fac% &ehas been &cdisbanded &eby &9%player%'
+
+errors:
+  no-permission: '&cYou do not have permission to use this command'
+  no-console: 'This action can not be performed through the console'
+  profile-not-found: '&cWe were unable to find your profile data so this action has been canceled'
+  player-not-found: '&cPlayer not found'
+  faction-not-found: '&cFaction not found'
+  already-in-faction: '&cYou are already in a faction'
+  already-in-faction-other: '&cThis player is already in a faction'
+  bad-fac-name: '&cFaction names must be 3-16 characters, A-Z 0-9. If you believe you meet these requirements you may be stupid and your name is something obviously offensive.'
+  fac-name-in-use: '&cThis faction name is already in use'
+  no-subclaim-access: '&cYou do not have access to this subclaim'
+  subclaim-too-close: '&cYou can not perform this action next to a subclaimed chest'
+  leader-required: '&cThis action requires you to have the role leader role'
+  officer-required: '&cThis action requires you to have the officer role'
+  unraidable-required: '&cThis action can not be performed while your faction is raidable'
+  unfrozen-required: '&cThis action can not be performed while your faction power is frozen'
+  not-in-faction: '&cYou are not in a faction'
+
+misc:
+  game-tag: '&7[&fFactions&4X&7]&r'
