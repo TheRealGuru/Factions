@@ -13,6 +13,7 @@ E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\scoreboar
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\scoreboards\ScoreboardManager.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\subclaims\SubclaimGUI.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\ToolBox.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FDisbandOtherCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\Configuration.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\claims\Claim.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\core\FactionManager.java
@@ -35,6 +36,7 @@ E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\timers\Ti
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\CommandManager.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FCreateCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FDisbandCommand.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FShowCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\UUIDFetcher.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FCreateServerFactionCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\locations\FLocation.java

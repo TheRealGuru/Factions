@@ -181,9 +181,9 @@ public class Messages {
             info.append("\n");
         }
 
-        info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Balance" + ChatColor.WHITE + ": $" + format.format(faction.getBalance()));
+        info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Balance" + ChatColor.WHITE + ": $" + format.format(faction.getBalance()) + "\n");
 
-        info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Leader" + ChatColor.WHITE + ": " + namedRoster.get(faction.getLeader()));
+        info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Leader" + ChatColor.WHITE + ": " + namedRoster.get(faction.getLeader()) + "\n");
 
         List<String> onlineOfficers = new ArrayList<String>();
         List<String> onlineMembers = new ArrayList<String>();
@@ -212,7 +212,7 @@ public class Messages {
         info.append(Joiner.on(ChatColor.WHITE + ", ").join(offlineMembers) + "\n");
 
         if(faction.isFrozen()) {
-            int seconds = 0, minutes = 0, hours = 0;
+            int seconds, minutes, hours;
             long dur = faction.getUnfreezeTime() - System.currentTimeMillis();
 
             seconds = (int)dur / 1000;

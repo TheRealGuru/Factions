@@ -62,7 +62,9 @@ gg\revival\factions\claims\ClaimManager$2.class
 gg\revival\factions\tools\NameFetcher.class
 gg\revival\factions\threads\ThreadManager$1.class
 gg\revival\factions\commands\cont\FDisbandCommand.class
+gg\revival\factions\commands\cont\FDisbandOtherCommand.class
 gg\revival\factions\scoreboards\FScoreboard.class
 gg\revival\factions\listeners\cont\SubclaimEventsListener$1.class
+gg\revival\factions\commands\cont\FShowCommand.class
 gg\revival\factions\commands\FactionsCommandExecutor.class
 gg\revival\factions\subclaims\SubclaimManager.class
