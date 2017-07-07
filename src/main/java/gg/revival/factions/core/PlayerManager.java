@@ -10,7 +10,6 @@ import gg.revival.factions.tools.Configuration;
 import org.bson.Document;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import javax.print.Doc;
 import java.util.HashSet;
 import java.util.UUID;
 
@@ -61,7 +60,7 @@ public class PlayerManager {
     }
 
     public static void loadProfile(UUID uuid) {
-        if(!Configuration.DB_ENABLED) {
+        if (!Configuration.DB_ENABLED) {
             loadPlayer(uuid, 0.0);
             return;
         }
@@ -72,13 +71,11 @@ public class PlayerManager {
                 FindIterable<Document> query = collection.find(Filters.eq("uuid", uuid.toString()));
                 Document document = query.first();
 
-                if(document != null) {
+                if (document != null) {
                     double balance = document.getDouble("balance");
 
                     loadPlayer(uuid, balance);
-                }
-
-                else {
+                } else {
                     loadPlayer(uuid, 0.0);
                 }
             }
@@ -86,7 +83,7 @@ public class PlayerManager {
     }
 
     public static void saveProfile(FPlayer player, boolean unloadOnCompletion) {
-        if(!Configuration.DB_ENABLED)
+        if (!Configuration.DB_ENABLED)
             return;
 
         new BukkitRunnable() {
@@ -98,15 +95,13 @@ public class PlayerManager {
                 Document newDoc = new Document("uuid", player.getUuid().toString())
                         .append("balance", player.getBalance());
 
-                if(document != null) {
+                if (document != null) {
                     collection.replaceOne(document, newDoc);
-                }
-
-                else {
+                } else {
                     collection.insertOne(newDoc);
                 }
 
-                if(unloadOnCompletion) {
+                if (unloadOnCompletion) {
                     unloadPlayer(player.getUuid());
                 }
             }

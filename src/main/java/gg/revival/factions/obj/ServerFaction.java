@@ -8,7 +8,9 @@ import java.util.UUID;
 
 public class ServerFaction extends Faction {
 
-    @Getter @Setter ServerClaimType type;
+    @Getter
+    @Setter
+    ServerClaimType type;
 
     public ServerFaction(UUID uuid, String displayName, ServerClaimType type) {
         super(uuid, displayName);

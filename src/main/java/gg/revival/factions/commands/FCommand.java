@@ -7,17 +7,25 @@ import java.util.List;
 
 public class FCommand {
 
-    @Getter String label;
-    @Getter String syntax;
-    @Getter String description;
-    @Getter String permission;
+    @Getter
+    String label;
+    @Getter
+    String syntax;
+    @Getter
+    String description;
+    @Getter
+    String permission;
 
-    @Getter  List<String> aliases;
+    @Getter
+    List<String> aliases;
 
-    @Getter int minArgs;
-    @Getter int maxArgs;
+    @Getter
+    int minArgs;
+    @Getter
+    int maxArgs;
 
-    @Getter boolean playerOnly;
+    @Getter
+    boolean playerOnly;
 
     public FCommand(String label, List<String> aliases, String syntax, String description, String permission, int minArgs, int maxArgs, boolean playerOnly) {
         this.label = label;

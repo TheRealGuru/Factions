@@ -27,8 +27,20 @@ public class NameFetcher implements Callable<Map<UUID, String>> {
     public Map<UUID, String> call() throws Exception {
         Map<UUID, String> uuidStringMap = new HashMap<UUID, String>();
 
-        for (UUID uuid: uuids) {
-            HttpURLConnection connection = (HttpURLConnection) new URL(PROFILE_URL+uuid.toString().replace("-", "")).openConnection();
+        for (UUID uuid : uuids) {
+            if (UserCache.isCached(uuid)) {
+                uuidStringMap.put(uuid, UserCache.cachedUsernames.get(uuid));
+            }
+        }
+
+        if (uuidStringMap.size() == uuids.size()) {
+            return uuidStringMap;
+        }
+
+        for (UUID uuid : uuids) {
+            if (uuidStringMap.containsKey(uuid)) continue;
+
+            HttpURLConnection connection = (HttpURLConnection) new URL(PROFILE_URL + uuid.toString().replace("-", "")).openConnection();
             JSONObject response = (JSONObject) jsonParser.parse(new InputStreamReader(connection.getInputStream()));
             String name = (String) response.get("name");
 
@@ -44,7 +56,9 @@ public class NameFetcher implements Callable<Map<UUID, String>> {
             }
 
             uuidStringMap.put(uuid, name);
+            UserCache.cachedUsernames.put(uuid, name);
         }
+
         return uuidStringMap;
     }
 

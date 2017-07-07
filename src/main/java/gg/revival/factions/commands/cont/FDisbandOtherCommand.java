@@ -29,25 +29,25 @@ public class FDisbandOtherCommand extends FCommand {
     public void onCommand(CommandSender sender, String args[]) {
         String disbander = "Console";
 
-        if(sender instanceof Player) {
-            Player player = (Player)sender;
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
 
             disbander = player.getName();
 
-            if(!player.hasPermission(getPermission())) {
+            if (!player.hasPermission(getPermission())) {
                 player.sendMessage(Messages.noPermission());
                 return;
             }
         }
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             sender.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
         String factionName = args[1];
 
-        if(FactionManager.getFactionByName(factionName) == null) {
+        if (FactionManager.getFactionByName(factionName) == null) {
             sender.sendMessage(Messages.factionNotFound());
             return;
         }

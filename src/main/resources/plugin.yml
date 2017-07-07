@@ -7,3 +7,4 @@ depends: [MongoBukkitDriver]
 commands:
   faction:
     description: Core Faction Command
+    aliases: [f, t, team]

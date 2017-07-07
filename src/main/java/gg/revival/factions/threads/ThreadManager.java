@@ -1,7 +1,6 @@
 package gg.revival.factions.threads;
 
 import gg.revival.factions.FP;
-import gg.revival.factions.locations.LocationManager;
 import gg.revival.factions.threads.cont.LocationThread;
 import org.bukkit.scheduler.BukkitRunnable;
 

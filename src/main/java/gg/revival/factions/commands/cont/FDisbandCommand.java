@@ -22,31 +22,31 @@ public class FDisbandCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player)) {
+        if (!(sender instanceof Player)) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(FactionManager.getFactionByPlayer(player.getUniqueId()) == null) {
+        if (FactionManager.getFactionByPlayer(player.getUniqueId()) == null) {
             player.sendMessage(Messages.notInFaction());
             return;
         }
 
-        PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
+        PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
 
-        if(!faction.getLeader().equals(player.getUniqueId())) {
+        if (!faction.getLeader().equals(player.getUniqueId())) {
             player.sendMessage(Messages.leaderRequired());
             return;
         }
 
-        if(faction.isRaidable()) {
+        if (faction.isRaidable()) {
             player.sendMessage(Messages.unraidableRequired());
             return;
         }
 
-        if(faction.isFrozen()) {
+        if (faction.isFrozen()) {
             player.sendMessage(Messages.unfrozenRequired());
             return;
         }

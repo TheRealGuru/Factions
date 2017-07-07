@@ -1,6 +1,8 @@
 package gg.revival.factions.obj;
 
 import gg.revival.factions.FP;
+import gg.revival.factions.tools.Configuration;
+import gg.revival.factions.tools.Logger;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
@@ -14,12 +16,23 @@ import java.util.UUID;
 
 public class PlayerFaction extends Faction {
 
-    @Getter UUID leader;
-    @Getter @Setter List<UUID> officers, members, allies, pendingInvites, pendingAllies, factionChat, allyChat;
-    @Getter @Setter String announcement;
-    @Getter @Setter double balance;
-    @Getter @Setter BigDecimal dtr;
-    @Getter @Setter long regenTime, unfreezeTime;
+    @Getter
+    UUID leader;
+    @Getter
+    @Setter
+    List<UUID> officers, members, allies, pendingInvites, pendingAllies, factionChat, allyChat;
+    @Getter
+    @Setter
+    String announcement;
+    @Getter
+    @Setter
+    double balance;
+    @Getter
+    @Setter
+    BigDecimal dtr;
+    @Getter
+    @Setter
+    long regenTime, unfreezeTime;
 
     public PlayerFaction(UUID factionID, String displayName, UUID leader,
                          List<UUID> officers, List<UUID> members, List<UUID> allies,
@@ -48,7 +61,7 @@ public class PlayerFaction extends Faction {
                 updateFreeze();
                 updateRegen();
             }
-        }.runTaskTimerAsynchronously(FP.getInstance(), 20L, 20L);
+        }.runTaskTimerAsynchronously(FP.getInstance(), 0L, 20L);
     }
 
     public List<UUID> getRoster(boolean onlineOnly) {
@@ -88,7 +101,7 @@ public class PlayerFaction extends Faction {
     public void updateRegen() {
         if (isFrozen()) return; //They are frozen
         if (getDtr().doubleValue() >= getMaxDTR()) return; //They have max DTR
-        if (getRegenTime() < System.currentTimeMillis()) return; //Regen time hasnt been reached yet
+        if (getRegenTime() > System.currentTimeMillis()) return; //Regen time hasnt been reached yet
 
         int baseTime = this.getRoster(false).size() * 20;
         int playerMultiplyer = 0, nextRegenInSeconds = 0;
@@ -97,9 +110,9 @@ public class PlayerFaction extends Faction {
             playerMultiplyer = this.getRoster(false).size() * 15;
         }
 
-        nextRegenInSeconds = (baseTime - playerMultiplyer);
+        nextRegenInSeconds = (baseTime - playerMultiplyer) * 1000;
 
-        this.regenTime = (System.currentTimeMillis() + (nextRegenInSeconds * 1000));
+        this.regenTime = System.currentTimeMillis() + nextRegenInSeconds;
 
         this.dtr = getDtr().add(BigDecimal.valueOf(0.1));
     }
@@ -115,8 +128,13 @@ public class PlayerFaction extends Faction {
     }
 
     public double getMaxDTR() {
-        //TODO: Finish this
-        return 0;
+        double max = Configuration.DTR_PLAYER_VALUE * getRoster(false).size();
+
+        if (max > Configuration.DTR_MAX) {
+            max = Configuration.DTR_MAX;
+        }
+
+        return max;
     }
 
     public void sendMessage(String message) {
@@ -136,7 +154,7 @@ public class PlayerFaction extends Faction {
     }
 
     public boolean isRaidable() {
-        if(this.dtr.doubleValue() < 0.0) {
+        if (this.dtr.doubleValue() < 0.0) {
             return true;
         }
 

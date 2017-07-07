@@ -30,31 +30,6 @@ public class UUIDFetcher implements Callable<Map<String, UUID>> {
         this(names, true);
     }
 
-    public Map<String, UUID> call() throws Exception {
-        Map<String, UUID> uuidMap = new HashMap<String, UUID>();
-        int requests = (int) Math.ceil(names.size() / PROFILES_PER_REQUEST);
-
-        for (int i = 0; i < requests; i++) {
-            HttpURLConnection connection = createConnection();
-            String body = JSONArray.toJSONString(names.subList(i * 100, Math.min((i + 1) * 100, names.size())));
-            writeBody(connection, body);
-            JSONArray array = (JSONArray) jsonParser.parse(new InputStreamReader(connection.getInputStream()));
-
-            for (Object profile : array) {
-                JSONObject jsonProfile = (JSONObject) profile;
-                String id = (String) jsonProfile.get("id");
-                String name = (String) jsonProfile.get("name");
-                UUID uuid = UUIDFetcher.getUUID(id);
-                uuidMap.put(name, uuid);
-            }
-
-            if (rateLimiting && i != requests - 1) {
-                Thread.sleep(100L);
-            }
-        }
-        return uuidMap;
-    }
-
     private static void writeBody(HttpURLConnection connection, String body) throws Exception {
         OutputStream stream = connection.getOutputStream();
         stream.write(body.getBytes());
@@ -74,7 +49,7 @@ public class UUIDFetcher implements Callable<Map<String, UUID>> {
     }
 
     private static UUID getUUID(String id) {
-        return UUID.fromString(id.substring(0, 8) + "-" + id.substring(8, 12) + "-" + id.substring(12, 16) + "-" + id.substring(16, 20) + "-" +id.substring(20, 32));
+        return UUID.fromString(id.substring(0, 8) + "-" + id.substring(8, 12) + "-" + id.substring(12, 16) + "-" + id.substring(16, 20) + "-" + id.substring(20, 32));
     }
 
     public static byte[] toBytes(UUID uuid) {
@@ -96,6 +71,43 @@ public class UUIDFetcher implements Callable<Map<String, UUID>> {
 
     public static UUID getUUIDOf(String name) throws Exception {
         return new UUIDFetcher(Arrays.asList(name)).call().get(name);
+    }
+
+    public Map<String, UUID> call() throws Exception {
+        Map<String, UUID> uuidMap = new HashMap<String, UUID>();
+        int requests = (int) Math.ceil(names.size() / PROFILES_PER_REQUEST);
+
+        for (String usernames : names) {
+            if (UserCache.isCached(usernames)) {
+                uuidMap.put(usernames, UserCache.getUUID(usernames));
+            }
+        }
+
+        if (uuidMap.size() == names.size()) {
+            return uuidMap;
+        }
+
+        for (int i = 0; i < requests; i++) {
+            HttpURLConnection connection = createConnection();
+            String body = JSONArray.toJSONString(names.subList(i * 100, Math.min((i + 1) * 100, names.size())));
+            writeBody(connection, body);
+            JSONArray array = (JSONArray) jsonParser.parse(new InputStreamReader(connection.getInputStream()));
+
+            for (Object profile : array) {
+                JSONObject jsonProfile = (JSONObject) profile;
+                String id = (String) jsonProfile.get("id");
+                String name = (String) jsonProfile.get("name");
+                UUID uuid = UUIDFetcher.getUUID(id);
+                uuidMap.put(name, uuid);
+                UserCache.cachedUsernames.put(uuid, name);
+            }
+
+            if (rateLimiting && i != requests - 1) {
+                Thread.sleep(100L);
+            }
+        }
+
+        return uuidMap;
     }
 
 }

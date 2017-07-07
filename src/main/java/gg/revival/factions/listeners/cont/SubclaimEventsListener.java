@@ -43,27 +43,30 @@ public class SubclaimEventsListener implements Listener {
         Player player = event.getPlayer();
         Action action = event.getAction();
 
-        if(!action.equals(Action.RIGHT_CLICK_BLOCK)) return;
-        if(event.getClickedBlock() == null) return;
-        if(!event.getClickedBlock().getType().equals(Material.CHEST) && !event.getClickedBlock().getType().equals(Material.TRAPPED_CHEST)) return;
+        if (!action.equals(Action.RIGHT_CLICK_BLOCK)) return;
+        if (event.getClickedBlock() == null) return;
+        if (!event.getClickedBlock().getType().equals(Material.CHEST) && !event.getClickedBlock().getType().equals(Material.TRAPPED_CHEST))
+            return;
 
         Block block = event.getClickedBlock();
 
-        if(SubclaimManager.getSubclaimAt(block.getLocation()) != null) {
+        if (SubclaimManager.getSubclaimAt(block.getLocation()) != null) {
             Subclaim subclaim = SubclaimManager.getSubclaimAt(block.getLocation());
 
-            if(subclaim.getSubclaimHolder().isRaidable()) return;
+            if (subclaim.getSubclaimHolder().isRaidable()) return;
 
-            for(Claim claims : subclaim.getSubclaimHolder().getClaims()) {
-                if(!claims.inside(block.getLocation(), false)) continue;
+            for (Claim claims : subclaim.getSubclaimHolder().getClaims()) {
+                if (!claims.inside(block.getLocation(), false)) continue;
 
-                if(subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) return;
+                if (subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) return;
 
-                else if(subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId()) && subclaim.isOfficerAccess()) return;
+                else if (subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId()) && subclaim.isOfficerAccess())
+                    return;
 
-                else if(subclaim.getPlayerAccess().contains(player.getUniqueId()) && subclaim.getSubclaimHolder().getRoster(false).contains(player.getUniqueId())) return;
+                else if (subclaim.getPlayerAccess().contains(player.getUniqueId()) && subclaim.getSubclaimHolder().getRoster(false).contains(player.getUniqueId()))
+                    return;
 
-                else if(player.hasPermission(Permissions.ADMIN)) return;
+                else if (player.hasPermission(Permissions.ADMIN)) return;
 
                 player.sendMessage(Messages.noSubclaimAccess());
                 event.setCancelled(true);
@@ -71,25 +74,27 @@ public class SubclaimEventsListener implements Listener {
             }
         }
 
-        for(BlockFace directions : flatDirections) {
+        for (BlockFace directions : flatDirections) {
             Block relative = block.getRelative(directions);
 
-            if(relative == null || SubclaimManager.getSubclaimAt(relative.getLocation()) == null) continue;
+            if (relative == null || SubclaimManager.getSubclaimAt(relative.getLocation()) == null) continue;
 
             Subclaim subclaim = SubclaimManager.getSubclaimAt(relative.getLocation());
 
-            if(subclaim.getSubclaimHolder().isRaidable()) continue;
+            if (subclaim.getSubclaimHolder().isRaidable()) continue;
 
-            for(Claim claims : subclaim.getSubclaimHolder().getClaims()) {
-                if(!claims.inside(block.getLocation(), false)) continue;
+            for (Claim claims : subclaim.getSubclaimHolder().getClaims()) {
+                if (!claims.inside(block.getLocation(), false)) continue;
 
-                if(subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) return;
+                if (subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) return;
 
-                else if(subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId()) && subclaim.isOfficerAccess()) return;
+                else if (subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId()) && subclaim.isOfficerAccess())
+                    return;
 
-                else if(subclaim.getPlayerAccess().contains(player.getUniqueId()) && subclaim.getSubclaimHolder().getRoster(false).contains(player.getUniqueId())) return;
+                else if (subclaim.getPlayerAccess().contains(player.getUniqueId()) && subclaim.getSubclaimHolder().getRoster(false).contains(player.getUniqueId()))
+                    return;
 
-                else if(player.hasPermission(Permissions.ADMIN)) return;
+                else if (player.hasPermission(Permissions.ADMIN)) return;
 
                 player.sendMessage(Messages.noSubclaimAccess());
                 event.setCancelled(true);
@@ -103,12 +108,12 @@ public class SubclaimEventsListener implements Listener {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if(!block.getType().equals(Material.CHEST) && !block.getType().equals(Material.TRAPPED_CHEST)) return;
+        if (!block.getType().equals(Material.CHEST) && !block.getType().equals(Material.TRAPPED_CHEST)) return;
 
-        if(SubclaimManager.getSubclaimAt(block.getLocation()) != null && !SubclaimManager.getSubclaimAt(block.getLocation()).getSubclaimHolder().isRaidable()) {
+        if (SubclaimManager.getSubclaimAt(block.getLocation()) != null && !SubclaimManager.getSubclaimAt(block.getLocation()).getSubclaimHolder().isRaidable()) {
             Subclaim subclaim = SubclaimManager.getSubclaimAt(block.getLocation());
 
-            if(player.hasPermission(Permissions.ADMIN)) {
+            if (player.hasPermission(Permissions.ADMIN)) {
                 SubclaimManager.removeSubclaim(subclaim);
 
                 player.sendMessage(Messages.subclaimDeleted());
@@ -116,7 +121,7 @@ public class SubclaimEventsListener implements Listener {
                 return;
             }
 
-            if(subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
+            if (subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
                 SubclaimManager.removeSubclaim(subclaim);
 
                 player.sendMessage(Messages.subclaimDeleted());
@@ -124,7 +129,7 @@ public class SubclaimEventsListener implements Listener {
                 return;
             }
 
-            if(subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId()) && subclaim.isOfficerAccess()) {
+            if (subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId()) && subclaim.isOfficerAccess()) {
                 SubclaimManager.removeSubclaim(subclaim);
 
                 player.sendMessage(Messages.subclaimDeleted());
@@ -137,14 +142,14 @@ public class SubclaimEventsListener implements Listener {
             return;
         }
 
-        for(BlockFace directions : flatDirections) {
+        for (BlockFace directions : flatDirections) {
             Block relative = block.getRelative(directions);
 
-            if(relative == null || SubclaimManager.getSubclaimAt(relative.getLocation()) == null) continue;
+            if (relative == null || SubclaimManager.getSubclaimAt(relative.getLocation()) == null) continue;
 
             Subclaim subclaim = SubclaimManager.getSubclaimAt(relative.getLocation());
 
-            if(player.hasPermission(Permissions.ADMIN)) {
+            if (player.hasPermission(Permissions.ADMIN)) {
                 SubclaimManager.removeSubclaim(subclaim);
 
                 player.sendMessage(Messages.subclaimDeleted());
@@ -152,7 +157,7 @@ public class SubclaimEventsListener implements Listener {
                 return;
             }
 
-            if(subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
+            if (subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
                 SubclaimManager.removeSubclaim(subclaim);
 
                 //TODO: Send subclaim deleted message to leader
@@ -160,7 +165,7 @@ public class SubclaimEventsListener implements Listener {
                 return;
             }
 
-            if(subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId()) && subclaim.isOfficerAccess()) {
+            if (subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId()) && subclaim.isOfficerAccess()) {
                 SubclaimManager.removeSubclaim(subclaim);
 
                 player.sendMessage(Messages.subclaimDeleted());
@@ -179,15 +184,16 @@ public class SubclaimEventsListener implements Listener {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if(!block.getType().equals(Material.CHEST) && !block.getType().equals(Material.TRAPPED_CHEST)) return;
+        if (!block.getType().equals(Material.CHEST) && !block.getType().equals(Material.TRAPPED_CHEST)) return;
 
-        for(BlockFace directions : flatDirections) {
+        for (BlockFace directions : flatDirections) {
             Block relative = block.getRelative(directions);
 
-            if(relative == null || !relative.getType().equals(Material.CHEST) || !relative.getType().equals(Material.TRAPPED_CHEST)) continue;
-            if(SubclaimManager.getSubclaimAt(relative.getLocation()) == null) continue;
+            if (relative == null || !relative.getType().equals(Material.CHEST) || !relative.getType().equals(Material.TRAPPED_CHEST))
+                continue;
+            if (SubclaimManager.getSubclaimAt(relative.getLocation()) == null) continue;
 
-            if(!player.hasPermission(Permissions.ADMIN)) {
+            if (!player.hasPermission(Permissions.ADMIN)) {
                 player.sendMessage(Messages.subclaimTooClose());
                 event.setCancelled(true);
             }
@@ -196,23 +202,23 @@ public class SubclaimEventsListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if(!(event.getWhoClicked() instanceof Player)) return;
-        if(event.getInventory() == null) return;
+        if (!(event.getWhoClicked() instanceof Player)) return;
+        if (event.getInventory() == null) return;
 
-        Player player = (Player)event.getWhoClicked();
+        Player player = (Player) event.getWhoClicked();
         Inventory inv = event.getInventory();
 
-        if(inv.getName().equals(Configuration.SUBCLAIM_GUI_NAME) && SubclaimManager.isEditingSubclaim(player.getUniqueId())) {
+        if (inv.getName().equals(Configuration.SUBCLAIM_GUI_NAME) && SubclaimManager.isEditingSubclaim(player.getUniqueId())) {
             Subclaim subclaim = SubclaimManager.getEditedSubclaim(player.getUniqueId()).getSubclaim();
             ItemStack currentItem = event.getCurrentItem();
 
-            if(currentItem == null) return;
+            if (currentItem == null) return;
 
             ItemMeta currentItemMeta = currentItem.getItemMeta();
             String title = currentItemMeta.getDisplayName();
             String stripped = ChatColor.stripColor(title);
 
-            if(currentItem.getType().equals(Material.SKULL_ITEM)) {
+            if (currentItem.getType().equals(Material.SKULL_ITEM)) {
                 new BukkitRunnable() {
                     public void run() {
                         try {
@@ -220,7 +226,7 @@ public class SubclaimEventsListener implements Listener {
 
                             new BukkitRunnable() {
                                 public void run() {
-                                    if(subclaim.getPlayerAccess().contains(clickedUUID)) {
+                                    if (subclaim.getPlayerAccess().contains(clickedUUID)) {
                                         subclaim.getPlayerAccess().remove(clickedUUID);
                                     } else {
                                         subclaim.getPlayerAccess().add(clickedUUID);
@@ -236,8 +242,8 @@ public class SubclaimEventsListener implements Listener {
                 }.runTaskAsynchronously(FP.getInstance());
             }
 
-            if(currentItem.getType().equals(Material.EMERALD_BLOCK)) {
-                if(!subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
+            if (currentItem.getType().equals(Material.EMERALD_BLOCK)) {
+                if (!subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
                     new BukkitRunnable() {
                         public void run() {
                             player.closeInventory();
@@ -253,8 +259,8 @@ public class SubclaimEventsListener implements Listener {
                 SubclaimManager.performUpdate(player, subclaim);
             }
 
-            if(currentItem.getType().equals(Material.REDSTONE_BLOCK)) {
-                if(!subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
+            if (currentItem.getType().equals(Material.REDSTONE_BLOCK)) {
+                if (!subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
                     new BukkitRunnable() {
                         public void run() {
                             player.closeInventory();
@@ -270,9 +276,9 @@ public class SubclaimEventsListener implements Listener {
                 SubclaimManager.performUpdate(player, subclaim);
             }
 
-            if(currentItem.getType().equals(Material.FIRE)) {
-                if(!subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
-                    if((subclaim.isOfficerAccess() && !subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId())) || !subclaim.isOfficerAccess()) {
+            if (currentItem.getType().equals(Material.FIRE)) {
+                if (!subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
+                    if ((subclaim.isOfficerAccess() && !subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId())) || !subclaim.isOfficerAccess()) {
                         new BukkitRunnable() {
                             public void run() {
                                 player.closeInventory();
@@ -298,31 +304,31 @@ public class SubclaimEventsListener implements Listener {
         InventoryHolder src = event.getSource().getHolder();
         InventoryHolder dest = event.getDestination().getHolder();
 
-        if(src instanceof Chest || src instanceof Hopper) {
+        if (src instanceof Chest || src instanceof Hopper) {
             Location location;
 
-            if(src instanceof Chest) {
-                location = ((Chest)src).getLocation();
+            if (src instanceof Chest) {
+                location = ((Chest) src).getLocation();
             } else {
-                location = ((Hopper)src).getLocation();
+                location = ((Hopper) src).getLocation();
             }
 
-            if(SubclaimManager.getSubclaimAt(location) != null) {
+            if (SubclaimManager.getSubclaimAt(location) != null) {
                 event.setCancelled(true);
                 return;
             }
         }
 
-        if(dest instanceof Chest || dest instanceof Hopper) {
+        if (dest instanceof Chest || dest instanceof Hopper) {
             Location location;
 
-            if(src instanceof Chest) {
-                location = ((Chest)dest).getLocation();
+            if (src instanceof Chest) {
+                location = ((Chest) dest).getLocation();
             } else {
-                location = ((Hopper)dest).getLocation();
+                location = ((Hopper) dest).getLocation();
             }
 
-            if(SubclaimManager.getSubclaimAt(location) != null) {
+            if (SubclaimManager.getSubclaimAt(location) != null) {
                 event.setCancelled(true);
                 return;
             }

@@ -17,7 +17,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class FP extends JavaPlugin {
 
-    @Getter  private static FP instance;
+    @Getter
+    private static FP instance;
 
     public void onEnable() {
         instance = this;
@@ -32,13 +33,13 @@ public class FP extends JavaPlugin {
     }
 
     public void onDisable() {
-        if(Configuration.DB_ENABLED && MongoAPI.isConnected()) {
+        if (Configuration.DB_ENABLED && MongoAPI.isConnected()) {
 
-            for(Faction factions : FactionManager.getFactions()) {
+            for (Faction factions : FactionManager.getFactions()) {
                 FactionManager.saveFaction(factions, true);
             }
 
-            for(Player players : Bukkit.getOnlinePlayers()) {
+            for (Player players : Bukkit.getOnlinePlayers()) {
                 PlayerManager.saveProfile(PlayerManager.getPlayer(players.getUniqueId()), true);
             }
 

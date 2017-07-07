@@ -35,7 +35,7 @@ public class ClaimManager {
     }
 
     public static void deleteClaim(Claim claim) {
-        if(!Configuration.DB_ENABLED || !MongoAPI.isConnected())
+        if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
             return;
 
         new BukkitRunnable() {
@@ -44,7 +44,7 @@ public class ClaimManager {
                 FindIterable<Document> query = collection.find(Filters.eq("claimID", claim.getClaimID().toString()));
                 Document document = query.first();
 
-                if(document != null) {
+                if (document != null) {
                     collection.deleteOne(document);
                 }
             }
@@ -52,7 +52,7 @@ public class ClaimManager {
     }
 
     public static void loadClaims(Faction faction) {
-        if(!Configuration.DB_ENABLED || !MongoAPI.isConnected())
+        if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
             return;
 
         new BukkitRunnable() {
@@ -61,10 +61,10 @@ public class ClaimManager {
                 FindIterable<Document> query = collection.find();
                 Iterator<Document> iterator = query.iterator();
 
-                while(iterator.hasNext()) {
+                while (iterator.hasNext()) {
                     Document document = iterator.next();
 
-                    if(!UUID.fromString(document.getString("factionID")).equals(faction.getFactionID())) continue;
+                    if (!UUID.fromString(document.getString("factionID")).equals(faction.getFactionID())) continue;
 
                     UUID claimID = UUID.fromString(document.getString("claimID"));
                     Faction claimOwner = FactionManager.getFactionByUUID(UUID.fromString(document.getString("factionID")));
@@ -117,7 +117,7 @@ public class ClaimManager {
     }*/
 
     public static void saveClaim(Claim claim) {
-        if(!Configuration.DB_ENABLED || !MongoAPI.isConnected())
+        if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
             return;
 
         new BukkitRunnable() {
@@ -137,11 +137,9 @@ public class ClaimManager {
                         .append("worldName", claim.getWorld().getName())
                         .append("claimValue", claim.getClaimValue());
 
-                if(document != null) {
+                if (document != null) {
                     collection.updateOne(document, newDoc);
-                }
-
-                else {
+                } else {
                     collection.insertOne(newDoc);
                 }
             }

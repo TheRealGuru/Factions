@@ -12,7 +12,7 @@ public class Logger {
 
     public static void log(Level lvl, String str) {
         Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd/mm '@' hh:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("dd/mm '@' hh:mm:ss aa");
 
         System.out.println("[" + format.format(date) + "][FactionsX][" + lvl.toString() + "] " + str);
     }

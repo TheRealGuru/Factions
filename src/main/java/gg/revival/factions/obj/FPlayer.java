@@ -12,11 +12,20 @@ import java.util.UUID;
 
 public class FPlayer {
 
-    @Getter UUID uuid;
-    @Getter @Setter double balance;
-    @Getter @Setter FScoreboard scoreboard;
-    @Getter @Setter FLocation location;
-    @Getter @Setter HashSet<Timer> timers = new HashSet<Timer>();
+    @Getter
+    UUID uuid;
+    @Getter
+    @Setter
+    double balance;
+    @Getter
+    @Setter
+    FScoreboard scoreboard;
+    @Getter
+    @Setter
+    FLocation location;
+    @Getter
+    @Setter
+    HashSet<Timer> timers = new HashSet<Timer>();
 
     public FPlayer(UUID uuid, double balance) {
         this.uuid = uuid;

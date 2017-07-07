@@ -3,7 +3,6 @@ package gg.revival.factions.core;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
-import com.mongodb.connection.ServerType;
 import gg.revival.driver.MongoAPI;
 import gg.revival.factions.FP;
 import gg.revival.factions.claims.Claim;
@@ -115,21 +114,21 @@ public class FactionManager {
     }
 
     public static void disbandFaction(String disbander, Faction faction) {
-        if(Configuration.DB_ENABLED && MongoAPI.isConnected()) {
+        if (Configuration.DB_ENABLED && MongoAPI.isConnected()) {
             new BukkitRunnable() {
                 public void run() {
                     MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "factions");
                     FindIterable<Document> query = collection.find(Filters.eq("factionID", faction.getFactionID().toString()));
                     Document document = query.first();
 
-                    if(document != null) {
+                    if (document != null) {
                         collection.deleteOne(document);
                     }
                 }
             }.runTaskAsynchronously(FP.getInstance());
 
-            if(!faction.getClaims().isEmpty()) {
-                for(Claim claims : faction.getClaims()) {
+            if (!faction.getClaims().isEmpty()) {
+                for (Claim claims : faction.getClaims()) {
                     ClaimManager.deleteClaim(claims);
                 }
             }
@@ -141,7 +140,7 @@ public class FactionManager {
     }
 
     public static void loadFactions() {
-        if(!Configuration.DB_ENABLED || !MongoAPI.isConnected())
+        if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
             return;
 
         new BukkitRunnable() {
@@ -150,21 +149,24 @@ public class FactionManager {
                 FindIterable<Document> query = collection.find();
                 Iterator<Document> iterator = query.iterator();
 
-                while(iterator.hasNext()) {
+                while (iterator.hasNext()) {
                     Document current = iterator.next();
 
-                    if(current.getString("type") != null) {
+                    if (current.getString("type") != null) {
                         UUID factionID = UUID.fromString(current.getString("factionID"));
                         String displayname = current.getString("displayName");
                         String foundType = current.getString("type");
                         ServerClaimType type = null;
 
-                        switch(foundType) {
-                            case "SAFEZONE": type = ServerClaimType.SAFEZONE;
+                        switch (foundType) {
+                            case "SAFEZONE":
+                                type = ServerClaimType.SAFEZONE;
                                 break;
-                            case "EVENT": type = ServerClaimType.EVENT;
+                            case "EVENT":
+                                type = ServerClaimType.EVENT;
                                 break;
-                            case "ROAD": type = ServerClaimType.ROAD;
+                            case "ROAD":
+                                type = ServerClaimType.ROAD;
                         }
 
                         ServerFaction faction = new ServerFaction(factionID, displayname, type);
@@ -176,11 +178,11 @@ public class FactionManager {
                         UUID factionID = UUID.fromString(current.getString("factionID"));
                         String displayName = current.getString("displayName");
                         UUID leader = UUID.fromString(current.getString("leader"));
-                        List<UUID> officers = (List<UUID>)current.get("officers");
-                        List<UUID> members = (List<UUID>)current.get("members");
-                        List<UUID> allies = (List<UUID>)current.get("allies");
-                        List<UUID> pendingInvites = (List<UUID>)current.get("pendingInvites");
-                        List<UUID> pendingAllies = (List<UUID>)current.get("pendingAllies");
+                        List<UUID> officers = (List<UUID>) current.get("officers");
+                        List<UUID> members = (List<UUID>) current.get("members");
+                        List<UUID> allies = (List<UUID>) current.get("allies");
+                        List<UUID> pendingInvites = (List<UUID>) current.get("pendingInvites");
+                        List<UUID> pendingAllies = (List<UUID>) current.get("pendingAllies");
                         String announcement = current.getString("announcement");
                         double balance = current.getDouble("balance");
                         double dtr = current.getDouble("dtr");
@@ -200,7 +202,7 @@ public class FactionManager {
     }
 
     public static void saveFaction(Faction faction, boolean unloadOnCompletion) {
-        if(!Configuration.DB_ENABLED || !MongoAPI.isConnected())
+        if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
             return;
 
         new BukkitRunnable() {
@@ -209,8 +211,8 @@ public class FactionManager {
                 FindIterable<Document> query = collection.find(Filters.eq("factionID", faction.getFactionID()));
                 Document document = query.first();
 
-                if(faction instanceof PlayerFaction) {
-                    PlayerFaction playerFaction = (PlayerFaction)faction;
+                if (faction instanceof PlayerFaction) {
+                    PlayerFaction playerFaction = (PlayerFaction) faction;
 
                     Document newDoc = new Document("factionID", faction.getFactionID().toString())
                             .append("displayName", faction.getDisplayName())
@@ -225,40 +227,38 @@ public class FactionManager {
                             .append("dtr", playerFaction.getDtr().doubleValue())
                             .append("unfreezeTime", playerFaction.getUnfreezeTime());
 
-                    if(document != null) {
+                    if (document != null) {
                         collection.updateOne(document, newDoc);
                     } else {
                         collection.insertOne(newDoc);
                     }
 
-                    if(!playerFaction.getClaims().isEmpty()) {
-                        for(Claim claims : playerFaction.getClaims()) {
+                    if (!playerFaction.getClaims().isEmpty()) {
+                        for (Claim claims : playerFaction.getClaims()) {
                             ClaimManager.saveClaim(claims);
                         }
                     }
-                }
-
-                else {
-                    ServerFaction serverFaction = (ServerFaction)faction;
+                } else {
+                    ServerFaction serverFaction = (ServerFaction) faction;
 
                     Document newDoc = new Document("factionID", faction.getFactionID().toString())
                             .append("displayName", serverFaction.getDisplayName())
                             .append("type", serverFaction.getType().toString());
 
-                    if(document != null) {
+                    if (document != null) {
                         collection.updateOne(document, newDoc);
                     } else {
                         collection.insertOne(newDoc);
                     }
 
-                    if(!serverFaction.getClaims().isEmpty()) {
-                        for(Claim claims : serverFaction.getClaims()) {
+                    if (!serverFaction.getClaims().isEmpty()) {
+                        for (Claim claims : serverFaction.getClaims()) {
                             ClaimManager.saveClaim(claims);
                         }
                     }
                 }
 
-                if(unloadOnCompletion) {
+                if (unloadOnCompletion) {
                     activeFactions.remove(faction);
                 }
             }

@@ -20,28 +20,16 @@ public class ToolBox {
         return stick;
     }
 
-    public enum WorldLocations {
-        WILDERNESS, WARZONE, NETHER, NETHER_WARZONE, END
-    }
-
     public static WorldLocations getLocationEnum(Location location) {
-        if(isWilderness(location)) {
+        if (isWilderness(location)) {
             return WorldLocations.WILDERNESS;
-        }
-
-        else if(isWarzone(location)) {
+        } else if (isWarzone(location)) {
             return WorldLocations.WARZONE;
-        }
-
-        else if(isNetherWarzone(location)) {
+        } else if (isNetherWarzone(location)) {
             return WorldLocations.NETHER_WARZONE;
-        }
-
-        else if(isNether(location)) {
+        } else if (isNether(location)) {
             return WorldLocations.NETHER;
-        }
-
-        else if(isEnd(location)) {
+        } else if (isEnd(location)) {
             return WorldLocations.END;
         }
 
@@ -104,5 +92,9 @@ public class ToolBox {
         }
 
         return false;
+    }
+
+    public enum WorldLocations {
+        WILDERNESS, WARZONE, NETHER, NETHER_WARZONE, END
     }
 }

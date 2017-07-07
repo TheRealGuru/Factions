@@ -11,8 +11,12 @@ import java.util.*;
 
 public class SubclaimManager {
 
-    @Getter @Setter private static HashSet<Subclaim> activeSubclaims = new HashSet<Subclaim>();
-    @Getter @Setter private static HashMap<UUID, SubclaimGUI> subclaimEditor = new HashMap<UUID, SubclaimGUI>();
+    @Getter
+    @Setter
+    private static HashSet<Subclaim> activeSubclaims = new HashSet<Subclaim>();
+    @Getter
+    @Setter
+    private static HashMap<UUID, SubclaimGUI> subclaimEditor = new HashMap<UUID, SubclaimGUI>();
 
     public static Subclaim getSubclaimAt(Location location) {
         for (Subclaim subclaims : activeSubclaims) {
@@ -25,13 +29,13 @@ public class SubclaimManager {
     }
 
     public static boolean isEditingSubclaim(UUID uuid) {
-        if(getEditedSubclaim(uuid) != null) return true;
+        if (getEditedSubclaim(uuid) != null) return true;
 
         return false;
     }
 
     public static SubclaimGUI getEditedSubclaim(UUID uuid) {
-        if(subclaimEditor.containsKey(uuid)) {
+        if (subclaimEditor.containsKey(uuid)) {
             return subclaimEditor.get(uuid);
         }
 
@@ -39,8 +43,8 @@ public class SubclaimManager {
     }
 
     public static boolean subclaimExists(Subclaim subclaim) {
-        for(Subclaim active : activeSubclaims) {
-            if(active.getSubclaimID().equals(subclaim.getSubclaimID())) {
+        for (Subclaim active : activeSubclaims) {
+            if (active.getSubclaimID().equals(subclaim.getSubclaimID())) {
                 return true;
             }
         }
@@ -49,34 +53,34 @@ public class SubclaimManager {
     }
 
     public static void addSubclaim(Subclaim subclaim) {
-        if(subclaimExists(subclaim)) return;
+        if (subclaimExists(subclaim)) return;
 
         activeSubclaims.add(subclaim);
         subclaim.getSubclaimHolder().getSubclaims().add(subclaim);
     }
 
     public static void removeSubclaim(Subclaim subclaim) {
-        if(!subclaimExists(subclaim)) return;
+        if (!subclaimExists(subclaim)) return;
 
         List<Subclaim> serverCache = new ArrayList<Subclaim>();
         List<Subclaim> factionCache = new ArrayList<Subclaim>();
 
-        for(Subclaim subclaims : activeSubclaims) {
+        for (Subclaim subclaims : activeSubclaims) {
             serverCache.add(subclaims);
         }
 
-        for(Subclaim subclaims : subclaim.getSubclaimHolder().getSubclaims()) {
+        for (Subclaim subclaims : subclaim.getSubclaimHolder().getSubclaims()) {
             factionCache.add(subclaims);
         }
 
-        for(Subclaim subclaims : serverCache) {
-            if(subclaims.getSubclaimID().equals(subclaim.getSubclaimID())) {
+        for (Subclaim subclaims : serverCache) {
+            if (subclaims.getSubclaimID().equals(subclaim.getSubclaimID())) {
                 activeSubclaims.remove(subclaims);
             }
         }
 
-        for(Subclaim subclaims : factionCache) {
-            if(subclaims.getSubclaimID().equals(subclaim.getSubclaimID())) {
+        for (Subclaim subclaims : factionCache) {
+            if (subclaims.getSubclaimID().equals(subclaim.getSubclaimID())) {
                 subclaim.getSubclaimHolder().getSubclaims().remove(subclaims);
             }
         }
@@ -85,7 +89,7 @@ public class SubclaimManager {
     public static void performUpdate(Player player, Subclaim subclaim) {
         new BukkitRunnable() {
             public void run() {
-                if(player.getOpenInventory() != null) {
+                if (player.getOpenInventory() != null) {
                     player.closeInventory();
                 }
 

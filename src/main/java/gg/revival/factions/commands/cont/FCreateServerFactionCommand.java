@@ -28,14 +28,14 @@ public class FCreateServerFactionCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(!player.hasPermission(getPermission())) {
+        if (!player.hasPermission(getPermission())) {
             player.sendMessage(Messages.noPermission());
             return;
         }
@@ -44,41 +44,44 @@ public class FCreateServerFactionCommand extends FCommand {
         String factionTypeAsString = args[2].toUpperCase();
         ServerClaimType type = null;
 
-        switch(factionTypeAsString) {
-            case "SAFEZONE": type = ServerClaimType.SAFEZONE;
+        switch (factionTypeAsString) {
+            case "SAFEZONE":
+                type = ServerClaimType.SAFEZONE;
                 break;
-            case "ROAD": type = ServerClaimType.ROAD;
+            case "ROAD":
+                type = ServerClaimType.ROAD;
                 break;
-            case "EVENT": type = ServerClaimType.EVENT;
+            case "EVENT":
+                type = ServerClaimType.EVENT;
                 break;
         }
 
-        if(type == null) {
+        if (type == null) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
-        if(!StringUtils.isAlphanumeric(factionName)) {
+        if (!StringUtils.isAlphanumeric(factionName)) {
             player.sendMessage(Messages.badFactionName());
             return;
         }
 
-        if(factionName.length() < Configuration.MIN_FAC_NAME_SIZE || factionName.length() > Configuration.MAX_FAC_NAME_SIZE) {
+        if (factionName.length() < Configuration.MIN_FAC_NAME_SIZE || factionName.length() > Configuration.MAX_FAC_NAME_SIZE) {
             player.sendMessage(Messages.badFactionName());
             return;
         }
 
-        if(factionName.contains(" ")) {
+        if (factionName.contains(" ")) {
             player.sendMessage(Messages.badFactionName());
             return;
         }
 
-        if(FactionManager.getFactionByName(factionName) != null) {
+        if (FactionManager.getFactionByName(factionName) != null) {
             player.sendMessage(Messages.facNameInUse());
             return;
         }

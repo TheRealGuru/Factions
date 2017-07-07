@@ -12,12 +12,19 @@ import java.util.UUID;
 
 public class Claim {
 
-    @Getter UUID claimID;
+    @Getter
+    UUID claimID;
 
-    @Getter @Setter double x1, x2, y1, y2, z1, z2, claimValue;
-    @Getter @Setter String worldName;
+    @Getter
+    @Setter
+    double x1, x2, y1, y2, z1, z2, claimValue;
+    @Getter
+    @Setter
+    String worldName;
 
-    @Getter @Setter Faction claimOwner;
+    @Getter
+    @Setter
+    Faction claimOwner;
 
     public Claim(UUID claimID, Faction claimOwner, double x1, double x2, double y1, double y2, double z1, double z2, String worldName, int claimValue) {
         this.claimID = claimID;

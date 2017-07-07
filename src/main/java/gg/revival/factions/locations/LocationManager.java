@@ -9,7 +9,6 @@ import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
 import gg.revival.factions.tools.Configuration;
-import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.ToolBox;
 import org.bukkit.ChatColor;
@@ -17,7 +16,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
-import java.util.logging.Level;
 
 public class LocationManager {
 
@@ -197,7 +195,7 @@ public class LocationManager {
         StringBuilder leaving = new StringBuilder();
         StringBuilder entering = new StringBuilder();
 
-        switch(oldLoc) {
+        switch (oldLoc) {
             case WILDERNESS:
                 leaving.append(Configuration.WILDERNESS_NAME);
                 break;
@@ -215,7 +213,7 @@ public class LocationManager {
                 break;
         }
 
-        switch(newLoc) {
+        switch (newLoc) {
             case WILDERNESS:
                 entering.append(Configuration.WILDERNESS_NAME);
                 break;
@@ -249,7 +247,7 @@ public class LocationManager {
 
         Location oldLocation = null;
 
-        if(player.getLocation().getLastLocation() != null) {
+        if (player.getLocation().getLastLocation() != null) {
             oldLocation = player.getLocation().getLastLocation();
         }
 
@@ -270,11 +268,11 @@ public class LocationManager {
             return;
         }
 
-        if(found == null && oldLocation != null) {
+        if (found == null && oldLocation != null) {
             ToolBox.WorldLocations oldLocEnum = ToolBox.getLocationEnum(oldLocation);
             ToolBox.WorldLocations currentLocEnum = ToolBox.getLocationEnum(currentLocation);
 
-            if(oldLocEnum != currentLocEnum) {
+            if (oldLocEnum != currentLocEnum) {
                 performZoneChange(mcPlayer, oldLocEnum, currentLocEnum);
             }
         }

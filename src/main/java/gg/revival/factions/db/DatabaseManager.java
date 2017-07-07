@@ -8,15 +8,15 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class DatabaseManager {
 
     public static void setupConnection() {
-        if(!Configuration.DB_ENABLED)
+        if (!Configuration.DB_ENABLED)
             return;
 
-        if(MongoAPI.isConnected())
+        if (MongoAPI.isConnected())
             return;
 
         new BukkitRunnable() {
             public void run() {
-                if(Configuration.DB_USECREDS) {
+                if (Configuration.DB_USECREDS) {
                     MongoAPI.connect(
                             Configuration.DB_HOSTNAME,
                             Configuration.DB_PORT,
