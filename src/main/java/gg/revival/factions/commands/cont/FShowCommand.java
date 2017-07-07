@@ -68,7 +68,42 @@ public class FShowCommand extends FCommand {
         }
 
         if (args.length == 2) {
+            String query = args[1];
+            List<Faction> results = new ArrayList<>();
 
+            if(FactionManager.getFactionByName(query) != null && FactionManager.getFactionByName(query) instanceof PlayerFaction) {
+                results.add(FactionManager.getFactionByName(query));
+            }
+
+            new BukkitRunnable() {
+                public void run() {
+                    try {
+                        UUID uuid = UUIDFetcher.getUUIDOf(query);
+
+                        if(FactionManager.getFactionByPlayer(uuid) != null) {
+                            results.add(FactionManager.getFactionByPlayer(uuid));
+                        }
+
+                        new BukkitRunnable() {
+                            public void run() {
+                                if(results.size() == 0) {
+                                    player.sendMessage(Messages.factionNotFound());
+                                }
+
+                                else if(results.size() == 1) {
+                                    player.sendMessage(Messages.factionInfo((PlayerFaction)results.get(0), player));
+                                }
+
+                                else if(results.size() > 1) {
+                                    Messages.sendMultiFactionList(results, player, query);
+                                }
+                            }
+                        }.runTask(FP.getInstance());
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }.runTaskAsynchronously(FP.getInstance());
         }
 
         if (args.length == 3) {
@@ -76,11 +111,48 @@ public class FShowCommand extends FCommand {
             String queryType = args[2];
 
             if (queryType.equalsIgnoreCase("-p")) {
-                //TODO: Perform player lookup
+                new BukkitRunnable() {
+                    public void run() {
+                        try {
+                            UUID uuid = UUIDFetcher.getUUIDOf(query);
+                            Faction faction = FactionManager.getFactionByPlayer(uuid);
+
+                            if(faction != null && faction instanceof PlayerFaction) {
+                                String info = Messages.factionInfo((PlayerFaction)faction, player);
+
+                                new BukkitRunnable() {
+                                    public void run() {
+                                        player.sendMessage(info);
+                                    }
+                                }.runTask(FP.getInstance());
+                            }
+
+                            else {
+                                player.sendMessage(Messages.factionNotFound());
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.runTaskAsynchronously(FP.getInstance());
             }
 
-            if (query.equalsIgnoreCase("-f")) {
-                //TODO: Perform faction lookup
+            if (queryType.equalsIgnoreCase("-f")) {
+                Faction faction = FactionManager.getFactionByName(query);
+
+                if(faction != null && faction instanceof PlayerFaction) {
+                    new BukkitRunnable() {
+                        public void run() {
+                            String info = Messages.factionInfo((PlayerFaction)faction, player);
+
+                            new BukkitRunnable() {
+                                public void run() {
+                                    player.sendMessage(info);
+                                }
+                            }.runTask(FP.getInstance());
+                        }
+                    }.runTaskAsynchronously(FP.getInstance());
+                }
             }
         }
     }

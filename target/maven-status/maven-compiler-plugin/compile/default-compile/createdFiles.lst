@@ -1,11 +1,13 @@
 gg\revival\factions\claims\ClaimManager$3.class
 gg\revival\factions\FP.class
 gg\revival\factions\commands\CommandManager.class
+gg\revival\factions\commands\cont\FShowCommand$3.class
 gg\revival\factions\locations\LocationManager.class
 gg\revival\factions\core\FactionManager$2.class
 gg\revival\factions\listeners\cont\ChatEventsListener.class
 gg\revival\factions\obj\Faction.class
 gg\revival\factions\claims\Claim.class
+gg\revival\factions\commands\cont\FShowCommand$4$1.class
 gg\revival\factions\scoreboards\ScoreboardManager.class
 gg\revival\factions\locations\FLocation.class
 gg\revival\factions\subclaims\SubclaimGUI$1$1.class
@@ -49,6 +51,7 @@ gg\revival\factions\commands\cont\FShowCommand$1.class
 gg\revival\factions\obj\FPlayer.class
 gg\revival\factions\subclaims\SubclaimGUI.class
 gg\revival\factions\listeners\cont\ClaimEventsListener.class
+gg\revival\factions\commands\cont\FShowCommand$3$1.class
 gg\revival\factions\subclaims\SubclaimManager$1.class
 gg\revival\factions\claims\ServerClaimType.class
 gg\revival\factions\commands\cont\FShowCommand$1$1.class
@@ -58,6 +61,7 @@ gg\revival\factions\commands\FCommand.class
 gg\revival\factions\threads\ThreadManager$3.class
 gg\revival\factions\core\PlayerManager.class
 gg\revival\factions\listeners\cont\SubclaimEventsListener$4.class
+gg\revival\factions\commands\cont\FShowCommand$4.class
 gg\revival\factions\subclaims\SubclaimGUI$1$2.class
 gg\revival\factions\core\FactionManager$3.class
 gg\revival\factions\timers\Timer.class

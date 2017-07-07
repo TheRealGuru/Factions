@@ -2,89 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15beb459-b905-4f30-9369-6b161deb67cc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/UserCache.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/FP.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/FP.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/Claim.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/Claim.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/ClaimManager$3.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/ClaimManager$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/ClaimManager.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/ClaimManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/commands/FCommand.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/commands/FCommand.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/commands/cont/FCreateServerFactionCommand.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/commands/cont/FCreateServerFactionCommand.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/FactionManager$1.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/FactionManager$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/FactionManager$2.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/FactionManager$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/FactionManager$3.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/FactionManager$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/FactionManager.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/FactionManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/PlayerManager$1.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/PlayerManager$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/PlayerManager$2.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/PlayerManager$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/PlayerManager.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/core/PlayerManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/SubclaimEventsListener$1$1.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/SubclaimEventsListener$1$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/SubclaimEventsListener$1.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/SubclaimEventsListener$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/SubclaimEventsListener$2.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/SubclaimEventsListener$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/SubclaimEventsListener$3.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/SubclaimEventsListener$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/SubclaimEventsListener$4.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/SubclaimEventsListener$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/SubclaimEventsListener.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/SubclaimEventsListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/locations/FLocation.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/locations/FLocation.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/locations/LocationManager$1.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/locations/LocationManager$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/locations/LocationManager.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/locations/LocationManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/obj/FPlayer.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/obj/FPlayer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/obj/Faction.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/obj/Faction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/obj/PlayerFaction$1.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/obj/PlayerFaction$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/obj/PlayerFaction.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/obj/PlayerFaction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/obj/ServerFaction.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/obj/ServerFaction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/Subclaim.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/Subclaim.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimGUI$1$1.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimGUI$1$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimGUI$1$2.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimGUI$1$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimGUI$1$3.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimGUI$1$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimGUI$1.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimGUI$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimGUI.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimGUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimManager$1.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimManager$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimManager.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/subclaims/SubclaimManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/threads/ThreadManager$1.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/threads/ThreadManager$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/threads/ThreadManager$2.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/threads/ThreadManager$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/threads/ThreadManager$3.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/threads/ThreadManager$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/threads/ThreadManager.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/threads/ThreadManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/timers/Timer.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/timers/Timer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/Logger.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/Logger.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/Messages.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/Messages.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/NameFetcher.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/NameFetcher.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/ToolBox$WorldLocations.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/ToolBox$WorldLocations.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/ToolBox.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/ToolBox.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/UUIDFetcher.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/UUIDFetcher.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/FP.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/FP.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/ClaimManager.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/ClaimManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/FCommand.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/FCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FCreateCommand.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FCreateCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FCreateServerFactionCommand.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FCreateServerFactionCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FDisbandCommand.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FDisbandCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FDisbandOtherCommand.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FDisbandOtherCommand.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FShowCommand.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FShowCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/core/FactionManager.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/core/FactionManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/core/PlayerManager.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/core/PlayerManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/db/DatabaseManager.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/db/DatabaseManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/cont/SubclaimEventsListener.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/cont/SubclaimEventsListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/locations/FLocation.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/locations/FLocation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/locations/LocationManager.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/locations/LocationManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/FPlayer.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/FPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/Faction.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/Faction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/PlayerFaction.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/PlayerFaction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/ServerFaction.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/ServerFaction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/subclaims/Subclaim.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/subclaims/Subclaim.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/subclaims/SubclaimGUI.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/subclaims/SubclaimGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/subclaims/SubclaimManager.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/subclaims/SubclaimManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/threads/ThreadManager.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/threads/ThreadManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/timers/Timer.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/timers/Timer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Logger.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Logger.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/NameFetcher.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/NameFetcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/ToolBox.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/ToolBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/UUIDFetcher.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/UUIDFetcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/plugin.yml" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -101,12 +25,9 @@
       <file leaf-file-name="Messages.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="178" column="40" lean-forward="true" selection-start-line="178" selection-start-column="40" selection-end-line="178" selection-end-column="40" />
-              <folding>
-                <element signature="e#5431#5445#0" expanded="true" />
-                <element signature="e#7743#7751#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1095">
+              <caret line="306" column="47" lean-forward="true" selection-start-line="306" selection-start-column="47" selection-end-line="306" selection-end-column="47" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -156,7 +77,6 @@
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/locations/FLocation.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/ListenerManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/threads/ThreadManager.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/config.yml" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Configuration.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/db/DatabaseManager.java" />
@@ -181,8 +101,9 @@
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/UUIDFetcher.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/UserCache.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/PlayerFaction.java" />
-        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FShowCommand.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java" />
       </list>
     </option>
   </component>
@@ -207,8 +128,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -313,163 +235,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Factions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RevivalFactions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="factions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="obj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Factions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RevivalFactions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="factions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Factions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RevivalFactions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="factions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commands" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Factions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RevivalFactions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="factions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commands" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cont" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Factions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RevivalFactions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="factions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="claims" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -783,6 +550,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -798,20 +566,20 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17537314" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17857143" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3266385" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -828,7 +596,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/timers/FactionTimer.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/timers/PlayerTimer.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/core/LocationManager.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/cont/ChatEventsListener.java">
@@ -849,13 +616,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="4" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/FactionsCommandExecutor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="13" lean-forward="true" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -933,14 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/db/DatabaseManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
@@ -952,14 +704,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="17" column="19" lean-forward="false" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/ServerFaction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -981,7 +725,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="20" column="21" lean-forward="false" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1013,20 +756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
           <caret line="119" column="41" lean-forward="false" selection-start-line="119" selection-start-column="41" selection-end-line="119" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-316">
-          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/FCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="26" column="37" lean-forward="false" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -1064,7 +793,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="19" column="39" lean-forward="false" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1095,15 +823,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="736">
           <caret line="106" column="5" lean-forward="false" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/FP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1111,10 +830,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="e#189#190#0" expanded="true" />
-            <element signature="e#225#226#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1122,7 +837,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="10" lean-forward="true" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1138,7 +852,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
           <caret line="40" column="35" lean-forward="false" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1146,15 +859,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="37" column="9" lean-forward="false" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/UUIDFetcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1411">
-          <caret line="96" column="5" lean-forward="true" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1162,10 +866,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#234#248#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1173,7 +873,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="721">
           <caret line="87" column="80" lean-forward="true" selection-start-line="87" selection-start-column="80" selection-end-line="87" selection-end-column="80" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1181,7 +880,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1189,31 +887,86 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-112">
           <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/UUIDFetcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="702">
+          <caret line="96" column="5" lean-forward="true" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/ServerFaction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/FCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="26" column="11" lean-forward="true" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/FactionsCommandExecutor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="13" lean-forward="true" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/FP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dependency-reduced-pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FShowCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="39" column="9" lean-forward="true" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
-          <folding>
-            <element signature="e#1681#2067#0" expanded="true" />
-            <element signature="e#1837#2008#0" expanded="true" />
-            <element signature="e#2007#2008#0" expanded="true" />
-            <element signature="e#2066#2067#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="141">
+          <caret line="129" column="29" lean-forward="false" selection-start-line="129" selection-start-column="29" selection-end-line="129" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="23" column="54" lean-forward="false" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="178" column="40" lean-forward="true" selection-start-line="178" selection-start-column="40" selection-end-line="178" selection-end-column="40" />
-          <folding>
-            <element signature="e#5431#5445#0" expanded="true" />
-            <element signature="e#7743#7751#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1095">
+          <caret line="306" column="47" lean-forward="true" selection-start-line="306" selection-start-column="47" selection-end-line="306" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>
