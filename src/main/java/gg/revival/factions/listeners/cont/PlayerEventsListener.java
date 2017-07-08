@@ -1,5 +1,6 @@
 package gg.revival.factions.listeners.cont;
 
+import gg.revival.factions.claims.ClaimManager;
 import gg.revival.factions.core.PlayerManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,6 +20,8 @@ public class PlayerEventsListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
+
+        ClaimManager.removeFromClaimEditor(player.getUniqueId());
 
         PlayerManager.saveProfile(PlayerManager.getPlayer(player.getUniqueId()), true);
     }

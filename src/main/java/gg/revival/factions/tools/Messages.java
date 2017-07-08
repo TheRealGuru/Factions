@@ -162,6 +162,16 @@ public class Messages {
         return getValue("errors.not-in-faction");
     }
 
+    public static String landClaimedBy(String claimOwner) {
+        return getValue("notifications.cant-break-claimed-land")
+                .replace("%claimowner%", claimOwner);
+    }
+
+    public static String nearbyLandClaimedBy(String claimOwner) {
+        return getValue("notifications.cant-break-nearby-claimed-land")
+                .replace("%claimowner%", claimOwner);
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

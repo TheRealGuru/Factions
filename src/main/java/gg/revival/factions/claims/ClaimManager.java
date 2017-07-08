@@ -8,20 +8,47 @@ import gg.revival.factions.FP;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.tools.Configuration;
+import gg.revival.factions.tools.ToolBox;
+import lombok.Getter;
 import org.bson.Document;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.UUID;
 
 public class ClaimManager {
 
-    private static HashSet<Claim> activeClaims = new HashSet<Claim>();
+    @Getter public static HashSet<Claim> activeClaims = new HashSet<Claim>();
+    @Getter public static HashMap<UUID, Faction> claimEditors = new HashMap<UUID, Faction>();
 
-    public static HashSet<Claim> getClaims() {
-        return activeClaims;
+    public static void removeFromClaimEditor(UUID uuid) {
+        if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
+            Player player = Bukkit.getPlayer(uuid);
+
+            for(ItemStack contents : player.getInventory().getContents()) {
+                if(contents != null && contents.hasItemMeta() && contents.getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
+                    player.getInventory().remove(contents);
+                }
+            }
+        }
+
+        if(claimEditors.containsKey(uuid)) {
+            claimEditors.remove(uuid);
+        }
+    }
+
+    public static Faction getFactionClaimingFor(UUID uuid) {
+        if(claimEditors.containsKey(uuid)) {
+            return claimEditors.get(uuid);
+        }
+
+        return null;
     }
 
     public static Claim getClaimAt(Location location, boolean isEntity) {

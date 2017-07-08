@@ -41,7 +41,7 @@ factions:
     gui-title: '&0Subclaim Editor'
 custom-items:
   faction-claiming-stick:
-    display-name: ''
+    display-name: '&aFaction Claiming Stick'
     description:
       - 'This is line 1'
       - 'This is line 2'

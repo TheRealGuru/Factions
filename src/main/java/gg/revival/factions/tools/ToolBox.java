@@ -73,6 +73,19 @@ public class ToolBox {
         return false;
     }
 
+    public static boolean isNonBuildableWarzone(Location location) {
+        if(isWarzone(location)) {
+            double x = location.getX();
+            double z = location.getZ();
+
+            if(x <= Configuration.BUILDABLE_WARZONE_RADIUS && z <= Configuration.BUILDABLE_WARZONE_RADIUS) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static boolean isWilderness(Location location) {
         if (!isWarzone(location) && isOverworld(location)) {
             return true;

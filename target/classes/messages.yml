@@ -7,6 +7,8 @@ notifications:
   leaving-claim: '&eYou are now leaving &r%claim%'
   subclaim-deleted: '&eRemoved subclaim'
   subclaim-deleted-faction: '&2%player% &eremoved a subclaim'
+  cant-break-claimed-land: '&cThis land is claimed by &r%claimowner%'
+  cant-break-nearby-claimed-land: '&cThis land is nearby &r%claimowner%'
 
 chat-formatting:
   global-faction-member: '&2[%fac%] &r%player%&f: %msg%'
