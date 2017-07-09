@@ -18,6 +18,7 @@ public class Claim {
     @Getter
     @Setter
     double x1, x2, y1, y2, z1, z2, claimValue;
+
     @Getter
     @Setter
     String worldName;
@@ -26,7 +27,7 @@ public class Claim {
     @Setter
     Faction claimOwner;
 
-    public Claim(UUID claimID, Faction claimOwner, double x1, double x2, double y1, double y2, double z1, double z2, String worldName, int claimValue) {
+    public Claim(UUID claimID, Faction claimOwner, double x1, double x2, double y1, double y2, double z1, double z2, String worldName, double claimValue) {
         this.claimID = claimID;
         this.claimOwner = claimOwner;
         this.x1 = x1;

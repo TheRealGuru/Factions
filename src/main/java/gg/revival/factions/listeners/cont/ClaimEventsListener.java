@@ -378,4 +378,17 @@ public class ClaimEventsListener implements Listener {
             }
         }
     }
+
+    @EventHandler
+    public void onPlayerClaimAttempt(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        Action action = event.getAction();
+        Location clickedLocation = null;
+
+        if(event.getClickedBlock() != null) {
+            clickedLocation = event.getClickedBlock().getLocation();
+        }
+
+        ClaimManager.performClaimAction(action, player, clickedLocation);
+    }
 }

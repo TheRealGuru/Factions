@@ -6,6 +6,8 @@ import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Arrays;
+
 public class ToolBox {
 
     public static ItemStack getClaimingStick() {
@@ -109,5 +111,30 @@ public class ToolBox {
 
     public enum WorldLocations {
         WILDERNESS, WARZONE, NETHER, NETHER_WARZONE, END
+    }
+
+    public static boolean overlapsWarzone(double x1, double x2, double z1, double z2) {
+        double[] vals = new double[2];
+
+        double min = Math.min(Configuration.WARZONE_RADIUS, -Configuration.WARZONE_RADIUS);
+        double max = Math.max(Configuration.WARZONE_RADIUS, -Configuration.WARZONE_RADIUS);
+
+        vals[0] = x1;
+        vals[1] = x2;
+
+        Arrays.sort(vals);
+
+        if(min > vals[1] || max < vals[0])
+            return false;
+
+        vals[0] = z1;
+        vals[1] = z2;
+
+        Arrays.sort(vals);
+
+        if(min > vals[1] || max < vals[0])
+            return false;
+
+        return true;
     }
 }

@@ -7,13 +7,17 @@ import gg.revival.driver.MongoAPI;
 import gg.revival.factions.FP;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.Faction;
+import gg.revival.factions.obj.PlayerFaction;
+import gg.revival.factions.obj.ServerFaction;
 import gg.revival.factions.tools.Configuration;
+import gg.revival.factions.tools.Permissions;
 import gg.revival.factions.tools.ToolBox;
 import lombok.Getter;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.Action;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -25,7 +29,7 @@ import java.util.UUID;
 public class ClaimManager {
 
     @Getter public static HashSet<Claim> activeClaims = new HashSet<Claim>();
-    @Getter public static HashMap<UUID, Faction> claimEditors = new HashMap<UUID, Faction>();
+    @Getter public static HashMap<UUID, PendingClaim> claimEditors = new HashMap<UUID, PendingClaim>();
 
     public static void removeFromClaimEditor(UUID uuid) {
         if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
@@ -43,7 +47,7 @@ public class ClaimManager {
         }
     }
 
-    public static Faction getFactionClaimingFor(UUID uuid) {
+    public static PendingClaim getPendingClaim(UUID uuid) {
         if(claimEditors.containsKey(uuid)) {
             return claimEditors.get(uuid);
         }
@@ -173,4 +177,103 @@ public class ClaimManager {
         }.runTaskAsynchronously(FP.getInstance());
     }
 
+    public static void performClaimAction(Action action, Player player, Location clickedLocation) {
+        if(getPendingClaim(player.getUniqueId()) == null)
+            return;
+
+        PendingClaim pendingClaim = getPendingClaim(player.getUniqueId());
+        Faction faction = pendingClaim.getClaimingFor();
+
+        if(action.equals(Action.LEFT_CLICK_BLOCK)) {
+            pendingClaim.setPosA(clickedLocation);
+
+            //TODO: Draw pillar at clickedLocation
+        }
+
+        if(action.equals(Action.RIGHT_CLICK_BLOCK)) {
+            pendingClaim.setPosB(clickedLocation);
+
+            //TODO: Draw pillar at clickedLocation
+        }
+
+        if(action.equals(Action.LEFT_CLICK_AIR) && player.isSneaking()) {
+
+            if(pendingClaim.getPosA() == null || pendingClaim.getPosB() == null) {
+                //TODO: Send claim not finished error
+                return;
+            }
+
+            double claimValue = pendingClaim.calculateCost();
+            int x1 = pendingClaim.getX1();
+            int x2 = pendingClaim.getX2();
+            int y1 = pendingClaim.getY1();
+            int y2 = pendingClaim.getY2();
+            int z1 = pendingClaim.getZ1();
+            int z2 = pendingClaim.getZ2();
+            String worldName = pendingClaim.getPosA().getWorld().getName();
+
+            if(faction instanceof PlayerFaction) {
+                PlayerFaction playerFaction = (PlayerFaction)faction;
+
+                for(Claim claims : ClaimManager.getActiveClaims()) {
+                    if(claims.overlaps(x1, x2, z1, z2)) {
+                        //TODO: Send claim overlapping
+                        return;
+                    }
+
+                    if(ToolBox.overlapsWarzone(x1, x2, z1, z2)) {
+                        //TODO: Send cant claim in warzone
+                        return;
+                    }
+
+                    for(Location blocks : pendingClaim.getBlockPeremeter(worldName, 64)) {
+                        if(claims.nearby(blocks, Configuration.CLAIM_BUFFER) && !claims.getClaimOwner().getFactionID().equals(faction.getFactionID())) {
+                            //TODO: Send claim too close to other factions
+                            return;
+                        }
+                    }
+                }
+
+                if(playerFaction.getBalance() < claimValue && !player.hasPermission(Permissions.ADMIN)) {
+                    //TODO: Send claim too expensive
+                    return;
+                }
+
+                if(!player.hasPermission(Permissions.ADMIN)) {
+                    playerFaction.setBalance(playerFaction.getBalance() - claimValue);
+                }
+
+                y1 = 0; y2 = 256; //Setting the claims to max height
+            }
+
+            if(faction instanceof ServerFaction) {
+                ServerFaction serverFaction = (ServerFaction)faction;
+
+                for(Claim claims : ClaimManager.getActiveClaims()) {
+                    if(claims.overlaps(x1, x2, z1, z2)) {
+                        //TODO: Send claim overlapping
+                        return;
+                    }
+                }
+
+                if(!serverFaction.getType().equals(ServerClaimType.ROAD)) {
+                    y1 = 0; y2 = 256; //Setting the claims to max height UNLESS its a road claim where we want players to go under/over it
+                }
+            }
+
+            Claim claim = new Claim(UUID.randomUUID(), faction, x1, x2, y1, y2, z1, z2, worldName, claimValue);
+
+            faction.getClaims().add(claim);
+            ClaimManager.getActiveClaims().add(claim);
+
+            ClaimManager.saveClaim(claim);
+        }
+
+        if(action.equals(Action.RIGHT_CLICK_AIR) && player.isSneaking()) {
+            pendingClaim.setPosA(null);
+            pendingClaim.setPosB(null);
+            //TODO: Send claim reset
+        }
+
+    }
 }

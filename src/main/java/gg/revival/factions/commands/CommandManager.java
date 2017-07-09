@@ -35,15 +35,20 @@ public class CommandManager {
 
         FCreateCommand createCommand = new FCreateCommand();
         FCreateServerFactionCommand createServerFactionCommand = new FCreateServerFactionCommand();
+
         FDisbandCommand disbandCommand = new FDisbandCommand();
         FDisbandOtherCommand disbandOtherCommand = new FDisbandOtherCommand();
+
         FShowCommand showCommand = new FShowCommand();
+
+        FClaimCommand claimCommand = new FClaimCommand();
 
         commands.add(createCommand);
         commands.add(createServerFactionCommand);
         commands.add(disbandCommand);
         commands.add(disbandOtherCommand);
         commands.add(showCommand);
+        commands.add(claimCommand);
 
         Logger.log("Loaded Commands");
     }
