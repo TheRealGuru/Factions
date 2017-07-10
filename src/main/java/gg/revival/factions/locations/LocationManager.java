@@ -187,8 +187,10 @@ public class LocationManager {
             }
         }
 
-        mcPlayer.sendMessage(Messages.enteringClaim(entering.toString()));
-        mcPlayer.sendMessage(Messages.leavingClaim(leaving.toString()));
+        if(entering != null && entering.length() > 0 && leaving != null && leaving.length() > 0) {
+            mcPlayer.sendMessage(Messages.enteringClaim(entering.toString()));
+            mcPlayer.sendMessage(Messages.leavingClaim(leaving.toString()));
+        }
     }
 
     public static void performZoneChange(Player mcPlayer, ToolBox.WorldLocations oldLoc, ToolBox.WorldLocations newLoc) {

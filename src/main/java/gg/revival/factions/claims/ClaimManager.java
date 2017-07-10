@@ -9,13 +9,17 @@ import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
+import gg.revival.factions.pillars.Pillar;
+import gg.revival.factions.pillars.PillarManager;
 import gg.revival.factions.tools.Configuration;
+import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.Permissions;
 import gg.revival.factions.tools.ToolBox;
 import lombok.Getter;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.inventory.ItemStack;
@@ -186,24 +190,69 @@ public class ClaimManager {
 
         if(action.equals(Action.LEFT_CLICK_BLOCK)) {
             pendingClaim.setPosA(clickedLocation);
+            player.sendMessage(Messages.claimPointSet(1));
 
-            //TODO: Draw pillar at clickedLocation
+            Pillar pillar = new Pillar(player.getUniqueId(), pendingClaim.getPosA(), Material.EMERALD_BLOCK, (byte)0);
+
+            for(Pillar pillars : PillarManager.getActivePillars(player.getUniqueId())) {
+                if(!pillars.getLocation().equals(pendingClaim.getPosA()) && !pillars.getLocation().equals(pendingClaim.getPosB())) {
+                    pillars.remove();
+                    PillarManager.getActivePillars().remove(pillars);
+                }
+            }
+
+            pillar.build();
+            PillarManager.getActivePillars().add(pillar);
+
+            if(pendingClaim.getPosA() != null && pendingClaim.getPosB() != null && faction instanceof PlayerFaction) {
+                PlayerFaction playerFaction = (PlayerFaction)faction;
+                double totalValue = pendingClaim.calculateCost();
+
+                for(Claim claims : playerFaction.getClaims()) {
+                    totalValue = totalValue + claims.getClaimValue();
+                }
+
+                player.sendMessage(Messages.claimCost(totalValue));
+            }
         }
 
         if(action.equals(Action.RIGHT_CLICK_BLOCK)) {
             pendingClaim.setPosB(clickedLocation);
+            player.sendMessage(Messages.claimPointSet(2));
 
-            //TODO: Draw pillar at clickedLocation
+            Pillar pillar = new Pillar(player.getUniqueId(), pendingClaim.getPosB(), Material.EMERALD_BLOCK, (byte)0);
+
+            for(Pillar pillars : PillarManager.getActivePillars(player.getUniqueId())) {
+                if(!pillars.getLocation().equals(pendingClaim.getPosA()) && !pillars.getLocation().equals(pendingClaim.getPosB())) {
+                    pillars.remove();
+                    PillarManager.getActivePillars().remove(pillars);
+                }
+            }
+
+            pillar.build();
+            PillarManager.getActivePillars().add(pillar);
+
+            if(pendingClaim.getPosA() != null && pendingClaim.getPosB() != null && faction instanceof PlayerFaction) {
+                PlayerFaction playerFaction = (PlayerFaction)faction;
+                double totalValue = pendingClaim.calculateCost();
+
+                for(Claim claims : playerFaction.getClaims()) {
+                    totalValue = totalValue + claims.getClaimValue();
+                }
+
+                player.sendMessage(Messages.claimCost(totalValue));
+            }
         }
 
         if(action.equals(Action.LEFT_CLICK_AIR) && player.isSneaking()) {
 
             if(pendingClaim.getPosA() == null || pendingClaim.getPosB() == null) {
-                //TODO: Send claim not finished error
+                player.sendMessage(Messages.claimUnfinished());
                 return;
             }
 
             double claimValue = pendingClaim.calculateCost();
+            double totalValue = claimValue;
             int x1 = pendingClaim.getX1();
             int x2 = pendingClaim.getX2();
             int y1 = pendingClaim.getY1();
@@ -215,33 +264,51 @@ public class ClaimManager {
             if(faction instanceof PlayerFaction) {
                 PlayerFaction playerFaction = (PlayerFaction)faction;
 
-                for(Claim claims : ClaimManager.getActiveClaims()) {
-                    if(claims.overlaps(x1, x2, z1, z2)) {
-                        //TODO: Send claim overlapping
+                if(!playerFaction.getClaims().isEmpty()) {
+                    if(!playerFaction.isTouching(pendingClaim.getPosA()) && !playerFaction.isTouching(pendingClaim.getPosB())) {
+                        player.sendMessage(Messages.claimNotConnected());
                         return;
                     }
+                }
 
-                    if(ToolBox.overlapsWarzone(x1, x2, z1, z2)) {
-                        //TODO: Send cant claim in warzone
+                if(pendingClaim.isTooSmall()) {
+                    player.sendMessage(Messages.claimTooSmall());
+                    return;
+                }
+
+                for(Claim claims : playerFaction.getClaims()) {
+                    totalValue = totalValue + claims.getClaimValue();
+                }
+
+                for(Claim claims : ClaimManager.getActiveClaims()) {
+                    if(claims.overlaps(x1, x2, z1, z2)) {
+                        player.sendMessage(Messages.claimOverlapping());
                         return;
                     }
 
                     for(Location blocks : pendingClaim.getBlockPeremeter(worldName, 64)) {
                         if(claims.nearby(blocks, Configuration.CLAIM_BUFFER) && !claims.getClaimOwner().getFactionID().equals(faction.getFactionID())) {
-                            //TODO: Send claim too close to other factions
+                            player.sendMessage(Messages.claimTooClose());
                             return;
                         }
                     }
                 }
 
-                if(playerFaction.getBalance() < claimValue && !player.hasPermission(Permissions.ADMIN)) {
-                    //TODO: Send claim too expensive
+                if(ToolBox.overlapsWarzone(x1, x2, z1, z2)) {
+                    player.sendMessage(Messages.cantClaimWarzone());
+                    return;
+                }
+
+                if(playerFaction.getBalance() < totalValue && !player.hasPermission(Permissions.ADMIN)) {
+                    player.sendMessage(Messages.claimTooExpensive());
                     return;
                 }
 
                 if(!player.hasPermission(Permissions.ADMIN)) {
-                    playerFaction.setBalance(playerFaction.getBalance() - claimValue);
+                    playerFaction.setBalance(playerFaction.getBalance() - totalValue);
                 }
+
+                playerFaction.sendMessage(Messages.landClaimSuccessOther(player.getName(), totalValue));
 
                 y1 = 0; y2 = 256; //Setting the claims to max height
             }
@@ -251,7 +318,7 @@ public class ClaimManager {
 
                 for(Claim claims : ClaimManager.getActiveClaims()) {
                     if(claims.overlaps(x1, x2, z1, z2)) {
-                        //TODO: Send claim overlapping
+                        player.sendMessage(Messages.claimOverlapping());
                         return;
                     }
                 }
@@ -261,19 +328,42 @@ public class ClaimManager {
                 }
             }
 
+            for(Pillar pillars : PillarManager.getActivePillars(player.getUniqueId())) {
+                pillars.remove();
+                PillarManager.getActivePillars().remove(pillars);
+            }
+
+            for(ItemStack contents : player.getInventory().getContents()) {
+                if(contents == null ||
+                        !contents.hasItemMeta() ||
+                        !contents.getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) continue;
+
+                player.getInventory().remove(contents);
+            }
+
+            player.sendMessage(Messages.landClaimSuccess());
+
             Claim claim = new Claim(UUID.randomUUID(), faction, x1, x2, y1, y2, z1, z2, worldName, claimValue);
 
             faction.getClaims().add(claim);
             ClaimManager.getActiveClaims().add(claim);
+            ClaimManager.getClaimEditors().remove(player.getUniqueId());
 
             ClaimManager.saveClaim(claim);
         }
 
         if(action.equals(Action.RIGHT_CLICK_AIR) && player.isSneaking()) {
-            pendingClaim.setPosA(null);
-            pendingClaim.setPosB(null);
-            //TODO: Send claim reset
-        }
+            if(pendingClaim.getPosA() != null || pendingClaim.getPosB() != null) {
+                pendingClaim.setPosA(null);
+                pendingClaim.setPosB(null);
 
+                for(Pillar pillars : PillarManager.getActivePillars(player.getUniqueId())) {
+                    pillars.remove();
+                    PillarManager.getActivePillars().remove(pillars);
+                }
+
+                player.sendMessage(Messages.claimReset());
+            }
+        }
     }
 }

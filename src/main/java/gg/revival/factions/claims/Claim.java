@@ -1,6 +1,7 @@
 package gg.revival.factions.claims;
 
 import gg.revival.factions.obj.Faction;
+import gg.revival.factions.tools.Configuration;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
@@ -80,8 +81,8 @@ public class Claim {
 
         if (xMin > vals[1] || xMax < vals[0]) return false;
 
-        vals[0] = zMin;
-        vals[1] = zMax;
+        vals[0] = z1;
+        vals[1] = z2;
 
         Arrays.sort(vals);
 

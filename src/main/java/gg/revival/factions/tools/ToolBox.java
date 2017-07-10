@@ -1,5 +1,6 @@
 package gg.revival.factions.tools;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -14,6 +15,7 @@ public class ToolBox {
         ItemStack stick = new ItemStack(Material.STICK);
         ItemMeta stickMeta = stick.getItemMeta();
 
+        stickMeta.setDisplayName(ChatColor.GREEN + "Faction Claiming Stick");
         //TODO: Get stick displayname from config
         //TODO: Get stick lore from config
 
@@ -116,8 +118,8 @@ public class ToolBox {
     public static boolean overlapsWarzone(double x1, double x2, double z1, double z2) {
         double[] vals = new double[2];
 
-        double min = Math.min(Configuration.WARZONE_RADIUS, -Configuration.WARZONE_RADIUS);
-        double max = Math.max(Configuration.WARZONE_RADIUS, -Configuration.WARZONE_RADIUS);
+        double min = -Configuration.WARZONE_RADIUS;
+        double max = Configuration.WARZONE_RADIUS;
 
         vals[0] = x1;
         vals[1] = x2;

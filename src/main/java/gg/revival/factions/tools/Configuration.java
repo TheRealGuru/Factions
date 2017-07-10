@@ -43,6 +43,8 @@ public class Configuration {
 
     public static String SUBCLAIM_GUI_NAME = ChatColor.BLACK + "Subclaim Editor";
 
+    public static double PILLAR_HEIGHT = 30.0;
+
     //TODO: Grab configuration from config.yml
 
 }

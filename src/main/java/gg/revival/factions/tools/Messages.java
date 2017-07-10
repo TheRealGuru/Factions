@@ -172,6 +172,58 @@ public class Messages {
                 .replace("%claimowner%", claimOwner);
     }
 
+    public static String cantClaimWarzone() {
+        return getValue("errors.cant-claim-warzone");
+    }
+
+    public static String claimOverlapping() {
+        return getValue("errors.claim-overlapping");
+    }
+
+    public static String claimTooClose() {
+        return getValue("errors.claim-too-close");
+    }
+
+    public static String claimPointSet(int claimNumber) {
+        return getValue("notifications.claim-point-set")
+                .replace("%claimpoint%", String.valueOf(claimNumber));
+    }
+
+    public static String claimReset() {
+        return getValue("notifications.claim-reset");
+    }
+
+    public static String claimCost(double totalValue) {
+        return getValue("notifications.claim-cost")
+                .replace("%totalvalue%", String.valueOf(totalValue));
+    }
+
+    public static String claimUnfinished() {
+        return getValue("errors.claim-unfinished");
+    }
+
+    public static String claimTooExpensive() {
+        return getValue("errors.claim-too-expensive");
+    }
+
+    public static String landClaimSuccess() {
+        return getValue("notifications.land-claim-success");
+    }
+
+    public static String landClaimSuccessOther(String claimer, double totalValue) {
+        return getValue("notifications.land-claim-success-other")
+                .replace("%player%", claimer)
+                .replace("%totalvalue%", String.valueOf(totalValue));
+    }
+
+    public static String claimNotConnected() {
+        return getValue("errors.claim-not-connected");
+    }
+
+    public static String claimTooSmall() {
+        return getValue("errors.claim-too-small");
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

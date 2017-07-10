@@ -34,6 +34,7 @@ factions:
   claiming:
     minimum-claim-size: 10
     claim-buffer: 5
+    pillar-height: 30.0
   alliances:
     enabled: true
     ally-limit: 1

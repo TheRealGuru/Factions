@@ -11,6 +11,7 @@ import gg.revival.factions.tools.Configuration;
 import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.Permissions;
 import gg.revival.factions.tools.ToolBox;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -385,10 +386,20 @@ public class ClaimEventsListener implements Listener {
         Action action = event.getAction();
         Location clickedLocation = null;
 
+        if(player.getItemInHand() == null ||
+                !player.getItemInHand().hasItemMeta() ||
+                !player.getItemInHand().getItemMeta().getDisplayName().equals(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
+            return;
+        }
+
         if(event.getClickedBlock() != null) {
             clickedLocation = event.getClickedBlock().getLocation();
         }
 
         ClaimManager.performClaimAction(action, player, clickedLocation);
+
+        if(action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.LEFT_CLICK_BLOCK)) {
+            event.setCancelled(true);
+        }
     }
 }

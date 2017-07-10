@@ -2,14 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15beb459-b905-4f30-9369-6b161deb67cc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/PendingClaim.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FClaimCommand.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/pillars/Pillar.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/pillars/PillarManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/Claim.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/Claim.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/ClaimManager$1.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/ClaimManager$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/ClaimManager$2.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/ClaimManager$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/ClaimManager$3.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/ClaimManager$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/ClaimManager.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/ClaimManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/commands/CommandManager.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/commands/CommandManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/ClaimEventsListener.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/listeners/cont/ClaimEventsListener.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/Messages.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/Messages.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/ToolBox$WorldLocations.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/ToolBox$WorldLocations.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/ToolBox.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/tools/ToolBox.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/ClaimManager.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/ClaimManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/CommandManager.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/CommandManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/PendingClaim.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/PendingClaim.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/cont/ClaimEventsListener.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/cont/ClaimEventsListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/locations/LocationManager.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/locations/LocationManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/Faction.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/Faction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Configuration.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Configuration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/ToolBox.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/ToolBox.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/config.yml" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/messages.yml" afterPath="$PROJECT_DIR$/src/main/resources/messages.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/messages.yml" afterPath="$PROJECT_DIR$/target/classes/messages.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,77 +52,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FClaimCommand.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FClaimCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="973">
-              <caret line="61" column="39" lean-forward="false" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClaimManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ClaimManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/ClaimManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3383">
-              <caret line="223" column="62" lean-forward="false" selection-start-line="223" selection-start-column="62" selection-end-line="223" selection-end-column="62" />
+            <state relative-caret-position="-863">
+              <caret line="274" column="65" lean-forward="false" selection-start-line="274" selection-start-column="65" selection-end-line="274" selection-end-column="65" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClaimEventsListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/cont/ClaimEventsListener.java">
+      <file leaf-file-name="Messages.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="220" column="45" lean-forward="false" selection-start-line="220" selection-start-column="44" selection-end-line="220" selection-end-column="45" />
+            <state relative-caret-position="459">
+              <caret line="223" column="50" lean-forward="false" selection-start-line="223" selection-start-column="50" selection-end-line="223" selection-end-column="50" />
               <folding>
-                <element signature="method#onItemDrop#0;class#ClaimEventsListener#0" expanded="false" />
-                <element signature="method#onInventoryClick#0;class#ClaimEventsListener#0" expanded="false" />
-                <element signature="method#onPistonExtension#0;class#ClaimEventsListener#0" expanded="false" />
-                <element signature="method#onPistonRetract#0;class#ClaimEventsListener#0" expanded="false" />
-                <element signature="method#onEntityTarget#0;class#ClaimEventsListener#0" expanded="false" />
-                <element signature="method#onEntitySpawn#0;class#ClaimEventsListener#0" expanded="false" />
-                <element signature="method#onEntityMount#0;class#ClaimEventsListener#0" expanded="false" />
-                <element signature="method#onPlayerEmptyBucket#0;class#ClaimEventsListener#0" expanded="false" />
-                <element signature="method#onBlockChange#0;class#ClaimEventsListener#0" expanded="false" />
-                <element signature="method#onBlockBreak#0;class#ClaimEventsListener#0" expanded="false" />
-                <element signature="method#onBlockPlace#0;class#ClaimEventsListener#0" expanded="false" />
-                <element signature="method#onPlayerInteract#0;class#ClaimEventsListener#0" expanded="false" />
+                <element signature="e#7088#7089#0" expanded="true" />
+                <element signature="e#7149#7150#0" expanded="true" />
+                <element signature="e#7193#7194#0" expanded="true" />
+                <element signature="e#7250#7251#0" expanded="true" />
+                <element signature="e#7498#7512#0" expanded="true" />
+                <element signature="e#9810#9818#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ToolBox.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/ToolBox.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1530">
-              <caret line="96" column="5" lean-forward="false" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PendingClaim.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/PendingClaim.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1309">
-              <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Claim.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="67" column="4" lean-forward="false" selection-start-line="67" selection-start-column="4" selection-end-line="90" selection-end-column="5" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -128,8 +100,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/cont/ChatEventsListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/cont/WorldEventsListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/FactionsCommandExecutor.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/timers/TimerType.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/timers/PlayerTimer.java" />
@@ -140,7 +110,6 @@
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Permissions.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/timers/Timer.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/subclaims/Subclaim.java" />
-        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/Faction.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/FPlayer.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/ServerFaction.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/subclaims/SubclaimGUI.java" />
@@ -149,11 +118,9 @@
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/locations/FLocation.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/ListenerManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/threads/ThreadManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Configuration.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/db/DatabaseManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/FP.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/core/PlayerManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/locations/LocationManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/FCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FCreateServerFactionCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/core/FactionManager.java" />
@@ -169,16 +136,21 @@
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FShowCommand.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/cont/PlayerEventsListener.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/config.yml" />
-        <option value="$PROJECT_DIR$/src/main/resources/messages.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/CommandManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FClaimCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/ToolBox.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/Faction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/pillars/PillarManager.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/config.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Configuration.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/pillars/Pillar.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/cont/ClaimEventsListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/locations/LocationManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/PendingClaim.java" />
-        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/ToolBox.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/messages.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/ClaimManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/cont/ClaimEventsListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FClaimCommand.java" />
       </list>
     </option>
   </component>
@@ -204,6 +176,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -305,6 +278,66 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Factions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RevivalFactions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="factions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pillars" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Factions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RevivalFactions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="factions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="obj" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -499,7 +532,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -840,7 +872,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17910448" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18230277" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -870,20 +902,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/scoreboards/ScoreboardManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/file/FileManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="4" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/cont/SubclaimEventsListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -954,13 +972,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
           <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/Faction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="17" column="19" lean-forward="false" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1055,24 +1066,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/PlayerFaction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-112">
-          <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/UUIDFetcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="702">
           <caret line="96" column="5" lean-forward="true" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/ServerFaction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1120,31 +1117,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="171" column="53" lean-forward="false" selection-start-line="171" selection-start-column="53" selection-end-line="171" selection-end-column="53" />
-          <folding>
-            <element signature="e#5895#5909#0" expanded="false" />
-            <element signature="e#8207#8215#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/messages.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="72" lean-forward="false" selection-start-line="10" selection-start-column="72" selection-end-line="10" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/locations/LocationManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FCreateCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1157,13 +1129,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="645">
           <caret line="50" column="35" lean-forward="false" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="13" lean-forward="false" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1193,42 +1158,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Configuration.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FClaimCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="67" column="4" lean-forward="false" selection-start-line="67" selection-start-column="4" selection-end-line="90" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/PendingClaim.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1309">
-          <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="1041">
+          <caret line="62" column="19" lean-forward="false" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/ToolBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="96" column="5" lean-forward="false" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
+        <state relative-caret-position="570">
+          <caret line="119" column="0" lean-forward="true" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/Faction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="32" column="10" lean-forward="false" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
+          <folding>
+            <element signature="docComment;method#isTouching#0;class#Faction#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/PlayerFaction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/ServerFaction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/pillars/PillarManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#214#222#0" expanded="true" />
+            <element signature="e#336#344#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/listeners/cont/ClaimEventsListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="220" column="45" lean-forward="false" selection-start-line="220" selection-start-column="44" selection-end-line="220" selection-end-column="45" />
+        <state relative-caret-position="145">
+          <caret line="386" column="40" lean-forward="false" selection-start-line="386" selection-start-column="40" selection-end-line="386" selection-end-column="40" />
           <folding>
             <element signature="method#onItemDrop#0;class#ClaimEventsListener#0" expanded="false" />
             <element signature="method#onInventoryClick#0;class#ClaimEventsListener#0" expanded="false" />
@@ -1246,21 +1235,84 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/ClaimManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3383">
-          <caret line="223" column="62" lean-forward="false" selection-start-line="223" selection-start-column="62" selection-end-line="223" selection-end-column="62" />
+        <state relative-caret-position="306">
+          <caret line="36" column="23" lean-forward="false" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FClaimCommand.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Configuration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="973">
-          <caret line="61" column="39" lean-forward="false" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
+        <state relative-caret-position="426">
+          <caret line="45" column="46" lean-forward="false" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/pillars/Pillar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="63" column="13" lean-forward="false" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/locations/LocationManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="284" column="5" lean-forward="true" selection-start-line="284" selection-start-column="5" selection-end-line="284" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/PendingClaim.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="110" column="0" lean-forward="true" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/messages.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="51" column="81" lean-forward="false" selection-start-line="51" selection-start-column="81" selection-end-line="51" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="223" column="50" lean-forward="false" selection-start-line="223" selection-start-column="50" selection-end-line="223" selection-end-column="50" />
+          <folding>
+            <element signature="e#7088#7089#0" expanded="true" />
+            <element signature="e#7149#7150#0" expanded="true" />
+            <element signature="e#7193#7194#0" expanded="true" />
+            <element signature="e#7250#7251#0" expanded="true" />
+            <element signature="e#7498#7512#0" expanded="true" />
+            <element signature="e#9810#9818#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/ClaimManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-863">
+          <caret line="274" column="65" lean-forward="false" selection-start-line="274" selection-start-column="65" selection-end-line="274" selection-end-column="65" />
+          <folding />
         </state>
       </provider>
     </entry>

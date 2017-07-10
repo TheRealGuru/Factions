@@ -9,6 +9,11 @@ notifications:
   subclaim-deleted-faction: '&2%player% &eremoved a subclaim'
   cant-break-claimed-land: '&cThis land is claimed by &r%claimowner%'
   cant-break-nearby-claimed-land: '&cThis land is nearby &r%claimowner%'
+  claim-point-set: '&aClaim Point #%claimpoint% Set'
+  claim-reset: '&eClaim Points have been reset'
+  claim-cost: '&eThis claim will cost &2$%totalvalue%'
+  land-claim-success: '&aYou have claimed this land'
+  land-claim-success-other: '&2%player% &ehas claimed land for &2$%totalvalue%'
 
 chat-formatting:
   global-faction-member: '&2[%fac%] &r%player%&f: %msg%'
@@ -38,6 +43,13 @@ errors:
   unraidable-required: '&cThis action can not be performed while your faction is raidable'
   unfrozen-required: '&cThis action can not be performed while your faction power is frozen'
   not-in-faction: '&cYou are not in a faction'
+  cant-claim-warzone: '&cYou can not claim in the Warzone'
+  claim-overlapping: '&cYou can not claim this land because it overlaps an existing claim'
+  claim-too-close: '&cYou can not claim this land because it is too close to another factions claim'
+  claim-too-expensive: '&cYou can not claim this land because it is too expensive'
+  claim-unfinished: '&cThis claim is unfinished. Make sure both points are set before confirming your claim'
+  claim-not-connected: '&cYou can not claim this land because it is not connected to your existing claims'
+  claim-too-small: '&cYou can not claim this land because the claim is too small'
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'

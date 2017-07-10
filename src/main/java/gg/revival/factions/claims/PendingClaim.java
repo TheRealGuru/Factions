@@ -1,6 +1,7 @@
 package gg.revival.factions.claims;
 
 import gg.revival.factions.obj.Faction;
+import gg.revival.factions.tools.Configuration;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
@@ -95,7 +96,17 @@ public class PendingClaim {
             }
         }
 
-        return area * 3;
+        return area * 4;
+    }
+
+    public boolean isTooSmall() {
+        double xAxis = Math.abs(getX1() - getX2());
+        double zAxis = Math.abs(getZ1() - getZ2());
+
+        if(xAxis < Configuration.MIN_CLAIM_SIZE || zAxis < Configuration.MIN_CLAIM_SIZE)
+            return true;
+
+        return false;
     }
 
 }

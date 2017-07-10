@@ -33,4 +33,25 @@ public class Faction {
         this.subclaims = new HashSet<Subclaim>();
     }
 
+    /**
+     * Mainly used to check if a block is touching the side of a claim
+     * @param location
+     * @return
+     */
+    public boolean isTouching(Location location) {
+        for(Claim claims : getClaims()) {
+            if(!claims.getWorld().equals(location.getWorld())) continue;
+
+            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(0.0D, 0.0D, 1.0D), false)) return true;
+            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(1.0D, 0.0D, 0.0D), false)) return true;
+            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(0.0D, 0.0D, -1.0D), true)) return true;
+            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(-1.0D, 0.0D, 0.0D), true)) return true;
+            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(-1.0D, 0.0D, 1.0D), false)) return true;
+            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(-1.0D, 0.0D, -1.0D), false)) return true;
+            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(1.0D, 0.0D, 1.0D), false)) return true;
+        }
+
+        return false;
+    }
+
 }
