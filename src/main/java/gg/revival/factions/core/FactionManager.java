@@ -11,6 +11,7 @@ import gg.revival.factions.claims.ServerClaimType;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
+import gg.revival.factions.subclaims.SubclaimManager;
 import gg.revival.factions.tools.Configuration;
 import gg.revival.factions.tools.Messages;
 import org.bson.Document;
@@ -193,6 +194,7 @@ public class FactionManager {
                         activeFactions.add(faction);
 
                         ClaimManager.loadClaims(faction);
+                        SubclaimManager.loadSubclaims(faction);
                     }
                 }
             }
