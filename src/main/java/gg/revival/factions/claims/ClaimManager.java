@@ -70,20 +70,21 @@ public class ClaimManager {
     }
 
     public static void deleteClaim(Claim claim) {
-        if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
-            return;
+        if (Configuration.DB_ENABLED && MongoAPI.isConnected()) {
+            new BukkitRunnable() {
+                public void run() {
+                    MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "claims");
+                    FindIterable<Document> query = collection.find(Filters.eq("claimID", claim.getClaimID().toString()));
+                    Document document = query.first();
 
-        new BukkitRunnable() {
-            public void run() {
-                MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "claims");
-                FindIterable<Document> query = collection.find(Filters.eq("claimID", claim.getClaimID().toString()));
-                Document document = query.first();
-
-                if (document != null) {
-                    collection.deleteOne(document);
+                    if (document != null) {
+                        collection.deleteOne(document);
+                    }
                 }
-            }
-        }.runTaskAsynchronously(FP.getInstance());
+            }.runTaskAsynchronously(FP.getInstance());
+        }
+
+        activeClaims.remove(claim);
     }
 
     public static void loadClaims(Faction faction) {
@@ -286,7 +287,9 @@ public class ClaimManager {
                         return;
                     }
 
-                    for(Location blocks : pendingClaim.getBlockPeremeter(worldName, 64)) {
+                    for(Location blocks : pendingClaim.getPerimeter(worldName, 64)) {
+                        player.sendBlockChange(blocks, Material.WOOL, (byte)0);
+
                         if(claims.nearby(blocks, Configuration.CLAIM_BUFFER) && !claims.getClaimOwner().getFactionID().equals(faction.getFactionID())) {
                             player.sendMessage(Messages.claimTooClose());
                             return;

@@ -6,6 +6,8 @@ gg\revival\factions\pillars\PillarManager.class
 gg\revival\factions\locations\LocationManager.class
 gg\revival\factions\core\FactionManager$2.class
 gg\revival\factions\listeners\cont\ChatEventsListener.class
+gg\revival\factions\commands\cont\FInviteCommand$1$1.class
+gg\revival\factions\commands\cont\FInviteCommand$1.class
 gg\revival\factions\obj\Faction.class
 gg\revival\factions\claims\Claim.class
 gg\revival\factions\commands\cont\FShowCommand$4$1.class
@@ -24,6 +26,7 @@ gg\revival\factions\obj\PlayerFaction.class
 gg\revival\factions\threads\cont\LocationThread.class
 gg\revival\factions\obj\ServerFaction.class
 gg\revival\factions\tools\Permissions.class
+gg\revival\factions\commands\cont\FClaimOtherCommand$1.class
 gg\revival\factions\obj\PlayerFaction$1.class
 gg\revival\factions\threads\ThreadManager.class
 gg\revival\factions\commands\cont\FCreateCommand.class
@@ -40,12 +43,14 @@ gg\revival\factions\subclaims\SubclaimGUI$1.class
 gg\revival\factions\claims\ClaimManager$1.class
 gg\revival\factions\claims\ClaimManager.class
 gg\revival\factions\tools\Messages.class
+gg\revival\factions\commands\cont\FClaimOtherCommand.class
 gg\revival\factions\subclaims\Subclaim.class
 gg\revival\factions\subclaims\SubclaimGUI$1$3.class
 gg\revival\factions\tools\Configuration.class
 gg\revival\factions\db\DatabaseManager$1.class
 gg\revival\factions\listeners\cont\SubclaimEventsListener$3.class
 gg\revival\factions\listeners\cont\WorldEventsListener.class
+gg\revival\factions\commands\cont\FInviteCommand.class
 gg\revival\factions\locations\LocationManager$1.class
 gg\revival\factions\listeners\cont\SubclaimEventsListener.class
 gg\revival\factions\commands\cont\FShowCommand$1.class

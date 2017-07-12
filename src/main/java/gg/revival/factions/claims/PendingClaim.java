@@ -66,14 +66,46 @@ public class PendingClaim {
         return Math.max(posA.getBlockZ(), posB.getBlockZ());
     }
 
-    public List<Location> getBlockPeremeter(String worldName, int yLevel) {
-        if(posA == null || posB == null)
-            return null;
-
+    public List<Location> getPerimeter(String worldName, int yLevel) {
         List<Location> locations = new ArrayList<>();
 
-        for(int x = getX1(); x <= getX2(); x++) {
-            for(int z = getZ1(); z <= getZ1(); z++) {
+        if(getPosA() == null || getPosB() == null) {
+            return locations;
+        }
+
+        int xMin = Math.min(getX1(), getX2());
+        int xMax = Math.max(getX1(), getX2());
+        int zMin = Math.min(getZ1(), getZ2());
+        int zMax = Math.max(getZ1(), getZ2());
+
+        for(int x = xMin; x <= xMax; x++) { //loop x
+
+            for(int z = zMin; z <= zMax; z++) { //loop z
+
+                if(x == xMin || x == xMax || z == zMin || z == zMax) { //checks to see if blocks are in line
+                    Location location = new Location(Bukkit.getWorld(worldName), x, yLevel, z);
+                    locations.add(location);
+                }
+            }
+        }
+
+        return locations;
+    }
+
+    public List<Location> getFloor(String worldName, int yLevel) {
+        List<Location> locations = new ArrayList<>();
+
+        if(getPosA() == null || getPosB() == null) {
+            return locations;
+        }
+
+        int xMin = Math.min(getX1(), getX2());
+        int xMax = Math.max(getX1(), getX2());
+        int zMin = Math.min(getZ1(), getZ2());
+        int zMax = Math.max(getZ1(), getZ2());
+
+        for(int x = xMin; x <= xMax; x++) {
+            for(int z = zMin; z <= zMax; z++) {
                 Location location = new Location(Bukkit.getWorld(worldName), x, yLevel, z);
                 locations.add(location);
             }

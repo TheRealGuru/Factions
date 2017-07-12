@@ -224,6 +224,20 @@ public class Messages {
         return getValue("errors.claim-too-small");
     }
 
+    public static String inventoryFull() {
+        return getValue("errors.inventory-full");
+    }
+
+    public static String alreadyClaimingLand() {
+        return getValue("errors.claim-in-progress");
+    }
+
+    public static String invitedPlayer(String inviter, String invited) {
+        return getValue("notifications.invited-player")
+                .replace("%player%", inviter)
+                .replace("%invited%", invited);
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");
@@ -383,6 +397,18 @@ public class Messages {
 
             i++;
         }
+    }
+
+    public static void sendFactionInvite(Player displayedTo, String factionName, String inviter) {
+        new FancyMessage(inviter)
+                .color(ChatColor.BLUE)
+                .then(" has invited you to join ")
+                .color(ChatColor.YELLOW).then(factionName)
+                .color(ChatColor.GOLD)
+                .then(" Click this meesage to accept the invitation")
+                .color(ChatColor.YELLOW)
+                .command("/faction accept " + factionName)
+                .send(displayedTo);
     }
 
 }

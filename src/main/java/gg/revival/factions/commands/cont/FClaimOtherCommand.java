@@ -5,25 +5,26 @@ import gg.revival.factions.claims.ClaimManager;
 import gg.revival.factions.claims.PendingClaim;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
-import gg.revival.factions.obj.PlayerFaction;
+import gg.revival.factions.obj.Faction;
 import gg.revival.factions.tools.Messages;
+import gg.revival.factions.tools.Permissions;
 import gg.revival.factions.tools.ToolBox;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class FClaimCommand extends FCommand {
+public class FClaimOtherCommand extends FCommand {
 
-    public FClaimCommand() {
+    public FClaimOtherCommand() {
         super(
-                "claim",
+                "claimfor",
                 null,
-                "/f claim",
-                "Claim faction land",
-                null,
-                1,
-                1,
+                "/f claimfor <faction>",
+                "Claim for another faction",
+                Permissions.ADMIN,
+                2,
+                2,
                 true);
     }
 
@@ -36,27 +37,24 @@ public class FClaimCommand extends FCommand {
 
         Player player = (Player)sender;
 
+        if(!player.hasPermission(getPermission())) {
+            player.sendMessage(Messages.noPermission());
+            return;
+        }
+
         if(args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
+
+        String factionName = args[1];
 
         if(ClaimManager.getPendingClaim(player.getUniqueId()) != null) {
             player.sendMessage(Messages.alreadyClaimingLand());
             return;
         }
 
-        if(FactionManager.getFactionByPlayer(player.getUniqueId()) == null) {
-            player.sendMessage(Messages.notInFaction());
-            return;
-        }
-
-        PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
-
-        if(!faction.getLeader().equals(player.getUniqueId()) && !faction.getOfficers().contains(player.getUniqueId())) {
-            player.sendMessage(Messages.officerRequired());
-            return;
-        }
+        Faction faction = FactionManager.getFactionByName(factionName);
 
         if(player.getInventory().firstEmpty() == -1) {
             player.sendMessage(Messages.inventoryFull());

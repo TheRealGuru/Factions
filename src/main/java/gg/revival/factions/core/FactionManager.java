@@ -126,12 +126,10 @@ public class FactionManager {
                     }
                 }
             }.runTaskAsynchronously(FP.getInstance());
+        }
 
-            if (!faction.getClaims().isEmpty()) {
-                for (Claim claims : faction.getClaims()) {
-                    ClaimManager.deleteClaim(claims);
-                }
-            }
+        for (Claim claims : faction.getClaims()) {
+            ClaimManager.deleteClaim(claims);
         }
 
         activeFactions.remove(faction);

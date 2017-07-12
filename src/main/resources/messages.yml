@@ -14,6 +14,7 @@ notifications:
   claim-cost: '&eThis claim will cost &2$%totalvalue%'
   land-claim-success: '&aYou have claimed this land'
   land-claim-success-other: '&2%player% &ehas claimed land for &2$%totalvalue%'
+  invited-player: '&2%player% &ehas invited &9%invited% &eto join the faction'
 
 chat-formatting:
   global-faction-member: '&2[%fac%] &r%player%&f: %msg%'
@@ -50,6 +51,8 @@ errors:
   claim-unfinished: '&cThis claim is unfinished. Make sure both points are set before confirming your claim'
   claim-not-connected: '&cYou can not claim this land because it is not connected to your existing claims'
   claim-too-small: '&cYou can not claim this land because the claim is too small'
+  inventory-full: '&cYou can not perform this task because your inventory is full'
+  claim-in-progress: '&cIt appears you are already claiming land'
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'

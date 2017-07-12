@@ -1,9 +1,14 @@
 package gg.revival.factions.tools;
 
+import gg.revival.factions.claims.ServerClaimType;
+import gg.revival.factions.core.PlayerManager;
+import gg.revival.factions.obj.FPlayer;
+import gg.revival.factions.obj.ServerFaction;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -104,6 +109,21 @@ public class ToolBox {
             double z = location.getZ();
 
             if (x <= Configuration.NETHER_WARZONE_RADIUS && z <= Configuration.NETHER_WARZONE_RADIUS) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean isInSafezone(Player mcPlayer) {
+        FPlayer player = PlayerManager.getPlayer(mcPlayer.getUniqueId());
+
+        if(player.getLocation().getCurrentClaim() != null &&
+                player.getLocation().getCurrentClaim().getClaimOwner() instanceof ServerFaction) {
+            ServerFaction serverFaction = (ServerFaction)player.getLocation().getCurrentClaim().getClaimOwner();
+
+            if(serverFaction.getType().equals(ServerClaimType.SAFEZONE)) {
                 return true;
             }
         }

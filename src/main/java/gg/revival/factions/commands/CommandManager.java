@@ -42,6 +42,9 @@ public class CommandManager {
         FShowCommand showCommand = new FShowCommand();
 
         FClaimCommand claimCommand = new FClaimCommand();
+        FClaimOtherCommand claimOtherCommand = new FClaimOtherCommand();
+
+        FInviteCommand inviteCommand = new FInviteCommand();
 
         commands.add(createCommand);
         commands.add(createServerFactionCommand);
@@ -49,6 +52,8 @@ public class CommandManager {
         commands.add(disbandOtherCommand);
         commands.add(showCommand);
         commands.add(claimCommand);
+        commands.add(claimOtherCommand);
+        commands.add(inviteCommand);
 
         Logger.log("Loaded Commands");
     }
