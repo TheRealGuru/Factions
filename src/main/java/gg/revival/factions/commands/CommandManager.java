@@ -45,6 +45,9 @@ public class CommandManager {
         FClaimOtherCommand claimOtherCommand = new FClaimOtherCommand();
 
         FInviteCommand inviteCommand = new FInviteCommand();
+        FUninviteCommand uninviteCommand = new FUninviteCommand();
+
+        FMapCommand mapCommand = new FMapCommand();
 
         commands.add(createCommand);
         commands.add(createServerFactionCommand);
@@ -54,6 +57,8 @@ public class CommandManager {
         commands.add(claimCommand);
         commands.add(claimOtherCommand);
         commands.add(inviteCommand);
+        commands.add(uninviteCommand);
+        commands.add(mapCommand);
 
         Logger.log("Loaded Commands");
     }

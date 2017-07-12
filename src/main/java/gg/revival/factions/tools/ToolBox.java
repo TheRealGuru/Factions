@@ -131,10 +131,6 @@ public class ToolBox {
         return false;
     }
 
-    public enum WorldLocations {
-        WILDERNESS, WARZONE, NETHER, NETHER_WARZONE, END
-    }
-
     public static boolean overlapsWarzone(double x1, double x2, double z1, double z2) {
         double[] vals = new double[2];
 
@@ -158,5 +154,9 @@ public class ToolBox {
             return false;
 
         return true;
+    }
+
+    public enum WorldLocations {
+        WILDERNESS, WARZONE, NETHER, NETHER_WARZONE, END
     }
 }

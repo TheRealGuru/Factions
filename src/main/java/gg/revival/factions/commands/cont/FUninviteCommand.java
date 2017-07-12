@@ -15,14 +15,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Arrays;
 import java.util.UUID;
 
-public class FInviteCommand extends FCommand {
+public class FUninviteCommand extends FCommand {
 
-    public FInviteCommand() {
+    public FUninviteCommand() {
         super(
-                "invite",
-                Arrays.asList("inv"),
-                "/f invite <player>",
-                "Invite a player to your faction",
+                "uninvite",
+                Arrays.asList("revoke"),
+                "/f uninvite <player>",
+                "Revoke a players invitation to your faction",
                 null,
                 2,
                 2,
@@ -43,6 +43,8 @@ public class FInviteCommand extends FCommand {
             return;
         }
 
+        String namedPlayer = args[1];
+
         if(FactionManager.getFactionByPlayer(player.getUniqueId()) == null) {
             player.sendMessage(Messages.notInFaction());
             return;
@@ -54,8 +56,6 @@ public class FInviteCommand extends FCommand {
             player.sendMessage(Messages.officerRequired());
             return;
         }
-
-        String namedPlayer = args[1];
 
         new BukkitRunnable() {
             public void run() {
@@ -70,31 +70,24 @@ public class FInviteCommand extends FCommand {
                                 return;
                             }
 
-                            if(FactionManager.getFactionByPlayer(uuid) != null) {
-                                player.sendMessage(Messages.alreadyInFactionOther());
+                            if(!faction.getPendingInvites().contains(uuid)) {
+                                player.sendMessage(Messages.noPendingInvite());
                                 return;
                             }
 
-                            if(faction.getPendingInvites().contains(uuid)) {
-                                player.sendMessage(Messages.playerAlreadyInvited());
-                                return;
-                            }
+                            faction.getPendingInvites().remove(uuid);
 
-                            faction.getPendingInvites().add(uuid);
+                            faction.sendMessage(Messages.uninvitedPlayer(player.getName(), properUsername));
 
                             if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
-                                Messages.sendFactionInvite(Bukkit.getPlayer(uuid), faction.getDisplayName(), player.getName());
+                                Bukkit.getPlayer(uuid).sendMessage(Messages.invitationRevoked(faction.getDisplayName()));
                             }
-
-                            faction.sendMessage(Messages.invitedPlayer(player.getName(), properUsername));
                         }
                     }.runTask(FP.getInstance());
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }.runTaskAsynchronously(FP.getInstance());
     }
-
 }

@@ -7,6 +7,7 @@ gg\revival\factions\locations\LocationManager.class
 gg\revival\factions\core\FactionManager$2.class
 gg\revival\factions\listeners\cont\ChatEventsListener.class
 gg\revival\factions\commands\cont\FInviteCommand$1$1.class
+gg\revival\factions\commands\cont\FUninviteCommand$1.class
 gg\revival\factions\commands\cont\FInviteCommand$1.class
 gg\revival\factions\obj\Faction.class
 gg\revival\factions\claims\Claim.class
@@ -35,6 +36,7 @@ gg\revival\factions\listeners\ListenerManager.class
 gg\revival\factions\listeners\cont\PlayerEventsListener.class
 gg\revival\factions\timers\TimerManager.class
 gg\revival\factions\commands\cont\FCreateServerFactionCommand.class
+gg\revival\factions\commands\cont\FMapCommand.class
 gg\revival\factions\threads\ThreadManager$2.class
 gg\revival\factions\tools\Logger.class
 gg\revival\factions\tools\ToolBox$WorldLocations.class
@@ -55,6 +57,7 @@ gg\revival\factions\locations\LocationManager$1.class
 gg\revival\factions\listeners\cont\SubclaimEventsListener.class
 gg\revival\factions\commands\cont\FShowCommand$1.class
 gg\revival\factions\obj\FPlayer.class
+gg\revival\factions\commands\cont\FUninviteCommand$1$1.class
 gg\revival\factions\subclaims\SubclaimGUI.class
 gg\revival\factions\listeners\cont\ClaimEventsListener.class
 gg\revival\factions\commands\cont\FShowCommand$3$1.class
@@ -78,6 +81,7 @@ gg\revival\factions\tools\ToolBox.class
 gg\revival\factions\claims\ClaimManager$2.class
 gg\revival\factions\commands\cont\FShowCommand$2.class
 gg\revival\factions\tools\NameFetcher.class
+gg\revival\factions\commands\cont\FUninviteCommand.class
 gg\revival\factions\threads\ThreadManager$1.class
 gg\revival\factions\commands\cont\FDisbandCommand.class
 gg\revival\factions\commands\cont\FDisbandOtherCommand.class

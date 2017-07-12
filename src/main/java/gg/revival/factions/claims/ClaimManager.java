@@ -288,8 +288,6 @@ public class ClaimManager {
                     }
 
                     for(Location blocks : pendingClaim.getPerimeter(worldName, 64)) {
-                        player.sendBlockChange(blocks, Material.WOOL, (byte)0);
-
                         if(claims.nearby(blocks, Configuration.CLAIM_BUFFER) && !claims.getClaimOwner().getFactionID().equals(faction.getFactionID())) {
                             player.sendMessage(Messages.claimTooClose());
                             return;

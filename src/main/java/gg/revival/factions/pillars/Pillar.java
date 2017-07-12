@@ -29,7 +29,7 @@ public class Pillar {
     }
 
     public void build() {
-        if(Bukkit.getPlayer(this.displayedTo) == null)
+        if(Bukkit.getPlayer(this.displayedTo) == null || this.location == null)
             return;
 
         Player player = Bukkit.getPlayer(this.displayedTo);

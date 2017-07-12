@@ -238,6 +238,29 @@ public class Messages {
                 .replace("%invited%", invited);
     }
 
+    public static String uninvitedPlayer(String uninviter, String uninvited) {
+        return getValue("notifications.uninvited-player")
+                .replace("%player%", uninviter)
+                .replace("%uninvited%", uninvited);
+    }
+
+    public static String invitationRevoked(String factionName) {
+        return getValue("notifications.uninvited-player-other")
+                .replace("%faction%", factionName);
+    }
+
+    public static String noPendingInvite() {
+        return getValue("errors.player-no-pending-invite");
+    }
+
+    public static String playerAlreadyInvited() {
+        return getValue("errors.player-already-invited");
+    }
+
+    public static String noNearbyFactions() {
+        return getValue("notifications.no-nearby-factions");
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");
