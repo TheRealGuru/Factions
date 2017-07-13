@@ -38,6 +38,5 @@ public class FCommand {
         this.playerOnly = playerOnly;
     }
 
-    public void onCommand(CommandSender sender, String args[]) {
-    }
+    public void onCommand(CommandSender sender, String args[]) {}
 }

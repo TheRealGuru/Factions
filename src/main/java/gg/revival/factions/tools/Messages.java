@@ -261,6 +261,28 @@ public class Messages {
         return getValue("notifications.no-nearby-factions");
     }
 
+    public static String noPendingInviteOther() {
+        return getValue("errors.player-no-pending-invite-other");
+    }
+
+    public static String factionFull() {
+        return getValue("errors.faction-full");
+    }
+
+    public static String unfrozenRequiredOther() {
+        return getValue("errors.unfrozen-required-other");
+    }
+
+    public static String joinedFaction(String factionName) {
+        return getValue("notifications.joined-faction")
+                .replace("%fac%", factionName);
+    }
+
+    public static String joinedFactionOther(String joiner) {
+        return getValue("notifications.joined-faction-other")
+                .replace("%player%", joiner);
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

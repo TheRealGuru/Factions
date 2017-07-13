@@ -19,12 +19,8 @@ import java.util.*;
 
 public class SubclaimManager {
 
-    @Getter
-    @Setter
-    private static HashSet<Subclaim> activeSubclaims = new HashSet<Subclaim>();
-    @Getter
-    @Setter
-    private static HashMap<UUID, SubclaimGUI> subclaimEditor = new HashMap<UUID, SubclaimGUI>();
+    @Getter @Setter private static HashSet<Subclaim> activeSubclaims = new HashSet<Subclaim>();
+    @Getter @Setter private static HashMap<UUID, SubclaimGUI> subclaimEditor = new HashMap<UUID, SubclaimGUI>();
 
     public static Subclaim getSubclaimAt(Location location) {
         for (Subclaim subclaims : activeSubclaims) {

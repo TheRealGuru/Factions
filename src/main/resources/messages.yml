@@ -18,6 +18,12 @@ notifications:
   uninvited-player: '&2%player% &ehas &crevoked &ean invitation for &9%uninvited%'
   uninvited-player-other: '&eYour invitation to join &6%faction% &ehas been &crevoked'
   no-nearby-factions: '&eIt appears there are no factions nearby'
+  joined-faction: '&eYou have joined &2%fac%'
+  joined-faction-other: '&2%player% has &ajoined &ethe faction'
+  left-faction: '&eYou have left &2%fac%'
+  left-faction-other: '&9%player% &ehas &cleft &ethe faction'
+  kick-faction: '&eYou have been kicked from &2%fac%'
+  kick-faction-other: '&9%player% &ehas been &ckicked &efrom the faction'
 
 chat-formatting:
   global-faction-member: '&2[%fac%] &r%player%&f: %msg%'
@@ -36,6 +42,7 @@ errors:
   profile-not-found: '&cWe were unable to find your profile data so this action has been canceled'
   player-not-found: '&cPlayer not found'
   faction-not-found: '&cFaction not found'
+  faction-full: '&cThis faction is full'
   already-in-faction: '&cYou are already in a faction'
   already-in-faction-other: '&cThis player is already in a faction'
   bad-fac-name: '&cFaction names must be 3-16 characters, A-Z 0-9. If you believe you meet these requirements you may be stupid and your name is something obviously offensive.'
@@ -46,6 +53,7 @@ errors:
   officer-required: '&cThis action requires you to have the officer role'
   unraidable-required: '&cThis action can not be performed while your faction is raidable'
   unfrozen-required: '&cThis action can not be performed while your faction power is frozen'
+  unfrozen-required-other: '&cThis action can not be performed while this factions power is frozen'
   not-in-faction: '&cYou are not in a faction'
   cant-claim-warzone: '&cYou can not claim in the Warzone'
   claim-overlapping: '&cYou can not claim this land because it overlaps an existing claim'
@@ -57,6 +65,7 @@ errors:
   inventory-full: '&cYou can not perform this task because your inventory is full'
   claim-in-progress: '&cIt appears you are already claiming land'
   player-no-pending-invite: '&cThis player did not have a pending invite to your faction'
+  player-no-pending-invite-other: '&cYou do not have a pending invitation to join this faction'
   player-already-invited: '&cThis player already has a pending invitation to join your faction'
 
 misc:

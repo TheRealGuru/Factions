@@ -46,6 +46,7 @@ public class CommandManager {
 
         FInviteCommand inviteCommand = new FInviteCommand();
         FUninviteCommand uninviteCommand = new FUninviteCommand();
+        FAcceptCommand acceptCommand = new FAcceptCommand();
 
         FMapCommand mapCommand = new FMapCommand();
 
@@ -59,6 +60,7 @@ public class CommandManager {
         commands.add(inviteCommand);
         commands.add(uninviteCommand);
         commands.add(mapCommand);
+        commands.add(acceptCommand);
 
         Logger.log("Loaded Commands");
     }
