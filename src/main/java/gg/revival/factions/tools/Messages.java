@@ -130,12 +130,22 @@ public class Messages {
         return getValue("errors.no-subclaim-access");
     }
 
+    public static String subclaimCreated() {
+        return getValue("notifications.subclaim-created");
+    }
+
+    public static String subclaimCreatedFaction(String creator) {
+        return getValue("notifications.subclaim-created-faction")
+                .replace("%player%", creator);
+    }
+
     public static String subclaimDeleted() {
         return getValue("notifications.subclaim-deleted");
     }
 
-    public static String subclaimDeletedFaction() {
-        return getValue("notifications.subclaim-deleted-faction");
+    public static String subclaimDeletedFaction(String deleter) {
+        return getValue("notifications.subclaim-deleted-faction")
+                .replace("%player%", deleter);
     }
 
     public static String subclaimTooClose() {
@@ -281,6 +291,18 @@ public class Messages {
     public static String joinedFactionOther(String joiner) {
         return getValue("notifications.joined-faction-other")
                 .replace("%player%", joiner);
+    }
+
+    public static String notLookingAtChest() {
+        return getValue("errors.not-looking-at-chest");
+    }
+
+    public static String subclaimAccessDenied() {
+        return getValue("errors.subclaim-access-denied");
+    }
+
+    public static String subclaimOutsideClaim() {
+        return getValue("errors.subclaim-outside-claim");
     }
 
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {

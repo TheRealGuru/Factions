@@ -4,17 +4,24 @@ import gg.revival.factions.claims.ServerClaimType;
 import gg.revival.factions.core.PlayerManager;
 import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.obj.ServerFaction;
+import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.BlockIterator;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ToolBox {
+
+    @Getter public static final List<BlockFace> flatDirections = Arrays.asList(BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST);
 
     public static ItemStack getClaimingStick() {
         ItemStack stick = new ItemStack(Material.STICK);
@@ -154,6 +161,21 @@ public class ToolBox {
             return false;
 
         return true;
+    }
+
+    public static Block getTargetBlock(Player player, int dist) {
+        BlockIterator iterator = new BlockIterator(player, dist);
+        Block lastBlock = iterator.next();
+
+        while(iterator.hasNext()) {
+            lastBlock = iterator.next();
+
+            if(lastBlock.getType().equals(Material.AIR)) continue;
+
+            break;
+        }
+
+        return lastBlock;
     }
 
     public enum WorldLocations {

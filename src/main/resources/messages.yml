@@ -5,8 +5,10 @@ notifications:
   ally-fire: '&cWarning, you are attacking an &dally'
   entering-claim: '&eYou are now entering &r%claim%'
   leaving-claim: '&eYou are now leaving &r%claim%'
-  subclaim-deleted: '&eRemoved subclaim'
-  subclaim-deleted-faction: '&2%player% &eremoved a subclaim'
+  subclaim-created: '&eYou have &acreated &ea subclaim'
+  subclaim-created-faction: '&2%player% &ehas &acreated &ea subclaim'
+  subclaim-deleted: '&eYou have &cremoved &ea subclaim'
+  subclaim-deleted-faction: '&2%player% &ehas &cremoved &ea subclaim'
   cant-break-claimed-land: '&cThis land is claimed by &r%claimowner%'
   cant-break-nearby-claimed-land: '&cThis land is nearby &r%claimowner%'
   claim-point-set: '&aClaim Point #%claimpoint% Set'
@@ -67,6 +69,9 @@ errors:
   player-no-pending-invite: '&cThis player did not have a pending invite to your faction'
   player-no-pending-invite-other: '&cYou do not have a pending invitation to join this faction'
   player-already-invited: '&cThis player already has a pending invitation to join your faction'
+  not-looking-at-chest: '&cYou are not looking at a chest'
+  subclaim-access-denied: '&cYou do not have access to this subclaim'
+  subclaim-outside-claim: '&cYou can not subclaim this chest because it is outside your faction claims'
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'

@@ -44,6 +44,8 @@ public class CommandManager {
         FClaimCommand claimCommand = new FClaimCommand();
         FClaimOtherCommand claimOtherCommand = new FClaimOtherCommand();
 
+        FSubclaimCommand subclaimCommand = new FSubclaimCommand();
+
         FInviteCommand inviteCommand = new FInviteCommand();
         FUninviteCommand uninviteCommand = new FUninviteCommand();
         FAcceptCommand acceptCommand = new FAcceptCommand();
@@ -61,6 +63,7 @@ public class CommandManager {
         commands.add(uninviteCommand);
         commands.add(mapCommand);
         commands.add(acceptCommand);
+        commands.add(subclaimCommand);
 
         Logger.log("Loaded Commands");
     }

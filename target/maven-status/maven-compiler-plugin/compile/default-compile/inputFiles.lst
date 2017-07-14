@@ -6,14 +6,14 @@ E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\timers\Ti
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\Permissions.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\FP.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FInviteCommand.java
-E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\scoreboards\FScoreboard.java
-E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\scoreboards\ScoreboardManager.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\claims\Claim.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FAcceptCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\claims\PendingClaim.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\core\FactionManager.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\listeners\cont\ChatEventsListener.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\NameFetcher.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\db\DatabaseManager.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FSubclaimCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FMapCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\subclaims\SubclaimManager.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\claims\ServerClaimType.java

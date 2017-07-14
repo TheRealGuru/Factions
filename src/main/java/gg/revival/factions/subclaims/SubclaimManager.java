@@ -103,6 +103,8 @@ public class SubclaimManager {
                 SubclaimGUI newGUI = new SubclaimGUI(player.getUniqueId(), subclaim);
 
                 newGUI.open();
+
+                getSubclaimEditor().put(player.getUniqueId(), newGUI);
             }
         }.runTaskLater(FP.getInstance(), 1L);
     }

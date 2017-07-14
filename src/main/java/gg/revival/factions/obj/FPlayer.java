@@ -1,7 +1,6 @@
 package gg.revival.factions.obj;
 
 import gg.revival.factions.locations.FLocation;
-import gg.revival.factions.scoreboards.FScoreboard;
 import gg.revival.factions.timers.Timer;
 import gg.revival.factions.timers.TimerType;
 import lombok.Getter;
@@ -19,9 +18,6 @@ public class FPlayer {
     double balance;
     @Getter
     @Setter
-    FScoreboard scoreboard;
-    @Getter
-    @Setter
     FLocation location;
     @Getter
     @Setter
@@ -30,7 +26,6 @@ public class FPlayer {
     public FPlayer(UUID uuid, double balance) {
         this.uuid = uuid;
         this.balance = balance;
-        this.scoreboard = new FScoreboard("Scoreboard Title"); //TODO: Update scoreboard title
         this.location = new FLocation(uuid);
         this.timers = new HashSet<Timer>();
     }

@@ -4,10 +4,8 @@ import gg.revival.factions.FP;
 import gg.revival.factions.claims.Claim;
 import gg.revival.factions.subclaims.Subclaim;
 import gg.revival.factions.subclaims.SubclaimManager;
-import gg.revival.factions.tools.Configuration;
-import gg.revival.factions.tools.Messages;
-import gg.revival.factions.tools.Permissions;
-import gg.revival.factions.tools.UUIDFetcher;
+import gg.revival.factions.tools.*;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,6 +20,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
@@ -35,8 +34,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class SubclaimEventsListener implements Listener {
-
-    private final List<BlockFace> flatDirections = Arrays.asList(BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST);
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
@@ -74,7 +71,7 @@ public class SubclaimEventsListener implements Listener {
             }
         }
 
-        for (BlockFace directions : flatDirections) {
+        for (BlockFace directions : ToolBox.getFlatDirections()) {
             Block relative = block.getRelative(directions);
 
             if (relative == null || SubclaimManager.getSubclaimAt(relative.getLocation()) == null) continue;
@@ -117,7 +114,7 @@ public class SubclaimEventsListener implements Listener {
                 SubclaimManager.removeSubclaim(subclaim);
 
                 player.sendMessage(Messages.subclaimDeleted());
-                subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction());
+                subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
                 return;
             }
 
@@ -125,7 +122,7 @@ public class SubclaimEventsListener implements Listener {
                 SubclaimManager.removeSubclaim(subclaim);
 
                 player.sendMessage(Messages.subclaimDeleted());
-                subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction());
+                subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
                 return;
             }
 
@@ -133,7 +130,7 @@ public class SubclaimEventsListener implements Listener {
                 SubclaimManager.removeSubclaim(subclaim);
 
                 player.sendMessage(Messages.subclaimDeleted());
-                subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction());
+                subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
                 return;
             }
 
@@ -142,7 +139,7 @@ public class SubclaimEventsListener implements Listener {
             return;
         }
 
-        for (BlockFace directions : flatDirections) {
+        for (BlockFace directions : ToolBox.getFlatDirections()) {
             Block relative = block.getRelative(directions);
 
             if (relative == null || SubclaimManager.getSubclaimAt(relative.getLocation()) == null) continue;
@@ -153,15 +150,15 @@ public class SubclaimEventsListener implements Listener {
                 SubclaimManager.removeSubclaim(subclaim);
 
                 player.sendMessage(Messages.subclaimDeleted());
-                subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction());
+                subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
                 return;
             }
 
             if (subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
                 SubclaimManager.removeSubclaim(subclaim);
 
-                //TODO: Send subclaim deleted message to leader
-                //TODO: Send subclaim deleted message to faction
+                player.sendMessage(Messages.subclaimDeleted());
+                subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
                 return;
             }
 
@@ -169,7 +166,7 @@ public class SubclaimEventsListener implements Listener {
                 SubclaimManager.removeSubclaim(subclaim);
 
                 player.sendMessage(Messages.subclaimDeleted());
-                subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction());
+                subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
                 return;
             }
 
@@ -186,7 +183,7 @@ public class SubclaimEventsListener implements Listener {
 
         if (!block.getType().equals(Material.CHEST) && !block.getType().equals(Material.TRAPPED_CHEST)) return;
 
-        for (BlockFace directions : flatDirections) {
+        for (BlockFace directions : ToolBox.getFlatDirections()) {
             Block relative = block.getRelative(directions);
 
             if (relative == null || !relative.getType().equals(Material.CHEST) || !relative.getType().equals(Material.TRAPPED_CHEST))
@@ -215,6 +212,9 @@ public class SubclaimEventsListener implements Listener {
             if (currentItem == null) return;
 
             ItemMeta currentItemMeta = currentItem.getItemMeta();
+
+            if(currentItemMeta.getDisplayName() == null) return;
+
             String title = currentItemMeta.getDisplayName();
             String stripped = ChatColor.stripColor(title);
 
@@ -292,7 +292,13 @@ public class SubclaimEventsListener implements Listener {
 
                 SubclaimManager.removeSubclaim(subclaim);
                 player.sendMessage(Messages.subclaimDeleted());
-                subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction());
+                subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
+
+                new BukkitRunnable() {
+                    public void run() {
+                        player.closeInventory();;
+                    }
+                }.runTaskLater(FP.getInstance(), 1L);
             }
 
             event.setCancelled(true);
@@ -332,6 +338,17 @@ public class SubclaimEventsListener implements Listener {
                 event.setCancelled(true);
                 return;
             }
+        }
+    }
+
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent event) {
+        if(!(event.getPlayer() instanceof Player)) return;
+
+        Player player = (Player)event.getPlayer();
+
+        if(SubclaimManager.getEditedSubclaim(player.getUniqueId()) != null) {
+            SubclaimManager.getSubclaimEditor().remove(player.getUniqueId());
         }
     }
 

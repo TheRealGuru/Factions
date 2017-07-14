@@ -88,20 +88,27 @@ public class SubclaimGUI {
 
                     new BukkitRunnable() {
                         public void run() {
-                            ItemStack officerItem = new ItemStack(Material.EMERALD_BLOCK);
-                            ItemMeta officerMeta = officerItem.getItemMeta();
+                            ItemStack officerItem = null;
+                            ItemStack delete = new ItemStack(Material.FIRE);
+
+                            ItemMeta officerMeta = null;
+                            ItemMeta deleteMeta = delete.getItemMeta();
 
                             if (subclaim.isOfficerAccess()) {
+                                officerItem = new ItemStack(Material.EMERALD_BLOCK);
+                                officerMeta = officerItem.getItemMeta();
+
                                 officerMeta.setDisplayName(ChatColor.GOLD + "Officer Access" + ChatColor.YELLOW + ": " + ChatColor.GREEN + "Yes");
                             } else {
+                                officerItem = new ItemStack(Material.REDSTONE_BLOCK);
+                                officerMeta = officerItem.getItemMeta();
+
                                 officerMeta.setDisplayName(ChatColor.GOLD + "Officer Access" + ChatColor.YELLOW + ": " + ChatColor.RED + "No");
                             }
 
-                            ItemStack delete = new ItemStack(Material.FIRE);
-                            ItemMeta deleteMeta = delete.getItemMeta();
-
                             deleteMeta.setDisplayName(ChatColor.DARK_RED + "Delete Subclaim");
 
+                            officerItem.setItemMeta(officerMeta);
                             delete.setItemMeta(deleteMeta);
 
                             gui.setItem(53, officerItem);

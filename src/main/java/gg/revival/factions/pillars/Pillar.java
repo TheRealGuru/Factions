@@ -35,7 +35,7 @@ public class Pillar {
         Player player = Bukkit.getPlayer(this.displayedTo);
 
         double x = location.getX();
-        double y = location.getY();
+        double y = Math.round(location.getY()); // this needs to be rounded because a half block (i.e y=64.503) would result in the pillar only being one block
         double z = location.getZ();
         double topY = y + Configuration.PILLAR_HEIGHT;
 
@@ -46,11 +46,9 @@ public class Pillar {
 
             displayedBlocks.add(blockLocation);
 
-            if(i % 2 == 0) {
+            if((i % 2) == 0) {
                 player.sendBlockChange(blockLocation, Material.GLASS, (byte)0);
-            }
-
-            else {
+            } else {
                 player.sendBlockChange(blockLocation, blockType, blockData);
             }
         }
