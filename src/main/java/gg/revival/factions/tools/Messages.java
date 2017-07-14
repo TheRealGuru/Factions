@@ -305,6 +305,40 @@ public class Messages {
         return getValue("errors.subclaim-outside-claim");
     }
 
+    public static String currentBalance(double balance) {
+        DecimalFormat format = new DecimalFormat("#,###.00");
+
+        return getValue("economy.current-balance")
+                .replace("%bal%", format.format(balance));
+    }
+
+    public static String currentBalanceOther(String player, double balance) {
+        DecimalFormat format = new DecimalFormat("#,###.00");
+
+        return getValue("economy.current-balance-other")
+                .replace("%player%", player)
+                .replace("%bal%", format.format(balance));
+    }
+
+    public static String balanceModified(double balance) {
+        DecimalFormat format = new DecimalFormat("#,###.00");
+
+        return getValue("economy.balance-modified")
+                .replace("%bal%", format.format(balance));
+    }
+
+    public static String balanceModifiedOther(String player, double balance) {
+        DecimalFormat format = new DecimalFormat("#,###.00");
+
+        return getValue("economy.balance-modified-other")
+                .replace("%bal%", format.format(balance))
+                .replace("%player%", player);
+    }
+
+    public static String invalidAmount() {
+        return getValue("economy.invalid-amount");
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

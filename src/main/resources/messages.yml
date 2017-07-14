@@ -1,3 +1,10 @@
+economy:
+  current-balance: "&2Balance&f: $%bal%"
+  current-balance-other: "&2%player%'s Balance&f: $%bal%"
+  balance-modified: "&eYou have changed this players balance to &2$%bal%"
+  balance-modified-other: "&eYour balance has been set to &2$%bal% &eby &9%player%"
+  invalid-amount: '&cInvalid amount'
+
 notifications:
   member-online: '&aMember Online&f: %player%'
   member-offline: '&cMember Offline&f: %player%'
@@ -26,6 +33,8 @@ notifications:
   left-faction-other: '&9%player% &ehas &cleft &ethe faction'
   kick-faction: '&eYou have been kicked from &2%fac%'
   kick-faction-other: '&9%player% &ehas been &ckicked &efrom the faction'
+  balance-self: '&2Your current balance&f: $%bal%'
+  balance-other: "&2%player%'s current balance&f: $%bal%"
 
 chat-formatting:
   global-faction-member: '&2[%fac%] &r%player%&f: %msg%'

@@ -8,3 +8,6 @@ commands:
   faction:
     description: Core Faction Command
     aliases: [f, t, team]
+  balance:
+    description: Economy Command
+    aliases: [bal, money, cash]

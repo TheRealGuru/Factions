@@ -7,6 +7,7 @@ gg\revival\factions\locations\LocationManager.class
 gg\revival\factions\core\FactionManager$2.class
 gg\revival\factions\commands\cont\FInviteCommand$1$1.class
 gg\revival\factions\commands\cont\FInviteCommand$1.class
+gg\revival\factions\commands\cont\BalanceCommandExecutor.class
 gg\revival\factions\locations\FLocation.class
 gg\revival\factions\subclaims\SubclaimGUI$1$1.class
 gg\revival\factions\timers\TimerType.class

@@ -32,6 +32,7 @@ public class CommandManager {
 
     public static void loadCommands() {
         FP.getInstance().getCommand("faction").setExecutor(new FactionsCommandExecutor());
+        FP.getInstance().getCommand("balance").setExecutor(new BalanceCommandExecutor());
 
         FCreateCommand createCommand = new FCreateCommand();
         FCreateServerFactionCommand createServerFactionCommand = new FCreateServerFactionCommand();
