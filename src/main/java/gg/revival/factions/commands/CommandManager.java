@@ -55,6 +55,7 @@ public class CommandManager {
         FMapCommand mapCommand = new FMapCommand();
 
         FRenameCommand renameCommand = new FRenameCommand();
+        FRenameForCommand renameForCommand = new FRenameForCommand();
 
         commands.add(createCommand);
         commands.add(createServerFactionCommand);
