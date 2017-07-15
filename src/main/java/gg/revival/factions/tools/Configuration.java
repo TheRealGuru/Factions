@@ -45,6 +45,10 @@ public class Configuration {
 
     public static double PILLAR_HEIGHT = 30.0;
 
+    public static int RENAME_COOLDOWN = 300;
+    public static int DISBAND_COOLDOWN = 300;
+    public static int MAP_COOLDOWN = 15;
+
     //TODO: Grab configuration from config.yml
 
 }

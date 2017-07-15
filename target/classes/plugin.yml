@@ -1,4 +1,4 @@
-name: RevivalFactions
+name: FactionsX
 main: gg.revival.factions.FP
 version: 1.0.0
 author: johnsama
@@ -11,3 +11,5 @@ commands:
   balance:
     description: Economy Command
     aliases: [bal, money, cash]
+  pay:
+    description: Economy Command

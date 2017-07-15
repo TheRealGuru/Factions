@@ -23,6 +23,17 @@ public class ToolBox {
 
     @Getter public static final List<BlockFace> flatDirections = Arrays.asList(BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST);
 
+    public static String getFormattedCooldown(boolean showDecimal, long duration) {
+        if(showDecimal) {
+            double seconds = Math.abs(duration / 1000.0f);
+            return String.format("%.1f", seconds);
+        }
+
+        else {
+            return String.valueOf((int)duration / 1000L);
+        }
+    }
+
     public static ItemStack getClaimingStick() {
         ItemStack stick = new ItemStack(Material.STICK);
         ItemMeta stickMeta = stick.getItemMeta();

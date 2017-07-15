@@ -15,6 +15,7 @@ E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\Nam
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\db\DatabaseManager.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FSubclaimCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FMapCommand.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\threads\cont\TimerThread.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\subclaims\SubclaimManager.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\claims\ServerClaimType.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\pillars\Pillar.java
@@ -42,9 +43,11 @@ E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\listeners
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\UserCache.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\file\FileManager.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\claims\ClaimManager.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FRenameCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\obj\FPlayer.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\subclaims\Subclaim.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FUninviteCommand.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\PayCommandExecutor.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\timers\TimerType.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\CommandManager.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FDisbandCommand.java

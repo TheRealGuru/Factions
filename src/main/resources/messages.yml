@@ -46,6 +46,7 @@ chat-formatting:
 broadcasts:
   fac-created: '&6%fac% &ehas been &acreated &eby &9%player%'
   fac-disbanded: '&6%fac% &ehas been &cdisbanded &eby &9%player%'
+  fac-renamed: '&6%oldname% &ehas been &drenamed &eto &6%newname% &eby &9%player%'
 
 errors:
   no-permission: '&cYou do not have permission to use this command'
@@ -81,6 +82,7 @@ errors:
   not-looking-at-chest: '&cYou are not looking at a chest'
   subclaim-access-denied: '&cYou do not have access to this subclaim'
   subclaim-outside-claim: '&cYou can not subclaim this chest because it is outside your faction claims'
+  cooldown: "&cYou can not perform this action for another &c&l%dur% &cseconds"
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'

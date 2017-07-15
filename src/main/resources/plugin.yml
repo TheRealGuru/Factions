@@ -11,3 +11,5 @@ commands:
   balance:
     description: Economy Command
     aliases: [bal, money, cash]
+  pay:
+    description: Economy Command

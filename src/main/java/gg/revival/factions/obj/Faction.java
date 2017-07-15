@@ -2,9 +2,12 @@ package gg.revival.factions.obj;
 
 import gg.revival.factions.claims.Claim;
 import gg.revival.factions.subclaims.Subclaim;
+import gg.revival.factions.tools.ToolBox;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 
 import java.util.HashSet;
 import java.util.UUID;
@@ -42,13 +45,13 @@ public class Faction {
         for(Claim claims : getClaims()) {
             if(!claims.getWorld().equals(location.getWorld())) continue;
 
-            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(0.0D, 0.0D, 1.0D), false)) return true;
-            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(1.0D, 0.0D, 0.0D), false)) return true;
-            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(0.0D, 0.0D, -1.0D), true)) return true;
-            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(-1.0D, 0.0D, 0.0D), true)) return true;
-            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(-1.0D, 0.0D, 1.0D), false)) return true;
-            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(-1.0D, 0.0D, -1.0D), false)) return true;
-            if (claims.inside(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()).add(1.0D, 0.0D, 1.0D), false)) return true;
+            for(BlockFace directions : ToolBox.getFlatDirections()) {
+                Block block = location.getBlock().getRelative(directions);
+                Location locations = block.getLocation();
+
+                if(claims.inside(locations, false))
+                    return true;
+            }
         }
 
         return false;

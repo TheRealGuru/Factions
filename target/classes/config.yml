@@ -7,6 +7,12 @@ database:
     username: username
     password: password
     database: 'factions'
+timers:
+  rename-cooldown: 300
+  disband-cooldown: 300
+  map-cooldown: 15
+  home-warmup: 5
+  stuck-warmup: 60
 factions:
   dtr:
     regen-time: 60
@@ -20,7 +26,6 @@ factions:
     max-faction-size: 20
     max-home-height: 150
     home-too-high-price: 100
-    home-warmup: 5
     stuck-warmup: 60
   map-setup:
     warzone-radius: 1000

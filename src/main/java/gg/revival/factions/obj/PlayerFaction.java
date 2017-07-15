@@ -1,6 +1,8 @@
 package gg.revival.factions.obj;
 
 import gg.revival.factions.FP;
+import gg.revival.factions.timers.Timer;
+import gg.revival.factions.timers.TimerType;
 import gg.revival.factions.tools.Configuration;
 import gg.revival.factions.tools.Logger;
 import lombok.Getter;
@@ -11,6 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,21 +21,30 @@ public class PlayerFaction extends Faction {
 
     @Getter
     UUID leader;
+
     @Getter
     @Setter
     List<UUID> officers, members, allies, pendingInvites, pendingAllies, factionChat, allyChat;
+
     @Getter
     @Setter
     String announcement;
+
     @Getter
     @Setter
     double balance;
+
     @Getter
     @Setter
     BigDecimal dtr;
+
     @Getter
     @Setter
     long regenTime, unfreezeTime;
+
+    @Getter
+    @Setter
+    HashSet<Timer> timers;
 
     public PlayerFaction(UUID factionID, String displayName, UUID leader,
                          List<UUID> officers, List<UUID> members, List<UUID> allies,
@@ -48,13 +60,14 @@ public class PlayerFaction extends Faction {
         this.allies = allies;
         this.pendingInvites = pendingInvites;
         this.pendingAllies = pendingAllies;
-        this.factionChat = new ArrayList<UUID>();
-        this.allyChat = new ArrayList<UUID>();
+        this.factionChat = new ArrayList<>();
+        this.allyChat = new ArrayList<>();
         this.announcement = announcement;
         this.balance = balance;
         this.dtr = dtr;
         this.regenTime = System.currentTimeMillis();
         this.unfreezeTime = unfreezeTime;
+        this.timers = new HashSet<>();
 
         new BukkitRunnable() {
             public void run() {
@@ -137,6 +150,19 @@ public class PlayerFaction extends Faction {
         return max;
     }
 
+    public Timer getTimer(TimerType type) {
+        if(!isBeingTimed(type))
+            return null;
+
+        for(Timer activeTimers : timers) {
+            if(activeTimers.getType().equals(type)) {
+                return activeTimers;
+            }
+        }
+
+        return null;
+    }
+
     public void sendMessage(String message) {
         for (UUID onlinePlayers : getRoster(true)) {
             Player player = Bukkit.getPlayer(onlinePlayers);
@@ -156,6 +182,19 @@ public class PlayerFaction extends Faction {
     public boolean isRaidable() {
         if (this.dtr.doubleValue() < 0.0) {
             return true;
+        }
+
+        return false;
+    }
+
+    public boolean isBeingTimed(TimerType type) {
+        if(this.timers.isEmpty())
+            return false;
+
+        for(Timer activeTimers : timers) {
+            if(activeTimers.getType().equals(type)) {
+                return true;
+            }
         }
 
         return false;

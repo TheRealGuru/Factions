@@ -13,12 +13,15 @@ public class FPlayer {
 
     @Getter
     UUID uuid;
+
     @Getter
     @Setter
     double balance;
+
     @Getter
     @Setter
     FLocation location;
+
     @Getter
     @Setter
     HashSet<Timer> timers = new HashSet<Timer>();

@@ -33,6 +33,7 @@ public class CommandManager {
     public static void loadCommands() {
         FP.getInstance().getCommand("faction").setExecutor(new FactionsCommandExecutor());
         FP.getInstance().getCommand("balance").setExecutor(new BalanceCommandExecutor());
+        FP.getInstance().getCommand("pay").setExecutor(new PayCommandExecutor());
 
         FCreateCommand createCommand = new FCreateCommand();
         FCreateServerFactionCommand createServerFactionCommand = new FCreateServerFactionCommand();
@@ -53,6 +54,8 @@ public class CommandManager {
 
         FMapCommand mapCommand = new FMapCommand();
 
+        FRenameCommand renameCommand = new FRenameCommand();
+
         commands.add(createCommand);
         commands.add(createServerFactionCommand);
         commands.add(disbandCommand);
@@ -65,6 +68,7 @@ public class CommandManager {
         commands.add(mapCommand);
         commands.add(acceptCommand);
         commands.add(subclaimCommand);
+        commands.add(renameCommand);
 
         Logger.log("Loaded Commands");
     }

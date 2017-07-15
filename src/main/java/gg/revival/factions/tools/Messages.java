@@ -90,6 +90,13 @@ public class Messages {
         return getValue("broadcasts.fac-disbanded").replace("%fac%", faction).replace("%player%", player);
     }
 
+    public static String factionRenamed(String oldName, String newName, String changer) {
+        return getValue("broadcasts.fac-renamed")
+                .replace("%oldname%", oldName)
+                .replace("%newname%", newName)
+                .replace("%player%", changer);
+    }
+
     public static String noPermission() {
         return getValue("errors.no-permission");
     }
@@ -337,6 +344,11 @@ public class Messages {
 
     public static String invalidAmount() {
         return getValue("economy.invalid-amount");
+    }
+
+    public static String cooldownMessage(String duration) {
+        return getValue("errors.cooldown")
+                .replace("%dur%", duration);
     }
 
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
