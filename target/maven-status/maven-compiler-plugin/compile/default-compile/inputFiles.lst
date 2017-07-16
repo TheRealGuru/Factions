@@ -25,8 +25,10 @@ E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\UUIDFetcher.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\FactionsCommandExecutor.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\obj\ServerFaction.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\LocationSerialization.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\obj\Faction.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\core\PlayerManager.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FRenameForCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\locations\LocationManager.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\subclaims\SubclaimGUI.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FClaimCommand.java
@@ -37,6 +39,7 @@ E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\pillars\P
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\listeners\cont\PlayerEventsListener.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\Messages.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\listeners\cont\SubclaimEventsListener.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FSethomeCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\FCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\threads\cont\LocationThread.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\listeners\cont\ClaimEventsListener.java
@@ -52,6 +55,7 @@ E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\timers\Ti
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\CommandManager.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FDisbandCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FCreateServerFactionCommand.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FSethomeForCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\locations\FLocation.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\listeners\cont\WorldEventsListener.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\obj\PlayerFaction.java

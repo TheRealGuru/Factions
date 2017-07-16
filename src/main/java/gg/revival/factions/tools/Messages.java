@@ -351,6 +351,19 @@ public class Messages {
                 .replace("%dur%", duration);
     }
 
+    public static String homeSet() {
+        return getValue("notifications.home-set");
+    }
+
+    public static String homeSetOther(String changer) {
+        return getValue("notifications.home-set-other")
+                .replace("%player%", changer);
+    }
+
+    public static String homeOutsideClaims() {
+        return getValue("errors.home-outside-claim");
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

@@ -14,9 +14,11 @@ import gg.revival.factions.obj.ServerFaction;
 import gg.revival.factions.subclaims.Subclaim;
 import gg.revival.factions.subclaims.SubclaimManager;
 import gg.revival.factions.tools.Configuration;
+import gg.revival.factions.tools.LocationSerialization;
 import gg.revival.factions.tools.Messages;
 import org.bson.Document;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.math.BigDecimal;
@@ -106,7 +108,7 @@ public class FactionManager {
                 pendingInvites = new ArrayList<UUID>(),
                 pendingAllies = new ArrayList<UUID>();
 
-        PlayerFaction faction = new PlayerFaction(factionID, displayName, leader,
+        PlayerFaction faction = new PlayerFaction(factionID, displayName, null, leader,
                 officers, members, allies, pendingInvites, pendingAllies,
                 null, 0.0, BigDecimal.valueOf(0.1), System.currentTimeMillis());
 
@@ -132,6 +134,10 @@ public class FactionManager {
 
         for (Claim claims : faction.getClaims()) {
             ClaimManager.deleteClaim(claims);
+        }
+
+        for (Subclaim subclaims : faction.getSubclaims()) {
+            SubclaimManager.deleteSubclaim(subclaims);
         }
 
         activeFactions.remove(faction);
@@ -177,6 +183,12 @@ public class FactionManager {
                     } else {
                         UUID factionID = UUID.fromString(current.getString("factionID"));
                         String displayName = current.getString("displayName");
+
+                        Location homeLocation = null;
+                        if(current.getString("homeLocation") != null && current.getString("homeLocation").length() > 0) {
+                            homeLocation = LocationSerialization.deserializeLocation(current.getString("homeLocation"));
+                        }
+
                         UUID leader = UUID.fromString(current.getString("leader"));
                         List<UUID> officers = (List<UUID>) current.get("officers");
                         List<UUID> members = (List<UUID>) current.get("members");
@@ -188,7 +200,7 @@ public class FactionManager {
                         double dtr = current.getDouble("dtr");
                         long unfreezeTime = current.getLong("unfreezeTime");
 
-                        PlayerFaction faction = new PlayerFaction(factionID, displayName, leader,
+                        PlayerFaction faction = new PlayerFaction(factionID, displayName, homeLocation, leader,
                                 officers, members, allies, pendingInvites, pendingAllies, announcement,
                                 balance, BigDecimal.valueOf(dtr), unfreezeTime);
 
@@ -227,6 +239,10 @@ public class FactionManager {
                             .append("balance", playerFaction.getBalance())
                             .append("dtr", playerFaction.getDtr().doubleValue())
                             .append("unfreezeTime", playerFaction.getUnfreezeTime());
+
+                    if(playerFaction.getHomeLocation() != null) {
+                        newDoc.append("homeLocation", LocationSerialization.serializeLocation(playerFaction.getHomeLocation()));
+                    }
 
                     if (document != null) {
                         collection.updateOne(document, newDoc);

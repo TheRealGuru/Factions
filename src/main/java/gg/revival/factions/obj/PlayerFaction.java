@@ -8,6 +8,7 @@ import gg.revival.factions.tools.Logger;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -44,9 +45,13 @@ public class PlayerFaction extends Faction {
 
     @Getter
     @Setter
+    Location homeLocation;
+
+    @Getter
+    @Setter
     HashSet<Timer> timers;
 
-    public PlayerFaction(UUID factionID, String displayName, UUID leader,
+    public PlayerFaction(UUID factionID, String displayName, Location homeLocation, UUID leader,
                          List<UUID> officers, List<UUID> members, List<UUID> allies,
                          List<UUID> pendingInvites, List<UUID> pendingAllies,
                          String announcement, double balance, BigDecimal dtr,
@@ -54,6 +59,7 @@ public class PlayerFaction extends Faction {
 
         super(factionID, displayName);
 
+        this.homeLocation = homeLocation;
         this.leader = leader;
         this.officers = officers;
         this.members = members;

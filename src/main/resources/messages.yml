@@ -35,6 +35,8 @@ notifications:
   kick-faction-other: '&9%player% &ehas been &ckicked &efrom the faction'
   balance-self: '&2Your current balance&f: $%bal%'
   balance-other: "&2%player%'s current balance&f: $%bal%"
+  home-set: '&eYou have changed your &2Faction &ehome location'
+  home-set-other: '&2%player% &ehas changed your &2Faction &ehome location'
 
 chat-formatting:
   global-faction-member: '&2[%fac%] &r%player%&f: %msg%'
@@ -82,6 +84,7 @@ errors:
   not-looking-at-chest: '&cYou are not looking at a chest'
   subclaim-access-denied: '&cYou do not have access to this subclaim'
   subclaim-outside-claim: '&cYou can not subclaim this chest because it is outside your faction claims'
+  home-outside-claim: '&cYou can not set your home location here because it is outside of your faction claims'
   cooldown: "&cYou can not perform this action for another &c&l%dur% &cseconds"
 
 misc:

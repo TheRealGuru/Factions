@@ -57,6 +57,9 @@ public class CommandManager {
         FRenameCommand renameCommand = new FRenameCommand();
         FRenameForCommand renameForCommand = new FRenameForCommand();
 
+        FSethomeCommand sethomeCommand = new FSethomeCommand();
+        FSethomeForCommand sethomeForCommand = new FSethomeForCommand();
+
         commands.add(createCommand);
         commands.add(createServerFactionCommand);
         commands.add(disbandCommand);
@@ -70,8 +73,11 @@ public class CommandManager {
         commands.add(acceptCommand);
         commands.add(subclaimCommand);
         commands.add(renameCommand);
+        commands.add(renameForCommand);
+        commands.add(sethomeCommand);
+        commands.add(sethomeForCommand);
 
-        Logger.log("Loaded Commands");
+        Logger.log("Loaded " + commands.size() + " Commands");
     }
 
 }
