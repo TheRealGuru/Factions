@@ -40,6 +40,7 @@ public class Configuration {
 
     public static boolean ALLIANCES_ENABLED = true;
     public static int ALLY_LIMIT = 1;
+    public static boolean ONLY_WARN_WHEN_ALLY_VISABLE = true;
 
     public static String SUBCLAIM_GUI_NAME = ChatColor.BLACK + "Subclaim Editor";
 

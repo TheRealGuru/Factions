@@ -364,6 +364,18 @@ public class Messages {
         return getValue("errors.home-outside-claim");
     }
 
+    public static String factionDamageDisabled() {
+        return getValue("notifications.faction-damage-disabled");
+    }
+
+    public static String allyDamage() {
+        return getValue("notifications.ally-damage");
+    }
+
+    public static String combatDisabledSafezone() {
+        return getValue("errors.combat-disabled-safezone");
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");
@@ -380,10 +392,10 @@ public class Messages {
                         ChatColor.GOLD + "" + ChatColor.BOLD + "[ " + ChatColor.YELLOW + faction.getDisplayName() + ChatColor.GOLD + "" + ChatColor.BOLD + " ]" +
                         ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "----------------" + "\n");
 
-        if (faction.getHome() != null) {
-            int x = faction.getHome().getBlockX();
-            int y = faction.getHome().getBlockY();
-            int z = faction.getHome().getBlockZ();
+        if (faction.getHomeLocation() != null) {
+            int x = faction.getHomeLocation().getBlockX();
+            int y = faction.getHomeLocation().getBlockY();
+            int z = faction.getHomeLocation().getBlockZ();
 
             info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Home" + ChatColor.WHITE + ": " + x + ", " + y + ", " + z + "\n");
         } else {

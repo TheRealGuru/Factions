@@ -37,6 +37,8 @@ notifications:
   balance-other: "&2%player%'s current balance&f: $%bal%"
   home-set: '&eYou have changed your &2Faction &ehome location'
   home-set-other: '&2%player% &ehas changed your &2Faction &ehome location'
+  faction-damage-disabled: '&cCombat is disabled between &fFaction Members'
+  ally-damage: '&cYou are attacking a member of your &dAlliance'
 
 chat-formatting:
   global-faction-member: '&2[%fac%] &r%player%&f: %msg%'
@@ -86,6 +88,7 @@ errors:
   subclaim-outside-claim: '&cYou can not subclaim this chest because it is outside your faction claims'
   home-outside-claim: '&cYou can not set your home location here because it is outside of your faction claims'
   cooldown: "&cYou can not perform this action for another &c&l%dur% &cseconds"
+  combat-disabled-safezone: '&cCombat is disabled in &fSafezones'
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'

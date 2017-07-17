@@ -13,8 +13,8 @@ import java.util.HashSet;
 public class TimerThread {
 
     public static void run() {
-        HashSet<Faction> factionCache = (HashSet<Faction>)FactionManager.getFactions().clone();
-        HashSet<FPlayer> playerCache = (HashSet<FPlayer>)PlayerManager.getPlayers().clone();
+        final HashSet<Faction> factionCache = (HashSet<Faction>)FactionManager.getFactions().clone();
+        final HashSet<FPlayer> playerCache = (HashSet<FPlayer>)PlayerManager.getPlayers().clone();
 
         for(Faction factions : factionCache) {
             if(!(factions instanceof PlayerFaction) || ((PlayerFaction) factions).getTimers().isEmpty()) continue;

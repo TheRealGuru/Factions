@@ -112,9 +112,6 @@ public class FMapCommand extends FCommand {
 
                 message.send(player);
 
-                player.sendMessage("     ");
-                player.sendMessage(ChatColor.AQUA + "You can click a faction name to view more information");
-
                 for(Claim claims : nearby.getClaims()) {
                     for(int i = 1; i < 5; i++) {
                         Location corner = claims.getCorner(i);
@@ -129,6 +126,9 @@ public class FMapCommand extends FCommand {
 
                 byteData++;
             }
+
+            player.sendMessage("     ");
+            player.sendMessage(ChatColor.AQUA + "You can click a faction name to view more information");
         }
 
         else {

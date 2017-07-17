@@ -53,7 +53,7 @@ public class FSethomeCommand extends FCommand {
         for(Claim claims : faction.getClaims()) {
             if(!claims.inside(player.getLocation(), true)) continue;
 
-            faction.setHome(player.getLocation());
+            faction.setHomeLocation(player.getLocation());
 
             player.sendMessage(Messages.homeSet());
             faction.sendMessage(Messages.homeSetOther(player.getName()));

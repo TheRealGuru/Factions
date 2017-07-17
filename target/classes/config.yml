@@ -43,6 +43,7 @@ factions:
   alliances:
     enabled: true
     ally-limit: 1
+    only-warn-when-visable: true
   subclaims:
     gui-title: '&0Subclaim Editor'
 custom-items:

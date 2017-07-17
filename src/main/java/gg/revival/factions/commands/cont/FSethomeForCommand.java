@@ -64,7 +64,7 @@ public class FSethomeForCommand extends FCommand {
         for(Claim claims : playerFaction.getClaims()) {
             if(!claims.inside(player.getLocation(), true)) continue;
 
-            playerFaction.setHome(player.getLocation());
+            playerFaction.setHomeLocation(player.getLocation());
 
             player.sendMessage(Messages.homeSet());
             playerFaction.sendMessage(Messages.homeSetOther(player.getName()));
