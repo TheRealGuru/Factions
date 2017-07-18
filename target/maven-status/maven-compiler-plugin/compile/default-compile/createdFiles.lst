@@ -63,7 +63,9 @@ gg\revival\factions\commands\cont\FUninviteCommand$1.class
 gg\revival\factions\obj\Faction.class
 gg\revival\factions\claims\Claim.class
 gg\revival\factions\commands\cont\FShowCommand$4$1.class
+gg\revival\factions\commands\cont\FThawCommand.class
 gg\revival\factions\commands\cont\PayCommandExecutor.class
+gg\revival\factions\commands\cont\FUnclaimCommand.class
 gg\revival\factions\listeners\cont\SubclaimEventsListener$5.class
 gg\revival\factions\listeners\cont\SubclaimEventsListener$2.class
 gg\revival\factions\tools\UserCache.class

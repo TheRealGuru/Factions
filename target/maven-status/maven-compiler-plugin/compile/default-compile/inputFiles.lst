@@ -6,6 +6,7 @@ E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\timers\Ti
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\Permissions.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\FP.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FInviteCommand.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FThawCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\claims\Claim.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FAcceptCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\claims\PendingClaim.java
@@ -54,6 +55,7 @@ E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\timers\TimerType.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\CommandManager.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FDisbandCommand.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FUnclaimCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FCreateServerFactionCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FSethomeForCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\locations\FLocation.java

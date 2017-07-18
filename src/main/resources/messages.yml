@@ -41,6 +41,8 @@ notifications:
   ally-damage: '&cYou are attacking a member of your &dAlliance'
   paid-player: '&eYou sent &2$%amount% &eto &9%player%'
   paid-player-other: '&eYou have received &2$%amount% &efrom &9%player%'
+  power-thawed: '&eYou have thawed &9%faction%'
+  power-thawed-other: '&eYour faction will now begin &aregenerating &epower'
 
 chat-formatting:
   global-faction-member: '&2[%fac%] &r%player%&f: %msg%'
@@ -93,6 +95,7 @@ errors:
   combat-disabled-safezone: '&cCombat is disabled in &fSafezones'
   not-enough-money: '&cYou do not have enough money to perform this task'
   cant-pay-self: '&cYou can not pay yourself'
+  power-not-frozen: "&cThis faction's power is not frozen"
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'

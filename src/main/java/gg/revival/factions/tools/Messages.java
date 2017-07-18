@@ -396,6 +396,19 @@ public class Messages {
         return getValue("notifications.cant-pay-self");
     }
 
+    public static String powerNotFrozen() {
+        return getValue("errors.power-not-frozen");
+    }
+
+    public static String powerThawed(String factionName) {
+        return getValue("notifications.power-thawed")
+                .replace("%faction%", factionName);
+    }
+
+    public static String powerThawedOther() {
+        return getValue("notifications.power-thawed-other");
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

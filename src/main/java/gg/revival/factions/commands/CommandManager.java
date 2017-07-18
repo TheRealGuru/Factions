@@ -60,6 +60,10 @@ public class CommandManager {
         FSethomeCommand sethomeCommand = new FSethomeCommand();
         FSethomeForCommand sethomeForCommand = new FSethomeForCommand();
 
+        FThawCommand thawCommand = new FThawCommand();
+
+        FUnclaimCommand unclaimCommand = new FUnclaimCommand();
+
         commands.add(createCommand);
         commands.add(createServerFactionCommand);
         commands.add(disbandCommand);
@@ -76,6 +80,8 @@ public class CommandManager {
         commands.add(renameForCommand);
         commands.add(sethomeCommand);
         commands.add(sethomeForCommand);
+        commands.add(thawCommand);
+        commands.add(unclaimCommand);
 
         Logger.log("Loaded " + commands.size() + " Commands");
     }

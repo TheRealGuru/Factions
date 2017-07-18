@@ -8,7 +8,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 public class Claim {
@@ -140,5 +142,46 @@ public class Claim {
             return true;
 
         return false;
+    }
+
+    public List<Location> getPerimeter(String worldName, int yLevel) {
+        List<Location> locations = new ArrayList<>();
+
+        double xMin = Math.min(getX1(), getX2());
+        double xMax = Math.max(getX1(), getX2());
+        double zMin = Math.min(getZ1(), getZ2());
+        double zMax = Math.max(getZ1(), getZ2());
+
+        for(int x = (int)xMin; x <= xMax; x++) { //loop x
+
+            for(int z = (int)zMin; z <= zMax; z++) { //loop z
+
+                if(x == xMin || x == xMax || z == zMin || z == zMax) { //checks to see if blocks are in line
+                    Location location = new Location(Bukkit.getWorld(worldName), x, yLevel, z);
+                    locations.add(location);
+                }
+            }
+        }
+
+        return locations;
+    }
+
+    public List<Location> getFloor(String worldName, int yLevel) {
+        List<Location> locations = new ArrayList<>();
+
+        double xMin = Math.min(getX1(), getX2());
+        double xMax = Math.max(getX1(), getX2());
+        double zMin = Math.min(getZ1(), getZ2());
+        double zMax = Math.max(getZ1(), getZ2());
+
+        for(int x = (int)xMin; x <= xMax; x++) {
+
+            for(int z = (int)zMin; z <= zMax; z++) {
+                Location location = new Location(Bukkit.getWorld(worldName), x, yLevel, z);
+                locations.add(location);
+            }
+        }
+
+        return locations;
     }
 }
