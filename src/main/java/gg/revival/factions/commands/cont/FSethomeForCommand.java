@@ -5,11 +5,14 @@ import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
+import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.Permissions;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.logging.Level;
 
 public class FSethomeForCommand extends FCommand {
 
@@ -68,6 +71,8 @@ public class FSethomeForCommand extends FCommand {
 
             player.sendMessage(Messages.homeSet());
             playerFaction.sendMessage(Messages.homeSetOther(player.getName()));
+
+            Logger.log(Level.INFO, player.getName() + " set the home location for " + faction.getDisplayName());
 
             return;
         }

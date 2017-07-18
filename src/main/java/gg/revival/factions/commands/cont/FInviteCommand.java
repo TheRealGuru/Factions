@@ -4,6 +4,7 @@ import gg.revival.factions.FP;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.PlayerFaction;
+import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.UUIDFetcher;
 import org.bukkit.Bukkit;
@@ -11,9 +12,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import sun.rmi.runtime.Log;
 
 import java.util.Arrays;
 import java.util.UUID;
+import java.util.logging.Level;
 
 public class FInviteCommand extends FCommand {
 
@@ -87,6 +90,8 @@ public class FInviteCommand extends FCommand {
                             }
 
                             faction.sendMessage(Messages.invitedPlayer(player.getName(), properUsername));
+
+                            Logger.log(Level.INFO, player.getName() + " invited " + properUsername + " to join " + faction.getDisplayName());
                         }
                     }.runTask(FP.getInstance());
 

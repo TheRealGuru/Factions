@@ -4,6 +4,7 @@ import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.tools.Configuration;
+import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.Permissions;
 import org.apache.commons.lang.StringUtils;
@@ -13,6 +14,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
+import java.util.logging.Level;
 
 public class FRenameForCommand extends FCommand {
 
@@ -80,6 +82,8 @@ public class FRenameForCommand extends FCommand {
         }
 
         Bukkit.broadcastMessage(Messages.factionRenamed(faction.getDisplayName(), newName, changer));
+
+        Logger.log(Level.INFO, changer + " renamed " + faction.getDisplayName() + " to " + newName);
 
         faction.setDisplayName(newName);
     }

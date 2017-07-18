@@ -39,6 +39,8 @@ notifications:
   home-set-other: '&2%player% &ehas changed your &2Faction &ehome location'
   faction-damage-disabled: '&cCombat is disabled between &fFaction Members'
   ally-damage: '&cYou are attacking a member of your &dAlliance'
+  paid-player: '&eYou sent &2$%amount% &eto &9%player%'
+  paid-player-other: '&eYou have received &2$%amount% &efrom &9%player%'
 
 chat-formatting:
   global-faction-member: '&2[%fac%] &r%player%&f: %msg%'
@@ -89,6 +91,8 @@ errors:
   home-outside-claim: '&cYou can not set your home location here because it is outside of your faction claims'
   cooldown: "&cYou can not perform this action for another &c&l%dur% &cseconds"
   combat-disabled-safezone: '&cCombat is disabled in &fSafezones'
+  not-enough-money: '&cYou do not have enough money to perform this task'
+  cant-pay-self: '&cYou can not pay yourself'
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'

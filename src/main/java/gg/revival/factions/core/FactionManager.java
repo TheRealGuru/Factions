@@ -15,6 +15,7 @@ import gg.revival.factions.subclaims.Subclaim;
 import gg.revival.factions.subclaims.SubclaimManager;
 import gg.revival.factions.tools.Configuration;
 import gg.revival.factions.tools.LocationSerialization;
+import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
 import org.bson.Document;
 import org.bukkit.Bukkit;
@@ -23,6 +24,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.logging.Level;
 
 public class FactionManager {
 
@@ -115,6 +117,8 @@ public class FactionManager {
         activeFactions.add(faction);
 
         Bukkit.broadcastMessage(Messages.factionCreated(faction.getDisplayName(), Bukkit.getPlayer(leader).getName()));
+
+        Logger.log(Level.INFO, faction.getDisplayName() + " has been created by " + Bukkit.getPlayer(leader).getName());
     }
 
     public static void disbandFaction(String disbander, Faction faction) {
@@ -143,6 +147,8 @@ public class FactionManager {
         activeFactions.remove(faction);
 
         Bukkit.broadcastMessage(Messages.factionDisbanded(faction.getDisplayName(), disbander));
+
+        Logger.log(Level.INFO, faction.getDisplayName() + " has been disbanded by " + disbander);
     }
 
     public static void loadFactions() {
@@ -209,6 +215,8 @@ public class FactionManager {
                         ClaimManager.loadClaims(faction);
                         SubclaimManager.loadSubclaims(faction);
                     }
+
+                    Logger.log(Level.INFO, "Loaded " + activeFactions.size() + " Factions");
                 }
             }
         }.runTaskAsynchronously(FP.getInstance());

@@ -4,10 +4,13 @@ import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.tools.Configuration;
+import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.logging.Level;
 
 public class FAcceptCommand extends FCommand {
 
@@ -71,6 +74,8 @@ public class FAcceptCommand extends FCommand {
         faction.sendMessage(Messages.joinedFactionOther(player.getName()));
 
         player.sendMessage(Messages.joinedFaction(faction.getDisplayName()));
+
+        Logger.log(Level.INFO, player.getName() + " joined " + faction.getDisplayName());
     }
 
 }

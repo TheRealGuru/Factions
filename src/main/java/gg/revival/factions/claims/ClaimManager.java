@@ -11,10 +11,7 @@ import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
 import gg.revival.factions.pillars.Pillar;
 import gg.revival.factions.pillars.PillarManager;
-import gg.revival.factions.tools.Configuration;
-import gg.revival.factions.tools.Messages;
-import gg.revival.factions.tools.Permissions;
-import gg.revival.factions.tools.ToolBox;
+import gg.revival.factions.tools.*;
 import lombok.Getter;
 import org.bson.Document;
 import org.bukkit.Bukkit;
@@ -29,6 +26,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.UUID;
+import java.util.logging.Level;
 
 public class ClaimManager {
 
@@ -118,6 +116,8 @@ public class ClaimManager {
                     faction.getClaims().add(claim);
                     activeClaims.add(claim);
                 }
+
+                Logger.log(Level.INFO, "Loaded " + activeClaims.size() + " Claims");
             }
         }.runTaskAsynchronously(FP.getInstance());
     }
@@ -351,6 +351,8 @@ public class ClaimManager {
             ClaimManager.getClaimEditors().remove(player.getUniqueId());
 
             ClaimManager.saveClaim(claim);
+
+            Logger.log(Level.INFO, player.getName() + " has created a new claim for " + faction.getDisplayName());
         }
 
         if(action.equals(Action.RIGHT_CLICK_AIR) && player.isSneaking()) {

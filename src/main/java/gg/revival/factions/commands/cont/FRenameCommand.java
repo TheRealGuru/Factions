@@ -7,6 +7,7 @@ import gg.revival.factions.timers.Timer;
 import gg.revival.factions.timers.TimerManager;
 import gg.revival.factions.timers.TimerType;
 import gg.revival.factions.tools.Configuration;
+import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.ToolBox;
 import org.apache.commons.lang.StringUtils;
@@ -14,8 +15,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import sun.rmi.runtime.Log;
 
 import java.util.Arrays;
+import java.util.logging.Level;
 
 public class FRenameCommand extends FCommand {
 
@@ -86,6 +89,8 @@ public class FRenameCommand extends FCommand {
         }
 
         Bukkit.broadcastMessage(Messages.factionRenamed(faction.getDisplayName(), factionName, player.getName()));
+
+        Logger.log(Level.INFO, player.getName() + " renamed " + faction.getDisplayName() + " to " + factionName);
 
         faction.setDisplayName(factionName);
 

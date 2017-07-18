@@ -7,6 +7,7 @@ import gg.revival.driver.MongoAPI;
 import gg.revival.factions.FP;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.tools.Configuration;
+import gg.revival.factions.tools.Logger;
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.Document;
@@ -16,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
+import java.util.logging.Level;
 
 public class SubclaimManager {
 
@@ -143,6 +145,8 @@ public class SubclaimManager {
                         }
                     }.runTask(FP.getInstance());
                 }
+
+                Logger.log(Level.INFO, "Loaded " + activeSubclaims.size() + " Subclaims");
             }
         }.runTaskAsynchronously(FP.getInstance());
     }

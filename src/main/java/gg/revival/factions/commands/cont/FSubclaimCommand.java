@@ -7,6 +7,7 @@ import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.subclaims.Subclaim;
 import gg.revival.factions.subclaims.SubclaimGUI;
 import gg.revival.factions.subclaims.SubclaimManager;
+import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.ToolBox;
 import org.bukkit.ChatColor;
@@ -21,6 +22,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
 
 public class FSubclaimCommand extends FCommand {
 
@@ -224,6 +226,9 @@ public class FSubclaimCommand extends FCommand {
 
                 player.sendMessage(Messages.subclaimCreated());
                 faction.sendMessage(Messages.subclaimCreatedFaction(player.getName()));
+
+                Logger.log(Level.INFO, player.getName() + " created a new subclaim for " + faction.getDisplayName());
+
                 return;
             }
 

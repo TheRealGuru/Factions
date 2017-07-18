@@ -376,6 +376,26 @@ public class Messages {
         return getValue("errors.combat-disabled-safezone");
     }
 
+    public static String notEnoughMoney() {
+        return getValue("errors.not-enough-money");
+    }
+
+    public static String paidPlayer(double amt, String paidPlayer) {
+        return getValue("notifications.paid-player")
+                .replace("%amount%", String.valueOf(amt))
+                .replace("%player%", paidPlayer);
+    }
+
+    public static String paidPlayerOther(double amt, String payingPlayer) {
+        return getValue("notifications.paid-player-other")
+                .replace("%amount%", String.valueOf(amt))
+                .replace("%player%", payingPlayer);
+    }
+
+    public static String cantPaySelf() {
+        return getValue("notifications.cant-pay-self");
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");
