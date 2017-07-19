@@ -43,6 +43,8 @@ notifications:
   paid-player-other: '&eYou have received &2$%amount% &efrom &9%player%'
   power-thawed: '&eYou have thawed &9%faction%'
   power-thawed-other: '&eYour faction will now begin &aregenerating &epower'
+  land-unclaimed: '&eYou have unclaimed land. &2$%claimvalue% &ehas been returned to your faction balance'
+  land-unclaimed-other: '&2%player% &ehas unclaimed land'
 
 chat-formatting:
   global-faction-member: '&2[%fac%] &r%player%&f: %msg%'
@@ -82,6 +84,8 @@ errors:
   claim-unfinished: '&cThis claim is unfinished. Make sure both points are set before confirming your claim'
   claim-not-connected: '&cYou can not claim this land because it is not connected to your existing claims'
   claim-too-small: '&cYou can not claim this land because the claim is too small'
+  unclaim-not-connected: '&cYou can not unclaim this land because it would separate your claims'
+  no-claims: '&cYour faction does not have any existing claims'
   inventory-full: '&cYou can not perform this task because your inventory is full'
   claim-in-progress: '&cIt appears you are already claiming land'
   player-no-pending-invite: '&cThis player did not have a pending invite to your faction'
@@ -94,6 +98,7 @@ errors:
   cooldown: "&cYou can not perform this action for another &c&l%dur% &cseconds"
   combat-disabled-safezone: '&cCombat is disabled in &fSafezones'
   not-enough-money: '&cYou do not have enough money to perform this task'
+  not-standing-in-claims: '&cYou need to be standing inside your faction claims to perform this task'
   cant-pay-self: '&cYou can not pay yourself'
   power-not-frozen: "&cThis faction's power is not frozen"
 

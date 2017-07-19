@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15beb459-b905-4f30-9369-6b161deb67cc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FThawCommand.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FUnclaimCommand.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/Claim.class" afterPath="$PROJECT_DIR$/target/classes/gg/revival/factions/claims/Claim.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/CommandManager.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/CommandManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FUnclaimCommand.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FUnclaimCommand.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java" afterPath="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/messages.yml" afterPath="$PROJECT_DIR$/src/main/resources/messages.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/messages.yml" afterPath="$PROJECT_DIR$/target/classes/messages.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -34,50 +30,7 @@
     <fileColor scope="Non-Project Files (Material Palenight)" color="2f2e43" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="CommandManager.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/CommandManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="650">
-              <caret line="83" column="37" lean-forward="false" selection-start-line="83" selection-start-column="37" selection-end-line="83" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FUnclaimCommand.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FUnclaimCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Claim.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="776">
-              <caret line="178" column="29" lean-forward="false" selection-start-line="178" selection-start-column="29" selection-end-line="178" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PendingClaim.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/PendingClaim.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="75" column="8" lean-forward="false" selection-start-line="75" selection-start-column="8" selection-end-line="78" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -90,6 +43,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>wool</find>
+      <find>unfrozenRequired</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -148,12 +102,12 @@
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FSubclaimCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FUninviteCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/PayCommandExecutor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FThawCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/messages.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java" />
-        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FUnclaimCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/CommandManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/messages.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FUnclaimCommand.java" />
       </list>
     </option>
   </component>
@@ -178,8 +132,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -251,6 +203,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="factions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Factions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RevivalFactions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="factions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -380,7 +362,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -721,7 +705,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13859275" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1433902" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -826,7 +810,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="574">
           <caret line="42" column="40" lean-forward="false" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -841,10 +824,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="45" lean-forward="true" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
-          <folding>
-            <element signature="e#8755#9150#0" expanded="false" />
-            <element signature="e#9149#9150#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -915,7 +894,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-557">
           <caret line="218" column="92" lean-forward="false" selection-start-line="218" selection-start-column="92" selection-end-line="218" selection-end-column="92" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1073,21 +1051,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="698">
-          <caret line="408" column="60" lean-forward="false" selection-start-line="408" selection-start-column="60" selection-end-line="408" selection-end-column="60" />
-          <folding>
-            <element signature="e#12832#12833#0" expanded="false" />
-            <element signature="e#12894#12895#0" expanded="false" />
-            <element signature="e#12939#12940#0" expanded="false" />
-            <element signature="e#12997#12998#0" expanded="false" />
-            <element signature="e#13216#13217#0" expanded="false" />
-            <element signature="e#13283#13284#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FThawCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="799">
@@ -1098,53 +1061,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/messages.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
-          <caret line="97" column="23" lean-forward="false" selection-start-line="97" selection-start-column="23" selection-end-line="97" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/PendingClaim.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="1122">
           <caret line="75" column="8" lean-forward="false" selection-start-line="75" selection-start-column="8" selection-end-line="78" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/CommandManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="776">
-          <caret line="178" column="29" lean-forward="false" selection-start-line="178" selection-start-column="29" selection-end-line="178" selection-end-column="29" />
+        <state relative-caret-position="1309">
+          <caret line="83" column="37" lean-forward="false" selection-start-line="83" selection-start-column="37" selection-end-line="83" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/obj/Faction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-38">
+        <state relative-caret-position="17">
           <caret line="29" column="32" lean-forward="false" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FUnclaimCommand.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/claims/Claim.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+        <state relative-caret-position="701">
+          <caret line="202" column="21" lean-forward="false" selection-start-line="202" selection-start-column="21" selection-end-line="202" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/messages.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="582">
+          <caret line="46" column="57" lean-forward="false" selection-start-line="46" selection-start-column="57" selection-end-line="46" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/tools/Messages.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="431" column="5" lean-forward="true" selection-start-line="431" selection-start-column="5" selection-end-line="431" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#13537#13538#0" expanded="true" />
+            <element signature="e#13600#13601#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/CommandManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/gg/revival/factions/commands/cont/FUnclaimCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="83" column="37" lean-forward="false" selection-start-line="83" selection-start-column="37" selection-end-line="83" selection-end-column="37" />
-          <folding />
+        <state relative-caret-position="2312">
+          <caret line="136" column="40" lean-forward="true" selection-start-line="136" selection-start-column="40" selection-end-line="136" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

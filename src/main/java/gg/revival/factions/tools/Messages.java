@@ -409,6 +409,28 @@ public class Messages {
         return getValue("notifications.power-thawed-other");
     }
 
+    public static String noClaims() {
+        return getValue("errors.no-claims");
+    }
+
+    public static String notStandingInClaims() {
+        return getValue("errors.not-standing-in-claims");
+    }
+
+    public static String unclaimNotConnected() {
+        return getValue("errors.unclaim-not-connected");
+    }
+
+    public static String landUnclaimed(String claimValue) {
+        return getValue("notifications.land-unclaimed")
+                .replace("%claimvalue%", claimValue);
+    }
+
+    public static String landUnclaimedOther(String unclaimer) {
+        return getValue("notifications.land-unclaimed-other")
+                .replace("%player%", unclaimer);
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

@@ -2,11 +2,14 @@ package gg.revival.factions.claims;
 
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.tools.Configuration;
+import gg.revival.factions.tools.ToolBox;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -183,5 +186,20 @@ public class Claim {
         }
 
         return locations;
+    }
+
+    public boolean isTouching(Location location) {
+        if(!location.getWorld().equals(getWorld()))
+            return false;
+
+        for(BlockFace directions : ToolBox.getFlatDirections()) {
+            Block block = location.getBlock().getRelative(directions);
+            Location locations = block.getLocation();
+
+            if(inside(locations, false))
+                return true;
+        }
+
+        return false;
     }
 }

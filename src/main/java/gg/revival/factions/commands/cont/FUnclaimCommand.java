@@ -56,16 +56,16 @@ public class FUnclaimCommand extends FCommand {
         }
 
         if(faction.isFrozen()) {
-            //TODO: Send cant perform while frozen
+            player.sendMessage(Messages.unfrozenRequired());
             return;
         }
 
         if(faction.getClaims().isEmpty()) {
-            //TODO: Send no claims error
+            player.sendMessage(Messages.noClaims());
             return;
         }
 
-        if(args.length == 0) {
+        if(args.length == 1) {
             Claim claim = null;
 
             for(Claim claims : faction.getClaims()) {
@@ -75,24 +75,29 @@ public class FUnclaimCommand extends FCommand {
             }
 
             if(claim == null) {
-                //TODO: Send not standing inside claim error
+                player.sendMessage(Messages.notStandingInClaims());
                 return;
             }
 
-            if(faction.getClaims().size() > 2) { //They have multiple claims, we need to check to make sure they're all still going to be connected
-                for(Claim claims : faction.getClaims()) {
+            if(faction.getClaims().size() > 2) {
+                for(Claim claimSetOne : faction.getClaims()) {
                     boolean isTouching = false;
 
-                    if(claims.getClaimID().equals(claim.getClaimID())) continue;
+                    if(claimSetOne.getClaimID().equals(claim.getClaimID())) continue;
 
-                    for(Location perimeter : claims.getPerimeter(claims.getWorldName(), 64)) {
-                        if(!faction.isTouching(perimeter) || claim.inside(perimeter, false)) continue;
+                    for(Claim claimSetTwo : faction.getClaims()) {
+                        if(claimSetTwo.getClaimID().equals(claim.getClaimID()) || claimSetOne.getClaimID().equals(claimSetTwo.getClaimID())) continue;
 
-                        isTouching = true;
+                        for(Location perimeter : claimSetTwo.getPerimeter(claimSetTwo.getWorldName(), 64)) {
+
+                            if(claimSetOne.isTouching(perimeter)) {
+                                isTouching = true;
+                            }
+                        }
                     }
 
                     if(!isTouching) {
-                        //TODO: Send claims would not be touching if unclaimed error
+                        player.sendMessage(Messages.unclaimNotConnected());
                         return;
                     }
                 }
@@ -102,21 +107,22 @@ public class FUnclaimCommand extends FCommand {
             faction.setBalance(faction.getBalance() + claim.getClaimValue());
             ClaimManager.deleteClaim(claim);
 
-            //TODO: Send unclaim messages
+            faction.sendMessage(Messages.landUnclaimedOther(player.getName()));
+            player.sendMessage(Messages.landUnclaimed(String.valueOf(claim.getClaimValue())));
 
             Logger.log(Level.INFO, player.getName() + " unclaimed land for " + faction.getDisplayName());
 
             return;
         }
 
-        if(args.length == 1) {
+        if(args.length == 2) {
             if(!args[1].equalsIgnoreCase("all")) {
                 player.sendMessage(ChatColor.RED + getSyntax());
                 return;
             }
 
             if(faction.getClaims().isEmpty()) {
-                //TODO: Send no claims error
+                player.sendMessage(Messages.noClaims());
                 return;
             }
 
@@ -131,7 +137,8 @@ public class FUnclaimCommand extends FCommand {
             faction.getClaims().clear();
             faction.setBalance(faction.getBalance() + totalReturned);
 
-            //TODO: Send unclaim all message
+            faction.sendMessage(Messages.landUnclaimedOther(player.getName()));
+            player.sendMessage(Messages.landUnclaimed(String.valueOf(totalReturned)));
 
             return;
         }
