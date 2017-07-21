@@ -54,11 +54,6 @@ public class FCreateCommand extends FCommand {
             return;
         }
 
-        if (factionName.contains(" ")) {
-            player.sendMessage(Messages.badFactionName());
-            return;
-        }
-
         if (FactionManager.getFactionByName(factionName) != null) {
             player.sendMessage(Messages.facNameInUse());
             return;

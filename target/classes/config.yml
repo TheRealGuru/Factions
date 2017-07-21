@@ -13,6 +13,10 @@ timers:
   map-cooldown: 15
   home-warmup: 5
   stuck-warmup: 60
+chat-channels:
+  create:
+    min-name-length: 2
+    max-name-length: 10
 factions:
   dtr:
     regen-time: 60

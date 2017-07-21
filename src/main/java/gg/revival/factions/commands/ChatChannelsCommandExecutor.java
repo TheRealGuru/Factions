@@ -4,14 +4,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class FactionsCommandExecutor implements CommandExecutor {
+public class ChatChannelsCommandExecutor implements CommandExecutor {
 
-    @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String args[]) {
-        if (command.getName().equalsIgnoreCase("faction")) {
+        if (command.getName().equalsIgnoreCase("chatchannel")) {
             if (args.length > 0) {
-                if (CommandManager.getFactionCommandByLabel(args[0]) != null) {
-                    CommandManager.getFactionCommandByLabel(args[0]).onCommand(sender, args);
+                if (CommandManager.getChatCommandByLabel(args[0]) != null) {
+                    CommandManager.getChatCommandByLabel(args[0]).onCommand(sender, args);
                 }
             } else {
                 //TODO: Send help block

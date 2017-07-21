@@ -7,7 +7,9 @@ gg\revival\factions\locations\LocationManager.class
 gg\revival\factions\core\FactionManager$2.class
 gg\revival\factions\commands\cont\FInviteCommand$1$1.class
 gg\revival\factions\commands\cont\FSethomeCommand.class
+gg\revival\factions\commands\cont\CCreateCommand.class
 gg\revival\factions\commands\cont\FInviteCommand$1.class
+gg\revival\factions\commands\CCommand.class
 gg\revival\factions\tools\LocationSerialization.class
 gg\revival\factions\commands\cont\BalanceCommandExecutor.class
 gg\revival\factions\locations\FLocation.class
@@ -16,6 +18,7 @@ gg\revival\factions\timers\TimerType.class
 gg\revival\factions\listeners\cont\PlayerEventsListener$1.class
 gg\revival\factions\commands\cont\FShowCommand$2$1.class
 gg\revival\factions\tools\UUIDFetcher.class
+gg\revival\factions\commands\ChatChannelsCommandExecutor.class
 gg\revival\factions\commands\cont\FAnnouncementCommand.class
 gg\revival\factions\obj\ServerFaction.class
 gg\revival\factions\commands\cont\FListCommand.class
@@ -44,6 +47,7 @@ gg\revival\factions\claims\ServerClaimType.class
 gg\revival\factions\commands\cont\FShowCommand$1$1.class
 gg\revival\factions\core\PlayerManager$2.class
 gg\revival\factions\file\FileManager.class
+gg\revival\factions\chat\ChatChannelManager.class
 gg\revival\factions\commands\cont\FRenameForCommand.class
 gg\revival\factions\subclaims\SubclaimManager$4.class
 gg\revival\factions\core\PlayerManager.class
@@ -93,6 +97,7 @@ gg\revival\factions\locations\LocationManager$1.class
 gg\revival\factions\commands\cont\FShowCommand$1.class
 gg\revival\factions\commands\cont\FUninviteCommand$1$1.class
 gg\revival\factions\listeners\cont\ClaimEventsListener.class
+gg\revival\factions\chat\ChatChannel.class
 gg\revival\factions\commands\cont\FShowCommand$3$1.class
 gg\revival\factions\subclaims\SubclaimManager$1.class
 gg\revival\factions\commands\cont\FUnclaimForCommand.class

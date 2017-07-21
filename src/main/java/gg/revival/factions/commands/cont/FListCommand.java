@@ -2,7 +2,6 @@ package gg.revival.factions.commands.cont;
 
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.tools.Messages;
-import gg.revival.factions.tools.ToolBox;
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -41,7 +40,7 @@ public class FListCommand extends FCommand {
 
         if(args.length == 2) {
             if(!NumberUtils.isNumber(args[1])) {
-                //TODO: Send not a number
+                player.sendMessage(Messages.badNumber());
                 return;
             }
 

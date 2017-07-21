@@ -444,6 +444,58 @@ public class Messages {
         return getValue("errors.no-announcement");
     }
 
+    public static String badNumber() {
+        return getValue("errors.bad-number");
+    }
+
+    public static String channelCreated(String channelName) {
+        return getValue("chat-channels.channel-created")
+                .replace("%channelname%", channelName);
+    }
+
+    public static String channelDeleted() {
+        return getValue("chat-channels.channel-deleted");
+    }
+
+    public static String joinedChannel() {
+        return getValue("chat-channels.joined-channel");
+    }
+
+    public static String joinedChannelOther(String player) {
+        return getValue("chat-channels.joined-channel-other")
+                .replace("%player%", player);
+    }
+
+    public static String leftChannel() {
+        return getValue("chat-channels.left-channel");
+    }
+
+    public static String leftChannelOther(String player) {
+        return getValue("chat-channels.left-channel-other")
+                .replace("%player%", player);
+    }
+
+    public static String kickedChannel() {
+        return getValue("chat-channels.kicked-channel");
+    }
+
+    public static String kickedChannelOther(String player) {
+        return getValue("chat-channels.kicked-channel-other")
+                .replace("%player%", player);
+    }
+
+    public static String channelExists() {
+        return getValue("chat-channels.channel-already-exists");
+    }
+
+    public static String alreadyInChannel() {
+        return getValue("chat-channels.already-in-channel");
+    }
+
+    public static String badChannelName() {
+        return getValue("chat-channels.bad-channel-name");
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

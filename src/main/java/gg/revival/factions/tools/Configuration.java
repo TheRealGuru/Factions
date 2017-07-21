@@ -12,6 +12,9 @@ public class Configuration {
     public static String DB_PASSWORD = "password";
     public static String DB_DATABASE = "factions";
 
+    public static int CHANNEL_MIN_NAME_SIZE = 2;
+    public static int CHANNEL_MAX_NAME_SIZE = 10;
+
     public static int DTR_REGEN_TIME = 60;
     public static int DTR_FREEZE_TIME = 3600;
     public static double DTR_PLAYER_VALUE = 0.6;

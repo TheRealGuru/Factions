@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
-public class FCommand {
+public class CCommand {
 
     @Getter String label;
     @Getter String syntax;
@@ -19,7 +19,7 @@ public class FCommand {
 
     @Getter boolean playerOnly;
 
-    public FCommand(String label, List<String> aliases, String syntax, String description, String permission, int minArgs, int maxArgs, boolean playerOnly) {
+    public CCommand(String label, List<String> aliases, String syntax, String description, String permission, int minArgs, int maxArgs, boolean playerOnly) {
         this.label = label;
         this.aliases = aliases;
         this.syntax = syntax;
@@ -31,4 +31,5 @@ public class FCommand {
     }
 
     public void onCommand(CommandSender sender, String args[]) {}
+
 }

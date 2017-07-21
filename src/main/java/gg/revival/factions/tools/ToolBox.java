@@ -214,6 +214,21 @@ public class ToolBox {
         return sortedMap;
     }
 
+    public static String getRandomPassword(int length) {
+        String SALTCHARS = "abcdefghijklmnopqrstuvwxyz1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random random = new Random();
+
+        while (salt.length() < length) {
+            int index = (int)(random.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+
+        String saltStr = salt.toString();
+
+        return saltStr;
+    }
+
     public enum WorldLocations {
         WILDERNESS, WARZONE, NETHER, NETHER_WARZONE, END
     }

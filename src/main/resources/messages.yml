@@ -1,3 +1,16 @@
+chat-channels:
+  channel-created: '&eYou have created a new chat channel. Access the channel by typing /f chat %channelname%. Type /chat help for more information.'
+  channel-deleted: '&eChat channel closed'
+  joined-channel: '&aYou have joined this chat channel'
+  joined-channel-other: '&9%player% &ehas joined the chat channel'
+  left-channel: '&eYou have left this chat channel'
+  left-channel-other: '&9%player% &ehas left the chat channel'
+  kicked-channel: '&cYou have been kicked from your current chat channel'
+  kicked-channel-other: '&9%player% &ehas been kicked from the chat channel'
+  channel-already-exists: '&cThis channel name is currently in use'
+  already-in-channel: '&cYou are already in a chat channel'
+  bad-channel-name: '&cThis channel name is not allowed. All channels names must be 2-10 characters, A-Z 0-9'
+
 economy:
   current-balance: "&2Balance&f: $%bal%"
   current-balance-other: "&2%player%'s Balance&f: $%bal%"
@@ -104,6 +117,7 @@ errors:
   power-not-frozen: "&cThis faction's power is not frozen"
   bad-announcement: '&cAnnouncements must only contain characters A-Z 0-9'
   no-announcement: '&cYour faction does not have the announcement set'
+  bad-number: '&cInvalid number'
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'
