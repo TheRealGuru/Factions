@@ -67,6 +67,9 @@ public class ChatChannelManager {
     public static void deleteChannel(ChatChannel channel) {
         activeChatChannels.remove(channel);
 
+        channel.getChannelMembers().clear();
+        channel.getChannelMembers().clear();
+
         Logger.log(Level.INFO, "Chat channel '" + channel.getChannelName() + "' has been deleted");
     }
 }

@@ -95,8 +95,10 @@ public class CommandManager {
         factionCommands.add(listCommand);
 
         CCreateCommand chatCreateCommand = new CCreateCommand();
+        CDeleteCommand chatDeleteCommand = new CDeleteCommand();
 
         chatCommands.add(chatCreateCommand);
+        chatCommands.add(chatDeleteCommand);
 
         Logger.log("Loaded " + factionCommands.size() + " Faction Commands");
         Logger.log("Loaded " + chatCommands.size() + " Chat Commands");

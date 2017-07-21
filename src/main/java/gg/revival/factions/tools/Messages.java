@@ -496,6 +496,10 @@ public class Messages {
         return getValue("chat-channels.bad-channel-name");
     }
 
+    public static String notInChatChannel() {
+        return getValue("chat-channels.not-in-channel");
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

@@ -9,6 +9,7 @@ chat-channels:
   kicked-channel-other: '&9%player% &ehas been kicked from the chat channel'
   channel-already-exists: '&cThis channel name is currently in use'
   already-in-channel: '&cYou are already in a chat channel'
+  not-in-channel: '&cYou are not in a chat channel'
   bad-channel-name: '&cThis channel name is not allowed. All channels names must be 2-10 characters, A-Z 0-9'
 
 economy:
