@@ -431,6 +431,19 @@ public class Messages {
                 .replace("%player%", unclaimer);
     }
 
+    public static String factionAnnouncement(String announcement) {
+        return getValue("notifications.faction-announcement")
+                .replace("%announcement%", announcement);
+    }
+
+    public static String badAnnouncement() {
+        return getValue("errors.bad-announcement");
+    }
+
+    public static String noAnnouncement() {
+        return getValue("errors.no-announcement");
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");
@@ -447,6 +460,10 @@ public class Messages {
                         ChatColor.GOLD + "" + ChatColor.BOLD + "[ " + ChatColor.YELLOW + faction.getDisplayName() + ChatColor.GOLD + "" + ChatColor.BOLD + " ]" +
                         ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "----------------" + "\n");
 
+        if (faction.getRoster(false).contains(displayedTo.getUniqueId()) && faction.getAnnouncement() != null) {
+            info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Announcement" + ChatColor.WHITE + ": " + faction.getAnnouncement() + "\n");
+        }
+
         if (faction.getHomeLocation() != null) {
             int x = faction.getHomeLocation().getBlockX();
             int y = faction.getHomeLocation().getBlockY();
@@ -455,10 +472,6 @@ public class Messages {
             info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Home" + ChatColor.WHITE + ": " + x + ", " + y + ", " + z + "\n");
         } else {
             info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Home" + ChatColor.WHITE + ": Unset" + "\n");
-        }
-
-        if (faction.getRoster(false).contains(displayedTo.getUniqueId()) && faction.getAnnouncement() != null) {
-            info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Announcement" + ChatColor.WHITE + ": " + faction.getAnnouncement() + "\n");
         }
 
         info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Deaths Until Raidable" + ChatColor.WHITE + ": ");
@@ -559,6 +572,69 @@ public class Messages {
         info.append(ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "-------------------------------------------------");
 
         return info.toString();
+    }
+
+    public static void sendList(Player player, int page) {
+        HashMap<PlayerFaction, Integer> factionCounts = new HashMap<>();
+
+        for(Faction factions : FactionManager.getFactions()) {
+            if(!(factions instanceof PlayerFaction)) continue;
+            if(factionCounts.containsKey(factionCounts)) continue;
+
+            PlayerFaction playerFactions = (PlayerFaction)factions;
+
+            factionCounts.put(playerFactions, playerFactions.getRoster(true).size());
+        }
+
+        Map<PlayerFaction, Integer> sortedFactionCounts = ToolBox.sortByValue(factionCounts);
+
+        int startingPlace = page * 10;
+        int finishingPlace = page + 10;
+        int cursor = 1;
+
+        if(startingPlace > sortedFactionCounts.size()) {
+            player.sendMessage(ChatColor.RED + "Invalid page number");
+            return;
+        }
+
+        if(finishingPlace > sortedFactionCounts.size()) {
+            finishingPlace = sortedFactionCounts.size();
+        }
+
+        player.sendMessage(ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH +
+                "---------------" + ChatColor.GOLD + "" + ChatColor.BOLD +
+                "[ " + ChatColor.YELLOW + "Faction List (Page #" + (page + 1) + ") " + ChatColor.GOLD + "" + ChatColor.BOLD + "]"
+                + ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "---------------");
+
+        player.sendMessage("     " + "\n" + ChatColor.YELLOW + "Click a faction name to view more information" + ChatColor.RESET + "\n" + "     ");
+
+        for(PlayerFaction factions : sortedFactionCounts.keySet()) {
+            if(cursor < startingPlace) {
+                cursor++;
+                continue;
+            }
+
+            if(cursor > finishingPlace) {
+                break;
+            }
+
+            // 1. FactionName - [16/20] [4.2DTR]
+
+            new FancyMessage(cursor + ". ")
+                    .color(ChatColor.YELLOW)
+                    .then(factions.getDisplayName())
+                    .color(ChatColor.BLUE)
+                    .command("/f who " + factions.getDisplayName() + " -f")
+                    .then(" - ")
+                    .color(ChatColor.WHITE)
+                    .then("[" + factions.getRoster(true).size() + "/" + factions.getRoster(false).size() + "]")
+                    .color(ChatColor.YELLOW)
+                    .then(" [" + factions.getDtr().doubleValue() + "/" + factions.getMaxDTR() + "]")
+                    .color(ChatColor.YELLOW)
+                    .send(player);
+        }
+
+        player.sendMessage(ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "-------------------------------------------------");
     }
 
     public static void sendMultiFactionList(List<Faction> results, Player displayedTo, String query) {

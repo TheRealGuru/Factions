@@ -43,6 +43,9 @@ notifications:
   paid-player-other: '&eYou have received &2$%amount% &efrom &9%player%'
   power-thawed: '&eYou have thawed &9%faction%'
   power-thawed-other: '&eYour faction will now begin &aregenerating &epower'
+  land-unclaimed: '&eYou have unclaimed land. &2$%claimvalue% &ehas been returned to your faction balance'
+  land-unclaimed-other: '&2%player% &ehas unclaimed land'
+  faction-announcement: '&2&lFaction Announcement > &e%announcement%'
 
 chat-formatting:
   global-faction-member: '&2[%fac%] &r%player%&f: %msg%'
@@ -99,6 +102,8 @@ errors:
   not-standing-in-claims: '&cYou need to be standing inside your faction claims to perform this task'
   cant-pay-self: '&cYou can not pay yourself'
   power-not-frozen: "&cThis faction's power is not frozen"
+  bad-announcement: '&cAnnouncements must only contain characters A-Z 0-9'
+  no-announcement: '&cYour faction does not have the announcement set'
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'

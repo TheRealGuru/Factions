@@ -1,10 +1,14 @@
 package gg.revival.factions.tools;
 
 import gg.revival.factions.claims.ServerClaimType;
+import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.core.PlayerManager;
 import gg.revival.factions.obj.FPlayer;
+import gg.revival.factions.obj.Faction;
+import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
 import lombok.Getter;
+import mkremins.fanciful.FancyMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,8 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.BlockIterator;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class ToolBox {
 
@@ -187,6 +190,28 @@ public class ToolBox {
         }
 
         return lastBlock;
+    }
+
+    public static Map<PlayerFaction, Integer> sortByValue(Map<PlayerFaction, Integer> unsortMap) {
+        List<Map.Entry<PlayerFaction, Integer>> list =
+                new LinkedList<Map.Entry<PlayerFaction, Integer>>(unsortMap.entrySet());
+
+        Collections.sort(list, new Comparator<Map.Entry<PlayerFaction, Integer>>() {
+            public int compare(Map.Entry<PlayerFaction, Integer> o1,
+                               Map.Entry<PlayerFaction, Integer> o2) {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        Collections.reverse(list);
+
+        Map<PlayerFaction, Integer> sortedMap = new LinkedHashMap<>();
+
+        for (Map.Entry<PlayerFaction, Integer> entry : list) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
+        return sortedMap;
     }
 
     public enum WorldLocations {

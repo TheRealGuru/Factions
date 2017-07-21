@@ -16,7 +16,9 @@ gg\revival\factions\timers\TimerType.class
 gg\revival\factions\listeners\cont\PlayerEventsListener$1.class
 gg\revival\factions\commands\cont\FShowCommand$2$1.class
 gg\revival\factions\tools\UUIDFetcher.class
+gg\revival\factions\commands\cont\FAnnouncementCommand.class
 gg\revival\factions\obj\ServerFaction.class
+gg\revival\factions\commands\cont\FListCommand.class
 gg\revival\factions\tools\Permissions.class
 gg\revival\factions\threads\ThreadManager.class
 gg\revival\factions\commands\cont\FCreateCommand.class
@@ -60,6 +62,7 @@ gg\revival\factions\subclaims\SubclaimManager$3.class
 gg\revival\factions\threads\ThreadManager$4.class
 gg\revival\factions\listeners\cont\ChatEventsListener.class
 gg\revival\factions\commands\cont\FUninviteCommand$1.class
+gg\revival\factions\tools\ToolBox$1.class
 gg\revival\factions\obj\Faction.class
 gg\revival\factions\claims\Claim.class
 gg\revival\factions\commands\cont\FShowCommand$4$1.class
@@ -92,6 +95,7 @@ gg\revival\factions\commands\cont\FUninviteCommand$1$1.class
 gg\revival\factions\listeners\cont\ClaimEventsListener.class
 gg\revival\factions\commands\cont\FShowCommand$3$1.class
 gg\revival\factions\subclaims\SubclaimManager$1.class
+gg\revival\factions\commands\cont\FUnclaimForCommand.class
 gg\revival\factions\commands\FCommand.class
 gg\revival\factions\commands\cont\FClaimCommand.class
 gg\revival\factions\threads\ThreadManager$3.class

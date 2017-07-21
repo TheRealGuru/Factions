@@ -63,6 +63,11 @@ public class CommandManager {
         FThawCommand thawCommand = new FThawCommand();
 
         FUnclaimCommand unclaimCommand = new FUnclaimCommand();
+        FUnclaimForCommand unclaimForCommand = new FUnclaimForCommand();
+
+        FAnnouncementCommand announcementCommand = new FAnnouncementCommand();
+
+        FListCommand listCommand = new FListCommand();
 
         commands.add(createCommand);
         commands.add(createServerFactionCommand);
@@ -82,6 +87,9 @@ public class CommandManager {
         commands.add(sethomeForCommand);
         commands.add(thawCommand);
         commands.add(unclaimCommand);
+        commands.add(unclaimForCommand);
+        commands.add(announcementCommand);
+        commands.add(listCommand);
 
         Logger.log("Loaded " + commands.size() + " Commands");
     }

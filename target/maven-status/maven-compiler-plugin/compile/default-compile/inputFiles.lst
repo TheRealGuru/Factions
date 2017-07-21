@@ -37,6 +37,7 @@ E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\Too
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FDisbandOtherCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\Configuration.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\pillars\PillarManager.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FListCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\listeners\cont\PlayerEventsListener.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\tools\Messages.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\listeners\cont\SubclaimEventsListener.java
@@ -54,11 +55,13 @@ E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\PayCommandExecutor.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\timers\TimerType.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\CommandManager.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FUnclaimForCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FDisbandCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FUnclaimCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FCreateServerFactionCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FSethomeForCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\locations\FLocation.java
+E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\commands\cont\FAnnouncementCommand.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\listeners\cont\WorldEventsListener.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\obj\PlayerFaction.java
 E:\Java\IJ\Workspace\RevivalFactions\src\main\java\gg\revival\factions\threads\ThreadManager.java
