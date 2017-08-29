@@ -14,12 +14,14 @@ public class ChatChannel {
     @Getter @Setter String channelName;
     @Getter @Setter String channelPassword;
     @Getter List<UUID> channelMembers;
+    @Getter List<UUID> chatroom;
     @Getter List<UUID> channelInvites;
 
     public ChatChannel(UUID owner, String channelName, String channelPassword) {
         this.owner = owner;
         this.channelName = channelName;
         this.channelPassword = channelPassword;
+        this.chatroom = new ArrayList<>();
         this.channelMembers = new ArrayList<>();
         this.channelInvites = new ArrayList<>();
     }

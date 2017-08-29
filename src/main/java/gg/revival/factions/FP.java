@@ -10,6 +10,7 @@ import gg.revival.factions.listeners.ListenerManager;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.threads.ThreadManager;
 import gg.revival.factions.tools.Configuration;
+import gg.revival.factions.tools.Logger;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -33,19 +34,10 @@ public class FP extends JavaPlugin {
     }
 
     public void onDisable() {
-        if (Configuration.DB_ENABLED && MongoAPI.isConnected()) {
+        FactionManager.saveAllFactions(true,true);
+        PlayerManager.saveAllProfiles(true,true);
 
-            for (Faction factions : FactionManager.getFactions()) {
-                FactionManager.saveFaction(factions, true);
-            }
-
-            for (Player players : Bukkit.getOnlinePlayers()) {
-                PlayerManager.saveProfile(PlayerManager.getPlayer(players.getUniqueId()), true);
-            }
-
+        if(Configuration.DB_ENABLED && MongoAPI.isConnected())
             MongoAPI.disconnect();
-        }
-
     }
-
 }

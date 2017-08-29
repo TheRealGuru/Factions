@@ -8,6 +8,7 @@ import gg.revival.factions.FP;
 import gg.revival.factions.claims.Claim;
 import gg.revival.factions.claims.ClaimManager;
 import gg.revival.factions.claims.ServerClaimType;
+import gg.revival.factions.db.DatabaseManager;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
@@ -17,6 +18,7 @@ import gg.revival.factions.tools.Configuration;
 import gg.revival.factions.tools.LocationSerialization;
 import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
+import lombok.Getter;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -28,11 +30,7 @@ import java.util.logging.Level;
 
 public class FactionManager {
 
-    private static HashSet<Faction> activeFactions = new HashSet<Faction>();
-
-    public static HashSet<Faction> getFactions() {
-        return activeFactions;
-    }
+    @Getter static Set<Faction> activeFactions = new HashSet<>();
 
     public static Faction getFactionByName(String query) {
         for (Faction factions : activeFactions) {
@@ -125,7 +123,7 @@ public class FactionManager {
         if (Configuration.DB_ENABLED && MongoAPI.isConnected()) {
             new BukkitRunnable() {
                 public void run() {
-                    MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "factions");
+                    MongoCollection<Document> collection = DatabaseManager.getFactionsCollection();
                     FindIterable<Document> query = collection.find(Filters.eq("factionID", faction.getFactionID().toString()));
                     Document document = query.first();
 
@@ -151,13 +149,52 @@ public class FactionManager {
         Logger.log(Level.INFO, faction.getDisplayName() + " has been disbanded by " + disbander);
     }
 
-    public static void loadFactions() {
-        if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
+    public static void saveAllFactions(boolean unsafe, boolean unload) {
+        if(!Configuration.DB_ENABLED || !MongoAPI.isConnected())
             return;
+
+        for(Faction factions : activeFactions) {
+            if(unsafe) {
+                unsafeSaveFaction(factions);
+            }
+
+            else {
+                saveFaction(factions, unload);
+            }
+        }
+    }
+
+    public static void loadFactions() {
+        if(!Configuration.DB_ENABLED)
+            return;
+
+        if(!MongoAPI.isConnected()) {
+            Logger.log(Level.WARNING, "It appears you are trying to use a Database, but the connection has not yet been established. I'll wait a few seconds and try again!");
+            new BukkitRunnable() {
+                public void run() {
+                    loadFactions();
+                }
+            }.runTaskLater(FP.getInstance(), 2 * 20L);
+
+            return;
+        }
 
         new BukkitRunnable() {
             public void run() {
-                MongoCollection collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "factions");
+                MongoCollection collection = DatabaseManager.getFactionsCollection();
+
+                if(collection == null) {
+                    Logger.log(Level.WARNING, "Collection response time was too slow... Waiting a few seconds and trying again!");
+
+                    new BukkitRunnable() {
+                        public void run() {
+                            loadFactions();
+                        }
+                    }.runTaskLater(FP.getInstance(), 2 * 20L);
+
+                    return;
+                }
+
                 FindIterable<Document> query = collection.find();
                 Iterator<Document> iterator = query.iterator();
 
@@ -183,9 +220,10 @@ public class FactionManager {
 
                         ServerFaction faction = new ServerFaction(factionID, displayname, type);
 
-                        activeFactions.add(faction);
-
-                        ClaimManager.loadClaims(faction);
+                        if(getFactionByUUID(factionID) == null) {
+                            activeFactions.add(faction);
+                            ClaimManager.loadClaims(faction);
+                        }
                     } else {
                         UUID factionID = UUID.fromString(current.getString("factionID"));
                         String displayName = current.getString("displayName");
@@ -210,10 +248,11 @@ public class FactionManager {
                                 officers, members, allies, pendingInvites, pendingAllies, announcement,
                                 balance, BigDecimal.valueOf(dtr), unfreezeTime);
 
-                        activeFactions.add(faction);
-
-                        ClaimManager.loadClaims(faction);
-                        SubclaimManager.loadSubclaims(faction);
+                        if(getFactionByUUID(factionID) == null) {
+                            activeFactions.add(faction);
+                            ClaimManager.loadClaims(faction);
+                            SubclaimManager.loadSubclaims(faction);
+                        }
                     }
 
                     Logger.log(Level.INFO, "Loaded " + activeFactions.size() + " Factions");
@@ -228,7 +267,7 @@ public class FactionManager {
 
         new BukkitRunnable() {
             public void run() {
-                MongoCollection collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "factions");
+                MongoCollection collection = DatabaseManager.getFactionsCollection();
                 FindIterable<Document> query = collection.find(Filters.eq("factionID", faction.getFactionID()));
                 Document document = query.first();
 
@@ -253,7 +292,8 @@ public class FactionManager {
                     }
 
                     if (document != null) {
-                        collection.updateOne(document, newDoc);
+                        collection.deleteOne(document);
+                        collection.insertOne(newDoc);
                     } else {
                         collection.insertOne(newDoc);
                     }
@@ -277,7 +317,8 @@ public class FactionManager {
                             .append("type", serverFaction.getType().toString());
 
                     if (document != null) {
-                        collection.updateOne(document, newDoc);
+                        collection.deleteOne(document);
+                        collection.insertOne(newDoc);
                     } else {
                         collection.insertOne(newDoc);
                     }
@@ -294,5 +335,77 @@ public class FactionManager {
                 }
             }
         }.runTaskAsynchronously(FP.getInstance());
+    }
+
+    /**
+     * Runs a save on the main thread, should only be used in the onDisable method
+     * @param faction
+     */
+    public static void unsafeSaveFaction(Faction faction) {
+        if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
+            return;
+
+        MongoCollection collection = DatabaseManager.getFactionsCollection();
+        FindIterable<Document> query = collection.find(Filters.eq("factionID", faction.getFactionID()));
+        Document document = query.first();
+
+        if (faction instanceof PlayerFaction) {
+            PlayerFaction playerFaction = (PlayerFaction) faction;
+
+            Document newDoc = new Document("factionID", faction.getFactionID().toString())
+                    .append("displayName", faction.getDisplayName())
+                    .append("leader", playerFaction.getLeader().toString())
+                    .append("officers", playerFaction.getOfficers())
+                    .append("members", playerFaction.getMembers())
+                    .append("allies", playerFaction.getAllies())
+                    .append("pendingInvites", playerFaction.getPendingAllies())
+                    .append("pendingAllies", playerFaction.getPendingAllies())
+                    .append("announcement", playerFaction.getAnnouncement())
+                    .append("balance", playerFaction.getBalance())
+                    .append("dtr", playerFaction.getDtr().doubleValue())
+                    .append("unfreezeTime", playerFaction.getUnfreezeTime());
+
+            if(playerFaction.getHomeLocation() != null) {
+                newDoc.append("homeLocation", LocationSerialization.serializeLocation(playerFaction.getHomeLocation()));
+            }
+
+            if (document != null) {
+                collection.deleteOne(document);
+                collection.insertOne(newDoc);
+            } else {
+                collection.insertOne(newDoc);
+            }
+
+            if (!playerFaction.getClaims().isEmpty()) {
+                for (Claim claims : playerFaction.getClaims()) {
+                    ClaimManager.unsafeSaveClaim(claims);
+                }
+            }
+
+            if(!playerFaction.getSubclaims().isEmpty()) {
+                for (Subclaim subclaims : playerFaction.getSubclaims()) {
+                    SubclaimManager.unsafeSaveSubclaim(subclaims);
+                }
+            }
+        } else {
+            ServerFaction serverFaction = (ServerFaction) faction;
+
+            Document newDoc = new Document("factionID", faction.getFactionID().toString())
+                    .append("displayName", serverFaction.getDisplayName())
+                    .append("type", serverFaction.getType().toString());
+
+            if (document != null) {
+                collection.deleteOne(document);
+                collection.insertOne(newDoc);
+            } else {
+                collection.insertOne(newDoc);
+            }
+
+            if (!serverFaction.getClaims().isEmpty()) {
+                for (Claim claims : serverFaction.getClaims()) {
+                    ClaimManager.unsafeSaveClaim(claims);
+                }
+            }
+        }
     }
 }

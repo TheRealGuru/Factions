@@ -8,13 +8,22 @@ import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.timers.Timer;
 import gg.revival.factions.timers.TimerManager;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 public class TimerThread {
 
     public static void run() {
-        final HashSet<Faction> factionCache = (HashSet<Faction>)FactionManager.getFactions().clone();
-        final HashSet<FPlayer> playerCache = (HashSet<FPlayer>)PlayerManager.getPlayers().clone();
+        Set<Faction> factionCache = new HashSet<>(); Set<FPlayer> playerCache = new HashSet<>();
+
+        for(Faction factions : FactionManager.getActiveFactions()) {
+            factionCache.add(factions);
+        }
+
+        for(FPlayer players : PlayerManager.getActivePlayers()) {
+            playerCache.add(players);
+        }
 
         for(Faction factions : factionCache) {
             if(!(factions instanceof PlayerFaction) || ((PlayerFaction) factions).getTimers().isEmpty()) continue;

@@ -171,12 +171,38 @@ public class SubclaimManager {
                         .append("officerBypass", subclaim.isOfficerAccess());
 
                 if(document != null) {
-                    collection.updateOne(document, newDoc);
+                    collection.deleteOne(document);
+                    collection.insertOne(newDoc);
                 } else {
                     collection.insertOne(newDoc);
                 }
             }
         }.runTaskAsynchronously(FP.getInstance());
+    }
+
+    public static void unsafeSaveSubclaim(Subclaim subclaim) {
+        if(!Configuration.DB_ENABLED || !MongoAPI.isConnected())
+            return;
+
+        MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "subclaims");
+        FindIterable<Document> query = collection.find(Filters.eq("subclaimID", subclaim.getSubclaimID().toString()));
+        Document document = query.first();
+
+        Document newDoc = new Document("subclaimID", subclaim.getSubclaimID().toString())
+                .append("worldName", subclaim.getLocation().getWorld().getName())
+                .append("x", subclaim.getLocation().getX())
+                .append("y", subclaim.getLocation().getY())
+                .append("z", subclaim.getLocation().getZ())
+                .append("factionID", subclaim.getSubclaimHolder().getFactionID().toString())
+                .append("accessPlayers", subclaim.getPlayerAccess())
+                .append("officerBypass", subclaim.isOfficerAccess());
+
+        if(document != null) {
+            collection.deleteOne(document);
+            collection.insertOne(newDoc);
+        } else {
+            collection.insertOne(newDoc);
+        }
     }
 
     public static void deleteSubclaim(Subclaim subclaim) {

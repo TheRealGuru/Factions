@@ -22,16 +22,13 @@ import org.bukkit.event.block.Action;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Level;
 
 public class ClaimManager {
 
-    @Getter public static HashSet<Claim> activeClaims = new HashSet<Claim>();
-    @Getter public static HashMap<UUID, PendingClaim> claimEditors = new HashMap<UUID, PendingClaim>();
+    @Getter static Set<Claim> activeClaims = new HashSet<>();
+    @Getter static Map<UUID, PendingClaim> claimEditors = new HashMap<>();
 
     public static void removeFromClaimEditor(UUID uuid) {
         if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
@@ -109,7 +106,7 @@ public class ClaimManager {
                     double z1 = document.getDouble("z1");
                     double z2 = document.getDouble("z2");
                     String worldName = document.getString("worldName");
-                    int claimValue = document.getInteger("claimValue");
+                    double claimValue = document.getDouble("claimValue");
 
                     Claim claim = new Claim(claimID, claimOwner, x1, x2, y1, y2, z1, z2, worldName, claimValue);
 
@@ -121,36 +118,6 @@ public class ClaimManager {
             }
         }.runTaskAsynchronously(FP.getInstance());
     }
-
-    /*public static void loadClaims() {
-        new BukkitRunnable() {
-            public void run() {
-                MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "claims");
-                FindIterable<Document> query = collection.find();
-                Iterator<Document> iterator = query.iterator();
-
-                while(iterator.hasNext()) {
-                    Document document = iterator.next();
-
-                    UUID claimID = UUID.fromString(document.getString("claimID"));
-                    Faction claimOwner = FactionManager.getFactionByUUID(UUID.fromString(document.getString("factionID")));
-                    double x1 = document.getDouble("x1");
-                    double x2 = document.getDouble("x2");
-                    double y1 = document.getDouble("y1");
-                    double y2 = document.getDouble("y2");
-                    double z1 = document.getDouble("z1");
-                    double z2 = document.getDouble("z2");
-                    String worldName = document.getString("worldName");
-                    int claimValue = document.getInteger("claimValue");
-
-                    Claim claim = new Claim(claimID, claimOwner, x1, x2, y1, y2, z1, z2, worldName, claimValue);
-
-                    claimOwner.getClaims().add(claim);
-                    activeClaims.add(claim);
-                }
-            }
-        }.runTaskAsynchronously(FP.getInstance());
-    }*/
 
     public static void saveClaim(Claim claim) {
         if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
@@ -174,12 +141,44 @@ public class ClaimManager {
                         .append("claimValue", claim.getClaimValue());
 
                 if (document != null) {
-                    collection.updateOne(document, newDoc);
+                    collection.deleteOne(document);
+                    collection.insertOne(newDoc);
                 } else {
                     collection.insertOne(newDoc);
                 }
             }
         }.runTaskAsynchronously(FP.getInstance());
+    }
+
+    /**
+     * Used to save a claim on the main thread, should only be used in the onDisable method
+     * @param claim
+     */
+    public static void unsafeSaveClaim(Claim claim) {
+        if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
+            return;
+
+        MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "claims");
+        FindIterable<Document> query = collection.find(Filters.eq("claimID", claim.getClaimID().toString()));
+        Document document = query.first();
+
+        Document newDoc = new Document("claimID", claim.getClaimID().toString())
+                .append("factionID", claim.getClaimOwner().getFactionID().toString())
+                .append("x1", claim.getX1())
+                .append("x2", claim.getX2())
+                .append("y1", claim.getY1())
+                .append("y2", claim.getY2())
+                .append("z1", claim.getZ1())
+                .append("z2", claim.getZ2())
+                .append("worldName", claim.getWorld().getName())
+                .append("claimValue", claim.getClaimValue());
+
+        if (document != null) {
+            collection.deleteOne(document);
+            collection.insertOne(newDoc);
+        } else {
+            collection.insertOne(newDoc);
+        }
     }
 
     public static void performClaimAction(Action action, Player player, Location clickedLocation) {

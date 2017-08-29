@@ -89,7 +89,7 @@ public class SubclaimGUI {
                     new BukkitRunnable() {
                         public void run() {
                             ItemStack officerItem = null;
-                            ItemStack delete = new ItemStack(Material.FIRE);
+                            ItemStack delete = new ItemStack(Material.ANVIL);
 
                             ItemMeta officerMeta = null;
                             ItemMeta deleteMeta = delete.getItemMeta();

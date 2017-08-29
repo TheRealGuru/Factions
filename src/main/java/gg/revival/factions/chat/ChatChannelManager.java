@@ -59,6 +59,7 @@ public class ChatChannelManager {
     public static void createChannel(String name, String password, UUID creator) {
         ChatChannel channel = new ChatChannel(creator, name, password);
 
+        channel.getChannelMembers().add(creator);
         activeChatChannels.add(channel);
 
         Logger.log(Level.INFO, "Chat channel '" + channel.getChannelName() + "' has been created by " + Bukkit.getPlayer(creator).getName());
@@ -66,8 +67,6 @@ public class ChatChannelManager {
 
     public static void deleteChannel(ChatChannel channel) {
         activeChatChannels.remove(channel);
-
-        channel.getChannelMembers().clear();
         channel.getChannelMembers().clear();
 
         Logger.log(Level.INFO, "Chat channel '" + channel.getChannelName() + "' has been deleted");

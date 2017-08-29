@@ -3,6 +3,7 @@ chat-channels:
   channel-deleted: '&eChat channel closed'
   joined-channel: '&aYou have joined this chat channel'
   joined-channel-other: '&9%player% &ehas joined the chat channel'
+  joined-faction-channel: '&eYou are now speaking in &r%channel%'
   left-channel: '&eYou have left this chat channel'
   left-channel-other: '&9%player% &ehas left the chat channel'
   kicked-channel: '&cYou have been kicked from your current chat channel'
@@ -11,6 +12,8 @@ chat-channels:
   already-in-channel: '&cYou are already in a chat channel'
   not-in-channel: '&cYou are not in a chat channel'
   bad-channel-name: '&cThis channel name is not allowed. All channels names must be 2-10 characters, A-Z 0-9'
+  already-speaking-in-channel: '&cYou are already speaking in this chat channel'
+  no-allies-in-ally-chat: '&cYou do not have any allies to speak to'
 
 economy:
   current-balance: "&2Balance&f: $%bal%"
@@ -60,6 +63,9 @@ notifications:
   land-unclaimed: '&eYou have unclaimed land. &2$%claimvalue% &ehas been returned to your faction balance'
   land-unclaimed-other: '&2%player% &ehas unclaimed land'
   faction-announcement: '&2&lFaction Announcement > &e%announcement%'
+  new-leader: '&2%oldleader% &ehas promoted &2%newleader% &eto faction leader'
+  new-officer: '&2%leader% &ehas promoted &2%officer% &eto faction officer'
+  removed-officer: '&2%leader% &ehas demoted &2%officer% to faction member'
 
 chat-formatting:
   global-faction-member: '&2[%fac%] &r%player%&f: %msg%'
@@ -119,6 +125,9 @@ errors:
   bad-announcement: '&cAnnouncements must only contain characters A-Z 0-9'
   no-announcement: '&cYour faction does not have the announcement set'
   bad-number: '&cInvalid number'
+  player-not-in-faction: '&cThis player is not in your faction'
+  already-officer: '&cThis member already has the officer rank'
+  not-officer: '&cThis member does not have the officer rank'
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'

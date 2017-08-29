@@ -20,36 +20,14 @@ import java.util.UUID;
 
 public class PlayerFaction extends Faction {
 
-    @Getter
-    UUID leader;
-
-    @Getter
-    @Setter
-    List<UUID> officers, members, allies, pendingInvites, pendingAllies, factionChat, allyChat;
-
-    @Getter
-    @Setter
-    String announcement;
-
-    @Getter
-    @Setter
-    double balance;
-
-    @Getter
-    @Setter
-    BigDecimal dtr;
-
-    @Getter
-    @Setter
-    long regenTime, unfreezeTime;
-
-    @Getter
-    @Setter
-    Location homeLocation;
-
-    @Getter
-    @Setter
-    HashSet<Timer> timers;
+    @Getter @Setter UUID leader;
+    @Getter @Setter List<UUID> officers, members, allies, pendingInvites, pendingAllies, factionChat, allyChat;
+    @Getter @Setter String announcement;
+    @Getter @Setter double balance;
+    @Getter @Setter BigDecimal dtr;
+    @Getter @Setter long regenTime, unfreezeTime;
+    @Getter @Setter Location homeLocation;
+    @Getter @Setter HashSet<Timer> timers;
 
     public PlayerFaction(UUID factionID, String displayName, Location homeLocation, UUID leader,
                          List<UUID> officers, List<UUID> members, List<UUID> allies,

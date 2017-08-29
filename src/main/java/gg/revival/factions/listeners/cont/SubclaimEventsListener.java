@@ -113,7 +113,6 @@ public class SubclaimEventsListener implements Listener {
             if (player.hasPermission(Permissions.ADMIN)) {
                 SubclaimManager.removeSubclaim(subclaim);
 
-                player.sendMessage(Messages.subclaimDeleted());
                 subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
                 return;
             }
@@ -121,7 +120,6 @@ public class SubclaimEventsListener implements Listener {
             if (subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
                 SubclaimManager.removeSubclaim(subclaim);
 
-                player.sendMessage(Messages.subclaimDeleted());
                 subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
                 return;
             }
@@ -129,7 +127,6 @@ public class SubclaimEventsListener implements Listener {
             if (subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId()) && subclaim.isOfficerAccess()) {
                 SubclaimManager.removeSubclaim(subclaim);
 
-                player.sendMessage(Messages.subclaimDeleted());
                 subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
                 return;
             }
@@ -149,7 +146,6 @@ public class SubclaimEventsListener implements Listener {
             if (player.hasPermission(Permissions.ADMIN)) {
                 SubclaimManager.removeSubclaim(subclaim);
 
-                player.sendMessage(Messages.subclaimDeleted());
                 subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
                 return;
             }
@@ -157,7 +153,6 @@ public class SubclaimEventsListener implements Listener {
             if (subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
                 SubclaimManager.removeSubclaim(subclaim);
 
-                player.sendMessage(Messages.subclaimDeleted());
                 subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
                 return;
             }
@@ -165,7 +160,6 @@ public class SubclaimEventsListener implements Listener {
             if (subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId()) && subclaim.isOfficerAccess()) {
                 SubclaimManager.removeSubclaim(subclaim);
 
-                player.sendMessage(Messages.subclaimDeleted());
                 subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
                 return;
             }
@@ -209,7 +203,7 @@ public class SubclaimEventsListener implements Listener {
             Subclaim subclaim = SubclaimManager.getEditedSubclaim(player.getUniqueId()).getSubclaim();
             ItemStack currentItem = event.getCurrentItem();
 
-            if (currentItem == null) return;
+            if (currentItem == null || currentItem.getType().equals(Material.AIR)) return;
 
             ItemMeta currentItemMeta = currentItem.getItemMeta();
 
@@ -276,7 +270,7 @@ public class SubclaimEventsListener implements Listener {
                 SubclaimManager.performUpdate(player, subclaim);
             }
 
-            if (currentItem.getType().equals(Material.FIRE)) {
+            if (currentItem.getType().equals(Material.ANVIL)) {
                 if (!subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
                     if ((subclaim.isOfficerAccess() && !subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId())) || !subclaim.isOfficerAccess()) {
                         new BukkitRunnable() {
@@ -291,7 +285,6 @@ public class SubclaimEventsListener implements Listener {
                 }
 
                 SubclaimManager.removeSubclaim(subclaim);
-                player.sendMessage(Messages.subclaimDeleted());
                 subclaim.getSubclaimHolder().sendMessage(Messages.subclaimDeletedFaction(player.getName()));
 
                 new BukkitRunnable() {

@@ -146,10 +146,6 @@ public class Messages {
                 .replace("%player%", creator);
     }
 
-    public static String subclaimDeleted() {
-        return getValue("notifications.subclaim-deleted");
-    }
-
     public static String subclaimDeletedFaction(String deleter) {
         return getValue("notifications.subclaim-deleted-faction")
                 .replace("%player%", deleter);
@@ -393,7 +389,7 @@ public class Messages {
     }
 
     public static String cantPaySelf() {
-        return getValue("notifications.cant-pay-self");
+        return getValue("errors.cant-pay-self");
     }
 
     public static String powerNotFrozen() {
@@ -466,6 +462,11 @@ public class Messages {
                 .replace("%player%", player);
     }
 
+    public static String joinedFactionChannel(String channel) {
+        return getValue("chat-channels.joined-faction-channel")
+                .replace("%channel%", channel);
+    }
+
     public static String leftChannel() {
         return getValue("chat-channels.left-channel");
     }
@@ -498,6 +499,44 @@ public class Messages {
 
     public static String notInChatChannel() {
         return getValue("chat-channels.not-in-channel");
+    }
+
+    public static String alreadySpeakingInChannel() {
+        return getValue("chat-channels.already-speaking-in-channel");
+    }
+
+    public static String noAlliesInAllyChat() {
+        return getValue("chat-channels.no-allies-in-ally-chat");
+    }
+
+    public static String playerNotInFaction() {
+        return getValue("errors.player-not-in-faction");
+    }
+
+    public static String newLeader(String oldLeader, String newLeader) {
+        return getValue("notifications.new-leader")
+                .replace("%oldleader%", oldLeader)
+                .replace("%newleader%", newLeader);
+    }
+
+    public static String newOfficer(String leader, String newOfficer) {
+        return getValue("notifications.new-officer")
+                .replace("%leader%", leader)
+                .replace("%officer%", newOfficer);
+    }
+
+    public static String removedOfficer(String leader, String officer) {
+        return getValue("notifications.removed-officer")
+                .replace("%leader%", leader)
+                .replace("%officer%", officer);
+    }
+
+    public static String notOfficer() {
+        return getValue("errors.not-officer");
+    }
+
+    public static String alreadyOfficer() {
+        return getValue("errors.already-officer");
     }
 
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
@@ -631,9 +670,9 @@ public class Messages {
     }
 
     public static void sendList(Player player, int page) {
-        HashMap<PlayerFaction, Integer> factionCounts = new HashMap<>();
+        Map<PlayerFaction, Integer> factionCounts = new HashMap<>();
 
-        for(Faction factions : FactionManager.getFactions()) {
+        for(Faction factions : FactionManager.getActiveFactions()) {
             if(!(factions instanceof PlayerFaction)) continue;
             if(factionCounts.containsKey(factionCounts)) continue;
 
@@ -685,7 +724,7 @@ public class Messages {
                     .color(ChatColor.WHITE)
                     .then("[" + factions.getRoster(true).size() + "/" + factions.getRoster(false).size() + "]")
                     .color(ChatColor.YELLOW)
-                    .then(" [" + factions.getDtr().doubleValue() + "/" + factions.getMaxDTR() + "]")
+                    .then(" [" + factions.getDtr().doubleValue() + "/" + factions.getMaxDTR() + "DTR]")
                     .color(ChatColor.YELLOW)
                     .send(player);
         }

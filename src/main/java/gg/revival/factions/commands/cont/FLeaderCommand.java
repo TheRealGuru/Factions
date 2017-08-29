@@ -4,7 +4,6 @@ import gg.revival.factions.FP;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.PlayerFaction;
-import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.UUIDFetcher;
 import org.bukkit.Bukkit;
@@ -13,22 +12,21 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Arrays;
 import java.util.UUID;
-import java.util.logging.Level;
 
-public class FInviteCommand extends FCommand {
+public class FLeaderCommand extends FCommand {
 
-    public FInviteCommand() {
+    public FLeaderCommand() {
         super(
-                "invite",
-                Arrays.asList("inv"),
-                "/f invite <player>",
-                "Invite a player to your faction",
+                "leader",
+                null,
+                "/f leader <new leader>",
+                "Assign a new faction leader",
                 null,
                 2,
                 2,
-                true);
+                true
+        );
     }
 
     @Override
@@ -45,15 +43,10 @@ public class FInviteCommand extends FCommand {
             return;
         }
 
-        if(FactionManager.getFactionByPlayer(player.getUniqueId()) == null) {
-            player.sendMessage(Messages.notInFaction());
-            return;
-        }
-
         PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
 
-        if(!faction.getLeader().equals(player.getUniqueId()) && !faction.getOfficers().contains(player.getUniqueId())) {
-            player.sendMessage(Messages.officerRequired());
+        if(!faction.getLeader().equals(player.getUniqueId())) {
+            player.sendMessage(Messages.leaderRequired());
             return;
         }
 
@@ -72,28 +65,17 @@ public class FInviteCommand extends FCommand {
                                 return;
                             }
 
-                            if(FactionManager.getFactionByPlayer(uuid) != null) {
-                                player.sendMessage(Messages.alreadyInFactionOther());
+                            if(!faction.getRoster(false).contains(uuid)) {
+                                player.sendMessage(Messages.playerNotInFaction());
                                 return;
                             }
 
-                            if(faction.getPendingInvites().contains(uuid)) {
-                                player.sendMessage(Messages.playerAlreadyInvited());
-                                return;
-                            }
+                            faction.setLeader(uuid);
+                            faction.getOfficers().add(player.getUniqueId());
 
-                            faction.getPendingInvites().add(uuid);
-
-                            if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
-                                Messages.sendFactionInvite(Bukkit.getPlayer(uuid), faction.getDisplayName(), player.getName());
-                            }
-
-                            faction.sendMessage(Messages.invitedPlayer(player.getName(), properUsername));
-
-                            Logger.log(Level.INFO, player.getName() + " invited " + properUsername + " to join " + faction.getDisplayName());
+                            faction.sendMessage(Messages.newLeader(player.getName(), properUsername));
                         }
                     }.runTask(FP.getInstance());
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

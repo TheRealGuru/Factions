@@ -14,20 +14,10 @@ import java.util.UUID;
 
 public class Faction {
 
-    @Getter
-    UUID factionID;
-
-    @Getter
-    @Setter
-    String displayName;
-
-    @Getter
-    @Setter
-    HashSet<Claim> claims;
-
-    @Getter
-    @Setter
-    HashSet<Subclaim> subclaims;
+    @Getter UUID factionID;
+    @Getter @Setter String displayName;
+    @Getter @Setter HashSet<Claim> claims;
+    @Getter @Setter HashSet<Subclaim> subclaims;
 
     public Faction(UUID factionID, String displayName) {
         this.factionID = factionID;

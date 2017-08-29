@@ -71,6 +71,10 @@ public class CommandManager {
         FUnclaimForCommand unclaimForCommand = new FUnclaimForCommand();
         FAnnouncementCommand announcementCommand = new FAnnouncementCommand();
         FListCommand listCommand = new FListCommand();
+        FChatCommand chatCommand = new FChatCommand();
+        FLeaderCommand leaderCommand = new FLeaderCommand();
+        FPromoteCommand promoteCommand = new FPromoteCommand();
+        FDemoteCommand demoteCommand = new FDemoteCommand();
 
         factionCommands.add(createCommand);
         factionCommands.add(createServerFactionCommand);
@@ -93,6 +97,10 @@ public class CommandManager {
         factionCommands.add(unclaimForCommand);
         factionCommands.add(announcementCommand);
         factionCommands.add(listCommand);
+        factionCommands.add(chatCommand);
+        factionCommands.add(leaderCommand);
+        factionCommands.add(promoteCommand);
+        factionCommands.add(demoteCommand);
 
         CCreateCommand chatCreateCommand = new CCreateCommand();
         CDeleteCommand chatDeleteCommand = new CDeleteCommand();

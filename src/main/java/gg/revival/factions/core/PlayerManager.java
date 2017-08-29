@@ -5,21 +5,23 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import gg.revival.driver.MongoAPI;
 import gg.revival.factions.FP;
+import gg.revival.factions.db.DatabaseManager;
 import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.tools.Configuration;
+import lombok.Getter;
 import org.bson.Document;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class PlayerManager {
 
-    private static HashSet<FPlayer> activePlayers = new HashSet<FPlayer>();
-
-    public static HashSet<FPlayer> getPlayers() {
-        return activePlayers;
-    }
+    @Getter static Set<FPlayer> activePlayers = new HashSet<>();
 
     public static boolean isLoaded(UUID uuid) {
         if (getPlayer(uuid) != null) {
@@ -59,6 +61,18 @@ public class PlayerManager {
         activePlayers.add(player);
     }
 
+    public static void saveAllProfiles(boolean unsafe, boolean unload) {
+        for(Player players : Bukkit.getOnlinePlayers()) {
+            if(unsafe) {
+                unsafeSaveProfile(PlayerManager.getPlayer(players.getUniqueId()));
+            }
+
+            else {
+                saveProfile(PlayerManager.getPlayer(players.getUniqueId()), unload);
+            }
+        }
+    }
+
     public static void loadProfile(UUID uuid) {
         if (!Configuration.DB_ENABLED) {
             loadPlayer(uuid, 0.0);
@@ -88,7 +102,7 @@ public class PlayerManager {
 
         new BukkitRunnable() {
             public void run() {
-                MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "players");
+                MongoCollection<Document> collection = DatabaseManager.getPlayersCollection();
                 FindIterable<Document> query = collection.find(Filters.eq("uuid", player.getUuid().toString()));
                 Document document = query.first();
 
@@ -96,7 +110,8 @@ public class PlayerManager {
                         .append("balance", player.getBalance());
 
                 if (document != null) {
-                    collection.replaceOne(document, newDoc);
+                    collection.deleteOne(document);
+                    collection.insertOne(newDoc);
                 } else {
                     collection.insertOne(newDoc);
                 }
@@ -108,4 +123,26 @@ public class PlayerManager {
         }.runTaskAsynchronously(FP.getInstance());
     }
 
+    /**
+     * Runs a save on the main thread, should only be used in the onDisable method
+     * @param player
+     */
+    public static void unsafeSaveProfile(FPlayer player) {
+        if (!Configuration.DB_ENABLED)
+            return;
+
+        MongoCollection<Document> collection = DatabaseManager.getPlayersCollection();
+        FindIterable<Document> query = collection.find(Filters.eq("uuid", player.getUuid().toString()));
+        Document document = query.first();
+
+        Document newDoc = new Document("uuid", player.getUuid().toString())
+                .append("balance", player.getBalance());
+
+        if (document != null) {
+            collection.deleteOne(document);
+            collection.insertOne(newDoc);
+        } else {
+            collection.insertOne(newDoc);
+        }
+    }
 }

@@ -9,6 +9,7 @@ import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
 import gg.revival.factions.tools.Configuration;
+import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.ToolBox;
 import org.bukkit.ChatColor;
@@ -16,6 +17,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
+import java.util.logging.Level;
 
 public class LocationManager {
 

@@ -56,6 +56,11 @@ public class FClaimOtherCommand extends FCommand {
 
         Faction faction = FactionManager.getFactionByName(factionName);
 
+        if(faction == null) {
+            player.sendMessage(Messages.factionNotFound());
+            return;
+        }
+
         if(player.getInventory().firstEmpty() == -1) {
             player.sendMessage(Messages.inventoryFull());
             return;

@@ -40,6 +40,11 @@ public class FCreateServerFactionCommand extends FCommand {
             return;
         }
 
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
+            player.sendMessage(ChatColor.RED + getSyntax());
+            return;
+        }
+
         String factionName = args[1];
         String factionTypeAsString = args[2].toUpperCase();
         ServerClaimType type = null;
@@ -57,11 +62,6 @@ public class FCreateServerFactionCommand extends FCommand {
         }
 
         if (type == null) {
-            player.sendMessage(ChatColor.RED + getSyntax());
-            return;
-        }
-
-        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }

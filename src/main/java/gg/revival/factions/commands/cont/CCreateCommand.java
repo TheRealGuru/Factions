@@ -57,6 +57,20 @@ public class CCreateCommand extends CCommand {
             return;
         }
 
+        if(name.equalsIgnoreCase("p") ||
+                name.equalsIgnoreCase("public") ||
+                name.equalsIgnoreCase("g") ||
+                name.equalsIgnoreCase("global") ||
+                name.equalsIgnoreCase("f") ||
+                name.equalsIgnoreCase("faction") ||
+                name.equalsIgnoreCase("a") ||
+                name.equalsIgnoreCase("ally") ||
+                name.equalsIgnoreCase("cc")) {
+
+            player.sendMessage(Messages.badChannelName());
+            return;
+        }
+
         if(ChatChannelManager.getChannelByName(name) != null) {
             player.sendMessage(Messages.channelExists());
             return;
