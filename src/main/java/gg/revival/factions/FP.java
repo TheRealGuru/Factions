@@ -7,13 +7,9 @@ import gg.revival.factions.core.PlayerManager;
 import gg.revival.factions.db.DatabaseManager;
 import gg.revival.factions.file.FileManager;
 import gg.revival.factions.listeners.ListenerManager;
-import gg.revival.factions.obj.Faction;
 import gg.revival.factions.threads.ThreadManager;
 import gg.revival.factions.tools.Configuration;
-import gg.revival.factions.tools.Logger;
 import lombok.Getter;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class FP extends JavaPlugin {
@@ -26,6 +22,7 @@ public class FP extends JavaPlugin {
 
         FileManager.createFiles();
 
+        Configuration.loadConfiguration();
         DatabaseManager.setupConnection();
         ListenerManager.loadListeners();
         CommandManager.loadCommands();

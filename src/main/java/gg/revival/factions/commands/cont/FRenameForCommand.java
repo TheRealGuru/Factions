@@ -33,7 +33,7 @@ public class FRenameForCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        String changer = "CONSOLE";
+        String changer = "Console";
 
         if(sender instanceof Player) {
             Player player = (Player)sender;

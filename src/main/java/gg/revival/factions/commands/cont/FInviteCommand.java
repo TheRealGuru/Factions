@@ -9,6 +9,7 @@ import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.UUIDFetcher;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -63,37 +64,50 @@ public class FInviteCommand extends FCommand {
             public void run() {
                 try {
                     UUID uuid = UUIDFetcher.getUUIDOf(namedPlayer);
-                    String properUsername = Bukkit.getOfflinePlayer(uuid).getName();
 
-                    new BukkitRunnable() {
-                        public void run() {
-                            if(uuid == null || properUsername == null) {
+                    if(uuid != null) {
+                        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
+
+                        new BukkitRunnable() {
+                            public void run() {
+                                if(uuid == null || offlinePlayer == null) {
+                                    player.sendMessage(Messages.playerNotFound());
+                                    return;
+                                }
+
+                                String properUsername = offlinePlayer.getName();
+
+                                if(FactionManager.getFactionByPlayer(uuid) != null) {
+                                    player.sendMessage(Messages.alreadyInFactionOther());
+                                    return;
+                                }
+
+                                if(faction.getPendingInvites().contains(uuid)) {
+                                    player.sendMessage(Messages.playerAlreadyInvited());
+                                    return;
+                                }
+
+                                faction.getPendingInvites().add(uuid);
+
+                                if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
+                                    Messages.sendFactionInvite(Bukkit.getPlayer(uuid), faction.getDisplayName(), player.getName());
+                                }
+
+                                faction.sendMessage(Messages.invitedPlayer(player.getName(), properUsername));
+
+                                Logger.log(Level.INFO, player.getName() + " invited " + properUsername + " to join " + faction.getDisplayName());
+                            }
+                        }.runTask(FP.getInstance());
+                    }
+
+                    else {
+                        new BukkitRunnable() {
+                            public void run() {
                                 player.sendMessage(Messages.playerNotFound());
                                 return;
                             }
-
-                            if(FactionManager.getFactionByPlayer(uuid) != null) {
-                                player.sendMessage(Messages.alreadyInFactionOther());
-                                return;
-                            }
-
-                            if(faction.getPendingInvites().contains(uuid)) {
-                                player.sendMessage(Messages.playerAlreadyInvited());
-                                return;
-                            }
-
-                            faction.getPendingInvites().add(uuid);
-
-                            if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
-                                Messages.sendFactionInvite(Bukkit.getPlayer(uuid), faction.getDisplayName(), player.getName());
-                            }
-
-                            faction.sendMessage(Messages.invitedPlayer(player.getName(), properUsername));
-
-                            Logger.log(Level.INFO, player.getName() + " invited " + properUsername + " to join " + faction.getDisplayName());
-                        }
-                    }.runTask(FP.getInstance());
-
+                        }.runTask(FP.getInstance());
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

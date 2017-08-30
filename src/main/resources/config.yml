@@ -29,7 +29,7 @@ factions:
   limits:
     max-faction-size: 20
     max-home-height: 150
-    home-too-high-price: 100
+    home-too-high-price: 250
     stuck-warmup: 60
   map-setup:
     warzone-radius: 1000

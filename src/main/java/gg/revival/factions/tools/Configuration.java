@@ -1,5 +1,6 @@
 package gg.revival.factions.tools;
 
+import gg.revival.factions.file.FileManager;
 import org.bukkit.ChatColor;
 
 public class Configuration {
@@ -27,7 +28,7 @@ public class Configuration {
     public static int MAX_FAC_HOME_HEIGHT = 150;
     public static int HOME_TOO_HIGH_PRICE = 100;
     public static int HOME_WARMUP = 5;
-    public static int STUCK_WARMUP = 60;
+    public static int STUCK_WARMUP = 120;
 
     public static int WARZONE_RADIUS = 1000;
     public static int NETHER_WARZONE_RADIUS = 200;
@@ -40,6 +41,7 @@ public class Configuration {
 
     public static int MIN_CLAIM_SIZE = 10;
     public static int CLAIM_BUFFER = 5;
+    public static double PILLAR_HEIGHT = 30.0;
 
     public static boolean ALLIANCES_ENABLED = true;
     public static int ALLY_LIMIT = 1;
@@ -47,12 +49,60 @@ public class Configuration {
 
     public static String SUBCLAIM_GUI_NAME = ChatColor.BLACK + "Subclaim Editor";
 
-    public static double PILLAR_HEIGHT = 30.0;
-
     public static int RENAME_COOLDOWN = 300;
     public static int DISBAND_COOLDOWN = 300;
     public static int MAP_COOLDOWN = 15;
 
-    //TODO: Grab configuration from config.yml
+    public static void loadConfiguration() {
+        DB_ENABLED = FileManager.getConfig().getBoolean("database.enabled");
+        DB_HOSTNAME = FileManager.getConfig().getString("database.hostname");
+        DB_PORT = FileManager.getConfig().getInt("database.port");
+        DB_USECREDS = FileManager.getConfig().getBoolean("database.use-creds.enabled");
+        DB_USERNAME = FileManager.getConfig().getString("database.use-creds.username");
+        DB_PASSWORD = FileManager.getConfig().getString("database.use-creds.password");
+
+        CHANNEL_MIN_NAME_SIZE = FileManager.getConfig().getInt("chat-channels.create.min-name-length");
+        CHANNEL_MAX_NAME_SIZE = FileManager.getConfig().getInt("chat-channels.create.max-name-length");
+
+        MIN_FAC_NAME_SIZE = FileManager.getConfig().getInt("factions.create.min-name-length");
+        MAX_FAC_NAME_SIZE = FileManager.getConfig().getInt("factions.create.max-name-length");
+
+        DTR_REGEN_TIME = FileManager.getConfig().getInt("factions.dtr.regen-time");
+        DTR_FREEZE_TIME = FileManager.getConfig().getInt("factions.dtr.freeze-time");
+        DTR_MAX = FileManager.getConfig().getDouble("factions.dtr.max-dtr");
+        DTR_PLAYER_VALUE = FileManager.getConfig().getDouble("factions.dtr.player-value");
+
+        MAX_FAC_SIZE = FileManager.getConfig().getInt("factions.limits.max-faction-size");
+        MAX_FAC_HOME_HEIGHT = FileManager.getConfig().getInt("factions.limits.max-home-height");
+        HOME_TOO_HIGH_PRICE = FileManager.getConfig().getInt("factions.limits.home-too-high-price");
+
+        HOME_WARMUP = FileManager.getConfig().getInt("factions.timers.home-warmup");
+        STUCK_WARMUP = FileManager.getConfig().getInt("factions.timers.stuck-warmup");
+
+        WARZONE_RADIUS = FileManager.getConfig().getInt("factions.map-setup.warzone-radius");
+        NETHER_WARZONE_RADIUS = FileManager.getConfig().getInt("factions.map-setup.nether-warzone-radius");
+        BUILDABLE_WARZONE_RADIUS = FileManager.getConfig().getInt("factions.map-setup.buildable-warzone-radius");
+        WARZONE_NAME = ChatColor.translateAlternateColorCodes('&', FileManager.getConfig().getString("factions.map-setup.warzone-name"));
+        WILDERNESS_NAME = ChatColor.translateAlternateColorCodes('&', FileManager.getConfig().getString("factions.map-setup.wilderness-name"));
+        NETHER_NAME = ChatColor.translateAlternateColorCodes('&', FileManager.getConfig().getString("factions.map-setup.nether-name"));
+        NETHER_WARZONE_NAME = ChatColor.translateAlternateColorCodes('&', FileManager.getConfig().getString("factions.map-setup.nether-warzone-name"));
+        END_NAME = ChatColor.translateAlternateColorCodes('&', FileManager.getConfig().getString("factions.map-setup.end-name"));
+
+        MIN_CLAIM_SIZE = FileManager.getConfig().getInt("factions.claiming.minimum-claim-size");
+        CLAIM_BUFFER = FileManager.getConfig().getInt("factions.claiming.claim-buffer");
+        PILLAR_HEIGHT = FileManager.getConfig().getDouble("factions.claiming.pillar-height");
+
+        ALLIANCES_ENABLED = FileManager.getConfig().getBoolean("factions.alliances.enabled");
+        ALLY_LIMIT = FileManager.getConfig().getInt("factions.alliances.ally-limit");
+        ONLY_WARN_WHEN_ALLY_VISABLE = FileManager.getConfig().getBoolean("factions.alliances.only-warn-when-visable");
+
+        SUBCLAIM_GUI_NAME = ChatColor.translateAlternateColorCodes('&', FileManager.getConfig().getString("factions.subclaims.gui-title"));
+
+        RENAME_COOLDOWN = FileManager.getConfig().getInt("timers.rename-cooldown");
+        DISBAND_COOLDOWN = FileManager.getConfig().getInt("timers.disband-cooldown");
+        MAP_COOLDOWN = FileManager.getConfig().getInt("timers.map-cooldown");
+
+        Logger.log("Loaded configuration from config.yml");
+    }
 
 }

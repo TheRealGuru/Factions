@@ -75,6 +75,9 @@ public class CommandManager {
         FLeaderCommand leaderCommand = new FLeaderCommand();
         FPromoteCommand promoteCommand = new FPromoteCommand();
         FDemoteCommand demoteCommand = new FDemoteCommand();
+        FFreezeCommand freezeCommand = new FFreezeCommand();
+        FSetDTRCommand setDTRCommand = new FSetDTRCommand();
+        FSaveCommand saveCommand = new FSaveCommand();
 
         factionCommands.add(createCommand);
         factionCommands.add(createServerFactionCommand);
@@ -101,6 +104,9 @@ public class CommandManager {
         factionCommands.add(leaderCommand);
         factionCommands.add(promoteCommand);
         factionCommands.add(demoteCommand);
+        factionCommands.add(freezeCommand);
+        factionCommands.add(setDTRCommand);
+        factionCommands.add(saveCommand);
 
         CCreateCommand chatCreateCommand = new CCreateCommand();
         CDeleteCommand chatDeleteCommand = new CDeleteCommand();

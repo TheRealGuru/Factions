@@ -9,16 +9,6 @@ public class ThreadManager {
 
     public static void startThreads() {
         /*
-            1 Tick Threads
-         */
-
-        new BukkitRunnable() {
-            public void run() {
-
-            }
-        }.runTaskTimer(FP.getInstance(), 0L, 1L);
-
-        /*
             5 Tick Threads
          */
 

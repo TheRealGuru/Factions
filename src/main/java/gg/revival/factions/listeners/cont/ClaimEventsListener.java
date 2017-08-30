@@ -11,7 +11,6 @@ import gg.revival.factions.tools.Configuration;
 import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.Permissions;
 import gg.revival.factions.tools.ToolBox;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,7 +21,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -365,7 +363,7 @@ public class ClaimEventsListener implements Listener {
                 event.setCancelled(true);
 
                 if(clickables.contains(block.getType())) {
-                    player.sendMessage(ChatColor.YELLOW + claims.getClaimOwner().getDisplayName());
+                    player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + claims.getClaimOwner().getDisplayName()));
                 }
             }
 
@@ -374,7 +372,7 @@ public class ClaimEventsListener implements Listener {
                     event.setCancelled(true);
 
                     if(clickables.contains(block.getType())) {
-                        player.sendMessage(ChatColor.RED + claims.getClaimOwner().getDisplayName());
+                        player.sendMessage(Messages.landClaimedBy(ChatColor.RED + claims.getClaimOwner().getDisplayName()));
                     }
                 }
             }

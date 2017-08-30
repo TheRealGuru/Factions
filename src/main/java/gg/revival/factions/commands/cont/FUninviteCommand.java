@@ -9,6 +9,7 @@ import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.UUIDFetcher;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -63,29 +64,43 @@ public class FUninviteCommand extends FCommand {
             public void run() {
                 try {
                     UUID uuid = UUIDFetcher.getUUIDOf(namedPlayer);
-                    String properUsername = Bukkit.getOfflinePlayer(uuid).getName();
 
-                    new BukkitRunnable() {
-                        public void run() {
-                            if(uuid == null || properUsername == null) {
+                    if(uuid != null) {
+                        OfflinePlayer offlinePlayer = Bukkit.getPlayer(uuid);
+
+                        new BukkitRunnable() {
+                            public void run() {
+                                if(uuid == null || offlinePlayer == null) {
+                                    player.sendMessage(Messages.playerNotFound());
+                                    return;
+                                }
+
+                                String properUsername = Bukkit.getOfflinePlayer(uuid).getName();
+
+                                if(!faction.getPendingInvites().contains(uuid)) {
+                                    player.sendMessage(Messages.noPendingInvite());
+                                    return;
+                                }
+
+                                faction.getPendingInvites().remove(uuid);
+
+                                faction.sendMessage(Messages.uninvitedPlayer(player.getName(), properUsername));
+
+                                if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
+                                    Bukkit.getPlayer(uuid).sendMessage(Messages.invitationRevoked(faction.getDisplayName()));
+                                }
+                            }
+                        }.runTask(FP.getInstance());
+                    }
+
+                    else {
+                        new BukkitRunnable() {
+                            public void run() {
                                 player.sendMessage(Messages.playerNotFound());
                                 return;
                             }
-
-                            if(!faction.getPendingInvites().contains(uuid)) {
-                                player.sendMessage(Messages.noPendingInvite());
-                                return;
-                            }
-
-                            faction.getPendingInvites().remove(uuid);
-
-                            faction.sendMessage(Messages.uninvitedPlayer(player.getName(), properUsername));
-
-                            if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
-                                Bukkit.getPlayer(uuid).sendMessage(Messages.invitationRevoked(faction.getDisplayName()));
-                            }
-                        }
-                    }.runTask(FP.getInstance());
+                        }.runTask(FP.getInstance());
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

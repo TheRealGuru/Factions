@@ -8,6 +8,7 @@ import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.UUIDFetcher;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -56,26 +57,40 @@ public class FLeaderCommand extends FCommand {
             public void run() {
                 try {
                     UUID uuid = UUIDFetcher.getUUIDOf(namedPlayer);
-                    String properUsername = Bukkit.getOfflinePlayer(uuid).getName();
 
-                    new BukkitRunnable() {
-                        public void run() {
-                            if(uuid == null || properUsername == null) {
+                    if(uuid != null) {
+                        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
+
+                        new BukkitRunnable() {
+                            public void run() {
+                                if(uuid == null || offlinePlayer == null) {
+                                    player.sendMessage(Messages.playerNotFound());
+                                    return;
+                                }
+
+                                String properUsername = Bukkit.getOfflinePlayer(uuid).getName();
+
+                                if(!faction.getRoster(false).contains(uuid)) {
+                                    player.sendMessage(Messages.playerNotInFaction());
+                                    return;
+                                }
+
+                                faction.setLeader(uuid);
+                                faction.getOfficers().add(player.getUniqueId());
+
+                                faction.sendMessage(Messages.newLeader(player.getName(), properUsername));
+                            }
+                        }.runTask(FP.getInstance());
+                    }
+
+                    else {
+                        new BukkitRunnable() {
+                            public void run() {
                                 player.sendMessage(Messages.playerNotFound());
                                 return;
                             }
-
-                            if(!faction.getRoster(false).contains(uuid)) {
-                                player.sendMessage(Messages.playerNotInFaction());
-                                return;
-                            }
-
-                            faction.setLeader(uuid);
-                            faction.getOfficers().add(player.getUniqueId());
-
-                            faction.sendMessage(Messages.newLeader(player.getName(), properUsername));
-                        }
-                    }.runTask(FP.getInstance());
+                        }.runTask(FP.getInstance());
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

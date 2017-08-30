@@ -5,6 +5,7 @@ import gg.revival.factions.timers.Timer;
 import gg.revival.factions.timers.TimerType;
 import gg.revival.factions.tools.Configuration;
 import gg.revival.factions.tools.Logger;
+import gg.revival.factions.tools.Messages;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
@@ -65,23 +66,23 @@ public class PlayerFaction extends Faction {
         List<UUID> roster = new ArrayList<UUID>();
 
         if (onlineOnly) {
-            if (Bukkit.getPlayer(this.leader).isOnline()) {
-                roster.add(this.leader);
+            if (Bukkit.getPlayer(leader) != null && Bukkit.getPlayer(leader).isOnline()) {
+                roster.add(leader);
             }
 
             for (UUID officer : officers) {
-                if (Bukkit.getPlayer(officer).isOnline()) {
+                if (Bukkit.getPlayer(officer) != null && Bukkit.getPlayer(officer).isOnline()) {
                     roster.add(officer);
                 }
             }
 
             for (UUID member : members) {
-                if (Bukkit.getPlayer(member).isOnline()) {
+                if (Bukkit.getPlayer(member) != null && Bukkit.getPlayer(member).isOnline()) {
                     roster.add(member);
                 }
             }
         } else {
-            roster.add(this.leader);
+            roster.add(leader);
 
             for (UUID officer : officers) {
                 roster.add(officer);
@@ -117,10 +118,10 @@ public class PlayerFaction extends Faction {
     public void updateFreeze() {
         if (isFrozen()) return; //Still frozen
 
-        if (getUnfreezeTime() < System.currentTimeMillis()) {
+        if (getUnfreezeTime() != 0 && getUnfreezeTime() < System.currentTimeMillis()) {
             this.unfreezeTime = 0;
 
-            //TODO: Notify of power regenerating
+            sendMessage(Messages.powerThawedOther());
         }
     }
 

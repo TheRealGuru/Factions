@@ -10,6 +10,7 @@ import gg.revival.factions.tools.Permissions;
 import gg.revival.factions.tools.UUIDFetcher;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -65,33 +66,46 @@ public class FPromoteCommand extends FCommand {
             public void run() {
                 try {
                     UUID uuid = UUIDFetcher.getUUIDOf(namedPlayer);
-                    String properUsername = Bukkit.getOfflinePlayer(uuid).getName();
 
-                    new BukkitRunnable() {
-                        public void run() {
-                            if(uuid == null || properUsername == null) {
+                    if(uuid != null) {
+                        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
+
+                        new BukkitRunnable() {
+                            public void run() {
+                                if(uuid == null || offlinePlayer == null) {
+                                    player.sendMessage(Messages.playerNotFound());
+                                    return;
+                                }
+
+                                String properUsername = Bukkit.getOfflinePlayer(uuid).getName();
+
+                                if(!faction.getRoster(false).contains(player.getUniqueId())) {
+                                    player.sendMessage(Messages.playerNotInFaction());
+                                    return;
+                                }
+
+                                if(faction.getOfficers().contains(uuid)) {
+                                    player.sendMessage(Messages.alreadyOfficer());
+                                    return;
+                                }
+
+                                faction.getOfficers().add(uuid);
+
+                                faction.sendMessage(Messages.newOfficer(player.getName(), properUsername));
+
+                                Logger.log(Level.INFO, player.getName() + " promoted " + properUsername + " to officer in the faction " + faction.getDisplayName());
+                            }
+                        }.runTask(FP.getInstance());
+                    }
+
+                    else {
+                        new BukkitRunnable() {
+                            public void run() {
                                 player.sendMessage(Messages.playerNotFound());
                                 return;
                             }
-
-                            if(!faction.getRoster(false).contains(player.getUniqueId())) {
-                                player.sendMessage(Messages.playerNotInFaction());
-                                return;
-                            }
-
-                            if(faction.getOfficers().contains(uuid)) {
-                                player.sendMessage(Messages.alreadyOfficer());
-                                return;
-                            }
-
-                            faction.getOfficers().add(uuid);
-
-                            faction.sendMessage(Messages.newOfficer(player.getName(), properUsername));
-
-                            Logger.log(Level.INFO, player.getName() + " promoted " + properUsername + " to officer in the faction " + faction.getDisplayName());
-                        }
-                    }.runTask(FP.getInstance());
-
+                        }.runTask(FP.getInstance());
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

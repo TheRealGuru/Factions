@@ -1,18 +1,13 @@
 package gg.revival.factions.tools;
 
 import gg.revival.factions.claims.ServerClaimType;
-import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.core.PlayerManager;
 import gg.revival.factions.obj.FPlayer;
-import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
 import lombok.Getter;
-import mkremins.fanciful.FancyMessage;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.apache.commons.lang.math.NumberUtils;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -48,6 +43,14 @@ public class ToolBox {
         stick.setItemMeta(stickMeta);
 
         return stick;
+    }
+
+    public static void sendMessageWithPermission(String message, String permissions) {
+        for(Player players : Bukkit.getOnlinePlayers()) {
+            if(!players.hasPermission(permissions)) continue;
+
+            players.sendMessage(message);
+        }
     }
 
     public static WorldLocations getLocationEnum(Location location) {
@@ -227,6 +230,69 @@ public class ToolBox {
         String saltStr = salt.toString();
 
         return saltStr;
+    }
+
+    public static int getTime(String string) {
+        int time = 0;
+
+        if (string.contains("m")) {
+            String timeStr = strip(string);
+
+            if (NumberUtils.isNumber(timeStr)) {
+                time = NumberUtils.toInt(timeStr) * 60;
+            }
+
+        }
+
+        else if (string.contains("h")) {
+            String timeStr = strip(string);
+
+            if (NumberUtils.isNumber(timeStr)) {
+                time = NumberUtils.toInt(timeStr) * 3600;
+            }
+
+        }
+
+        else if (string.contains("s")) {
+            String timeStr = strip(string);
+
+            if (NumberUtils.isNumber(timeStr)) {
+                time = NumberUtils.toInt(timeStr);
+            }
+
+        }
+
+        else if (string.contains("d")) {
+            String timeStr = strip(string);
+
+            if (NumberUtils.isNumber(timeStr)) {
+                time = NumberUtils.toInt(timeStr) * 86400;
+            }
+        }
+
+        else if (string.contains("y")) {
+            String timeStr = strip(string);
+
+            if (NumberUtils.isNumber(timeStr)) {
+                time = NumberUtils.toInt(timeStr) * 31536000;
+            }
+        }
+
+        return time;
+    }
+
+    private static String strip(String src) {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < src.length(); i++) {
+            char c = src.charAt(i);
+
+            if (Character.isDigit(c)) {
+                builder.append(c);
+            }
+        }
+
+        return builder.toString();
     }
 
     public enum WorldLocations {

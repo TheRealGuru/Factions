@@ -229,7 +229,13 @@ public class ClaimManager {
                 }
             }
 
-            pillar.build();
+            // Run 1 tick later so the bottom block isn't clicked
+            new BukkitRunnable() {
+                public void run() {
+                    pillar.build();
+                }
+            }.runTask(FP.getInstance());
+
             PillarManager.getActivePillars().add(pillar);
 
             if(pendingClaim.getPosA() != null && pendingClaim.getPosB() != null && faction instanceof PlayerFaction) {

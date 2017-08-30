@@ -45,7 +45,7 @@ notifications:
   uninvited-player-other: '&eYour invitation to join &6%faction% &ehas been &crevoked'
   no-nearby-factions: '&eIt appears there are no factions nearby'
   joined-faction: '&eYou have joined &2%fac%'
-  joined-faction-other: '&2%player% has &ajoined &ethe faction'
+  joined-faction-other: '&2%player% &ehas &ajoined &ethe faction'
   left-faction: '&eYou have left &2%fac%'
   left-faction-other: '&9%player% &ehas &cleft &ethe faction'
   kick-faction: '&eYou have been kicked from &2%fac%'
@@ -60,19 +60,24 @@ notifications:
   paid-player-other: '&eYou have received &2$%amount% &efrom &9%player%'
   power-thawed: '&eYou have thawed &9%faction%'
   power-thawed-other: '&eYour faction will now begin &aregenerating &epower'
+  power-frozen-by-staff: '&eYour faction power has been frozen by &9%freezer%'
+  power-frozen-by-staff-other: "&eYou have frozen &2%faction%&e's power"
   land-unclaimed: '&eYou have unclaimed land. &2$%claimvalue% &ehas been returned to your faction balance'
   land-unclaimed-other: '&2%player% &ehas unclaimed land'
   faction-announcement: '&2&lFaction Announcement > &e%announcement%'
   new-leader: '&2%oldleader% &ehas promoted &2%newleader% &eto faction leader'
   new-officer: '&2%leader% &ehas promoted &2%officer% &eto faction officer'
   removed-officer: '&2%leader% &ehas demoted &2%officer% to faction member'
+  dtr-changed: '&eYour factions DTR has been modified to &d%dtr% &eby &9%changer%'
+  dtr-changed-other: "&eYou have set &2%faction%&e's DTR to &d%dtr%"
 
 chat-formatting:
-  global-faction-member: '&2[%fac%] &r%player%&f: %msg%'
-  global-ally-member: '&d[%fac%] &r%player%&f: %msg%'
-  global-enemy: '&c[%fac%] &r%player%&f: %msg%'
-  faction-chat: '&2[&6FC&2][%fac%] &r%player%&f: &2%msg%'
-  ally-chat: '&d[&6AC&d][%fac%] &r%player%&f: &d%msg%'
+  global-faction-member: '&2[%fac%]&r%player%&f: %msg%'
+  global-ally-member: '&d[%fac%]&r%player%&f: %msg%'
+  global-enemy: '&c[%fac%]&r%player%&f: %msg%'
+  faction-chat: '&2[&6FC&2][%fac%]&r%player%&f: &2%msg%'
+  ally-chat: '&d[&6AC&d][%fac%]&r%player%&f: &d%msg%'
+  chat-channel: '&6[&9%channel%&6]&r%player%&f: &e%msg%'
 
 broadcasts:
   fac-created: '&6%fac% &ehas been &acreated &eby &9%player%'
@@ -125,6 +130,7 @@ errors:
   bad-announcement: '&cAnnouncements must only contain characters A-Z 0-9'
   no-announcement: '&cYour faction does not have the announcement set'
   bad-number: '&cInvalid number'
+  bad-time: '&cInvalid time'
   player-not-in-faction: '&cThis player is not in your faction'
   already-officer: '&cThis member already has the officer rank'
   not-officer: '&cThis member does not have the officer rank'

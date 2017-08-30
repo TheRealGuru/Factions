@@ -110,7 +110,7 @@ public class FactionManager {
 
         PlayerFaction faction = new PlayerFaction(factionID, displayName, null, leader,
                 officers, members, allies, pendingInvites, pendingAllies,
-                null, 0.0, BigDecimal.valueOf(0.1), System.currentTimeMillis());
+                null, 0.0, BigDecimal.valueOf(0.1), 0);
 
         activeFactions.add(faction);
 

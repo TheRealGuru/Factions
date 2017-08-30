@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -78,6 +79,13 @@ public class Messages {
     public static String formattedAllyChat(String faction, String player, String message) {
         return getValue("chat-formatting.ally-chat")
                 .replace("%fac%", faction)
+                .replace("%player%", player)
+                .replace("%msg%", message);
+    }
+
+    public static String formattedChatChannel(String channel, String player, String message) {
+        return getValue("chat-formatting.chat-channel")
+                .replace("%channel%", channel)
                 .replace("%player%", player)
                 .replace("%msg%", message);
     }
@@ -539,6 +547,32 @@ public class Messages {
         return getValue("errors.already-officer");
     }
 
+    public static String badTime() {
+        return getValue("errors.bad-time");
+    }
+
+    public static String powerFrozenByStaff(String freezer) {
+        return getValue("notifications.power-frozen-by-staff")
+                .replace("%freezer%", freezer);
+    }
+
+    public static String powerFrozenByStaffOther(String faction) {
+        return getValue("notifications.power-frozen-by-staff-other")
+                .replace("%faction%", faction);
+    }
+
+    public static String dtrChanged(String changer, double newDtr) {
+        return getValue("notifications.dtr-changed")
+                .replace("%changer%", changer)
+                .replace("%dtr%", String.valueOf(newDtr));
+    }
+
+    public static String dtrChangedOther(String faction, double newDtr) {
+        return getValue("notifications.dtr-changed-other")
+                .replace("%faction%", faction)
+                .replace("%dtr%", String.valueOf(newDtr));
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");
@@ -581,6 +615,8 @@ public class Messages {
 
         if (faction.isFrozen()) {
             info.append(ChatColor.GRAY + " (Frozen)" + "\n");
+        } else if (faction.getDtr().doubleValue() < 0.0) {
+            info.append(ChatColor.RED + " (Raid-able)" + "\n");
         } else if (faction.getDtr().doubleValue() == faction.getMaxDTR()) {
             info.append(ChatColor.BLUE + " (Max)" + "\n");
         } else {
