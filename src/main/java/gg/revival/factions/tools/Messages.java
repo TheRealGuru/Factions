@@ -573,6 +573,18 @@ public class Messages {
                 .replace("%dtr%", String.valueOf(newDtr));
     }
 
+    public static String factionDeposit(String player, String amt) {
+        return getValue("notifications.faction-deposit")
+                .replace("%player%", player)
+                .replace("%amt%", amt);
+    }
+
+    public static String factionWithdrawl(String player, String amt) {
+        return getValue("notifications.faction-withdrawl")
+                .replace("%player%", player)
+                .replace("%amt%", amt);
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

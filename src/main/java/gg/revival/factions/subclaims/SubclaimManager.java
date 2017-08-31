@@ -5,6 +5,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import gg.revival.driver.MongoAPI;
 import gg.revival.factions.FP;
+import gg.revival.factions.db.DatabaseManager;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.tools.Configuration;
 import gg.revival.factions.tools.Logger;
@@ -21,8 +22,8 @@ import java.util.logging.Level;
 
 public class SubclaimManager {
 
-    @Getter @Setter private static HashSet<Subclaim> activeSubclaims = new HashSet<Subclaim>();
-    @Getter @Setter private static HashMap<UUID, SubclaimGUI> subclaimEditor = new HashMap<UUID, SubclaimGUI>();
+    @Getter @Setter private static HashSet<Subclaim> activeSubclaims = new HashSet<>();
+    @Getter @Setter private static HashMap<UUID, SubclaimGUI> subclaimEditor = new HashMap<>();
 
     public static Subclaim getSubclaimAt(Location location) {
         for (Subclaim subclaims : activeSubclaims) {
@@ -68,8 +69,8 @@ public class SubclaimManager {
     public static void removeSubclaim(Subclaim subclaim) {
         if (!subclaimExists(subclaim)) return;
 
-        List<Subclaim> serverCache = new ArrayList<Subclaim>();
-        List<Subclaim> factionCache = new ArrayList<Subclaim>();
+        List<Subclaim> serverCache = new ArrayList<>();
+        List<Subclaim> factionCache = new ArrayList<>();
 
         for (Subclaim subclaims : activeSubclaims) {
             serverCache.add(subclaims);
@@ -117,7 +118,10 @@ public class SubclaimManager {
 
         new BukkitRunnable() {
             public void run() {
-                MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "subclaims");
+                if(DatabaseManager.getSubclaimsCollection() == null)
+                    DatabaseManager.setSubclaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "subclaims"));
+
+                MongoCollection<Document> collection = DatabaseManager.getSubclaimsCollection();
                 FindIterable<Document> query = collection.find();
                 Iterator<Document> iterator = query.iterator();
 
@@ -145,8 +149,6 @@ public class SubclaimManager {
                         }
                     }.runTask(FP.getInstance());
                 }
-
-                Logger.log(Level.INFO, "Loaded " + activeSubclaims.size() + " Subclaims");
             }
         }.runTaskAsynchronously(FP.getInstance());
     }
@@ -157,7 +159,10 @@ public class SubclaimManager {
 
         new BukkitRunnable() {
             public void run() {
-                MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "subclaims");
+                if(DatabaseManager.getSubclaimsCollection() == null)
+                    DatabaseManager.setSubclaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "subclaims"));
+
+                MongoCollection<Document> collection = DatabaseManager.getSubclaimsCollection();
                 FindIterable<Document> query = collection.find(Filters.eq("subclaimID", subclaim.getSubclaimID().toString()));
                 Document document = query.first();
 
@@ -171,8 +176,7 @@ public class SubclaimManager {
                         .append("officerBypass", subclaim.isOfficerAccess());
 
                 if(document != null) {
-                    collection.deleteOne(document);
-                    collection.insertOne(newDoc);
+                    collection.replaceOne(document, newDoc);
                 } else {
                     collection.insertOne(newDoc);
                 }
@@ -184,7 +188,10 @@ public class SubclaimManager {
         if(!Configuration.DB_ENABLED || !MongoAPI.isConnected())
             return;
 
-        MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "subclaims");
+        if(DatabaseManager.getSubclaimsCollection() == null)
+            DatabaseManager.setSubclaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "subclaims"));
+
+        MongoCollection<Document> collection = DatabaseManager.getSubclaimsCollection();
         FindIterable<Document> query = collection.find(Filters.eq("subclaimID", subclaim.getSubclaimID().toString()));
         Document document = query.first();
 
@@ -198,8 +205,7 @@ public class SubclaimManager {
                 .append("officerBypass", subclaim.isOfficerAccess());
 
         if(document != null) {
-            collection.deleteOne(document);
-            collection.insertOne(newDoc);
+            collection.replaceOne(document, newDoc);
         } else {
             collection.insertOne(newDoc);
         }
@@ -209,12 +215,15 @@ public class SubclaimManager {
         if(Configuration.DB_ENABLED && MongoAPI.isConnected()) {
             new BukkitRunnable() {
                 public void run() {
-                    MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "claims");
+                    if(DatabaseManager.getSubclaimsCollection() == null)
+                        DatabaseManager.setSubclaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "subclaims"));
+
+                    MongoCollection<Document> collection = DatabaseManager.getSubclaimsCollection();
                     FindIterable<Document> query = collection.find(Filters.eq("subclaimID", subclaim.getSubclaimID().toString()));
                     Document document = query.first();
 
                     if (document != null) {
-                        collection.deleteOne(document);
+                        collection.findOneAndDelete(document);
                     }
                 }
             }.runTaskAsynchronously(FP.getInstance());

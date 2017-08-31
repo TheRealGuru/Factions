@@ -6,6 +6,7 @@ import com.mongodb.client.model.Filters;
 import gg.revival.driver.MongoAPI;
 import gg.revival.factions.FP;
 import gg.revival.factions.core.FactionManager;
+import gg.revival.factions.db.DatabaseManager;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
@@ -68,12 +69,15 @@ public class ClaimManager {
         if (Configuration.DB_ENABLED && MongoAPI.isConnected()) {
             new BukkitRunnable() {
                 public void run() {
-                    MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "claims");
+                    if(DatabaseManager.getClaimsCollection() == null)
+                        DatabaseManager.setClaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "claims"));
+
+                    MongoCollection<Document> collection = DatabaseManager.getClaimsCollection();
                     FindIterable<Document> query = collection.find(Filters.eq("claimID", claim.getClaimID().toString()));
                     Document document = query.first();
 
                     if (document != null) {
-                        collection.deleteOne(document);
+                        collection.findOneAndDelete(document);
                     }
                 }
             }.runTaskAsynchronously(FP.getInstance());
@@ -88,7 +92,10 @@ public class ClaimManager {
 
         new BukkitRunnable() {
             public void run() {
-                MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "claims");
+                if(DatabaseManager.getClaimsCollection() == null)
+                    DatabaseManager.setClaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "claims"));
+
+                MongoCollection<Document> collection = DatabaseManager.getClaimsCollection();
                 FindIterable<Document> query = collection.find();
                 Iterator<Document> iterator = query.iterator();
 
@@ -113,8 +120,6 @@ public class ClaimManager {
                     faction.getClaims().add(claim);
                     activeClaims.add(claim);
                 }
-
-                Logger.log(Level.INFO, "Loaded " + activeClaims.size() + " Claims");
             }
         }.runTaskAsynchronously(FP.getInstance());
     }
@@ -125,7 +130,10 @@ public class ClaimManager {
 
         new BukkitRunnable() {
             public void run() {
-                MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "claims");
+                if(DatabaseManager.getClaimsCollection() == null)
+                    DatabaseManager.setClaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "claims"));
+
+                MongoCollection<Document> collection = DatabaseManager.getClaimsCollection();
                 FindIterable<Document> query = collection.find(Filters.eq("claimID", claim.getClaimID().toString()));
                 Document document = query.first();
 
@@ -141,8 +149,7 @@ public class ClaimManager {
                         .append("claimValue", claim.getClaimValue());
 
                 if (document != null) {
-                    collection.deleteOne(document);
-                    collection.insertOne(newDoc);
+                    collection.replaceOne(document, newDoc);
                 } else {
                     collection.insertOne(newDoc);
                 }
@@ -158,7 +165,10 @@ public class ClaimManager {
         if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
             return;
 
-        MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "claims");
+        if(DatabaseManager.getClaimsCollection() == null)
+            DatabaseManager.setClaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "claims"));
+
+        MongoCollection<Document> collection = DatabaseManager.getClaimsCollection();
         FindIterable<Document> query = collection.find(Filters.eq("claimID", claim.getClaimID().toString()));
         Document document = query.first();
 
@@ -174,8 +184,7 @@ public class ClaimManager {
                 .append("claimValue", claim.getClaimValue());
 
         if (document != null) {
-            collection.deleteOne(document);
-            collection.insertOne(newDoc);
+            collection.replaceOne(document, newDoc);
         } else {
             collection.insertOne(newDoc);
         }

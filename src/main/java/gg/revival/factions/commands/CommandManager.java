@@ -78,6 +78,10 @@ public class CommandManager {
         FFreezeCommand freezeCommand = new FFreezeCommand();
         FSetDTRCommand setDTRCommand = new FSetDTRCommand();
         FSaveCommand saveCommand = new FSaveCommand();
+        FDepositCommand depositCommand = new FDepositCommand();
+        FWithdrawCommand withdrawCommand = new FWithdrawCommand();
+        FHomeCommand homeCommand = new FHomeCommand();
+        FStuckCommand stuckCommand = new FStuckCommand();
 
         factionCommands.add(createCommand);
         factionCommands.add(createServerFactionCommand);
@@ -107,6 +111,10 @@ public class CommandManager {
         factionCommands.add(freezeCommand);
         factionCommands.add(setDTRCommand);
         factionCommands.add(saveCommand);
+        factionCommands.add(depositCommand);
+        factionCommands.add(withdrawCommand);
+        factionCommands.add(homeCommand);
+        factionCommands.add(stuckCommand);
 
         CCreateCommand chatCreateCommand = new CCreateCommand();
         CDeleteCommand chatDeleteCommand = new CDeleteCommand();

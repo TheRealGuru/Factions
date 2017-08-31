@@ -30,7 +30,7 @@ public class FileManager {
 
             if (!messageFile.exists()) {
                 messageFile.getParentFile().mkdirs();
-                FP.getInstance().saveResource("messages.yml", false);
+                FP.getInstance().saveResource("messages.yml", true);
             }
 
             configConfig = new YamlConfiguration();
@@ -87,7 +87,7 @@ public class FileManager {
 
             if (!messageFile.exists()) {
                 messageFile.getParentFile().mkdirs();
-                FP.getInstance().saveResource("messages.yml", false);
+                FP.getInstance().saveResource("messages.yml", true);
             }
 
             configConfig = new YamlConfiguration();

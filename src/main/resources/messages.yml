@@ -70,6 +70,8 @@ notifications:
   removed-officer: '&2%leader% &ehas demoted &2%officer% to faction member'
   dtr-changed: '&eYour factions DTR has been modified to &d%dtr% &eby &9%changer%'
   dtr-changed-other: "&eYou have set &2%faction%&e's DTR to &d%dtr%"
+  faction-deposit: '&2%player% &edeposited &2$%amt% &eto the faction balance'
+  faction-withdrawl: '&2%player% &ewithdrew &2$%amt% &efrom the faction balance'
 
 chat-formatting:
   global-faction-member: '&2[%fac%]&r%player%&f: %msg%'

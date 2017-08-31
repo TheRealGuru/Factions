@@ -6,12 +6,7 @@ import org.bukkit.ChatColor;
 public class Configuration {
 
     public static boolean DB_ENABLED = false;
-    public static String DB_HOSTNAME = "localhost";
-    public static int DB_PORT = 27017;
-    public static boolean DB_USECREDS = false;
-    public static String DB_USERNAME = "root";
-    public static String DB_PASSWORD = "password";
-    public static String DB_DATABASE = "factions";
+    public static String DB_NAME = "factions";
 
     public static int CHANNEL_MIN_NAME_SIZE = 2;
     public static int CHANNEL_MAX_NAME_SIZE = 10;
@@ -55,11 +50,7 @@ public class Configuration {
 
     public static void loadConfiguration() {
         DB_ENABLED = FileManager.getConfig().getBoolean("database.enabled");
-        DB_HOSTNAME = FileManager.getConfig().getString("database.hostname");
-        DB_PORT = FileManager.getConfig().getInt("database.port");
-        DB_USECREDS = FileManager.getConfig().getBoolean("database.use-creds.enabled");
-        DB_USERNAME = FileManager.getConfig().getString("database.use-creds.username");
-        DB_PASSWORD = FileManager.getConfig().getString("database.use-creds.password");
+        DB_NAME = FileManager.getConfig().getString("database.db");
 
         CHANNEL_MIN_NAME_SIZE = FileManager.getConfig().getInt("chat-channels.create.min-name-length");
         CHANNEL_MAX_NAME_SIZE = FileManager.getConfig().getInt("chat-channels.create.max-name-length");

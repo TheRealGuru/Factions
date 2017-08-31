@@ -16,13 +16,14 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
-import org.bukkit.event.entity.EntitySpawnEvent;
-import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -33,6 +34,7 @@ import org.spigotmc.event.entity.EntityMountEvent;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ClaimEventsListener implements Listener {
 
@@ -398,6 +400,86 @@ public class ClaimEventsListener implements Listener {
         ClaimManager.performClaimAction(action, player, clickedLocation);
 
         if(action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.LEFT_CLICK_BLOCK)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onEntityExplode(EntityExplodeEvent event) {
+        List<Block> blocks = new CopyOnWriteArrayList<>(event.blockList());
+
+        for(Block block : blocks) {
+            if(ClaimManager.getClaimAt(block.getLocation(), false) == null) continue;
+
+            blocks.remove(block);
+        }
+
+        event.blockList().clear();
+        event.blockList().addAll(blocks);
+    }
+
+    @EventHandler
+    public void onEntityBlockChange(EntityChangeBlockEvent event) {
+        if(ClaimManager.getClaimAt(event.getBlock().getLocation(), false) == null)
+            return;
+
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onLeafDecay(LeavesDecayEvent event) {
+        if (ClaimManager.getClaimAt(event.getBlock().getLocation(), false) == null)
+            return;
+
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageEvent event) {
+        Entity entity = event.getEntity();
+
+        if(entity.getType().equals(EntityType.HORSE) ||
+                entity.getType().equals(EntityType.IRON_GOLEM) ||
+                entity.getType().equals(EntityType.ITEM_FRAME) ||
+                entity.getType().equals(EntityType.VILLAGER) ||
+                entity.getType().equals(EntityType.WOLF)) {
+
+            Claim claim = ClaimManager.getClaimAt(entity.getLocation(), true);
+
+            if(claim == null)
+                return;
+
+            if(claim.getClaimOwner() instanceof ServerFaction) {
+                ServerFaction serverFaction = (ServerFaction)claim.getClaimOwner();
+
+                if(serverFaction.getType().equals(ServerClaimType.SAFEZONE)) {
+                    event.setCancelled(true);
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onEntitySpawn(CreatureSpawnEvent event) {
+        if(!(event.getEntity() instanceof LivingEntity))
+            return;
+
+        if(!event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.NATURAL))
+            return;
+
+        Entity entity = event.getEntity();
+
+        Claim claim = ClaimManager.getClaimAt(entity.getLocation(), true);
+
+        if(claim == null)
+            return;
+
+        if(claim.getClaimOwner() instanceof ServerFaction) {
+            ServerFaction serverFaction = (ServerFaction)claim.getClaimOwner();
+
+            if(serverFaction.getType().equals(ServerClaimType.ROAD))
+                return;
+
             event.setCancelled(true);
         }
     }

@@ -58,7 +58,6 @@ public class FSethomeCommand extends FCommand {
 
             faction.setHomeLocation(player.getLocation());
 
-            player.sendMessage(Messages.homeSet());
             faction.sendMessage(Messages.homeSetOther(player.getName()));
 
             Logger.log(Level.INFO, player.getName() + " set the home location for " + faction.getDisplayName());

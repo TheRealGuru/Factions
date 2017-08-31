@@ -1,12 +1,6 @@
 database:
-  enabled: false
-  hostname: 'localhost'
-  port: 27017
-  use-creds:
-    enabled: false
-    username: username
-    password: password
-    database: 'factions'
+  enabled: true
+  db: 'factions'
 timers:
   rename-cooldown: 300
   disband-cooldown: 300

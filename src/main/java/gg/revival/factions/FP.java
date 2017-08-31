@@ -1,10 +1,8 @@
 package gg.revival.factions;
 
-import gg.revival.driver.MongoAPI;
 import gg.revival.factions.commands.CommandManager;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.core.PlayerManager;
-import gg.revival.factions.db.DatabaseManager;
 import gg.revival.factions.file.FileManager;
 import gg.revival.factions.listeners.ListenerManager;
 import gg.revival.factions.threads.ThreadManager;
@@ -23,7 +21,6 @@ public class FP extends JavaPlugin {
         FileManager.createFiles();
 
         Configuration.loadConfiguration();
-        DatabaseManager.setupConnection();
         ListenerManager.loadListeners();
         CommandManager.loadCommands();
         FactionManager.loadFactions();
@@ -33,8 +30,5 @@ public class FP extends JavaPlugin {
     public void onDisable() {
         FactionManager.saveAllFactions(true,true);
         PlayerManager.saveAllProfiles(true,true);
-
-        if(Configuration.DB_ENABLED && MongoAPI.isConnected())
-            MongoAPI.disconnect();
     }
 }

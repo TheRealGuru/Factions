@@ -81,7 +81,10 @@ public class PlayerManager {
 
         new BukkitRunnable() {
             public void run() {
-                MongoCollection<Document> collection = MongoAPI.getCollection(Configuration.DB_DATABASE, "players");
+                if(DatabaseManager.getPlayersCollection() == null)
+                    DatabaseManager.setPlayersCollection(MongoAPI.getCollection(Configuration.DB_NAME, "players"));
+
+                MongoCollection<Document> collection = DatabaseManager.getPlayersCollection();
                 FindIterable<Document> query = collection.find(Filters.eq("uuid", uuid.toString()));
                 Document document = query.first();
 
@@ -102,6 +105,9 @@ public class PlayerManager {
 
         new BukkitRunnable() {
             public void run() {
+                if(DatabaseManager.getPlayersCollection() == null)
+                    DatabaseManager.setPlayersCollection(MongoAPI.getCollection(Configuration.DB_NAME, "players"));
+
                 MongoCollection<Document> collection = DatabaseManager.getPlayersCollection();
                 FindIterable<Document> query = collection.find(Filters.eq("uuid", player.getUuid().toString()));
                 Document document = query.first();
@@ -110,8 +116,7 @@ public class PlayerManager {
                         .append("balance", player.getBalance());
 
                 if (document != null) {
-                    collection.deleteOne(document);
-                    collection.insertOne(newDoc);
+                    collection.replaceOne(document, newDoc);
                 } else {
                     collection.insertOne(newDoc);
                 }
@@ -131,6 +136,9 @@ public class PlayerManager {
         if (!Configuration.DB_ENABLED)
             return;
 
+        if(DatabaseManager.getPlayersCollection() == null)
+            DatabaseManager.setPlayersCollection(MongoAPI.getCollection(Configuration.DB_NAME, "players"));
+
         MongoCollection<Document> collection = DatabaseManager.getPlayersCollection();
         FindIterable<Document> query = collection.find(Filters.eq("uuid", player.getUuid().toString()));
         Document document = query.first();
@@ -139,8 +147,7 @@ public class PlayerManager {
                 .append("balance", player.getBalance());
 
         if (document != null) {
-            collection.deleteOne(document);
-            collection.insertOne(newDoc);
+            collection.replaceOne(document, newDoc);
         } else {
             collection.insertOne(newDoc);
         }

@@ -28,6 +28,8 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.logging.Level;
 
+import static com.mongodb.client.model.Filters.eq;
+
 public class FactionManager {
 
     @Getter static Set<Faction> activeFactions = new HashSet<>();
@@ -102,11 +104,11 @@ public class FactionManager {
         UUID factionID = UUID.randomUUID();
 
         List<UUID>
-                officers = new ArrayList<UUID>(),
-                members = new ArrayList<UUID>(),
-                allies = new ArrayList<UUID>(),
-                pendingInvites = new ArrayList<UUID>(),
-                pendingAllies = new ArrayList<UUID>();
+                officers = new ArrayList<>(),
+                members = new ArrayList<>(),
+                allies = new ArrayList<>(),
+                pendingInvites = new ArrayList<>(),
+                pendingAllies = new ArrayList<>();
 
         PlayerFaction faction = new PlayerFaction(factionID, displayName, null, leader,
                 officers, members, allies, pendingInvites, pendingAllies,
@@ -123,12 +125,15 @@ public class FactionManager {
         if (Configuration.DB_ENABLED && MongoAPI.isConnected()) {
             new BukkitRunnable() {
                 public void run() {
+                    if(DatabaseManager.getFactionsCollection() == null)
+                        DatabaseManager.setFactionsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "factions"));
+
                     MongoCollection<Document> collection = DatabaseManager.getFactionsCollection();
-                    FindIterable<Document> query = collection.find(Filters.eq("factionID", faction.getFactionID().toString()));
+                    FindIterable<Document> query = collection.find(eq("factionID", faction.getFactionID().toString()));
                     Document document = query.first();
 
                     if (document != null) {
-                        collection.deleteOne(document);
+                        collection.findOneAndDelete(document);
                     }
                 }
             }.runTaskAsynchronously(FP.getInstance());
@@ -181,20 +186,10 @@ public class FactionManager {
 
         new BukkitRunnable() {
             public void run() {
+                if(DatabaseManager.getFactionsCollection() == null)
+                    DatabaseManager.setFactionsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "factions"));
+
                 MongoCollection collection = DatabaseManager.getFactionsCollection();
-
-                if(collection == null) {
-                    Logger.log(Level.WARNING, "Collection response time was too slow... Waiting a few seconds and trying again!");
-
-                    new BukkitRunnable() {
-                        public void run() {
-                            loadFactions();
-                        }
-                    }.runTaskLater(FP.getInstance(), 2 * 20L);
-
-                    return;
-                }
-
                 FindIterable<Document> query = collection.find();
                 Iterator<Document> iterator = query.iterator();
 
@@ -254,9 +249,9 @@ public class FactionManager {
                             SubclaimManager.loadSubclaims(faction);
                         }
                     }
-
-                    Logger.log(Level.INFO, "Loaded " + activeFactions.size() + " Factions");
                 }
+
+                Logger.log(Level.INFO, "Loaded " + activeFactions.size() + " Factions");
             }
         }.runTaskAsynchronously(FP.getInstance());
     }
@@ -267,8 +262,11 @@ public class FactionManager {
 
         new BukkitRunnable() {
             public void run() {
+                if(DatabaseManager.getFactionsCollection() == null)
+                    DatabaseManager.setFactionsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "factions"));
+
                 MongoCollection collection = DatabaseManager.getFactionsCollection();
-                FindIterable<Document> query = collection.find(Filters.eq("factionID", faction.getFactionID()));
+                FindIterable<Document> query = collection.find(eq("factionID", faction.getFactionID().toString()));
                 Document document = query.first();
 
                 if (faction instanceof PlayerFaction) {
@@ -292,8 +290,7 @@ public class FactionManager {
                     }
 
                     if (document != null) {
-                        collection.deleteOne(document);
-                        collection.insertOne(newDoc);
+                        collection.replaceOne(document, newDoc);
                     } else {
                         collection.insertOne(newDoc);
                     }
@@ -317,8 +314,7 @@ public class FactionManager {
                             .append("type", serverFaction.getType().toString());
 
                     if (document != null) {
-                        collection.deleteOne(document);
-                        collection.insertOne(newDoc);
+                        collection.replaceOne(document, newDoc);
                     } else {
                         collection.insertOne(newDoc);
                     }
@@ -345,8 +341,11 @@ public class FactionManager {
         if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
             return;
 
+        if(DatabaseManager.getFactionsCollection() == null)
+            DatabaseManager.setFactionsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "factions"));
+
         MongoCollection collection = DatabaseManager.getFactionsCollection();
-        FindIterable<Document> query = collection.find(Filters.eq("factionID", faction.getFactionID()));
+        FindIterable<Document> query = collection.find(eq("factionID", faction.getFactionID().toString()));
         Document document = query.first();
 
         if (faction instanceof PlayerFaction) {
@@ -370,8 +369,7 @@ public class FactionManager {
             }
 
             if (document != null) {
-                collection.deleteOne(document);
-                collection.insertOne(newDoc);
+                collection.replaceOne(document, newDoc);
             } else {
                 collection.insertOne(newDoc);
             }
@@ -395,8 +393,7 @@ public class FactionManager {
                     .append("type", serverFaction.getType().toString());
 
             if (document != null) {
-                collection.deleteOne(document);
-                collection.insertOne(newDoc);
+                collection.replaceOne(document, newDoc);
             } else {
                 collection.insertOne(newDoc);
             }

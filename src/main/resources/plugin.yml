@@ -3,7 +3,7 @@ main: gg.revival.factions.FP
 version: 1.0.0
 author: johnsama
 description: Factions engine for Revival
-depends: [MongoBukkitDriver]
+depends: [MongoBukkitDriver, Revival]
 commands:
   faction:
     description: Core Faction Command

@@ -70,7 +70,7 @@ public class FInviteCommand extends FCommand {
 
                         new BukkitRunnable() {
                             public void run() {
-                                if(uuid == null || offlinePlayer == null) {
+                                if(uuid == null || offlinePlayer == null || offlinePlayer.getName() == null) {
                                     player.sendMessage(Messages.playerNotFound());
                                     return;
                                 }
