@@ -585,6 +585,71 @@ public class Messages {
                 .replace("%amt%", amt);
     }
 
+    public static String alliesDisabled()
+    {
+        return getValue("errors.allies-disabled");
+    }
+
+    public static String selfMaxAllies()
+    {
+        return getValue("errors.ally-limit-self");
+    }
+
+    public static String otherMaxAllies()
+    {
+        return getValue("errors.ally-limit-other");
+    }
+
+    public static String allianceFormed(String factionOne, String factionTwo)
+    {
+        return getValue("broadcasts.alliance-formed")
+                .replace("%factionOne%", factionOne)
+                .replace("%factionTwo%", factionTwo);
+    }
+
+    public static String allianceBroken(String factionOne, String factionTwo)
+    {
+        return getValue("broadcasts.alliance-formed")
+                .replace("%factionOne%", factionOne)
+                .replace("%factionTwo%", factionTwo);
+    }
+
+    public static String allyRequest(String requestingFaction)
+    {
+        return getValue("notifications.ally-request")
+                .replace("%faction%", requestingFaction);
+    }
+
+    public static String allyRequestSent(String requester, String faction)
+    {
+        return getValue("notifications.ally-request-sent")
+                .replace("%requester%", requester)
+                .replace("%faction%", faction);
+    }
+
+    public static String notAllied()
+    {
+        return getValue("errors.not-allied");
+    }
+
+    public static String allyRequestRevoked(String revoker, String faction)
+    {
+        return getValue("notifications.ally-request-revoked")
+                .replace("%player%", revoker)
+                .replace("%faction%", faction);
+    }
+
+    public static String allyRequestRevokedOther(String faction)
+    {
+        return getValue("notifications.ally-request-revoked-other")
+                .replace("%faction%", faction);
+    }
+
+    public static String allyRequestPending()
+    {
+        return getValue("errors.ally-request-pending");
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

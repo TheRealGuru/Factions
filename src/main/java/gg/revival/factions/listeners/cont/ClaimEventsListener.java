@@ -38,10 +38,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ClaimEventsListener implements Listener {
 
-    private final List<Material> clickables = Arrays.asList(Material.ANVIL, Material.BEACON, Material.BED_BLOCK, Material.BREWING_STAND, Material.BURNING_FURNACE, Material.CAULDRON,
-            Material.CHEST, Material.DIODE, Material.DIODE_BLOCK_OFF, Material.DIODE_BLOCK_ON, Material.DROPPER, Material.ENCHANTMENT_TABLE, Material.ENDER_CHEST, Material.FENCE_GATE,
+    private final List<Material> clickables = Arrays.asList(Material.ANVIL, Material.BEACON, Material.BED_BLOCK, Material.BED, Material.BREWING_STAND, Material.BURNING_FURNACE, Material.CAULDRON,
+            Material.CHEST, Material.TRAPPED_CHEST, Material.DIODE, Material.DIODE_BLOCK_OFF, Material.DIODE_BLOCK_ON, Material.DROPPER, Material.ENCHANTMENT_TABLE, Material.ENDER_CHEST, Material.FENCE_GATE,
             Material.FURNACE, Material.HOPPER, Material.ITEM_FRAME, Material.JUKEBOX, Material.LEVER, Material.NOTE_BLOCK, Material.REDSTONE_COMPARATOR, Material.REDSTONE_COMPARATOR_OFF,
-            Material.REDSTONE_COMPARATOR_ON, Material.TRAP_DOOR, Material.WOODEN_DOOR, Material.WORKBENCH, Material.STONE_BUTTON, Material.WOOD_BUTTON);
+            Material.REDSTONE_COMPARATOR_ON, Material.TRAP_DOOR, Material.WOODEN_DOOR, Material.WORKBENCH, Material.STONE_BUTTON, Material.WOOD_BUTTON, Material.WOOD_DOOR, Material.STONE_PLATE,
+            Material.WOOD_PLATE, Material.IRON_PLATE, Material.GOLD_PLATE, Material.ACACIA_DOOR, Material.BIRCH_DOOR, Material.DARK_OAK_DOOR, Material.JUNGLE_DOOR, Material.SPRUCE_DOOR,
+            Material.ACACIA_FENCE_GATE, Material.BIRCH_FENCE_GATE, Material.DARK_OAK_FENCE_GATE, Material.JUNGLE_FENCE_GATE, Material.SPRUCE_FENCE_GATE);
 
     @EventHandler
     public void onItemDrop(PlayerDropItemEvent event) {
@@ -362,19 +364,25 @@ public class ClaimEventsListener implements Listener {
             if(!claims.inside(block.getLocation(), false)) continue;
 
             if(claims.getClaimOwner() instanceof ServerFaction && !player.hasPermission(Permissions.ADMIN)) {
-                event.setCancelled(true);
-
                 if(clickables.contains(block.getType())) {
-                    player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + claims.getClaimOwner().getDisplayName()));
+                    if(!block.getType().name().contains("PLATE"))
+                    {
+                        player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + claims.getClaimOwner().getDisplayName()));
+                    }
+
+                    event.setCancelled(true);
                 }
             }
 
             if(claims.getClaimOwner() instanceof PlayerFaction && !player.hasPermission(Permissions.ADMIN)) {
                 if(!((PlayerFaction) claims.getClaimOwner()).getRoster(false).contains(player.getUniqueId())) {
-                    event.setCancelled(true);
-
                     if(clickables.contains(block.getType())) {
-                        player.sendMessage(Messages.landClaimedBy(ChatColor.RED + claims.getClaimOwner().getDisplayName()));
+                        if(!block.getType().name().contains("PLATE"))
+                        {
+                            player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + claims.getClaimOwner().getDisplayName()));
+                        }
+
+                        event.setCancelled(true);
                     }
                 }
             }

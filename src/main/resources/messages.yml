@@ -72,6 +72,10 @@ notifications:
   dtr-changed-other: "&eYou have set &2%faction%&e's DTR to &d%dtr%"
   faction-deposit: '&2%player% &edeposited &2$%amt% &eto the faction balance'
   faction-withdrawl: '&2%player% &ewithdrew &2$%amt% &efrom the faction balance'
+  ally-request-sent: '&2%requester% &ehas requested to form an alliance with &9%faction%'
+  ally-request: '&9%faction% &ehas requested to form an alliance with your faction. Type &6/f ally %faction% &eto form an alliance'
+  ally-request-revoked: "&2%player% &erevoked &9%faction%&e's alliance request"
+  ally-request-revoked-other: '&9%faction% &erevoked their alliance request'
 
 chat-formatting:
   global-faction-member: '&2[%fac%]&r%player%&f: %msg%'
@@ -85,6 +89,8 @@ broadcasts:
   fac-created: '&6%fac% &ehas been &acreated &eby &9%player%'
   fac-disbanded: '&6%fac% &ehas been &cdisbanded &eby &9%player%'
   fac-renamed: '&6%oldname% &ehas been &drenamed &eto &6%newname% &eby &9%player%'
+  alliance-formed: '&d%factionOne% &ehas &aformed &ean alliance with &d%factionTwo%'
+  alliance-broken: '&d%factionOne% &ehas &cbroke &ean alliance with &d%factionTwo%'
 
 errors:
   no-permission: '&cYou do not have permission to use this command'
@@ -136,6 +142,11 @@ errors:
   player-not-in-faction: '&cThis player is not in your faction'
   already-officer: '&cThis member already has the officer rank'
   not-officer: '&cThis member does not have the officer rank'
+  allies-disabled: '&cAllies are disabled'
+  ally-limit-self: '&cYour faction has reached the alliance limit. Break off alliances to make new ones.'
+  ally-limit-other: '&cThis faction has reached the alliance limit.'
+  not-allied: '&cYou are not allied with this faction'
+  ally-request-pending: '&cYour alliance request with this faction is already pending'
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'

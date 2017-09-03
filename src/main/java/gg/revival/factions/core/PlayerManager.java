@@ -8,6 +8,7 @@ import gg.revival.factions.FP;
 import gg.revival.factions.db.DatabaseManager;
 import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.tools.Configuration;
+import gg.revival.factions.tools.Logger;
 import lombok.Getter;
 import org.bson.Document;
 import org.bukkit.Bukkit;
@@ -103,6 +104,9 @@ public class PlayerManager {
         if (!Configuration.DB_ENABLED)
             return;
 
+        if(player == null)
+            return;
+
         new BukkitRunnable() {
             public void run() {
                 if(DatabaseManager.getPlayersCollection() == null)
@@ -134,6 +138,9 @@ public class PlayerManager {
      */
     public static void unsafeSaveProfile(FPlayer player) {
         if (!Configuration.DB_ENABLED)
+            return;
+
+        if(player == null)
             return;
 
         if(DatabaseManager.getPlayersCollection() == null)

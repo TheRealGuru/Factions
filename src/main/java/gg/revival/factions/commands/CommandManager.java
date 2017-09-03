@@ -82,6 +82,8 @@ public class CommandManager {
         FWithdrawCommand withdrawCommand = new FWithdrawCommand();
         FHomeCommand homeCommand = new FHomeCommand();
         FStuckCommand stuckCommand = new FStuckCommand();
+        FAllyCommand allyCommand = new FAllyCommand();
+        FUnallyCommand unallyCommand = new FUnallyCommand();
 
         factionCommands.add(createCommand);
         factionCommands.add(createServerFactionCommand);
@@ -115,6 +117,7 @@ public class CommandManager {
         factionCommands.add(withdrawCommand);
         factionCommands.add(homeCommand);
         factionCommands.add(stuckCommand);
+        factionCommands.add(allyCommand);
 
         CCreateCommand chatCreateCommand = new CCreateCommand();
         CDeleteCommand chatDeleteCommand = new CDeleteCommand();

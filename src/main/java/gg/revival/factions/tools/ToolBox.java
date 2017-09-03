@@ -199,12 +199,7 @@ public class ToolBox {
         List<Map.Entry<PlayerFaction, Integer>> list =
                 new LinkedList<Map.Entry<PlayerFaction, Integer>>(unsortMap.entrySet());
 
-        Collections.sort(list, new Comparator<Map.Entry<PlayerFaction, Integer>>() {
-            public int compare(Map.Entry<PlayerFaction, Integer> o1,
-                               Map.Entry<PlayerFaction, Integer> o2) {
-                return (o1.getValue()).compareTo(o2.getValue());
-            }
-        });
+        Collections.sort(list, Comparator.comparing(o -> (o.getValue())));
 
         Collections.reverse(list);
 

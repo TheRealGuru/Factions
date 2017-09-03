@@ -147,6 +147,20 @@ public class FactionManager {
             SubclaimManager.deleteSubclaim(subclaims);
         }
 
+        if (faction instanceof PlayerFaction) {
+            PlayerFaction playerFaction = (PlayerFaction)faction;
+
+            if(!playerFaction.getAllies().isEmpty()) {
+                for(UUID allyId : playerFaction.getAllies())
+                {
+                    PlayerFaction allyFaction = (PlayerFaction)getFactionByUUID(allyId);
+                    allyFaction.getAllies().remove(playerFaction.getFactionID());
+                }
+            }
+
+            playerFaction.getPendingAllies().clear();
+        }
+
         activeFactions.remove(faction);
 
         Bukkit.broadcastMessage(Messages.factionDisbanded(faction.getDisplayName(), disbander));

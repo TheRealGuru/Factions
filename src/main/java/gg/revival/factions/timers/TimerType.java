@@ -6,6 +6,7 @@ public enum TimerType {
     HOME,
     DISBAND,
     RENAME,
-    MAP
+    MAP,
+    ALLY
 
 }

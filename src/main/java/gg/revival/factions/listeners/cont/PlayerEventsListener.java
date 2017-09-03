@@ -44,6 +44,7 @@ public class PlayerEventsListener implements Listener {
             PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
 
             faction.sendMessage(Messages.memberOnline(player.getName()));
+            player.sendMessage(Messages.factionInfo(faction, player));
         }
     }
 
