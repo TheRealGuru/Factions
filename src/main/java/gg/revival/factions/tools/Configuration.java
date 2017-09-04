@@ -23,6 +23,7 @@ public class Configuration {
     public static int MAX_FAC_HOME_HEIGHT = 150;
     public static int HOME_TOO_HIGH_PRICE = 100;
     public static int HOME_WARMUP = 5;
+    public static int HOME_WARMUP_OTHERWORLD = 60;
     public static int STUCK_WARMUP = 120;
 
     public static int WARZONE_RADIUS = 1000;
@@ -67,8 +68,9 @@ public class Configuration {
         MAX_FAC_HOME_HEIGHT = FileManager.getConfig().getInt("factions.limits.max-home-height");
         HOME_TOO_HIGH_PRICE = FileManager.getConfig().getInt("factions.limits.home-too-high-price");
 
-        HOME_WARMUP = FileManager.getConfig().getInt("factions.timers.home-warmup");
-        STUCK_WARMUP = FileManager.getConfig().getInt("factions.timers.stuck-warmup");
+        HOME_WARMUP = FileManager.getConfig().getInt("timers.home-warmup");
+        HOME_WARMUP_OTHERWORLD = FileManager.getConfig().getInt("timers.home-warmup-other");
+        STUCK_WARMUP = FileManager.getConfig().getInt("timers.stuck-warmup");
 
         WARZONE_RADIUS = FileManager.getConfig().getInt("factions.map-setup.warzone-radius");
         NETHER_WARZONE_RADIUS = FileManager.getConfig().getInt("factions.map-setup.nether-warzone-radius");

@@ -29,6 +29,7 @@
                                 <excludes>
                                     <exclude>gg.revival:mongo-bukkit-driver</exclude>
                                     <exclude>gg.revival:revival</exclude>
+                                    <exclude>gg.revival:factionscore</exclude>
                                 </excludes>
                             </artifactSet>
                         </configuration>
@@ -88,6 +89,14 @@
         <dependency>
             <groupId>gg.revival</groupId>
             <artifactId>Revival</artifactId>
+            <version>1.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Factions Core -->
+        <dependency>
+            <groupId>gg.revival</groupId>
+            <artifactId>FactionsCore</artifactId>
             <version>1.0.0</version>
             <scope>provided</scope>
         </dependency>

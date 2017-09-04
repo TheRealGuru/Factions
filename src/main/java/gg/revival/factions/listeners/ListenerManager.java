@@ -16,6 +16,7 @@ public class ListenerManager {
         pluginManager.registerEvents(new SubclaimEventsListener(), FP.getInstance());
         pluginManager.registerEvents(new ChatEventsListener(), FP.getInstance());
         pluginManager.registerEvents(new WorldEventsListener(), FP.getInstance());
+        pluginManager.registerEvents(new TaskEventsListener(), FP.getInstance());
 
         Logger.log("Loaded Listeners");
     }

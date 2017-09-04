@@ -11,20 +11,10 @@ import java.util.UUID;
 
 public class FPlayer {
 
-    @Getter
-    UUID uuid;
-
-    @Getter
-    @Setter
-    double balance;
-
-    @Getter
-    @Setter
-    FLocation location;
-
-    @Getter
-    @Setter
-    HashSet<Timer> timers = new HashSet<Timer>();
+    @Getter UUID uuid;
+    @Getter @Setter double balance;
+    @Getter @Setter FLocation location;
+    @Getter @Setter HashSet<Timer> timers = new HashSet<Timer>();
 
     public FPlayer(UUID uuid, double balance) {
         this.uuid = uuid;
@@ -34,15 +24,27 @@ public class FPlayer {
     }
 
     public boolean isBeingTimed(TimerType type) {
-        if (this.timers.isEmpty()) return false;
+        if (timers.isEmpty()) return false;
 
-        for (Timer activeTimers : this.timers) {
+        for (Timer activeTimers : timers) {
             if (activeTimers.getType().equals(type)) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    public Timer getTimer(TimerType type) {
+        if(timers.isEmpty()) return null;
+
+        for (Timer activeTimers : timers) {
+            if (activeTimers.getType().equals(type)) {
+                return activeTimers;
+            }
+        }
+
+        return null;
     }
 
     public void addTimer(Timer timer) {

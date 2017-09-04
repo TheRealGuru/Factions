@@ -6,6 +6,7 @@ timers:
   disband-cooldown: 300
   map-cooldown: 15
   home-warmup: 5
+  home-warmup-other: 60
   stuck-warmup: 60
 chat-channels:
   create:
@@ -22,7 +23,7 @@ factions:
     max-name-length: 16
   limits:
     max-faction-size: 20
-    max-home-height: 150
+    max-home-height: 125
     home-too-high-price: 250
     stuck-warmup: 60
   map-setup:

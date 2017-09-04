@@ -1,10 +1,22 @@
 package gg.revival.factions.commands.cont;
 
+import gg.revival.factions.claims.Claim;
+import gg.revival.factions.claims.ClaimManager;
+import gg.revival.factions.claims.ServerClaimType;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
+import gg.revival.factions.core.PlayerManager;
+import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.obj.PlayerFaction;
+import gg.revival.factions.obj.ServerFaction;
+import gg.revival.factions.tasks.HomeTask;
+import gg.revival.factions.timers.TimerManager;
+import gg.revival.factions.timers.TimerType;
+import gg.revival.factions.tools.Configuration;
 import gg.revival.factions.tools.Messages;
+import gg.revival.factions.tools.ToolBox;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -33,7 +45,9 @@ public class FHomeCommand extends FCommand {
         }
 
         Player player = (Player)sender;
+        FPlayer facPlayer = PlayerManager.getPlayer(player.getUniqueId());
         PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
+        Location homeLocation = faction.getHomeLocation();
 
         if(args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
@@ -45,12 +59,75 @@ public class FHomeCommand extends FCommand {
             return;
         }
 
-        if(faction.getHomeLocation() == null) {
-            // TODO: Send home not set message
+        if(homeLocation == null) {
+            player.sendMessage(Messages.homeNotSet());
             return;
         }
 
-        // TODO: Attempt to execute faction home process in Factions core
+        if(facPlayer.isBeingTimed(TimerType.HOME))
+        {
+            int inSeconds = (int)((PlayerManager.getPlayer(player.getUniqueId()).getTimer(TimerType.HOME).getExpire() - System.currentTimeMillis()) / 1000L);
+            player.sendMessage(Messages.homeWarpStarted(inSeconds));
+            return;
+        }
+
+        // TODO: Check if the player is combat tagged and prevent home if so
+
+        if(homeLocation.getBlockY() >= Configuration.MAX_FAC_HOME_HEIGHT)
+        {
+            if(faction.getBalance() < Configuration.HOME_TOO_HIGH_PRICE)
+            {
+                player.sendMessage(Messages.cantAffordHomeTooHigh());
+                return;
+            }
+        }
+
+        int homeDur = Configuration.HOME_WARMUP;
+
+        if(ToolBox.isNether(player.getLocation()) || ToolBox.isEnd(player.getLocation()))
+        {
+            homeDur = Configuration.HOME_WARMUP_OTHERWORLD;
+        }
+
+        Claim inside = ClaimManager.getClaimAt(player.getLocation(), true);
+
+        if(inside != null)
+        {
+            if(inside.getClaimOwner() instanceof ServerFaction)
+            {
+                ServerFaction serverFaction = (ServerFaction)inside.getClaimOwner();
+
+                if(serverFaction.getType().equals(ServerClaimType.SAFEZONE))
+                {
+                    HomeTask.sendHome(player.getUniqueId());
+                    return;
+                }
+
+                if(serverFaction.getType().equals(ServerClaimType.EVENT))
+                {
+                    player.sendMessage(Messages.cantWarpHomeInsideClaim());
+                    return;
+                }
+            }
+
+            else
+            {
+                PlayerFaction insidePlayerFaction = (PlayerFaction)inside.getClaimOwner();
+
+                if(insidePlayerFaction.getFactionID().equals(faction.getFactionID()))
+                {
+                    HomeTask.sendHome(player.getUniqueId());
+                    return;
+                }
+
+                player.sendMessage(Messages.cantWarpHomeInsideClaim());
+                return;
+            }
+        }
+
+        PlayerManager.getPlayer(player.getUniqueId()).addTimer(TimerManager.createTimer(TimerType.HOME, homeDur));
+        HomeTask.getStartingLocations().put(player.getUniqueId(), player.getLocation());
+        player.sendMessage(Messages.homeWarpStarted(homeDur));
     }
 
 }

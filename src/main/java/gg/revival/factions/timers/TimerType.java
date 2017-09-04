@@ -7,6 +7,7 @@ public enum TimerType {
     DISBAND,
     RENAME,
     MAP,
-    ALLY
+    ALLY,
+    LOGOUT
 
 }

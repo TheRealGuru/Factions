@@ -118,6 +118,7 @@ public class CommandManager {
         factionCommands.add(homeCommand);
         factionCommands.add(stuckCommand);
         factionCommands.add(allyCommand);
+        factionCommands.add(unallyCommand);
 
         CCreateCommand chatCreateCommand = new CCreateCommand();
         CDeleteCommand chatDeleteCommand = new CDeleteCommand();

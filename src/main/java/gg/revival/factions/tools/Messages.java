@@ -650,6 +650,63 @@ public class Messages {
         return getValue("errors.ally-request-pending");
     }
 
+    public static String homeNotSet()
+    {
+        return getValue("errors.home-not-set");
+    }
+
+    public static String cantAffordHomeTooHigh()
+    {
+        return getValue("errors.home-too-high-cant-afford");
+    }
+
+    public static String returnedHome()
+    {
+        return getValue("notifications.returned-home");
+    }
+
+    public static String homeWarpStarted(int dur)
+    {
+        return getValue("notifications.home-warp-started")
+                .replace("%dur%", String.valueOf(dur));
+    }
+
+    public static String stuckWarpStarted(int dur)
+    {
+        return getValue("notifications.stuck-warp-started")
+                .replace("%dur%", String.valueOf(dur));
+    }
+
+    public static String cantWarpHomeInsideClaim()
+    {
+        return getValue("errors.cant-home-from-current-claim");
+    }
+
+    public static String homeWarpCancelled()
+    {
+        return getValue("errors.home-warp-cancelled");
+    }
+
+    public static String stuckWarpCancelled()
+    {
+        return getValue("errors.stuck-warp-cancelled");
+    }
+
+    public static String notInsideClaim()
+    {
+        return getValue("errors.not-in-claim");
+    }
+
+    public static String logoutCancelled()
+    {
+        return getValue("errors.logout-cancelled");
+    }
+
+    public static String unstuck()
+    {
+        return getValue("notifications.unstuck");
+    }
+
     public static String factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

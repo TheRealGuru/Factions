@@ -76,6 +76,10 @@ notifications:
   ally-request: '&9%faction% &ehas requested to form an alliance with your faction. Type &6/f ally %faction% &eto form an alliance'
   ally-request-revoked: "&2%player% &erevoked &9%faction%&e's alliance request"
   ally-request-revoked-other: '&9%faction% &erevoked their alliance request'
+  returned-home: '&aYou have returned home'
+  unstuck: '&aYou have been teleported to a safer location'
+  home-warp-started: '&eYou will be returned home in &6%dur% &eseconds. Make sure to not move or take damage.'
+  stuck-warp-started: '&eYou will be teleported to a safe location in &6%dur% &eseconds. Make sure to not move or take damage.'
 
 chat-formatting:
   global-faction-member: '&2[%fac%]&r%player%&f: %msg%'
@@ -147,6 +151,13 @@ errors:
   ally-limit-other: '&cThis faction has reached the alliance limit.'
   not-allied: '&cYou are not allied with this faction'
   ally-request-pending: '&cYour alliance request with this faction is already pending'
+  home-not-set: '&cYour faction does not have their home set'
+  home-too-high-cant-afford: "&cYou can't afford to return home because your home location is too high"
+  cant-home-from-current-claim: '&cYou can not warp home from inside this claim'
+  not-in-claim: '&cYou are not inside a claim'
+  home-warp-cancelled: '&cHome warp cancelled'
+  stuck-warp-cancelled: '&cStuck warp cancelled'
+  logout-cancelled: '&cLogout cancelled'
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'
