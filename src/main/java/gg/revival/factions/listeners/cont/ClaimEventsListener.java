@@ -49,7 +49,12 @@ public class ClaimEventsListener implements Listener {
     public void onItemDrop(PlayerDropItemEvent event) {
         ItemStack item = event.getItemDrop().getItemStack();
 
-        if(item != null && item.hasItemMeta() && item.getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
+        if(
+                item != null &&
+                item.hasItemMeta() &&
+                item.getItemMeta().getDisplayName() != null &&
+                item.getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
+
             event.getItemDrop().remove();
         }
     }
@@ -104,6 +109,9 @@ public class ClaimEventsListener implements Listener {
             return;
 
         Player player = (Player)target;
+
+        if(PlayerManager.getPlayer(player.getUniqueId()) == null || PlayerManager.getPlayer(player.getUniqueId()).getLocation() == null) return;
+
         FLocation location = PlayerManager.getPlayer(player.getUniqueId()).getLocation();
 
         if(location.getCurrentClaim() != null && location.getCurrentClaim().getClaimOwner() instanceof ServerFaction) {
@@ -395,11 +403,9 @@ public class ClaimEventsListener implements Listener {
         Action action = event.getAction();
         Location clickedLocation = null;
 
-        if(player.getItemInHand() == null ||
-                !player.getItemInHand().hasItemMeta() ||
-                !player.getItemInHand().getItemMeta().getDisplayName().equals(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
-            return;
-        }
+        if(player.getItemInHand() == null) return;
+        if(!player.getItemInHand().hasItemMeta() || player.getItemInHand().getItemMeta() == null || player.getItemInHand().getItemMeta().getDisplayName() == null) return;
+        if(!player.getItemInHand().getItemMeta().getDisplayName().equals(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) return;
 
         if(event.getClickedBlock() != null) {
             clickedLocation = event.getClickedBlock().getLocation();

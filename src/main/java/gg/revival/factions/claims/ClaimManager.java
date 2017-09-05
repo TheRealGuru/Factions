@@ -36,9 +36,11 @@ public class ClaimManager {
             Player player = Bukkit.getPlayer(uuid);
 
             for(ItemStack contents : player.getInventory().getContents()) {
-                if(contents != null && contents.hasItemMeta() && contents.getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
-                    player.getInventory().remove(contents);
-                }
+                if(contents == null) continue;
+                if(!contents.hasItemMeta()) continue;
+                if(!contents.getItemMeta().getDisplayName().equals(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) continue;
+
+                player.getInventory().remove(contents);
             }
         }
 

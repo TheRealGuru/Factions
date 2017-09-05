@@ -26,6 +26,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -35,7 +36,9 @@ public class FactionManager {
     @Getter static Set<Faction> activeFactions = new HashSet<>();
 
     public static Faction getFactionByName(String query) {
-        for (Faction factions : activeFactions) {
+        List<Faction> cache = new CopyOnWriteArrayList<>(activeFactions);
+
+        for (Faction factions : cache) {
             if (factions.getDisplayName().equalsIgnoreCase(query)) {
                 return factions;
             }
@@ -45,7 +48,9 @@ public class FactionManager {
     }
 
     public static Faction getFactionByUUID(UUID query) {
-        for (Faction factions : activeFactions) {
+        List<Faction> cache = new CopyOnWriteArrayList<>(activeFactions);
+
+        for (Faction factions : cache) {
             if (factions.getFactionID().equals(query)) {
                 return factions;
             }
@@ -55,7 +60,9 @@ public class FactionManager {
     }
 
     public static Faction getFactionByPlayer(UUID query) {
-        for (Faction factions : activeFactions) {
+        List<Faction> cache = new CopyOnWriteArrayList<>(activeFactions);
+
+        for (Faction factions : cache) {
             if (!(factions instanceof PlayerFaction)) continue;
 
             PlayerFaction faction = (PlayerFaction) factions;

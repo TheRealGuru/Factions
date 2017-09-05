@@ -8,6 +8,8 @@ public enum TimerType {
     RENAME,
     MAP,
     ALLY,
-    LOGOUT
+    LOGOUT,
+    ENDERPEARL,
+    CLASS
 
 }

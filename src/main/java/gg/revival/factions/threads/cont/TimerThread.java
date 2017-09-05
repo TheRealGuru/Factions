@@ -13,6 +13,7 @@ import gg.revival.factions.timers.Timer;
 import gg.revival.factions.timers.TimerManager;
 import gg.revival.factions.timers.TimerType;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collections;
@@ -71,6 +72,16 @@ public class TimerThread {
                             public void run() {
                                 if(Bukkit.getPlayer(players.getUuid()) != null) {
                                     LogoutTask.logoutPlayer(players.getUuid());
+                                }
+                            }
+                        }.runTask(FP.getInstance());
+                    }
+
+                    if(timers.getType().equals(TimerType.ENDERPEARL)) {
+                        new BukkitRunnable() {
+                            public void run() {
+                                if(Bukkit.getPlayer(players.getUuid()) != null) {
+                                    Bukkit.getPlayer(players.getUuid()).sendMessage(ChatColor.GREEN + "Your enderpearls have been unlocked");
                                 }
                             }
                         }.runTask(FP.getInstance());
