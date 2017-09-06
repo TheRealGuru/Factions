@@ -7,14 +7,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class FPlayer {
 
     @Getter UUID uuid;
     @Getter @Setter double balance;
     @Getter @Setter FLocation location;
-    @Getter @Setter HashSet<Timer> timers = new HashSet<Timer>();
+    @Getter @Setter HashSet<Timer> timers = new HashSet<>();
 
     public FPlayer(UUID uuid, double balance) {
         this.uuid = uuid;
@@ -58,9 +60,11 @@ public class FPlayer {
     public void removeTimer(TimerType type) {
         if (!isBeingTimed(type)) return;
 
-        for (Timer activeTimers : this.timers) {
+        List<Timer> cache = new CopyOnWriteArrayList<>(timers);
+
+        for (Timer activeTimers : cache) {
             if (activeTimers.getType().equals(type)) {
-                this.timers.remove(activeTimers);
+                timers.remove(activeTimers);
             }
         }
     }

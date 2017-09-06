@@ -2,12 +2,14 @@ package gg.revival.factions.locations;
 
 import gg.revival.factions.claims.Claim;
 import gg.revival.factions.claims.ClaimManager;
+import gg.revival.factions.claims.ServerClaimType;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.core.PlayerManager;
 import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
+import gg.revival.factions.timers.TimerType;
 import gg.revival.factions.tools.Configuration;
 import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
@@ -278,6 +280,28 @@ public class LocationManager {
 
             if (oldLocEnum != currentLocEnum) {
                 performZoneChange(mcPlayer, oldLocEnum, currentLocEnum);
+            }
+        }
+
+        if(found != null && found.getClaimOwner() instanceof ServerFaction) {
+            if(player.isBeingTimed(TimerType.PVPPROT) && !player.getTimer(TimerType.PVPPROT).isPaused()) {
+                player.getTimer(TimerType.PVPPROT).setPaused(true);
+                player.getTimer(TimerType.PVPPROT).setPauseDiff(player.getTimer(TimerType.PVPPROT).getExpire() - System.currentTimeMillis());
+            }
+
+            if(player.isBeingTimed(TimerType.PROGRESSION) && !player.getTimer(TimerType.PROGRESSION).isPaused()) {
+                player.getTimer(TimerType.PROGRESSION).setPaused(true);
+                player.getTimer(TimerType.PROGRESSION).setPauseDiff(player.getTimer(TimerType.PROGRESSION).getExpire() - System.currentTimeMillis());
+            }
+        }
+
+        else if(player.isBeingTimed(TimerType.PVPPROT) || player.isBeingTimed(TimerType.PROGRESSION)) {
+            if(player.isBeingTimed(TimerType.PVPPROT) && player.getTimer(TimerType.PVPPROT).isPaused()) {
+                player.getTimer(TimerType.PVPPROT).setPaused(false);
+            }
+
+            if(player.isBeingTimed(TimerType.PROGRESSION) && player.getTimer(TimerType.PROGRESSION).isPaused()) {
+                player.getTimer(TimerType.PROGRESSION).setPaused(false);
             }
         }
 

@@ -10,6 +10,10 @@ public enum TimerType {
     ALLY,
     LOGOUT,
     ENDERPEARL,
-    CLASS
+    CLASS,
+    TAG,
+    SAFETY,
+    PVPPROT,
+    PROGRESSION
 
 }

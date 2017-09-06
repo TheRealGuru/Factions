@@ -6,6 +6,7 @@ import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.tools.Configuration;
 import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
+import gg.revival.factions.tools.Permissions;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -55,17 +56,17 @@ public class FAcceptCommand extends FCommand {
 
         PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByName(namedFaction);
 
-        if(!faction.getPendingInvites().contains(player.getUniqueId())) {
+        if(!faction.getPendingInvites().contains(player.getUniqueId()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.noPendingInviteOther());
             return;
         }
 
-        if(faction.getRoster(false).size() >= Configuration.MAX_FAC_SIZE) {
+        if(faction.getRoster(false).size() >= Configuration.MAX_FAC_SIZE && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.factionFull());
             return;
         }
 
-        if(faction.isFrozen()) {
+        if(faction.isFrozen() && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.unfrozenRequiredOther());
             return;
         }

@@ -55,8 +55,6 @@ public class PlayerEventsListener implements Listener {
         ClaimManager.removeFromClaimEditor(player.getUniqueId());
         SubclaimManager.getSubclaimEditor().remove(player.getUniqueId());
 
-        PlayerManager.saveProfile(PlayerManager.getPlayer(player.getUniqueId()), true);
-
         if(FactionManager.getFactionByPlayer(player.getUniqueId()) != null) {
             PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
 

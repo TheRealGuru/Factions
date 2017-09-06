@@ -5,8 +5,10 @@ import lombok.Setter;
 
 public class Timer {
 
-    @Getter @Setter TimerType type;
+    @Getter TimerType type;
     @Getter @Setter long expire;
+    @Getter @Setter long pauseDiff;
+    @Getter @Setter boolean paused;
 
     public Timer(TimerType type, long expire) {
         this.type = type;

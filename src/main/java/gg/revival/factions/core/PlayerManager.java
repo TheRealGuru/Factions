@@ -126,7 +126,13 @@ public class PlayerManager {
                 }
 
                 if (unloadOnCompletion) {
-                    unloadPlayer(player.getUuid());
+                    new BukkitRunnable() {
+                        public void run() {
+                            if(Bukkit.getPlayer(player.getUuid()) == null || !Bukkit.getPlayer(player.getUuid()).isOnline()) {
+                                unloadPlayer(player.getUuid());
+                            }
+                        }
+                    }.runTask(FP.getInstance());
                 }
             }
         }.runTaskAsynchronously(FP.getInstance());
