@@ -2,6 +2,7 @@ package gg.revival.factions.tools;
 
 import gg.revival.factions.claims.ServerClaimType;
 import gg.revival.factions.core.PlayerManager;
+import gg.revival.factions.file.FileManager;
 import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
@@ -36,9 +37,16 @@ public class ToolBox {
         ItemStack stick = new ItemStack(Material.STICK);
         ItemMeta stickMeta = stick.getItemMeta();
 
-        stickMeta.setDisplayName(ChatColor.GREEN + "Faction Claiming Stick");
-        //TODO: Get stick displayname from config
-        //TODO: Get stick lore from config
+        stickMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', FileManager.getConfig().getString("custom-items.faction-claiming-stick.display-name")));
+
+        List<String> lore = new ArrayList<>();
+
+        for(String unformattedLore : FileManager.getConfig().getStringList("custom-items.faction-claiming-stick.description"))
+        {
+            lore.add(ChatColor.translateAlternateColorCodes('&', unformattedLore));
+        }
+
+        stickMeta.setLore(lore);
 
         stick.setItemMeta(stickMeta);
 

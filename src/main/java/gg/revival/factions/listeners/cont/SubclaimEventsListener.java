@@ -212,29 +212,15 @@ public class SubclaimEventsListener implements Listener {
             String title = currentItemMeta.getDisplayName();
             String stripped = ChatColor.stripColor(title);
 
-            if (currentItem.getType().equals(Material.SKULL_ITEM)) {
-                new BukkitRunnable() {
-                    public void run() {
-                        try {
-                            UUID clickedUUID = UUIDFetcher.getUUIDOf(stripped);
+            OfflinePlayerLookup.getOfflinePlayerByName(stripped, (uuid, username) -> {
+                if (subclaim.getPlayerAccess().contains(uuid)) {
+                    subclaim.getPlayerAccess().remove(uuid);
+                } else {
+                    subclaim.getPlayerAccess().add(uuid);
+                }
 
-                            new BukkitRunnable() {
-                                public void run() {
-                                    if (subclaim.getPlayerAccess().contains(clickedUUID)) {
-                                        subclaim.getPlayerAccess().remove(clickedUUID);
-                                    } else {
-                                        subclaim.getPlayerAccess().add(clickedUUID);
-                                    }
-
-                                    SubclaimManager.performUpdate(player, subclaim);
-                                }
-                            }.runTask(FP.getInstance());
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }.runTaskAsynchronously(FP.getInstance());
-            }
+                SubclaimManager.performUpdate(player, subclaim);
+            });
 
             if (currentItem.getType().equals(Material.EMERALD_BLOCK)) {
                 if (!subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {

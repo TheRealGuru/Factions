@@ -266,7 +266,7 @@ public class ClaimEventsListener implements Listener {
                 if(claims.getClaimOwner() instanceof ServerFaction) {
                     ServerFaction faction = (ServerFaction)claims.getClaimOwner();
 
-                    if(!faction.getType().equals(ServerClaimType.ROAD)) {
+                    if(!faction.getType().equals(ServerClaimType.ROAD) && !player.hasPermission(Permissions.ADMIN)) {
                         player.sendMessage(Messages.nearbyLandClaimedBy(ChatColor.YELLOW + faction.getDisplayName()));
                         event.setCancelled(true);
                         return;
@@ -330,7 +330,7 @@ public class ClaimEventsListener implements Listener {
                 if(claims.getClaimOwner() instanceof ServerFaction) {
                     ServerFaction faction = (ServerFaction)claims.getClaimOwner();
 
-                    if(!faction.getType().equals(ServerClaimType.ROAD)) {
+                    if(!faction.getType().equals(ServerClaimType.ROAD) && !player.hasPermission(Permissions.ADMIN)) {
                         player.sendMessage(Messages.nearbyLandClaimedBy(ChatColor.YELLOW + faction.getDisplayName()));
                         event.setCancelled(true);
                         return;

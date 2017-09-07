@@ -51,8 +51,6 @@ public class FDisbandCommand extends FCommand {
             return;
         }
 
-        //TODO: Make it so faction can not be disbanded if member is combat tagged
-
         FactionManager.disbandFaction(player.getName(), faction);
     }
 }

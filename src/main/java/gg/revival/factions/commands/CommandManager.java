@@ -84,6 +84,7 @@ public class CommandManager {
         FStuckCommand stuckCommand = new FStuckCommand();
         FAllyCommand allyCommand = new FAllyCommand();
         FUnallyCommand unallyCommand = new FUnallyCommand();
+        FKickCommand kickCommand = new FKickCommand();
 
         factionCommands.add(createCommand);
         factionCommands.add(createServerFactionCommand);
@@ -119,6 +120,7 @@ public class CommandManager {
         factionCommands.add(stuckCommand);
         factionCommands.add(allyCommand);
         factionCommands.add(unallyCommand);
+        factionCommands.add(kickCommand);
 
         CCreateCommand chatCreateCommand = new CCreateCommand();
         CDeleteCommand chatDeleteCommand = new CDeleteCommand();

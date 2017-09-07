@@ -80,6 +80,8 @@ notifications:
   unstuck: '&aYou have been teleported to a safer location'
   home-warp-started: '&eYou will be returned home in &6%dur% &eseconds. Make sure to not move or take damage.'
   stuck-warp-started: '&eYou will be teleported to a safe location in &6%dur% &eseconds. Make sure to not move or take damage.'
+  player-kicked: '&2%kicker% &ehas kicked &9%kicked% &efrom the faction'
+  player-kicked-other: '&eYou have been &ckicked &efrom the faction'
 
 chat-formatting:
   global-faction-member: '&2[%fac%]&r%player%&f: %msg%'
@@ -158,6 +160,9 @@ errors:
   home-warp-cancelled: '&cHome warp cancelled'
   stuck-warp-cancelled: '&cStuck warp cancelled'
   logout-cancelled: '&cLogout cancelled'
+  cant-home-while-tagged: '&cYou can not warp home while combat tagged'
+  cant-while-player-is-tagged: '&cYou can not perform this task while this player is combat-tagged'
+  cant-kick-leader: '&cYou can not kick the leader of the faction'
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'

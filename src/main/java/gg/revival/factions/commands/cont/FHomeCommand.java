@@ -71,7 +71,11 @@ public class FHomeCommand extends FCommand {
             return;
         }
 
-        // TODO: Check if the player is combat tagged and prevent home if so
+        if(facPlayer.isBeingTimed(TimerType.TAG))
+        {
+            player.sendMessage(Messages.cantHomeWhileTagged());
+            return;
+        }
 
         if(homeLocation.getBlockY() >= Configuration.MAX_FAC_HOME_HEIGHT)
         {

@@ -6,7 +6,8 @@ import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
-import gg.revival.factions.tools.UUIDFetcher;
+import gg.revival.factions.tools.OfflinePlayerCallback;
+import gg.revival.factions.tools.OfflinePlayerLookup;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -60,59 +61,32 @@ public class FInviteCommand extends FCommand {
 
         String namedPlayer = args[1];
 
-        new BukkitRunnable() {
-            public void run() {
-                try {
-                    UUID uuid = UUIDFetcher.getUUIDOf(namedPlayer);
-
-                    if(uuid != null) {
-                        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-
-                        new BukkitRunnable() {
-                            public void run() {
-                                if(uuid == null || offlinePlayer == null || offlinePlayer.getName() == null) {
-                                    player.sendMessage(Messages.playerNotFound());
-                                    return;
-                                }
-
-                                String properUsername = offlinePlayer.getName();
-
-                                if(FactionManager.getFactionByPlayer(uuid) != null) {
-                                    player.sendMessage(Messages.alreadyInFactionOther());
-                                    return;
-                                }
-
-                                if(faction.getPendingInvites().contains(uuid)) {
-                                    player.sendMessage(Messages.playerAlreadyInvited());
-                                    return;
-                                }
-
-                                faction.getPendingInvites().add(uuid);
-
-                                if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
-                                    Messages.sendFactionInvite(Bukkit.getPlayer(uuid), faction.getDisplayName(), player.getName());
-                                }
-
-                                faction.sendMessage(Messages.invitedPlayer(player.getName(), properUsername));
-
-                                Logger.log(Level.INFO, player.getName() + " invited " + properUsername + " to join " + faction.getDisplayName());
-                            }
-                        }.runTask(FP.getInstance());
-                    }
-
-                    else {
-                        new BukkitRunnable() {
-                            public void run() {
-                                player.sendMessage(Messages.playerNotFound());
-                                return;
-                            }
-                        }.runTask(FP.getInstance());
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        OfflinePlayerLookup.getOfflinePlayerByName(namedPlayer, (uuid, username) -> {
+            if(uuid == null || username == null)
+            {
+                player.sendMessage(Messages.playerNotFound());
             }
-        }.runTaskAsynchronously(FP.getInstance());
+
+            if(FactionManager.getFactionByPlayer(uuid) != null) {
+                player.sendMessage(Messages.alreadyInFactionOther());
+                return;
+            }
+
+            if(faction.getPendingInvites().contains(uuid)) {
+                player.sendMessage(Messages.playerAlreadyInvited());
+                return;
+            }
+
+            faction.getPendingInvites().add(uuid);
+
+            if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
+                Messages.sendFactionInvite(Bukkit.getPlayer(uuid), faction.getDisplayName(), player.getName());
+            }
+
+            faction.sendMessage(Messages.invitedPlayer(player.getName(), username));
+
+            Logger.log(Level.INFO, player.getName() + " invited " + username + " to join " + faction.getDisplayName());
+        });
     }
 
 }

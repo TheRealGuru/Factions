@@ -24,6 +24,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 
 public class ClaimManager {
@@ -37,7 +38,7 @@ public class ClaimManager {
 
             for(ItemStack contents : player.getInventory().getContents()) {
                 if(contents == null) continue;
-                if(!contents.hasItemMeta()) continue;
+                if(contents.getItemMeta() == null) continue;
                 if(!contents.getItemMeta().getDisplayName().equals(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) continue;
 
                 player.getInventory().remove(contents);
@@ -58,7 +59,9 @@ public class ClaimManager {
     }
 
     public static Claim getClaimAt(Location location, boolean isEntity) {
-        for (Claim claims : activeClaims) {
+        List<Claim> claimCache = new CopyOnWriteArrayList<>(activeClaims);
+
+        for (Claim claims : claimCache) {
             if (!claims.inside(location, isEntity)) continue;
 
             return claims;
