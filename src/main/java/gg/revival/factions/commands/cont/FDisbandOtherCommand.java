@@ -1,5 +1,6 @@
 package gg.revival.factions.commands.cont;
 
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.Faction;
@@ -20,6 +21,7 @@ public class FDisbandOtherCommand extends FCommand {
                 "/f disbandfor <name>",
                 "Disband other players factions",
                 Permissions.ADMIN,
+                CmdCategory.STAFF,
                 2,
                 2,
                 false);

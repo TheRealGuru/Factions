@@ -1,5 +1,6 @@
 package gg.revival.factions.commands.cont;
 
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.core.PlayerManager;
@@ -22,6 +23,7 @@ public class FDepositCommand extends FCommand {
                 "/f deposit <amount>",
                 "Add money from your balance",
                 null,
+                CmdCategory.ECONOMY,
                 2,
                 2,
                 true

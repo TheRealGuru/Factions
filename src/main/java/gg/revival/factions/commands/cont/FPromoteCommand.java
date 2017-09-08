@@ -1,6 +1,7 @@
 package gg.revival.factions.commands.cont;
 
 import gg.revival.factions.FP;
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.PlayerFaction;
@@ -25,6 +26,7 @@ public class FPromoteCommand extends FCommand {
                 "/f promote <player>",
                 "Promote a member of your faction to officer",
                 null,
+                CmdCategory.MANAGE,
                 2,
                 2,
                 true

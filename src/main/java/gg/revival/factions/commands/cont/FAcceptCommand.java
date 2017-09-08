@@ -1,5 +1,6 @@
 package gg.revival.factions.commands.cont;
 
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.PlayerFaction;
@@ -22,6 +23,7 @@ public class FAcceptCommand extends FCommand {
                 "/f accept <faction>",
                 "Accept a faction invitation",
                 null,
+                CmdCategory.BASICS,
                 2,
                 2,
                 true

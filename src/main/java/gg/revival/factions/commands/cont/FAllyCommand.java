@@ -1,5 +1,6 @@
 package gg.revival.factions.commands.cont;
 
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.Faction;
@@ -24,6 +25,7 @@ public class FAllyCommand extends FCommand {
                 "/f ally <faction>",
                 "Form an alliance with another faction",
                 null,
+                CmdCategory.BASICS,
                 2,
                 2,
                 true

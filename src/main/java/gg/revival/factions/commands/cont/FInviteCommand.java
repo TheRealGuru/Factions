@@ -1,6 +1,7 @@
 package gg.revival.factions.commands.cont;
 
 import gg.revival.factions.FP;
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.PlayerFaction;
@@ -28,6 +29,7 @@ public class FInviteCommand extends FCommand {
                 "/f invite <player>",
                 "Invite a player to your faction",
                 null,
+                CmdCategory.BASICS,
                 2,
                 2,
                 true);

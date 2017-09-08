@@ -38,7 +38,7 @@ public class ClaimManager {
 
             for(ItemStack contents : player.getInventory().getContents()) {
                 if(contents == null) continue;
-                if(contents.getItemMeta() == null) continue;
+                if(contents.getItemMeta() == null || contents.getItemMeta().getDisplayName() == null) continue;
                 if(!contents.getItemMeta().getDisplayName().equals(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) continue;
 
                 player.getInventory().remove(contents);

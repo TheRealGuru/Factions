@@ -3,6 +3,7 @@ package gg.revival.factions.commands.cont;
 import gg.revival.factions.claims.Claim;
 import gg.revival.factions.claims.ClaimManager;
 import gg.revival.factions.claims.ServerClaimType;
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.core.PlayerManager;
@@ -31,6 +32,7 @@ public class FHomeCommand extends FCommand {
                 "/f home",
                 "Warp to your faction home",
                 null,
+                CmdCategory.BASICS,
                 1,
                 1,
                 true

@@ -1,11 +1,15 @@
 package gg.revival.factions.tools;
 
 import com.google.common.base.Joiner;
+import gg.revival.factions.commands.CmdCategory;
+import gg.revival.factions.commands.CommandManager;
+import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.file.FileManager;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
 import mkremins.fanciful.FancyMessage;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -965,6 +969,69 @@ public class Messages {
                 .color(ChatColor.YELLOW)
                 .command("/faction accept " + factionName)
                 .send(displayedTo);
+    }
+
+    public static void sendHelpPage(Player player, CmdCategory category) {
+        if(category == null) {
+
+            player.sendMessage(ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH +
+                    "---------------" + ChatColor.GOLD + "" + ChatColor.BOLD +
+                    "[ " + ChatColor.YELLOW + "Faction Help (" + "Home" + ") " + ChatColor.GOLD + "" + ChatColor.BOLD + "]"
+                    + ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "---------------");
+
+            player.sendMessage("     ");
+
+            player.sendMessage(ChatColor.GOLD + "Choose a category that you wish to learn about:");
+
+            new FancyMessage
+                    ("Claim, ").color(ChatColor.YELLOW).command("/f help claim")
+                    .then("Economy, ").color(ChatColor.YELLOW).command("/f help economy")
+                    .then("Basics, ").color(ChatColor.YELLOW).command("/f help basics")
+                    .then("Manage, ").color(ChatColor.YELLOW).command("/f help manage")
+                    .then("Info").color(ChatColor.YELLOW).command("/f help info").send(player);
+
+            player.sendMessage("     ");
+            player.sendMessage(ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "-------------------------------------------------");
+
+            return;
+        }
+
+        if(category.equals(CmdCategory.STAFF) && !player.hasPermission(Permissions.MOD) && !player.hasPermission(Permissions.ADMIN)) {
+            player.sendMessage(Messages.noPermission());
+
+            return;
+        }
+
+        player.sendMessage(ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH +
+                "---------------" + ChatColor.GOLD + "" + ChatColor.BOLD +
+                "[ " + ChatColor.YELLOW + "Faction Help (" + StringUtils.capitalize(category.toString().toLowerCase()) + ") " + ChatColor.GOLD + "" + ChatColor.BOLD + "]"
+                + ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "---------------");
+
+        player.sendMessage("     ");
+
+        player.sendMessage(ChatColor.GOLD + "Hover over a command to view more information");
+
+        player.sendMessage("     ");
+
+        for(FCommand command : CommandManager.getFactionCommandsByCategory(category)) {
+            List<String> info = new ArrayList<>();
+
+            info.add("Description: " + command.getDescription());
+
+            if(command.getAliases() != null && !command.getAliases().isEmpty()) {
+                info.add("Aliases: " + Joiner.on(", ").join(command.getAliases()));
+            }
+
+            new FancyMessage(" - ")
+                    .color(ChatColor.GOLD)
+                    .then(command.getSyntax())
+                    .tooltip(info)
+                    .color(ChatColor.YELLOW).send(player);
+        }
+
+        player.sendMessage("     ");
+
+        player.sendMessage(ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "-------------------------------------------------");
     }
 
 }

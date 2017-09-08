@@ -1,6 +1,7 @@
 package gg.revival.factions.commands.cont;
 
 import gg.revival.factions.FP;
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.PlayerFaction;
@@ -26,6 +27,7 @@ public class FUninviteCommand extends FCommand {
                 "/f uninvite <player>",
                 "Revoke a players invitation to your faction",
                 null,
+                CmdCategory.MANAGE,
                 2,
                 2,
                 true);

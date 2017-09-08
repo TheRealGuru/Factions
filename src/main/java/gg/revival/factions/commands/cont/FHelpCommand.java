@@ -3,19 +3,18 @@ package gg.revival.factions.commands.cont;
 import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.tools.Messages;
-import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class FListCommand extends FCommand {
+public class FHelpCommand extends FCommand {
 
-    public FListCommand() {
+    public FHelpCommand() {
         super(
-                "list",
+                "help",
                 null,
-                "/f list [page#]",
-                "View a list of existing factions",
+                "/f help [category]",
+                "View information about Factions commands",
                 null,
                 CmdCategory.INFO,
                 1,
@@ -38,22 +37,19 @@ public class FListCommand extends FCommand {
             return;
         }
 
-        int page = 0;
+        if(args.length == 1) {
+            Messages.sendHelpPage(player, null);
+            return;
+        }
 
-        if(args.length == 2) {
-            if(!NumberUtils.isNumber(args[1])) {
-                player.sendMessage(Messages.badNumber());
+        for(CmdCategory categories : CmdCategory.values()) {
+            if(categories.toString().equalsIgnoreCase(args[1])) {
+                Messages.sendHelpPage(player, categories);
                 return;
-            }
-
-            page = Math.abs(Integer.valueOf(args[1]));
-
-            if(page < 2) { //We do this so players could TECHNICALLY type /f list 1 and still view the first page
-                page = 0;
             }
         }
 
-        Messages.sendList(player, page);
+        Messages.sendHelpPage(player, null);
     }
 
 }

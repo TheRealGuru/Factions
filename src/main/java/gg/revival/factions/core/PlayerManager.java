@@ -15,10 +15,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class PlayerManager {
 
@@ -33,7 +31,9 @@ public class PlayerManager {
     }
 
     public static FPlayer getPlayer(UUID uuid) {
-        for (FPlayer players : activePlayers) {
+        List<FPlayer> playerCache = new CopyOnWriteArrayList<>(activePlayers);
+
+        for (FPlayer players : playerCache) {
             if (players.getUuid().equals(uuid)) {
                 return players;
             }

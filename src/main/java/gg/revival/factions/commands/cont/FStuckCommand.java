@@ -1,6 +1,7 @@
 package gg.revival.factions.commands.cont;
 
 import gg.revival.factions.claims.ClaimManager;
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.PlayerManager;
 import gg.revival.factions.tasks.StuckTask;
@@ -23,6 +24,7 @@ public class FStuckCommand extends FCommand {
                 "/f stuck",
                 "Teleport to a safer location",
                 null,
+                CmdCategory.BASICS,
                 1,
                 1,
                 true

@@ -51,8 +51,7 @@ public class ClaimEventsListener implements Listener {
 
         if(
                 item != null &&
-                item.hasItemMeta() &&
-                item.getItemMeta().getDisplayName() != null &&
+                item.getItemMeta() != null && item.getItemMeta().getDisplayName() != null &&
                 item.getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
 
             event.getItemDrop().remove();
@@ -61,7 +60,11 @@ public class ClaimEventsListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if(event.getCurrentItem() != null && event.getCurrentItem().hasItemMeta() && event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
+        if(
+                event.getCurrentItem() != null &&
+                event.getCurrentItem().getItemMeta() != null && event.getCurrentItem().getItemMeta().getDisplayName() != null &&
+                event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
+
             event.setCurrentItem(null);
             event.setCancelled(true);
         }

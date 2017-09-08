@@ -2,6 +2,7 @@ package gg.revival.factions.commands.cont;
 
 import gg.revival.factions.claims.Claim;
 import gg.revival.factions.claims.ClaimManager;
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.Faction;
@@ -25,6 +26,7 @@ public class FUnclaimForCommand extends FCommand {
                 "/f unclaimfor <faction> [all]",
                 "Unclaim land for another faction",
                 Permissions.ADMIN,
+                CmdCategory.STAFF,
                 2,
                 3,
                 true

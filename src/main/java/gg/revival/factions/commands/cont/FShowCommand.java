@@ -1,6 +1,7 @@
 package gg.revival.factions.commands.cont;
 
 import gg.revival.factions.FP;
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.Faction;
@@ -24,6 +25,7 @@ public class FShowCommand extends FCommand {
                 "/f show <name>",
                 "View a factions information",
                 null,
+                CmdCategory.INFO,
                 1,
                 3,
                 true

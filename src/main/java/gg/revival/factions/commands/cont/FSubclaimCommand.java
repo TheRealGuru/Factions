@@ -1,6 +1,7 @@
 package gg.revival.factions.commands.cont;
 
 import gg.revival.factions.claims.Claim;
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.PlayerFaction;
@@ -33,6 +34,7 @@ public class FSubclaimCommand extends FCommand {
                 "/f subclaim",
                 "Subclaim a chest",
                 null,
+                CmdCategory.MANAGE,
                 1,
                 1,
                 true

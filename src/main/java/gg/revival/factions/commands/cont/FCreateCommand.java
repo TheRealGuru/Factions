@@ -1,5 +1,6 @@
 package gg.revival.factions.commands.cont;
 
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.tools.Configuration;
@@ -18,6 +19,7 @@ public class FCreateCommand extends FCommand {
                 "/f create <name>",
                 "Create a faction",
                 null,
+                CmdCategory.BASICS,
                 2,
                 2,
                 true);

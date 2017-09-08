@@ -6,6 +6,7 @@ import gg.revival.factions.tools.Logger;
 import lombok.Getter;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class CommandManager {
 
@@ -42,6 +43,18 @@ public class CommandManager {
         }
 
         return null;
+    }
+
+    public static Set<FCommand> getFactionCommandsByCategory(CmdCategory category) {
+        Set<FCommand> result = new HashSet<>();
+
+        for(FCommand commands : factionCommands) {
+            if(!commands.getCategory().equals(category)) continue;
+
+            result.add(commands);
+        }
+
+        return result;
     }
 
     public static void loadCommands() {
@@ -85,6 +98,7 @@ public class CommandManager {
         FAllyCommand allyCommand = new FAllyCommand();
         FUnallyCommand unallyCommand = new FUnallyCommand();
         FKickCommand kickCommand = new FKickCommand();
+        FHelpCommand helpCommand = new FHelpCommand();
 
         factionCommands.add(createCommand);
         factionCommands.add(createServerFactionCommand);
@@ -121,6 +135,7 @@ public class CommandManager {
         factionCommands.add(allyCommand);
         factionCommands.add(unallyCommand);
         factionCommands.add(kickCommand);
+        factionCommands.add(helpCommand);
 
         CCreateCommand chatCreateCommand = new CCreateCommand();
         CDeleteCommand chatDeleteCommand = new CDeleteCommand();

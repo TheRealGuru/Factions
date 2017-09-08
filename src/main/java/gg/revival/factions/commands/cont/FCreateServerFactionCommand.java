@@ -1,6 +1,7 @@
 package gg.revival.factions.commands.cont;
 
 import gg.revival.factions.claims.ServerClaimType;
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.tools.Configuration;
@@ -21,6 +22,7 @@ public class FCreateServerFactionCommand extends FCommand {
                 "/f createserver <name> <safezone/road/event>",
                 "Create a server-side faction",
                 Permissions.ADMIN,
+                CmdCategory.STAFF,
                 3,
                 3,
                 true);

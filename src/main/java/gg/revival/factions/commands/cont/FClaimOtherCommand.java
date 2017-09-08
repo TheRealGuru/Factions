@@ -3,6 +3,7 @@ package gg.revival.factions.commands.cont;
 import gg.revival.factions.FP;
 import gg.revival.factions.claims.ClaimManager;
 import gg.revival.factions.claims.PendingClaim;
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.Faction;
@@ -23,6 +24,7 @@ public class FClaimOtherCommand extends FCommand {
                 "/f claimfor <faction>",
                 "Claim for another faction",
                 Permissions.ADMIN,
+                CmdCategory.STAFF,
                 2,
                 2,
                 true);

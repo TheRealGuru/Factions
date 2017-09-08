@@ -1,5 +1,6 @@
 package gg.revival.factions.commands.cont;
 
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.Faction;
@@ -25,6 +26,7 @@ public class FRenameForCommand extends FCommand {
                 "/f renamefor <faction> <name>",
                 "Rename another faction",
                 Permissions.ADMIN,
+                CmdCategory.STAFF,
                 3,
                 3,
                 false

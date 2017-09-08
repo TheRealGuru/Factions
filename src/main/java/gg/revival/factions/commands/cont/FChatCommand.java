@@ -3,6 +3,7 @@ package gg.revival.factions.commands.cont;
 import gg.revival.factions.chat.ChatChannel;
 import gg.revival.factions.chat.ChatChannelManager;
 import gg.revival.factions.chat.FactionChatChannelType;
+import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.PlayerFaction;
@@ -23,6 +24,7 @@ public class FChatCommand extends FCommand {
                 "/f chat [public/faction/ally]",
                 "Change between faction chat channels",
                 null,
+                CmdCategory.BASICS,
                 1,
                 2,
                 true
