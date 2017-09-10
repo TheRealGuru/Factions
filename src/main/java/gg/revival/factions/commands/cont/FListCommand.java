@@ -26,29 +26,29 @@ public class FListCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
         int page = 0;
 
-        if(args.length == 2) {
-            if(!NumberUtils.isNumber(args[1])) {
+        if (args.length == 2) {
+            if (!NumberUtils.isNumber(args[1])) {
                 player.sendMessage(Messages.badNumber());
                 return;
             }
 
             page = Math.abs(Integer.valueOf(args[1]));
 
-            if(page < 2) { //We do this so players could TECHNICALLY type /f list 1 and still view the first page
+            if (page < 2) { //We do this so players could TECHNICALLY type /f list 1 and still view the first page
                 page = 0;
             }
         }

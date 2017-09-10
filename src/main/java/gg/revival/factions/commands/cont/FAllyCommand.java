@@ -17,8 +17,7 @@ import org.bukkit.entity.Player;
 
 public class FAllyCommand extends FCommand {
 
-    public FAllyCommand()
-    {
+    public FAllyCommand() {
         super(
                 "ally",
                 null,
@@ -33,18 +32,15 @@ public class FAllyCommand extends FCommand {
     }
 
     @Override
-    public void onCommand(CommandSender sender, String args[])
-    {
-        if(!(sender instanceof Player) && isPlayerOnly())
-        {
+    public void onCommand(CommandSender sender, String args[]) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs())
-        {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
@@ -54,48 +50,41 @@ public class FAllyCommand extends FCommand {
         Faction faction = FactionManager.getFactionByPlayer(player.getUniqueId());
         Faction allyFaction = FactionManager.getFactionByName(namedFaction);
 
-        if(!Configuration.ALLIANCES_ENABLED)
-        {
+        if (!Configuration.ALLIANCES_ENABLED) {
             player.sendMessage(Messages.alliesDisabled());
             return;
         }
 
-        if(faction == null)
-        {
+        if (faction == null) {
             player.sendMessage(Messages.notInFaction());
             return;
         }
 
-        PlayerFaction playerFaction = (PlayerFaction)faction;
+        PlayerFaction playerFaction = (PlayerFaction) faction;
 
-        if(!playerFaction.getOfficers().contains(player.getUniqueId()) && !playerFaction.getLeader().equals(player.getUniqueId()))
-        {
+        if (!playerFaction.getOfficers().contains(player.getUniqueId()) && !playerFaction.getLeader().equals(player.getUniqueId())) {
             player.sendMessage(Messages.officerRequired());
             return;
         }
 
-        if(allyFaction == null || !(allyFaction instanceof PlayerFaction))
-        {
+        if (allyFaction == null || !(allyFaction instanceof PlayerFaction)) {
             player.sendMessage(Messages.factionNotFound());
             return;
         }
 
-        PlayerFaction playerAllyFaction = (PlayerFaction)allyFaction;
+        PlayerFaction playerAllyFaction = (PlayerFaction) allyFaction;
 
-        if(playerFaction.getAllies().size() >= Configuration.ALLY_LIMIT)
-        {
+        if (playerFaction.getAllies().size() >= Configuration.ALLY_LIMIT) {
             player.sendMessage(Messages.selfMaxAllies());
             return;
         }
 
-        if(playerAllyFaction.getAllies().size() >= Configuration.ALLY_LIMIT)
-        {
+        if (playerAllyFaction.getAllies().size() >= Configuration.ALLY_LIMIT) {
             player.sendMessage(Messages.otherMaxAllies());
             return;
         }
 
-        if(playerAllyFaction.getPendingAllies().contains(playerFaction.getFactionID()))
-        {
+        if (playerAllyFaction.getPendingAllies().contains(playerFaction.getFactionID())) {
             playerFaction.getAllies().add(playerAllyFaction.getFactionID());
             playerFaction.getPendingAllies().remove(playerAllyFaction.getFactionID());
             playerAllyFaction.getAllies().add(playerFaction.getFactionID());
@@ -105,15 +94,13 @@ public class FAllyCommand extends FCommand {
             return;
         }
 
-        if(playerFaction.getAllies().contains(playerAllyFaction.getFactionID()))
-        {
+        if (playerFaction.getAllies().contains(playerAllyFaction.getFactionID())) {
             player.sendMessage(Messages.allyRequestPending());
             return;
         }
 
-        if(playerFaction.getTimer(TimerType.ALLY) != null)
-        {
-            int dur = (int)((playerFaction.getTimer(TimerType.ALLY).getExpire() - System.currentTimeMillis()) / 1000L);
+        if (playerFaction.getTimer(TimerType.ALLY) != null) {
+            int dur = (int) ((playerFaction.getTimer(TimerType.ALLY).getExpire() - System.currentTimeMillis()) / 1000L);
             player.sendMessage(Messages.cooldownMessage(String.valueOf(dur)));
             return;
         }

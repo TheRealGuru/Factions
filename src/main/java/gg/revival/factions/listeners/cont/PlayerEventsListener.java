@@ -40,8 +40,8 @@ public class PlayerEventsListener implements Listener {
 
         PlayerManager.loadProfile(player.getUniqueId());
 
-        if(FactionManager.getFactionByPlayer(player.getUniqueId()) != null) {
-            PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
+        if (FactionManager.getFactionByPlayer(player.getUniqueId()) != null) {
+            PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
 
             faction.sendMessage(Messages.memberOnline(player.getName()));
             Messages.factionInfo(faction, player);
@@ -55,24 +55,24 @@ public class PlayerEventsListener implements Listener {
         ClaimManager.removeFromClaimEditor(player.getUniqueId());
         SubclaimManager.getSubclaimEditor().remove(player.getUniqueId());
 
-        if(FactionManager.getFactionByPlayer(player.getUniqueId()) != null) {
-            PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
+        if (FactionManager.getFactionByPlayer(player.getUniqueId()) != null) {
+            PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
 
             faction.sendMessage(Messages.memberOffline(player.getName()));
         }
     }
 
-    @EventHandler (priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamage(EntityDamageEvent event) {
         Entity entity = event.getEntity();
 
-        if(!(entity instanceof Player))
+        if (!(entity instanceof Player))
             return;
 
-        Player player = (Player)entity;
+        Player player = (Player) entity;
         FLocation location = PlayerManager.getPlayer(player.getUniqueId()).getLocation();
 
-        if(location.getCurrentClaim() != null &&
+        if (location.getCurrentClaim() != null &&
                 location.getCurrentClaim().getClaimOwner() instanceof ServerFaction &&
                 ((ServerFaction) location.getCurrentClaim().getClaimOwner()).getType().equals(ServerClaimType.SAFEZONE)) {
 
@@ -80,22 +80,22 @@ public class PlayerEventsListener implements Listener {
         }
     }
 
-    @EventHandler (priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if(event.isCancelled())
+        if (event.isCancelled())
             return;
 
         Entity damaged = event.getEntity();
         Entity damager = event.getDamager();
 
-        if(damaged instanceof Player && damager instanceof Player) {
-            Player pDamaged = (Player)damaged;
-            Player pDamager = (Player)damager;
+        if (damaged instanceof Player && damager instanceof Player) {
+            Player pDamaged = (Player) damaged;
+            Player pDamager = (Player) damager;
 
             FLocation damagedLocation = PlayerManager.getPlayer(pDamaged.getUniqueId()).getLocation();
             FLocation damagerLocation = PlayerManager.getPlayer(pDamager.getUniqueId()).getLocation();
 
-            if(damagedLocation.getCurrentClaim() != null &&
+            if (damagedLocation.getCurrentClaim() != null &&
                     damagedLocation.getCurrentClaim().getClaimOwner() instanceof ServerFaction &&
                     ((ServerFaction) damagedLocation.getCurrentClaim().getClaimOwner()).getType().equals(ServerClaimType.SAFEZONE) &&
                     !pDamaged.getUniqueId().equals(pDamager.getUniqueId())) {
@@ -106,7 +106,7 @@ public class PlayerEventsListener implements Listener {
                 return;
             }
 
-            if(damagerLocation.getCurrentClaim() != null &&
+            if (damagerLocation.getCurrentClaim() != null &&
                     damagerLocation.getCurrentClaim().getClaimOwner() instanceof ServerFaction &&
                     ((ServerFaction) damagerLocation.getCurrentClaim().getClaimOwner()).getType().equals(ServerClaimType.SAFEZONE) &&
                     !pDamaged.getUniqueId().equals(pDamager.getUniqueId())) {
@@ -117,7 +117,7 @@ public class PlayerEventsListener implements Listener {
                 return;
             }
 
-            if(FactionManager.isFactionMember(pDamaged.getUniqueId(), pDamager.getUniqueId()) &&
+            if (FactionManager.isFactionMember(pDamaged.getUniqueId(), pDamager.getUniqueId()) &&
                     !pDamaged.getUniqueId().equals(pDamager.getUniqueId())) {
 
                 pDamager.sendMessage(Messages.factionDamageDisabled());
@@ -126,8 +126,8 @@ public class PlayerEventsListener implements Listener {
                 return;
             }
 
-            if(FactionManager.isAllyMember(pDamaged.getUniqueId(), pDamager.getUniqueId())) {
-                if(pDamaged.hasPotionEffect(PotionEffectType.INVISIBILITY) && Configuration.ONLY_WARN_WHEN_ALLY_VISABLE) {
+            if (FactionManager.isAllyMember(pDamaged.getUniqueId(), pDamager.getUniqueId())) {
+                if (pDamaged.hasPotionEffect(PotionEffectType.INVISIBILITY) && Configuration.ONLY_WARN_WHEN_ALLY_VISABLE) {
                     return;
                 }
 
@@ -139,19 +139,19 @@ public class PlayerEventsListener implements Listener {
             return;
         }
 
-        if(damaged instanceof Player && damager instanceof Arrow) {
-            Player pDamaged = (Player)damaged;
+        if (damaged instanceof Player && damager instanceof Arrow) {
+            Player pDamaged = (Player) damaged;
             FLocation damagedLocation = PlayerManager.getPlayer(pDamaged.getUniqueId()).getLocation();
 
-            Arrow arrow = (Arrow)damager;
+            Arrow arrow = (Arrow) damager;
             ProjectileSource shooter = arrow.getShooter();
 
-            if(damagedLocation.getCurrentClaim() != null &&
+            if (damagedLocation.getCurrentClaim() != null &&
                     damagedLocation.getCurrentClaim().getClaimOwner() instanceof ServerFaction &&
                     ((ServerFaction) damagedLocation.getCurrentClaim().getClaimOwner()).getType().equals(ServerClaimType.SAFEZONE)) {
 
-                if(shooter instanceof Player) {
-                    Player pDamager = (Player)shooter;
+                if (shooter instanceof Player) {
+                    Player pDamager = (Player) shooter;
 
                     pDamager.sendMessage(Messages.combatDisabledSafezone());
                 }
@@ -161,20 +161,20 @@ public class PlayerEventsListener implements Listener {
                 return;
             }
 
-            if(!(shooter instanceof Player))
+            if (!(shooter instanceof Player))
                 return;
 
-            Player pDamager = (Player)shooter;
+            Player pDamager = (Player) shooter;
 
-            if(FactionManager.isFactionMember(pDamaged.getUniqueId(), pDamager.getUniqueId())) {
+            if (FactionManager.isFactionMember(pDamaged.getUniqueId(), pDamager.getUniqueId())) {
                 pDamager.sendMessage(Messages.factionDamageDisabled());
                 event.setCancelled(true);
 
                 return;
             }
 
-            if(FactionManager.isAllyMember(pDamaged.getUniqueId(), pDamager.getUniqueId())) {
-                if(pDamaged.hasPotionEffect(PotionEffectType.INVISIBILITY) && Configuration.ONLY_WARN_WHEN_ALLY_VISABLE) {
+            if (FactionManager.isAllyMember(pDamaged.getUniqueId(), pDamager.getUniqueId())) {
+                if (pDamaged.hasPotionEffect(PotionEffectType.INVISIBILITY) && Configuration.ONLY_WARN_WHEN_ALLY_VISABLE) {
                     return;
                 }
 
@@ -189,14 +189,14 @@ public class PlayerEventsListener implements Listener {
 
     @EventHandler
     public void onPotionSplash(PotionSplashEvent event) {
-        if(event.getAffectedEntities().isEmpty())
+        if (event.getAffectedEntities().isEmpty())
             return;
 
-        if(event.getPotion().getShooter() instanceof Player) {
-            Player player = (Player)event.getPotion().getShooter();
+        if (event.getPotion().getShooter() instanceof Player) {
+            Player player = (Player) event.getPotion().getShooter();
             FLocation location = PlayerManager.getPlayer(player.getUniqueId()).getLocation();
 
-            if(location.getCurrentClaim() != null &&
+            if (location.getCurrentClaim() != null &&
                     location.getCurrentClaim().getClaimOwner() instanceof ServerFaction &&
                     ((ServerFaction) location.getCurrentClaim().getClaimOwner()).getType().equals(ServerClaimType.SAFEZONE)) {
 
@@ -207,32 +207,32 @@ public class PlayerEventsListener implements Listener {
 
         List<UUID> protectedEntities = new ArrayList<>();
 
-        for(Entity entities : event.getAffectedEntities()) {
-            if(!(entities instanceof Player)) continue;
+        for (Entity entities : event.getAffectedEntities()) {
+            if (!(entities instanceof Player)) continue;
 
-            Player players = (Player)entities;
+            Player players = (Player) entities;
             FLocation location = PlayerManager.getPlayer(players.getUniqueId()).getLocation();
 
-            if(location.getCurrentClaim() != null &&
+            if (location.getCurrentClaim() != null &&
                     location.getCurrentClaim().getClaimOwner() instanceof ServerFaction &&
                     ((ServerFaction) location.getCurrentClaim().getClaimOwner()).getType().equals(ServerClaimType.SAFEZONE)) {
 
-                if(!protectedEntities.contains(players.getUniqueId())) {
+                if (!protectedEntities.contains(players.getUniqueId())) {
                     protectedEntities.add(players.getUniqueId());
                 }
             }
         }
 
-        if(protectedEntities.isEmpty())
+        if (protectedEntities.isEmpty())
             return;
 
         new BukkitRunnable() {
             public void run() {
 
-                for(UUID playerID : protectedEntities) {
+                for (UUID playerID : protectedEntities) {
                     Player players = Bukkit.getPlayer(playerID);
 
-                    for(PotionEffect effects : event.getPotion().getEffects()) {
+                    for (PotionEffect effects : event.getPotion().getEffects()) {
                         players.removePotionEffect(effects.getType());
                     }
                 }

@@ -34,10 +34,10 @@ public class FFreezeCommand extends FCommand {
     public void onCommand(CommandSender sender, String args[]) {
         String freezer = "Console";
 
-        if(sender instanceof Player) {
-            Player player = (Player)sender;
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
 
-            if(!player.hasPermission(getPermission())) {
+            if (!player.hasPermission(getPermission())) {
                 player.sendMessage(Messages.noPermission());
                 return;
             }
@@ -45,7 +45,7 @@ public class FFreezeCommand extends FCommand {
             freezer = player.getName();
         }
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             sender.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
@@ -54,15 +54,15 @@ public class FFreezeCommand extends FCommand {
         String namedDuration = args[2];
         Faction faction = FactionManager.getFactionByName(namedFaction);
 
-        if(!(faction instanceof PlayerFaction)) {
+        if (!(faction instanceof PlayerFaction)) {
             sender.sendMessage(Messages.factionNotFound());
             return;
         }
 
-        PlayerFaction playerFaction = (PlayerFaction)faction;
+        PlayerFaction playerFaction = (PlayerFaction) faction;
         int time = ToolBox.getTime(namedDuration);
 
-        if(time == 0) {
+        if (time == 0) {
             sender.sendMessage(Messages.badTime());
             return;
         }

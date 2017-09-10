@@ -14,7 +14,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -589,152 +588,125 @@ public class Messages {
                 .replace("%amt%", amt);
     }
 
-    public static String alliesDisabled()
-    {
+    public static String alliesDisabled() {
         return getValue("errors.allies-disabled");
     }
 
-    public static String selfMaxAllies()
-    {
+    public static String selfMaxAllies() {
         return getValue("errors.ally-limit-self");
     }
 
-    public static String otherMaxAllies()
-    {
+    public static String otherMaxAllies() {
         return getValue("errors.ally-limit-other");
     }
 
-    public static String allianceFormed(String factionOne, String factionTwo)
-    {
+    public static String allianceFormed(String factionOne, String factionTwo) {
         return getValue("broadcasts.alliance-formed")
                 .replace("%factionOne%", factionOne)
                 .replace("%factionTwo%", factionTwo);
     }
 
-    public static String allianceBroken(String factionOne, String factionTwo)
-    {
+    public static String allianceBroken(String factionOne, String factionTwo) {
         return getValue("broadcasts.alliance-formed")
                 .replace("%factionOne%", factionOne)
                 .replace("%factionTwo%", factionTwo);
     }
 
-    public static String allyRequest(String requestingFaction)
-    {
+    public static String allyRequest(String requestingFaction) {
         return getValue("notifications.ally-request")
                 .replace("%faction%", requestingFaction);
     }
 
-    public static String allyRequestSent(String requester, String faction)
-    {
+    public static String allyRequestSent(String requester, String faction) {
         return getValue("notifications.ally-request-sent")
                 .replace("%requester%", requester)
                 .replace("%faction%", faction);
     }
 
-    public static String notAllied()
-    {
+    public static String notAllied() {
         return getValue("errors.not-allied");
     }
 
-    public static String allyRequestRevoked(String revoker, String faction)
-    {
+    public static String allyRequestRevoked(String revoker, String faction) {
         return getValue("notifications.ally-request-revoked")
                 .replace("%player%", revoker)
                 .replace("%faction%", faction);
     }
 
-    public static String allyRequestRevokedOther(String faction)
-    {
+    public static String allyRequestRevokedOther(String faction) {
         return getValue("notifications.ally-request-revoked-other")
                 .replace("%faction%", faction);
     }
 
-    public static String allyRequestPending()
-    {
+    public static String allyRequestPending() {
         return getValue("errors.ally-request-pending");
     }
 
-    public static String homeNotSet()
-    {
+    public static String homeNotSet() {
         return getValue("errors.home-not-set");
     }
 
-    public static String cantAffordHomeTooHigh()
-    {
+    public static String cantAffordHomeTooHigh() {
         return getValue("errors.home-too-high-cant-afford");
     }
 
-    public static String returnedHome()
-    {
+    public static String returnedHome() {
         return getValue("notifications.returned-home");
     }
 
-    public static String homeWarpStarted(int dur)
-    {
+    public static String homeWarpStarted(int dur) {
         return getValue("notifications.home-warp-started")
                 .replace("%dur%", String.valueOf(dur));
     }
 
-    public static String stuckWarpStarted(int dur)
-    {
+    public static String stuckWarpStarted(int dur) {
         return getValue("notifications.stuck-warp-started")
                 .replace("%dur%", String.valueOf(dur));
     }
 
-    public static String cantWarpHomeInsideClaim()
-    {
+    public static String cantWarpHomeInsideClaim() {
         return getValue("errors.cant-home-from-current-claim");
     }
 
-    public static String homeWarpCancelled()
-    {
+    public static String homeWarpCancelled() {
         return getValue("errors.home-warp-cancelled");
     }
 
-    public static String stuckWarpCancelled()
-    {
+    public static String stuckWarpCancelled() {
         return getValue("errors.stuck-warp-cancelled");
     }
 
-    public static String notInsideClaim()
-    {
+    public static String notInsideClaim() {
         return getValue("errors.not-in-claim");
     }
 
-    public static String logoutCancelled()
-    {
+    public static String logoutCancelled() {
         return getValue("errors.logout-cancelled");
     }
 
-    public static String unstuck()
-    {
+    public static String unstuck() {
         return getValue("notifications.unstuck");
     }
 
-    public static String cantHomeWhileTagged()
-    {
+    public static String cantHomeWhileTagged() {
         return getValue("errors.cant-home-while-tagged");
     }
 
-    public static String playerKicked(String kicker, String kicked)
-    {
+    public static String playerKicked(String kicker, String kicked) {
         return getValue("notifications.player-kicked")
                 .replace("%kicker%", kicker)
                 .replace("%kicked%", kicked);
     }
 
-    public static String cantWhilePlayerIsTagged()
-    {
+    public static String cantWhilePlayerIsTagged() {
         return getValue("errors.cant-while-player-is-tagged");
     }
 
-    public static String cantKickLeader()
-    {
+    public static String cantKickLeader() {
         return getValue("errors.cant-kick-leader");
     }
 
-    public static String playerKickedOther()
-    {
+    public static String playerKickedOther() {
         return getValue("notifications.player-kicked-other");
     }
 
@@ -784,7 +756,7 @@ public class Messages {
 
             info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Balance" + ChatColor.WHITE + ": $" + format.format(faction.getBalance()) + "\n");
 
-            if(!faction.getAllies().isEmpty()) {
+            if (!faction.getAllies().isEmpty()) {
                 List<String> allies = new ArrayList<String>();
 
                 for (UUID allyID : faction.getAllies()) {
@@ -796,7 +768,7 @@ public class Messages {
                 info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Allies" + ChatColor.WHITE + ": " + Joiner.on(", ").join(allies) + "\n");
             }
 
-            if(Bukkit.getPlayer(faction.getLeader()) != null && Bukkit.getPlayer(faction.getLeader()).isOnline()) {
+            if (Bukkit.getPlayer(faction.getLeader()) != null && Bukkit.getPlayer(faction.getLeader()).isOnline()) {
                 info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Leader" + ChatColor.WHITE + ": " + ChatColor.GREEN + "**" + result.get(faction.getLeader()) + "\n");
             } else {
                 info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Leader" + ChatColor.WHITE + ": " + ChatColor.GRAY + "**" + result.get(faction.getLeader()) + "\n");
@@ -842,8 +814,8 @@ public class Messages {
                 long dur = faction.getUnfreezeTime() - System.currentTimeMillis();
 
                 seconds = (int) dur / 1000;
-                minutes = seconds     / 60;
-                hours = minutes       / 60;
+                minutes = seconds / 60;
+                hours = minutes / 60;
 
                 String unfreezeTime = null;
 
@@ -868,11 +840,11 @@ public class Messages {
     public static void sendList(Player player, int page) {
         Map<PlayerFaction, Integer> factionCounts = new HashMap<>();
 
-        for(Faction factions : FactionManager.getActiveFactions()) {
-            if(!(factions instanceof PlayerFaction)) continue;
-            if(factionCounts.containsKey(factionCounts)) continue;
+        for (Faction factions : FactionManager.getActiveFactions()) {
+            if (!(factions instanceof PlayerFaction)) continue;
+            if (factionCounts.containsKey(factionCounts)) continue;
 
-            PlayerFaction playerFactions = (PlayerFaction)factions;
+            PlayerFaction playerFactions = (PlayerFaction) factions;
 
             factionCounts.put(playerFactions, playerFactions.getRoster(true).size());
         }
@@ -883,12 +855,12 @@ public class Messages {
         int finishingPlace = page + 10;
         int cursor = 1;
 
-        if(startingPlace > sortedFactionCounts.size()) {
+        if (startingPlace > sortedFactionCounts.size()) {
             player.sendMessage(ChatColor.RED + "Invalid page number");
             return;
         }
 
-        if(finishingPlace > sortedFactionCounts.size()) {
+        if (finishingPlace > sortedFactionCounts.size()) {
             finishingPlace = sortedFactionCounts.size();
         }
 
@@ -899,13 +871,13 @@ public class Messages {
 
         player.sendMessage("     " + "\n" + ChatColor.YELLOW + "Click a faction name to view more information" + ChatColor.RESET + "\n" + "     ");
 
-        for(PlayerFaction factions : sortedFactionCounts.keySet()) {
-            if(cursor < startingPlace) {
+        for (PlayerFaction factions : sortedFactionCounts.keySet()) {
+            if (cursor < startingPlace) {
                 cursor++;
                 continue;
             }
 
-            if(cursor > finishingPlace) {
+            if (cursor > finishingPlace) {
                 break;
             }
 
@@ -932,8 +904,8 @@ public class Messages {
         displayedTo.sendMessage(ChatColor.AQUA + "There were multiple results for your search request. Click one of the following:");
 
         int i = 1;
-        for(Faction faction : results) {
-            if(faction.getDisplayName().equalsIgnoreCase(query)) {
+        for (Faction faction : results) {
+            if (faction.getDisplayName().equalsIgnoreCase(query)) {
                 new
                         FancyMessage(i + ". ")
                         .color(ChatColor.GOLD)
@@ -943,9 +915,7 @@ public class Messages {
                         .color(ChatColor.GREEN)
                         .command("/f show " + faction.getDisplayName() + " -f")
                         .send(displayedTo);
-            }
-
-            else {
+            } else {
                 new
                         FancyMessage(i + ". ")
                         .color(ChatColor.GOLD)
@@ -972,7 +942,7 @@ public class Messages {
     }
 
     public static void sendHelpPage(Player player, CmdCategory category) {
-        if(category == null) {
+        if (category == null) {
 
             player.sendMessage(ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH +
                     "---------------" + ChatColor.GOLD + "" + ChatColor.BOLD +
@@ -996,7 +966,7 @@ public class Messages {
             return;
         }
 
-        if(category.equals(CmdCategory.STAFF) && !player.hasPermission(Permissions.MOD) && !player.hasPermission(Permissions.ADMIN)) {
+        if (category.equals(CmdCategory.STAFF) && !player.hasPermission(Permissions.MOD) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.noPermission());
 
             return;
@@ -1013,12 +983,12 @@ public class Messages {
 
         player.sendMessage("     ");
 
-        for(FCommand command : CommandManager.getFactionCommandsByCategory(category)) {
+        for (FCommand command : CommandManager.getFactionCommandsByCategory(category)) {
             List<String> info = new ArrayList<>();
 
             info.add("Description: " + command.getDescription());
 
-            if(command.getAliases() != null && !command.getAliases().isEmpty()) {
+            if (command.getAliases() != null && !command.getAliases().isEmpty()) {
                 info.add("Aliases: " + Joiner.on(", ").join(command.getAliases()));
             }
 

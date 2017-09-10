@@ -32,43 +32,43 @@ public class FAcceptCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
-        if(FactionManager.getFactionByPlayer(player.getUniqueId()) != null) {
+        if (FactionManager.getFactionByPlayer(player.getUniqueId()) != null) {
             player.sendMessage(Messages.alreadyInFaction());
             return;
         }
 
         String namedFaction = args[1];
 
-        if(FactionManager.getFactionByName(namedFaction) == null) {
+        if (FactionManager.getFactionByName(namedFaction) == null) {
             player.sendMessage(Messages.factionNotFound());
             return;
         }
 
-        PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByName(namedFaction);
+        PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByName(namedFaction);
 
-        if(!faction.getPendingInvites().contains(player.getUniqueId()) && !player.hasPermission(Permissions.ADMIN)) {
+        if (!faction.getPendingInvites().contains(player.getUniqueId()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.noPendingInviteOther());
             return;
         }
 
-        if(faction.getRoster(false).size() >= Configuration.MAX_FAC_SIZE && !player.hasPermission(Permissions.ADMIN)) {
+        if (faction.getRoster(false).size() >= Configuration.MAX_FAC_SIZE && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.factionFull());
             return;
         }
 
-        if(faction.isFrozen() && !player.hasPermission(Permissions.ADMIN)) {
+        if (faction.isFrozen() && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.unfrozenRequiredOther());
             return;
         }

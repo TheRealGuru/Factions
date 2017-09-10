@@ -13,8 +13,8 @@ public class PillarManager {
     public static HashSet<Pillar> getActivePillars(UUID uuid) {
         HashSet<Pillar> results = new HashSet<Pillar>();
 
-        for(Pillar pillars : activePillars) {
-            if(!pillars.getDisplayedTo().equals(uuid)) continue;
+        for (Pillar pillars : activePillars) {
+            if (!pillars.getDisplayedTo().equals(uuid)) continue;
 
             results.add(pillars);
         }

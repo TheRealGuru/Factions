@@ -14,8 +14,7 @@ import org.bukkit.entity.Player;
 
 public class FUnallyCommand extends FCommand {
 
-    public FUnallyCommand()
-    {
+    public FUnallyCommand() {
         super(
                 "unally",
                 null,
@@ -30,18 +29,15 @@ public class FUnallyCommand extends FCommand {
     }
 
     @Override
-    public void onCommand(CommandSender sender, String args[])
-    {
-        if(!(sender instanceof Player) && isPlayerOnly())
-        {
+    public void onCommand(CommandSender sender, String args[]) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs())
-        {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
@@ -51,36 +47,31 @@ public class FUnallyCommand extends FCommand {
         Faction faction = FactionManager.getFactionByPlayer(player.getUniqueId());
         Faction allyFaction = FactionManager.getFactionByName(namedFaction);
 
-        if(!Configuration.ALLIANCES_ENABLED)
-        {
+        if (!Configuration.ALLIANCES_ENABLED) {
             player.sendMessage(Messages.alliesDisabled());
             return;
         }
 
-        if(faction == null)
-        {
+        if (faction == null) {
             player.sendMessage(Messages.notInFaction());
             return;
         }
 
-        PlayerFaction playerFaction = (PlayerFaction)faction;
+        PlayerFaction playerFaction = (PlayerFaction) faction;
 
-        if(!playerFaction.getOfficers().contains(player.getUniqueId()) && !playerFaction.getLeader().equals(player.getUniqueId()))
-        {
+        if (!playerFaction.getOfficers().contains(player.getUniqueId()) && !playerFaction.getLeader().equals(player.getUniqueId())) {
             player.sendMessage(Messages.officerRequired());
             return;
         }
 
-        if(allyFaction == null || !(allyFaction instanceof PlayerFaction))
-        {
+        if (allyFaction == null || !(allyFaction instanceof PlayerFaction)) {
             player.sendMessage(Messages.factionNotFound());
             return;
         }
 
-        PlayerFaction playerAllyFaction = (PlayerFaction)allyFaction;
+        PlayerFaction playerAllyFaction = (PlayerFaction) allyFaction;
 
-        if(playerFaction.getPendingAllies().contains(playerAllyFaction.getFactionID()))
-        {
+        if (playerFaction.getPendingAllies().contains(playerAllyFaction.getFactionID())) {
             playerFaction.getPendingAllies().remove(playerAllyFaction.getFactionID());
 
             playerFaction.sendMessage(Messages.allyRequestRevoked(player.getName(), playerAllyFaction.getDisplayName()));
@@ -89,8 +80,7 @@ public class FUnallyCommand extends FCommand {
             return;
         }
 
-        if(!playerFaction.getAllies().contains(playerAllyFaction))
-        {
+        if (!playerFaction.getAllies().contains(playerAllyFaction)) {
             player.sendMessage(Messages.notAllied());
             return;
         }

@@ -12,7 +12,7 @@ public class WorldEventsListener implements Listener {
 
     @EventHandler
     public void onBlockSpread(BlockSpreadEvent event) {
-        if(!event.getBlock().getType().equals(Material.FIRE))
+        if (!event.getBlock().getType().equals(Material.FIRE))
             return;
 
         event.setCancelled(true);
@@ -22,7 +22,7 @@ public class WorldEventsListener implements Listener {
     public void onBlockChange(BlockFromToEvent event) {
         Block block = event.getToBlock();
 
-        if(block.getType().equals(Material.OBSIDIAN) || block.getType().equals(Material.COBBLESTONE) || block.getType().equals(Material.STONE))
+        if (block.getType().equals(Material.OBSIDIAN) || block.getType().equals(Material.COBBLESTONE) || block.getType().equals(Material.STONE))
             event.setCancelled(true);
     }
 

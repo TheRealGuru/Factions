@@ -15,7 +15,7 @@ public class LocationSerialization {
                 .append(":@p;" + location.getPitch())
                 .append(":@yaw;" + location.getYaw());
 
-        if(locationBuilder.length() > 0) {
+        if (locationBuilder.length() > 0) {
             return locationBuilder.toString();
         }
 

@@ -10,11 +10,12 @@ import java.util.logging.Level;
 
 public class ChatChannelManager {
 
-    @Getter public static HashSet<ChatChannel> activeChatChannels = new HashSet<>();
+    @Getter
+    public static HashSet<ChatChannel> activeChatChannels = new HashSet<>();
 
     public static ChatChannel getChannel(UUID uuid) {
-        for(ChatChannel activeChannels : activeChatChannels) {
-            if(activeChannels.getChannelMembers().contains(uuid)) {
+        for (ChatChannel activeChannels : activeChatChannels) {
+            if (activeChannels.getChannelMembers().contains(uuid)) {
                 return activeChannels;
             }
         }
@@ -23,8 +24,8 @@ public class ChatChannelManager {
     }
 
     public static ChatChannel getChannelByName(String query) {
-        for(ChatChannel activeChannels : activeChatChannels) {
-            if(activeChannels.getChannelName().equalsIgnoreCase(query)) {
+        for (ChatChannel activeChannels : activeChatChannels) {
+            if (activeChannels.getChannelName().equalsIgnoreCase(query)) {
                 return activeChannels;
             }
         }
@@ -33,12 +34,12 @@ public class ChatChannelManager {
     }
 
     public static void addToChannel(UUID uuid, ChatChannel channel) {
-        if(getChannel(uuid) != null)
+        if (getChannel(uuid) != null)
             return;
 
         channel.getChannelMembers().add(uuid);
 
-        if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
+        if (Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
             Logger.log(Level.INFO, Bukkit.getPlayer(uuid).getName() + " joined chat-channel '" + channel.getChannelName() + "'");
         }
     }
@@ -46,12 +47,12 @@ public class ChatChannelManager {
     public static void removeFromChannel(UUID uuid) {
         ChatChannel channel = getChannel(uuid);
 
-        if(channel == null)
+        if (channel == null)
             return;
 
         channel.getChannelMembers().remove(uuid);
 
-        if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
+        if (Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
             Logger.log(Level.INFO, Bukkit.getPlayer(uuid).getName() + " left chat-channel '" + channel.getChannelName() + "'");
         }
     }

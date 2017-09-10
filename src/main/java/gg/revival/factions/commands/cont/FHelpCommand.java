@@ -25,25 +25,25 @@ public class FHelpCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
-        if(args.length == 1) {
+        if (args.length == 1) {
             Messages.sendHelpPage(player, null);
             return;
         }
 
-        for(CmdCategory categories : CmdCategory.values()) {
-            if(categories.toString().equalsIgnoreCase(args[1])) {
+        for (CmdCategory categories : CmdCategory.values()) {
+            if (categories.toString().equalsIgnoreCase(args[1])) {
                 Messages.sendHelpPage(player, categories);
                 return;
             }

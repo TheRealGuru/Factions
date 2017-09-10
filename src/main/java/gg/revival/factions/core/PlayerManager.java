@@ -7,8 +7,8 @@ import gg.revival.driver.MongoAPI;
 import gg.revival.factions.FP;
 import gg.revival.factions.db.DatabaseManager;
 import gg.revival.factions.obj.FPlayer;
+import gg.revival.factions.timers.Timer;
 import gg.revival.factions.tools.Configuration;
-import gg.revival.factions.tools.Logger;
 import lombok.Getter;
 import org.bson.Document;
 import org.bukkit.Bukkit;
@@ -16,24 +16,23 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class PlayerManager {
 
-    @Getter static Set<FPlayer> activePlayers = new HashSet<>();
+    @Getter static List<FPlayer> activePlayers = new ArrayList<>();
+
+    public static List<FPlayer> getActivePlayersSnapshot() {
+        List<FPlayer> foundPlayers = new ArrayList<>();
+        foundPlayers.addAll(activePlayers);
+        return foundPlayers;
+    }
 
     public static boolean isLoaded(UUID uuid) {
-        if (getPlayer(uuid) != null) {
-            return true;
-        }
-
-        return false;
+        return getPlayer(uuid) != null;
     }
 
     public static FPlayer getPlayer(UUID uuid) {
-        List<FPlayer> playerCache = new CopyOnWriteArrayList<>(activePlayers);
-
-        for (FPlayer players : playerCache) {
+        for (FPlayer players : getActivePlayersSnapshot()) {
             if (players.getUuid().equals(uuid)) {
                 return players;
             }
@@ -63,12 +62,10 @@ public class PlayerManager {
     }
 
     public static void saveAllProfiles(boolean unsafe, boolean unload) {
-        for(Player players : Bukkit.getOnlinePlayers()) {
-            if(unsafe) {
+        for (Player players : Bukkit.getOnlinePlayers()) {
+            if (unsafe) {
                 unsafeSaveProfile(PlayerManager.getPlayer(players.getUniqueId()));
-            }
-
-            else {
+            } else {
                 saveProfile(PlayerManager.getPlayer(players.getUniqueId()), unload);
             }
         }
@@ -82,7 +79,7 @@ public class PlayerManager {
 
         new BukkitRunnable() {
             public void run() {
-                if(DatabaseManager.getPlayersCollection() == null)
+                if (DatabaseManager.getPlayersCollection() == null)
                     DatabaseManager.setPlayersCollection(MongoAPI.getCollection(Configuration.DB_NAME, "players"));
 
                 MongoCollection<Document> collection = DatabaseManager.getPlayersCollection();
@@ -104,12 +101,12 @@ public class PlayerManager {
         if (!Configuration.DB_ENABLED)
             return;
 
-        if(player == null)
+        if (player == null)
             return;
 
         new BukkitRunnable() {
             public void run() {
-                if(DatabaseManager.getPlayersCollection() == null)
+                if (DatabaseManager.getPlayersCollection() == null)
                     DatabaseManager.setPlayersCollection(MongoAPI.getCollection(Configuration.DB_NAME, "players"));
 
                 MongoCollection<Document> collection = DatabaseManager.getPlayersCollection();
@@ -128,7 +125,7 @@ public class PlayerManager {
                 if (unloadOnCompletion) {
                     new BukkitRunnable() {
                         public void run() {
-                            if(Bukkit.getPlayer(player.getUuid()) == null || !Bukkit.getPlayer(player.getUuid()).isOnline()) {
+                            if (Bukkit.getPlayer(player.getUuid()) == null || !Bukkit.getPlayer(player.getUuid()).isOnline()) {
                                 unloadPlayer(player.getUuid());
                             }
                         }
@@ -140,16 +137,17 @@ public class PlayerManager {
 
     /**
      * Runs a save on the main thread, should only be used in the onDisable method
+     *
      * @param player
      */
     public static void unsafeSaveProfile(FPlayer player) {
         if (!Configuration.DB_ENABLED)
             return;
 
-        if(player == null)
+        if (player == null)
             return;
 
-        if(DatabaseManager.getPlayersCollection() == null)
+        if (DatabaseManager.getPlayersCollection() == null)
             DatabaseManager.setPlayersCollection(MongoAPI.getCollection(Configuration.DB_NAME, "players"));
 
         MongoCollection<Document> collection = DatabaseManager.getPlayersCollection();

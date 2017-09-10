@@ -1,21 +1,14 @@
 package gg.revival.factions.commands.cont;
 
-import gg.revival.factions.FP;
 import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.tools.Messages;
-import gg.revival.factions.tools.OfflinePlayerCallback;
 import gg.revival.factions.tools.OfflinePlayerLookup;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.UUID;
 
 public class FLeaderCommand extends FCommand {
 
@@ -35,21 +28,21 @@ public class FLeaderCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
-        PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
+        PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
 
-        if(!faction.getLeader().equals(player.getUniqueId())) {
+        if (!faction.getLeader().equals(player.getUniqueId())) {
             player.sendMessage(Messages.leaderRequired());
             return;
         }
@@ -57,13 +50,12 @@ public class FLeaderCommand extends FCommand {
         String namedPlayer = args[1];
 
         OfflinePlayerLookup.getOfflinePlayerByName(namedPlayer, (uuid, username) -> {
-            if(uuid == null || username == null)
-            {
+            if (uuid == null || username == null) {
                 player.sendMessage(Messages.playerNotFound());
                 return;
             }
 
-            if(!faction.getRoster(false).contains(uuid)) {
+            if (!faction.getRoster(false).contains(uuid)) {
                 player.sendMessage(Messages.playerNotInFaction());
                 return;
             }

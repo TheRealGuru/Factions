@@ -1,22 +1,17 @@
 package gg.revival.factions.commands.cont;
 
-import gg.revival.factions.FP;
 import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.tools.Messages;
-import gg.revival.factions.tools.OfflinePlayerCallback;
 import gg.revival.factions.tools.OfflinePlayerLookup;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
-import java.util.UUID;
 
 public class FUninviteCommand extends FCommand {
 

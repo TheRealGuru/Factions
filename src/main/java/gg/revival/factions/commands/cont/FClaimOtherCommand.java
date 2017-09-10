@@ -32,38 +32,38 @@ public class FClaimOtherCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(!player.hasPermission(getPermission())) {
+        if (!player.hasPermission(getPermission())) {
             player.sendMessage(Messages.noPermission());
             return;
         }
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
         String factionName = args[1];
 
-        if(ClaimManager.getPendingClaim(player.getUniqueId()) != null) {
+        if (ClaimManager.getPendingClaim(player.getUniqueId()) != null) {
             player.sendMessage(Messages.alreadyClaimingLand());
             return;
         }
 
         Faction faction = FactionManager.getFactionByName(factionName);
 
-        if(faction == null) {
+        if (faction == null) {
             player.sendMessage(Messages.factionNotFound());
             return;
         }
 
-        if(player.getInventory().firstEmpty() == -1) {
+        if (player.getInventory().firstEmpty() == -1) {
             player.sendMessage(Messages.inventoryFull());
             return;
         }
@@ -75,7 +75,7 @@ public class FClaimOtherCommand extends FCommand {
 
         new BukkitRunnable() {
             public void run() {
-                if(ClaimManager.getPendingClaim(player.getUniqueId()) == pendingClaim) {
+                if (ClaimManager.getPendingClaim(player.getUniqueId()) == pendingClaim) {
                     ClaimManager.getClaimEditors().remove(player.getUniqueId());
                 }
             }

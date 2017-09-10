@@ -35,10 +35,10 @@ public class FThawCommand extends FCommand {
     public void onCommand(CommandSender sender, String args[]) {
         String unfreezer = "CONSOLE";
 
-        if(sender instanceof Player) {
-            Player player = (Player)sender;
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
 
-            if(!player.hasPermission(getPermission())) {
+            if (!player.hasPermission(getPermission())) {
                 player.sendMessage(Messages.noPermission());
                 return;
             }
@@ -46,28 +46,28 @@ public class FThawCommand extends FCommand {
             unfreezer = player.getName();
         }
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             sender.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
         String factionName = args[1];
 
-        if(FactionManager.getFactionByName(factionName) == null) {
+        if (FactionManager.getFactionByName(factionName) == null) {
             sender.sendMessage(Messages.factionNotFound());
             return;
         }
 
         Faction faction = FactionManager.getFactionByName(factionName);
 
-        if(!(faction instanceof PlayerFaction)) {
+        if (!(faction instanceof PlayerFaction)) {
             sender.sendMessage(Messages.factionNotFound());
             return;
         }
 
-        PlayerFaction playerFaction = (PlayerFaction)faction;
+        PlayerFaction playerFaction = (PlayerFaction) faction;
 
-        if(!playerFaction.isFrozen()) {
+        if (!playerFaction.isFrozen()) {
             sender.sendMessage(Messages.powerNotFrozen());
             return;
         }

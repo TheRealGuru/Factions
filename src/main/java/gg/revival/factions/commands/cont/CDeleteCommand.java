@@ -26,26 +26,26 @@ public class CDeleteCommand extends CCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length > getMaxArgs()) {
+        if (args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
-        if(ChatChannelManager.getChannel(player.getUniqueId()) == null) {
+        if (ChatChannelManager.getChannel(player.getUniqueId()) == null) {
             player.sendMessage(Messages.notInChatChannel());
             return;
         }
 
         ChatChannel channel = ChatChannelManager.getChannel(player.getUniqueId());
 
-        if(!channel.getOwner().equals(player.getUniqueId()) && !player.hasPermission(Permissions.ADMIN)) {
+        if (!channel.getOwner().equals(player.getUniqueId()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.noPermission());
             return;
         }

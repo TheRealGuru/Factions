@@ -20,16 +20,15 @@ import java.util.*;
 
 public class ToolBox {
 
-    @Getter public static final List<BlockFace> flatDirections = Arrays.asList(BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST);
+    @Getter
+    public static final List<BlockFace> flatDirections = Arrays.asList(BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST);
 
     public static String getFormattedCooldown(boolean showDecimal, long duration) {
-        if(showDecimal) {
+        if (showDecimal) {
             double seconds = Math.abs(duration / 1000.0f);
             return String.format("%.1f", seconds);
-        }
-
-        else {
-            return String.valueOf((int)duration / 1000L);
+        } else {
+            return String.valueOf((int) duration / 1000L);
         }
     }
 
@@ -41,8 +40,7 @@ public class ToolBox {
 
         List<String> lore = new ArrayList<>();
 
-        for(String unformattedLore : FileManager.getConfig().getStringList("custom-items.faction-claiming-stick.description"))
-        {
+        for (String unformattedLore : FileManager.getConfig().getStringList("custom-items.faction-claiming-stick.description")) {
             lore.add(ChatColor.translateAlternateColorCodes('&', unformattedLore));
         }
 
@@ -54,8 +52,8 @@ public class ToolBox {
     }
 
     public static void sendMessageWithPermission(String message, String permissions) {
-        for(Player players : Bukkit.getOnlinePlayers()) {
-            if(!players.hasPermission(permissions)) continue;
+        for (Player players : Bukkit.getOnlinePlayers()) {
+            if (!players.hasPermission(permissions)) continue;
 
             players.sendMessage(message);
         }
@@ -115,11 +113,11 @@ public class ToolBox {
     }
 
     public static boolean isNonBuildableWarzone(Location location) {
-        if(isWarzone(location)) {
+        if (isWarzone(location)) {
             double x = location.getX();
             double z = location.getZ();
 
-            if(x <= Configuration.BUILDABLE_WARZONE_RADIUS && z <= Configuration.BUILDABLE_WARZONE_RADIUS) {
+            if (x <= Configuration.BUILDABLE_WARZONE_RADIUS && z <= Configuration.BUILDABLE_WARZONE_RADIUS) {
                 return true;
             }
         }
@@ -151,11 +149,11 @@ public class ToolBox {
     public static boolean isInSafezone(Player mcPlayer) {
         FPlayer player = PlayerManager.getPlayer(mcPlayer.getUniqueId());
 
-        if(player.getLocation().getCurrentClaim() != null &&
+        if (player.getLocation().getCurrentClaim() != null &&
                 player.getLocation().getCurrentClaim().getClaimOwner() instanceof ServerFaction) {
-            ServerFaction serverFaction = (ServerFaction)player.getLocation().getCurrentClaim().getClaimOwner();
+            ServerFaction serverFaction = (ServerFaction) player.getLocation().getCurrentClaim().getClaimOwner();
 
-            if(serverFaction.getType().equals(ServerClaimType.SAFEZONE)) {
+            if (serverFaction.getType().equals(ServerClaimType.SAFEZONE)) {
                 return true;
             }
         }
@@ -174,7 +172,7 @@ public class ToolBox {
 
         Arrays.sort(vals);
 
-        if(min > vals[1] || max < vals[0])
+        if (min > vals[1] || max < vals[0])
             return false;
 
         vals[0] = z1;
@@ -182,7 +180,7 @@ public class ToolBox {
 
         Arrays.sort(vals);
 
-        if(min > vals[1] || max < vals[0])
+        if (min > vals[1] || max < vals[0])
             return false;
 
         return true;
@@ -192,10 +190,10 @@ public class ToolBox {
         BlockIterator iterator = new BlockIterator(player, dist);
         Block lastBlock = iterator.next();
 
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             lastBlock = iterator.next();
 
-            if(lastBlock.getType().equals(Material.AIR)) continue;
+            if (lastBlock.getType().equals(Material.AIR)) continue;
 
             break;
         }
@@ -226,7 +224,7 @@ public class ToolBox {
         Random random = new Random();
 
         while (salt.length() < length) {
-            int index = (int)(random.nextFloat() * SALTCHARS.length());
+            int index = (int) (random.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }
 
@@ -245,35 +243,27 @@ public class ToolBox {
                 time = NumberUtils.toInt(timeStr) * 60;
             }
 
-        }
-
-        else if (string.contains("h")) {
+        } else if (string.contains("h")) {
             String timeStr = strip(string);
 
             if (NumberUtils.isNumber(timeStr)) {
                 time = NumberUtils.toInt(timeStr) * 3600;
             }
 
-        }
-
-        else if (string.contains("s")) {
+        } else if (string.contains("s")) {
             String timeStr = strip(string);
 
             if (NumberUtils.isNumber(timeStr)) {
                 time = NumberUtils.toInt(timeStr);
             }
 
-        }
-
-        else if (string.contains("d")) {
+        } else if (string.contains("d")) {
             String timeStr = strip(string);
 
             if (NumberUtils.isNumber(timeStr)) {
                 time = NumberUtils.toInt(timeStr) * 86400;
             }
-        }
-
-        else if (string.contains("y")) {
+        } else if (string.contains("y")) {
             String timeStr = strip(string);
 
             if (NumberUtils.isNumber(timeStr)) {

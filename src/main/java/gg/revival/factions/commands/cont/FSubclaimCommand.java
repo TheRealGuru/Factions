@@ -43,56 +43,56 @@ public class FSubclaimCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
-        if(FactionManager.getFactionByPlayer(player.getUniqueId()) == null) {
+        if (FactionManager.getFactionByPlayer(player.getUniqueId()) == null) {
             player.sendMessage(Messages.notInFaction());
             return;
         }
 
-        PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
+        PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
 
-        if(!faction.getLeader().equals(player.getUniqueId()) && !faction.getOfficers().contains(player.getUniqueId())) {
+        if (!faction.getLeader().equals(player.getUniqueId()) && !faction.getOfficers().contains(player.getUniqueId())) {
             player.sendMessage(Messages.officerRequired());
             return;
         }
 
         Block block = ToolBox.getTargetBlock(player, 4);
 
-        if(block == null) {
+        if (block == null) {
             player.sendMessage(Messages.notLookingAtChest());
             return;
         }
 
-        if(!block.getType().equals(Material.CHEST) && !block.getType().equals(Material.TRAPPED_CHEST)) {
+        if (!block.getType().equals(Material.CHEST) && !block.getType().equals(Material.TRAPPED_CHEST)) {
             player.sendMessage(Messages.notLookingAtChest());
             return;
         }
 
-        Chest chest = (Chest)block.getState();
+        Chest chest = (Chest) block.getState();
         DoubleChest doubleChest = null;
 
-        if(chest.getInventory().getHolder() instanceof DoubleChest) {
-            doubleChest = (DoubleChest)chest.getInventory().getHolder();
+        if (chest.getInventory().getHolder() instanceof DoubleChest) {
+            doubleChest = (DoubleChest) chest.getInventory().getHolder();
         }
 
-        if(chest != null && doubleChest == null) {
+        if (chest != null && doubleChest == null) {
             Subclaim subclaim = null;
 
-            if(SubclaimManager.getSubclaimAt(chest.getLocation()) != null) {
+            if (SubclaimManager.getSubclaimAt(chest.getLocation()) != null) {
                 subclaim = SubclaimManager.getSubclaimAt(chest.getLocation());
 
-                if(faction.getLeader().equals(player.getUniqueId())) {
+                if (faction.getLeader().equals(player.getUniqueId())) {
                     SubclaimGUI subclaimGUI = new SubclaimGUI(player.getUniqueId(), subclaim);
                     subclaimGUI.open();
 
@@ -101,7 +101,7 @@ public class FSubclaimCommand extends FCommand {
                     return;
                 }
 
-                if(subclaim.isOfficerAccess() && faction.getOfficers().contains(player.getUniqueId())) {
+                if (subclaim.isOfficerAccess() && faction.getOfficers().contains(player.getUniqueId())) {
                     SubclaimGUI subclaimGUI = new SubclaimGUI(player.getUniqueId(), subclaim);
                     subclaimGUI.open();
 
@@ -114,8 +114,8 @@ public class FSubclaimCommand extends FCommand {
                 return;
             }
 
-            for(Claim claims : faction.getClaims()) {
-                if(!claims.inside(chest.getLocation(), false)) continue;
+            for (Claim claims : faction.getClaims()) {
+                if (!claims.inside(chest.getLocation(), false)) continue;
 
                 List<UUID> accessPlayers = new ArrayList<>();
                 accessPlayers.add(player.getUniqueId());
@@ -138,13 +138,13 @@ public class FSubclaimCommand extends FCommand {
             return;
         }
 
-        if(doubleChest != null) {
+        if (doubleChest != null) {
             Subclaim subclaim = null;
 
-            if(SubclaimManager.getSubclaimAt(chest.getBlock().getLocation()) != null) {
+            if (SubclaimManager.getSubclaimAt(chest.getBlock().getLocation()) != null) {
                 subclaim = SubclaimManager.getSubclaimAt(chest.getBlock().getLocation());
 
-                if(faction.getLeader().equals(player.getUniqueId())) {
+                if (faction.getLeader().equals(player.getUniqueId())) {
                     SubclaimGUI subclaimGUI = new SubclaimGUI(player.getUniqueId(), subclaim);
                     subclaimGUI.open();
 
@@ -153,7 +153,7 @@ public class FSubclaimCommand extends FCommand {
                     return;
                 }
 
-                if(subclaim.isOfficerAccess() && faction.getOfficers().contains(player.getUniqueId())) {
+                if (subclaim.isOfficerAccess() && faction.getOfficers().contains(player.getUniqueId())) {
                     SubclaimGUI subclaimGUI = new SubclaimGUI(player.getUniqueId(), subclaim);
                     subclaimGUI.open();
 
@@ -162,7 +162,7 @@ public class FSubclaimCommand extends FCommand {
                     return;
                 }
 
-                if(subclaim.getPlayerAccess().contains(player.getUniqueId()) && subclaim.getSubclaimHolder().getRoster(false).contains(player.getUniqueId())) {
+                if (subclaim.getPlayerAccess().contains(player.getUniqueId()) && subclaim.getSubclaimHolder().getRoster(false).contains(player.getUniqueId())) {
                     SubclaimGUI subclaimGUI = new SubclaimGUI(player.getUniqueId(), subclaim);
                     subclaimGUI.open();
 
@@ -175,12 +175,13 @@ public class FSubclaimCommand extends FCommand {
                 return;
             }
 
-            for(BlockFace directions : ToolBox.getFlatDirections()) {
-                if(SubclaimManager.getSubclaimAt(chest.getBlock().getRelative(directions).getLocation()) == null) continue;
+            for (BlockFace directions : ToolBox.getFlatDirections()) {
+                if (SubclaimManager.getSubclaimAt(chest.getBlock().getRelative(directions).getLocation()) == null)
+                    continue;
 
                 subclaim = SubclaimManager.getSubclaimAt(chest.getBlock().getRelative(directions).getLocation());
 
-                if(faction.getLeader().equals(player.getUniqueId())) {
+                if (faction.getLeader().equals(player.getUniqueId())) {
                     SubclaimGUI subclaimGUI = new SubclaimGUI(player.getUniqueId(), subclaim);
                     subclaimGUI.open();
 
@@ -189,7 +190,7 @@ public class FSubclaimCommand extends FCommand {
                     return;
                 }
 
-                if(subclaim.isOfficerAccess() && faction.getOfficers().contains(player.getUniqueId())) {
+                if (subclaim.isOfficerAccess() && faction.getOfficers().contains(player.getUniqueId())) {
                     SubclaimGUI subclaimGUI = new SubclaimGUI(player.getUniqueId(), subclaim);
                     subclaimGUI.open();
 
@@ -198,7 +199,7 @@ public class FSubclaimCommand extends FCommand {
                     return;
                 }
 
-                if(subclaim.getPlayerAccess().contains(player.getUniqueId()) && subclaim.getSubclaimHolder().getRoster(false).contains(player.getUniqueId())) {
+                if (subclaim.getPlayerAccess().contains(player.getUniqueId()) && subclaim.getSubclaimHolder().getRoster(false).contains(player.getUniqueId())) {
                     SubclaimGUI subclaimGUI = new SubclaimGUI(player.getUniqueId(), subclaim);
                     subclaimGUI.open();
 
@@ -211,8 +212,8 @@ public class FSubclaimCommand extends FCommand {
                 return;
             }
 
-            for(Claim claims : faction.getClaims()) {
-                if(!claims.inside(chest.getLocation(), false)) continue;
+            for (Claim claims : faction.getClaims()) {
+                if (!claims.inside(chest.getLocation(), false)) continue;
 
                 List<UUID> accessPlayers = new ArrayList<>();
                 accessPlayers.add(player.getUniqueId());

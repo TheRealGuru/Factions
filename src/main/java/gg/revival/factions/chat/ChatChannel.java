@@ -10,12 +10,20 @@ import java.util.UUID;
 
 public class ChatChannel {
 
-    @Getter UUID owner;
-    @Getter @Setter String channelName;
-    @Getter @Setter String channelPassword;
-    @Getter List<UUID> channelMembers;
-    @Getter List<UUID> chatroom;
-    @Getter List<UUID> channelInvites;
+    @Getter
+    UUID owner;
+    @Getter
+    @Setter
+    String channelName;
+    @Getter
+    @Setter
+    String channelPassword;
+    @Getter
+    List<UUID> channelMembers;
+    @Getter
+    List<UUID> chatroom;
+    @Getter
+    List<UUID> channelInvites;
 
     public ChatChannel(UUID owner, String channelName, String channelPassword) {
         this.owner = owner;
@@ -27,8 +35,8 @@ public class ChatChannel {
     }
 
     public void sendMessage(String message) {
-        for(UUID uuid : channelMembers) {
-            if(Bukkit.getPlayer(uuid) == null || !Bukkit.getPlayer(uuid).isOnline()) continue;
+        for (UUID uuid : channelMembers) {
+            if (Bukkit.getPlayer(uuid) == null || !Bukkit.getPlayer(uuid).isOnline()) continue;
 
             Bukkit.getPlayer(uuid).sendMessage(message);
         }

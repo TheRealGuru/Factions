@@ -49,10 +49,10 @@ public class ClaimEventsListener implements Listener {
     public void onItemDrop(PlayerDropItemEvent event) {
         ItemStack item = event.getItemDrop().getItemStack();
 
-        if(
+        if (
                 item != null &&
-                item.getItemMeta() != null && item.getItemMeta().getDisplayName() != null &&
-                item.getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
+                        item.getItemMeta() != null && item.getItemMeta().getDisplayName() != null &&
+                        item.getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
 
             event.getItemDrop().remove();
         }
@@ -60,10 +60,10 @@ public class ClaimEventsListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if(
+        if (
                 event.getCurrentItem() != null &&
-                event.getCurrentItem().getItemMeta() != null && event.getCurrentItem().getItemMeta().getDisplayName() != null &&
-                event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
+                        event.getCurrentItem().getItemMeta() != null && event.getCurrentItem().getItemMeta().getDisplayName() != null &&
+                        event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
 
             event.setCurrentItem(null);
             event.setCancelled(true);
@@ -74,16 +74,16 @@ public class ClaimEventsListener implements Listener {
     public void onPistonExtension(BlockPistonExtendEvent event) {
         Block piston = event.getBlock();
 
-        if(event.getBlocks().isEmpty())
+        if (event.getBlocks().isEmpty())
             return;
 
-        for(Claim claims : ClaimManager.getActiveClaims()) {
-            for(Block blocks : event.getBlocks()) {
-                if(claims.inside(blocks.getLocation(), false) && !claims.inside(piston.getLocation(), false)) {
+        for (Claim claims : ClaimManager.getActiveClaims()) {
+            for (Block blocks : event.getBlocks()) {
+                if (claims.inside(blocks.getLocation(), false) && !claims.inside(piston.getLocation(), false)) {
                     event.setCancelled(true);
                 }
 
-                if(claims.nearby(blocks.getLocation(), Configuration.CLAIM_BUFFER) && !claims.inside(piston.getLocation(), false)) {
+                if (claims.nearby(blocks.getLocation(), Configuration.CLAIM_BUFFER) && !claims.inside(piston.getLocation(), false)) {
                     event.setCancelled(true);
                 }
             }
@@ -95,8 +95,8 @@ public class ClaimEventsListener implements Listener {
         Block piston = event.getBlock();
         Location retractLocation = event.getRetractLocation();
 
-        for(Claim claims : ClaimManager.getActiveClaims()) {
-            if(claims.inside(retractLocation, false) && !claims.inside(piston.getLocation(), false)) {
+        for (Claim claims : ClaimManager.getActiveClaims()) {
+            if (claims.inside(retractLocation, false) && !claims.inside(piston.getLocation(), false)) {
                 event.setCancelled(true);
                 return;
             }
@@ -108,16 +108,17 @@ public class ClaimEventsListener implements Listener {
         Entity entity = event.getEntity();
         Entity target = event.getTarget();
 
-        if(!(target instanceof Player))
+        if (!(target instanceof Player))
             return;
 
-        Player player = (Player)target;
+        Player player = (Player) target;
 
-        if(PlayerManager.getPlayer(player.getUniqueId()) == null || PlayerManager.getPlayer(player.getUniqueId()).getLocation() == null) return;
+        if (PlayerManager.getPlayer(player.getUniqueId()) == null || PlayerManager.getPlayer(player.getUniqueId()).getLocation() == null)
+            return;
 
         FLocation location = PlayerManager.getPlayer(player.getUniqueId()).getLocation();
 
-        if(location.getCurrentClaim() != null && location.getCurrentClaim().getClaimOwner() instanceof ServerFaction) {
+        if (location.getCurrentClaim() != null && location.getCurrentClaim().getClaimOwner() instanceof ServerFaction) {
             event.setCancelled(true);
         }
     }
@@ -126,10 +127,10 @@ public class ClaimEventsListener implements Listener {
     public void onEntitySpawn(EntitySpawnEvent event) {
         Location location = event.getLocation();
 
-        for(Claim claims : ClaimManager.getActiveClaims()) {
-            if(!claims.inside(location, true)) continue;
+        for (Claim claims : ClaimManager.getActiveClaims()) {
+            if (!claims.inside(location, true)) continue;
 
-            if(claims.getClaimOwner() instanceof ServerFaction) {
+            if (claims.getClaimOwner() instanceof ServerFaction) {
                 event.setCancelled(true);
             }
         }
@@ -137,6 +138,7 @@ public class ClaimEventsListener implements Listener {
 
     /**
      * This is used to prevent block-glitching & mounting entities to get inside claims
+     *
      * @param event
      */
     @EventHandler
@@ -144,18 +146,18 @@ public class ClaimEventsListener implements Listener {
         Entity mounted = event.getEntity();
         Entity mounter = event.getMount();
 
-        if(!(mounter instanceof Player))
+        if (!(mounter instanceof Player))
             return;
 
-        Player player = (Player)mounter;
+        Player player = (Player) mounter;
 
-        for(Claim claims : ClaimManager.getActiveClaims()) {
-            if(!claims.inside(mounted.getLocation(), true)) continue;
+        for (Claim claims : ClaimManager.getActiveClaims()) {
+            if (!claims.inside(mounted.getLocation(), true)) continue;
 
-            if(claims.getClaimOwner() instanceof PlayerFaction) {
-                PlayerFaction faction = (PlayerFaction)claims.getClaimOwner();
+            if (claims.getClaimOwner() instanceof PlayerFaction) {
+                PlayerFaction faction = (PlayerFaction) claims.getClaimOwner();
 
-                if(!faction.getRoster(false).contains(player.getUniqueId())) {
+                if (!faction.getRoster(false).contains(player.getUniqueId())) {
                     event.setCancelled(true);
                     return;
                 }
@@ -165,6 +167,7 @@ public class ClaimEventsListener implements Listener {
 
     /**
      * For whatever stupid reason, placing water/lava buckets can not be cancelled in the PlayerInteractEvent
+     *
      * @param event
      */
     @EventHandler
@@ -172,19 +175,19 @@ public class ClaimEventsListener implements Listener {
         Player player = event.getPlayer();
         Block block = event.getBlockClicked();
 
-        for(Claim claims : ClaimManager.getActiveClaims()) {
-            if(!claims.inside(block.getLocation(), false)) continue;
+        for (Claim claims : ClaimManager.getActiveClaims()) {
+            if (!claims.inside(block.getLocation(), false)) continue;
 
-            if(claims.getClaimOwner() instanceof ServerFaction && !player.hasPermission(Permissions.ADMIN)) {
+            if (claims.getClaimOwner() instanceof ServerFaction && !player.hasPermission(Permissions.ADMIN)) {
                 player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + claims.getClaimOwner().getDisplayName()));
                 event.setCancelled(true);
                 return;
             }
 
-            if(claims.getClaimOwner() instanceof PlayerFaction) {
-                PlayerFaction faction = (PlayerFaction)claims.getClaimOwner();
+            if (claims.getClaimOwner() instanceof PlayerFaction) {
+                PlayerFaction faction = (PlayerFaction) claims.getClaimOwner();
 
-                if(!faction.getRoster(false).contains(player.getUniqueId()) && !faction.isRaidable() && !player.hasPermission(Permissions.ADMIN)) {
+                if (!faction.getRoster(false).contains(player.getUniqueId()) && !faction.isRaidable() && !player.hasPermission(Permissions.ADMIN)) {
                     player.sendMessage(Messages.landClaimedBy(ChatColor.RED + faction.getDisplayName()));
                     event.setCancelled(true);
                     return;
@@ -192,19 +195,19 @@ public class ClaimEventsListener implements Listener {
             }
         }
 
-        if(ToolBox.isNonBuildableWarzone(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
+        if (ToolBox.isNonBuildableWarzone(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.landClaimedBy(Configuration.WARZONE_NAME));
             event.setCancelled(true);
             return;
         }
 
-        if(ToolBox.isNetherWarzone(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
+        if (ToolBox.isNetherWarzone(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.landClaimedBy(Configuration.NETHER_WARZONE_NAME));
             event.setCancelled(true);
             return;
         }
 
-        if(ToolBox.isEnd(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
+        if (ToolBox.isEnd(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.landClaimedBy(Configuration.END_NAME));
             event.setCancelled(true);
             return;
@@ -214,6 +217,7 @@ public class ClaimEventsListener implements Listener {
     /**
      * This event is used to stop Water/Lava flow in to other claims.
      * It also prevents things such as cobblestone generators entering the claim
+     *
      * @param event
      */
     @EventHandler
@@ -221,13 +225,13 @@ public class ClaimEventsListener implements Listener {
         Block from = event.getBlock();
         Block to = event.getToBlock();
 
-        if(from == null || to == null)
+        if (from == null || to == null)
             return;
 
-        for(Claim claims : ClaimManager.getActiveClaims()) {
-            if(!claims.inside(to.getLocation(), false)) continue;
+        for (Claim claims : ClaimManager.getActiveClaims()) {
+            if (!claims.inside(to.getLocation(), false)) continue;
 
-            if(!claims.inside(from.getLocation(), false)) {
+            if (!claims.inside(from.getLocation(), false)) {
                 event.setCancelled(true);
             }
         }
@@ -235,29 +239,27 @@ public class ClaimEventsListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockBreak(BlockBreakEvent event) {
-        if(event.isCancelled())
+        if (event.isCancelled())
             return;
 
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        for(Claim claims : ClaimManager.getActiveClaims()) {
-            if(claims.inside(block.getLocation(), false)) {
-                if(claims.getClaimOwner() instanceof PlayerFaction) {
-                    PlayerFaction faction = (PlayerFaction)claims.getClaimOwner();
+        for (Claim claims : ClaimManager.getActiveClaims()) {
+            if (claims.inside(block.getLocation(), false)) {
+                if (claims.getClaimOwner() instanceof PlayerFaction) {
+                    PlayerFaction faction = (PlayerFaction) claims.getClaimOwner();
                     List<UUID> roster = faction.getRoster(false);
 
-                    if(!roster.contains(player.getUniqueId()) && !faction.isRaidable() && !player.hasPermission(Permissions.ADMIN)) {
+                    if (!roster.contains(player.getUniqueId()) && !faction.isRaidable() && !player.hasPermission(Permissions.ADMIN)) {
                         player.sendMessage(Messages.landClaimedBy(ChatColor.RED + faction.getDisplayName()));
                         event.setCancelled(true);
                         return;
                     }
-                }
+                } else {
+                    ServerFaction faction = (ServerFaction) claims.getClaimOwner();
 
-                else {
-                    ServerFaction faction = (ServerFaction)claims.getClaimOwner();
-
-                    if(!player.hasPermission(Permissions.ADMIN)) {
+                    if (!player.hasPermission(Permissions.ADMIN)) {
                         player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + faction.getDisplayName()));
                         event.setCancelled(true);
                         return;
@@ -265,11 +267,11 @@ public class ClaimEventsListener implements Listener {
                 }
             }
 
-            if(claims.nearby(block.getLocation(), Configuration.CLAIM_BUFFER)) {
-                if(claims.getClaimOwner() instanceof ServerFaction) {
-                    ServerFaction faction = (ServerFaction)claims.getClaimOwner();
+            if (claims.nearby(block.getLocation(), Configuration.CLAIM_BUFFER)) {
+                if (claims.getClaimOwner() instanceof ServerFaction) {
+                    ServerFaction faction = (ServerFaction) claims.getClaimOwner();
 
-                    if(!faction.getType().equals(ServerClaimType.ROAD) && !player.hasPermission(Permissions.ADMIN)) {
+                    if (!faction.getType().equals(ServerClaimType.ROAD) && !player.hasPermission(Permissions.ADMIN)) {
                         player.sendMessage(Messages.nearbyLandClaimedBy(ChatColor.YELLOW + faction.getDisplayName()));
                         event.setCancelled(true);
                         return;
@@ -278,19 +280,19 @@ public class ClaimEventsListener implements Listener {
             }
         }
 
-        if(ToolBox.isNonBuildableWarzone(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
+        if (ToolBox.isNonBuildableWarzone(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.landClaimedBy(Configuration.WARZONE_NAME));
             event.setCancelled(true);
             return;
         }
 
-        if(ToolBox.isNetherWarzone(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
+        if (ToolBox.isNetherWarzone(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.landClaimedBy(Configuration.NETHER_WARZONE_NAME));
             event.setCancelled(true);
             return;
         }
 
-        if(ToolBox.isEnd(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
+        if (ToolBox.isEnd(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.landClaimedBy(Configuration.END_NAME));
             event.setCancelled(true);
             return;
@@ -299,29 +301,27 @@ public class ClaimEventsListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockPlace(BlockPlaceEvent event) {
-        if(event.isCancelled())
+        if (event.isCancelled())
             return;
 
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        for(Claim claims : ClaimManager.getActiveClaims()) {
-            if(claims.inside(block.getLocation(), false)) {
-                if(claims.getClaimOwner() instanceof PlayerFaction) {
-                    PlayerFaction faction = (PlayerFaction)claims.getClaimOwner();
+        for (Claim claims : ClaimManager.getActiveClaims()) {
+            if (claims.inside(block.getLocation(), false)) {
+                if (claims.getClaimOwner() instanceof PlayerFaction) {
+                    PlayerFaction faction = (PlayerFaction) claims.getClaimOwner();
                     List<UUID> roster = faction.getRoster(false);
 
-                    if(!roster.contains(player.getUniqueId()) && !faction.isRaidable() && !player.hasPermission(Permissions.ADMIN)) {
+                    if (!roster.contains(player.getUniqueId()) && !faction.isRaidable() && !player.hasPermission(Permissions.ADMIN)) {
                         player.sendMessage(Messages.landClaimedBy(ChatColor.RED + faction.getDisplayName()));
                         event.setCancelled(true);
                         return;
                     }
-                }
+                } else {
+                    ServerFaction faction = (ServerFaction) claims.getClaimOwner();
 
-                else {
-                    ServerFaction faction = (ServerFaction)claims.getClaimOwner();
-
-                    if(!player.hasPermission(Permissions.ADMIN)) {
+                    if (!player.hasPermission(Permissions.ADMIN)) {
                         player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + faction.getDisplayName()));
                         event.setCancelled(true);
                         return;
@@ -329,11 +329,11 @@ public class ClaimEventsListener implements Listener {
                 }
             }
 
-            if(claims.nearby(block.getLocation(), Configuration.CLAIM_BUFFER)) {
-                if(claims.getClaimOwner() instanceof ServerFaction) {
-                    ServerFaction faction = (ServerFaction)claims.getClaimOwner();
+            if (claims.nearby(block.getLocation(), Configuration.CLAIM_BUFFER)) {
+                if (claims.getClaimOwner() instanceof ServerFaction) {
+                    ServerFaction faction = (ServerFaction) claims.getClaimOwner();
 
-                    if(!faction.getType().equals(ServerClaimType.ROAD) && !player.hasPermission(Permissions.ADMIN)) {
+                    if (!faction.getType().equals(ServerClaimType.ROAD) && !player.hasPermission(Permissions.ADMIN)) {
                         player.sendMessage(Messages.nearbyLandClaimedBy(ChatColor.YELLOW + faction.getDisplayName()));
                         event.setCancelled(true);
                         return;
@@ -342,19 +342,19 @@ public class ClaimEventsListener implements Listener {
             }
         }
 
-        if(ToolBox.isNonBuildableWarzone(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
+        if (ToolBox.isNonBuildableWarzone(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.landClaimedBy(Configuration.WARZONE_NAME));
             event.setCancelled(true);
             return;
         }
 
-        if(ToolBox.isNetherWarzone(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
+        if (ToolBox.isNetherWarzone(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.landClaimedBy(Configuration.NETHER_WARZONE_NAME));
             event.setCancelled(true);
             return;
         }
 
-        if(ToolBox.isEnd(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
+        if (ToolBox.isEnd(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.landClaimedBy(Configuration.END_NAME));
             event.setCancelled(true);
             return;
@@ -366,18 +366,17 @@ public class ClaimEventsListener implements Listener {
         Player player = event.getPlayer();
         Action action = event.getAction();
 
-        if(!action.equals(Action.RIGHT_CLICK_BLOCK) && !action.equals(Action.PHYSICAL))
+        if (!action.equals(Action.RIGHT_CLICK_BLOCK) && !action.equals(Action.PHYSICAL))
             return;
 
         Block block = event.getClickedBlock();
 
-        for(Claim claims : ClaimManager.getActiveClaims()) {
-            if(!claims.inside(block.getLocation(), false)) continue;
+        for (Claim claims : ClaimManager.getActiveClaims()) {
+            if (!claims.inside(block.getLocation(), false)) continue;
 
-            if(claims.getClaimOwner() instanceof ServerFaction && !player.hasPermission(Permissions.ADMIN)) {
-                if(clickables.contains(block.getType())) {
-                    if(!block.getType().name().contains("PLATE"))
-                    {
+            if (claims.getClaimOwner() instanceof ServerFaction && !player.hasPermission(Permissions.ADMIN)) {
+                if (clickables.contains(block.getType())) {
+                    if (!block.getType().name().contains("PLATE")) {
                         player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + claims.getClaimOwner().getDisplayName()));
                     }
 
@@ -385,11 +384,10 @@ public class ClaimEventsListener implements Listener {
                 }
             }
 
-            if(claims.getClaimOwner() instanceof PlayerFaction && !player.hasPermission(Permissions.ADMIN)) {
-                if(!((PlayerFaction) claims.getClaimOwner()).getRoster(false).contains(player.getUniqueId())) {
-                    if(clickables.contains(block.getType())) {
-                        if(!block.getType().name().contains("PLATE"))
-                        {
+            if (claims.getClaimOwner() instanceof PlayerFaction && !player.hasPermission(Permissions.ADMIN)) {
+                if (!((PlayerFaction) claims.getClaimOwner()).getRoster(false).contains(player.getUniqueId())) {
+                    if (clickables.contains(block.getType())) {
+                        if (!block.getType().name().contains("PLATE")) {
                             player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + claims.getClaimOwner().getDisplayName()));
                         }
 
@@ -406,17 +404,19 @@ public class ClaimEventsListener implements Listener {
         Action action = event.getAction();
         Location clickedLocation = null;
 
-        if(player.getItemInHand() == null) return;
-        if(!player.getItemInHand().hasItemMeta() || player.getItemInHand().getItemMeta() == null || player.getItemInHand().getItemMeta().getDisplayName() == null) return;
-        if(!player.getItemInHand().getItemMeta().getDisplayName().equals(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) return;
+        if (player.getItemInHand() == null) return;
+        if (!player.getItemInHand().hasItemMeta() || player.getItemInHand().getItemMeta() == null || player.getItemInHand().getItemMeta().getDisplayName() == null)
+            return;
+        if (!player.getItemInHand().getItemMeta().getDisplayName().equals(ToolBox.getClaimingStick().getItemMeta().getDisplayName()))
+            return;
 
-        if(event.getClickedBlock() != null) {
+        if (event.getClickedBlock() != null) {
             clickedLocation = event.getClickedBlock().getLocation();
         }
 
         ClaimManager.performClaimAction(action, player, clickedLocation);
 
-        if(action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.LEFT_CLICK_BLOCK)) {
+        if (action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.LEFT_CLICK_BLOCK)) {
             event.setCancelled(true);
         }
     }
@@ -425,8 +425,8 @@ public class ClaimEventsListener implements Listener {
     public void onEntityExplode(EntityExplodeEvent event) {
         List<Block> blocks = new CopyOnWriteArrayList<>(event.blockList());
 
-        for(Block block : blocks) {
-            if(ClaimManager.getClaimAt(block.getLocation(), false) == null) continue;
+        for (Block block : blocks) {
+            if (ClaimManager.getClaimAt(block.getLocation(), false) == null) continue;
 
             blocks.remove(block);
         }
@@ -437,7 +437,7 @@ public class ClaimEventsListener implements Listener {
 
     @EventHandler
     public void onEntityBlockChange(EntityChangeBlockEvent event) {
-        if(ClaimManager.getClaimAt(event.getBlock().getLocation(), false) == null)
+        if (ClaimManager.getClaimAt(event.getBlock().getLocation(), false) == null)
             return;
 
         event.setCancelled(true);
@@ -455,7 +455,7 @@ public class ClaimEventsListener implements Listener {
     public void onEntityDamage(EntityDamageEvent event) {
         Entity entity = event.getEntity();
 
-        if(entity.getType().equals(EntityType.HORSE) ||
+        if (entity.getType().equals(EntityType.HORSE) ||
                 entity.getType().equals(EntityType.IRON_GOLEM) ||
                 entity.getType().equals(EntityType.ITEM_FRAME) ||
                 entity.getType().equals(EntityType.VILLAGER) ||
@@ -463,13 +463,13 @@ public class ClaimEventsListener implements Listener {
 
             Claim claim = ClaimManager.getClaimAt(entity.getLocation(), true);
 
-            if(claim == null)
+            if (claim == null)
                 return;
 
-            if(claim.getClaimOwner() instanceof ServerFaction) {
-                ServerFaction serverFaction = (ServerFaction)claim.getClaimOwner();
+            if (claim.getClaimOwner() instanceof ServerFaction) {
+                ServerFaction serverFaction = (ServerFaction) claim.getClaimOwner();
 
-                if(serverFaction.getType().equals(ServerClaimType.SAFEZONE)) {
+                if (serverFaction.getType().equals(ServerClaimType.SAFEZONE)) {
                     event.setCancelled(true);
                 }
             }
@@ -478,23 +478,23 @@ public class ClaimEventsListener implements Listener {
 
     @EventHandler
     public void onEntitySpawn(CreatureSpawnEvent event) {
-        if(!(event.getEntity() instanceof LivingEntity))
+        if (!(event.getEntity() instanceof LivingEntity))
             return;
 
-        if(!event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.NATURAL))
+        if (!event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.NATURAL))
             return;
 
         Entity entity = event.getEntity();
 
         Claim claim = ClaimManager.getClaimAt(entity.getLocation(), true);
 
-        if(claim == null)
+        if (claim == null)
             return;
 
-        if(claim.getClaimOwner() instanceof ServerFaction) {
-            ServerFaction serverFaction = (ServerFaction)claim.getClaimOwner();
+        if (claim.getClaimOwner() instanceof ServerFaction) {
+            ServerFaction serverFaction = (ServerFaction) claim.getClaimOwner();
 
-            if(serverFaction.getType().equals(ServerClaimType.ROAD))
+            if (serverFaction.getType().equals(ServerClaimType.ROAD))
                 return;
 
             event.setCancelled(true);

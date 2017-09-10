@@ -16,8 +16,10 @@ import java.util.*;
 
 public class SubclaimGUI {
 
-    @Getter UUID editor;
-    @Getter Subclaim subclaim;
+    @Getter
+    UUID editor;
+    @Getter
+    Subclaim subclaim;
 
     public SubclaimGUI(UUID editor, Subclaim subclaim) {
         this.editor = editor;
@@ -32,15 +34,12 @@ public class SubclaimGUI {
             Map<UUID, String> officerNames = new HashMap<>();
             Map<UUID, String> memberNames = new HashMap<>();
 
-            for(UUID uuid : result.keySet())
-            {
-                if(holder.getOfficers().contains(uuid))
-                {
+            for (UUID uuid : result.keySet()) {
+                if (holder.getOfficers().contains(uuid)) {
                     officerNames.put(uuid, result.get(uuid));
                 }
 
-                if(holder.getMembers().contains(uuid))
-                {
+                if (holder.getMembers().contains(uuid)) {
                     memberNames.put(uuid, result.get(uuid));
                 }
             }
@@ -50,7 +49,7 @@ public class SubclaimGUI {
 
                 ItemStack head = new ItemStack(Material.SKULL, 1, (short) 3);
 
-                SkullMeta skullMeta = (SkullMeta)head.getItemMeta();
+                SkullMeta skullMeta = (SkullMeta) head.getItemMeta();
                 skullMeta.setOwner(name);
                 head.setItemMeta(skullMeta);
 
@@ -75,7 +74,7 @@ public class SubclaimGUI {
 
                 ItemStack head = new ItemStack(Material.SKULL, 1, (short) 3);
 
-                SkullMeta skullMeta = (SkullMeta)head.getItemMeta();
+                SkullMeta skullMeta = (SkullMeta) head.getItemMeta();
                 skullMeta.setOwner(name);
                 head.setItemMeta(skullMeta);
 

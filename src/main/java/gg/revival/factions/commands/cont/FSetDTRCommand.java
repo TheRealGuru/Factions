@@ -34,18 +34,18 @@ public class FSetDTRCommand extends FCommand {
     public void onCommand(CommandSender sender, String args[]) {
         String changer = "Console";
 
-        if(sender instanceof Player) {
-            Player player = (Player)sender;
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
 
             changer = player.getName();
 
-            if(!player.hasPermission(getPermission())) {
+            if (!player.hasPermission(getPermission())) {
                 player.sendMessage(Messages.noPermission());
                 return;
             }
         }
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             sender.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
@@ -63,14 +63,14 @@ public class FSetDTRCommand extends FCommand {
 
         Faction faction = FactionManager.getFactionByName(namedFaction);
 
-        if(faction == null || !(faction instanceof PlayerFaction)) {
+        if (faction == null || !(faction instanceof PlayerFaction)) {
             sender.sendMessage(Messages.factionNotFound());
             return;
         }
 
-        PlayerFaction playerFaction = (PlayerFaction)faction;
+        PlayerFaction playerFaction = (PlayerFaction) faction;
 
-        if(playerFaction.getMaxDTR() < dtr) {
+        if (playerFaction.getMaxDTR() < dtr) {
             dtr = playerFaction.getMaxDTR();
         }
 

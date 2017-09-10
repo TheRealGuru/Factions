@@ -6,44 +6,45 @@ import gg.revival.factions.timers.TimerType;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.*;
 
 public class FPlayer {
 
     @Getter UUID uuid;
     @Getter @Setter double balance;
     @Getter @Setter FLocation location;
-    @Getter @Setter HashSet<Timer> timers = new HashSet<>();
+    @Getter @Setter List<Timer> timers;
 
     public FPlayer(UUID uuid, double balance) {
         this.uuid = uuid;
         this.balance = balance;
         this.location = new FLocation(uuid);
-        this.timers = new HashSet<Timer>();
+        this.timers = new ArrayList<>();
+    }
+
+    public synchronized List<Timer> getTimersSnapshot() {
+        List<Timer> foundTimers = new ArrayList<>();
+        foundTimers.addAll(timers);
+        return foundTimers;
     }
 
     public boolean isBeingTimed(TimerType type) {
         if (timers.isEmpty()) return false;
 
-        for (Timer activeTimers : timers) {
-            if (activeTimers.getType().equals(type)) {
+        for (Timer timer : getTimersSnapshot()) {
+            if (timer.getType().equals(type))
                 return true;
-            }
         }
 
         return false;
     }
 
     public Timer getTimer(TimerType type) {
-        if(timers.isEmpty()) return null;
+        if (timers.isEmpty()) return null;
 
-        for (Timer activeTimers : timers) {
-            if (activeTimers.getType().equals(type)) {
-                return activeTimers;
-            }
+        for (Timer timer : getTimersSnapshot()) {
+            if (timer.getType().equals(type))
+                return timer;
         }
 
         return null;
@@ -54,19 +55,15 @@ public class FPlayer {
             removeTimer(timer.getType());
         }
 
-        this.timers.add(timer);
+        timers.add(timer);
     }
 
     public void removeTimer(TimerType type) {
         if (!isBeingTimed(type)) return;
 
-        List<Timer> cache = new CopyOnWriteArrayList<>(timers);
-
-        for (Timer activeTimers : cache) {
-            if (activeTimers.getType().equals(type)) {
-                timers.remove(activeTimers);
-            }
+        for (Timer timer : getTimersSnapshot()) {
+            if (timer.getType().equals(type))
+                timers.remove(timer);
         }
     }
-
 }

@@ -13,114 +13,103 @@ import gg.revival.factions.tasks.StuckTask;
 import gg.revival.factions.timers.Timer;
 import gg.revival.factions.timers.TimerManager;
 import gg.revival.factions.timers.TimerType;
-import gg.revival.factions.tools.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 public class TimerThread {
 
     public static void run() {
-        List<Faction> factionCache = new CopyOnWriteArrayList<>(FactionManager.getActiveFactions());
-        List<FPlayer> playerCache = new CopyOnWriteArrayList<>(PlayerManager.getActivePlayers());
+        for(Faction factions : FactionManager.getActiveFactionsSnapshot()) {
+            if (!(factions instanceof PlayerFaction) || ((PlayerFaction) factions).getTimers().isEmpty()) continue;
 
-        for(Faction factions : factionCache) {
-            if(!(factions instanceof PlayerFaction) || ((PlayerFaction) factions).getTimers().isEmpty()) continue;
+            PlayerFaction faction = (PlayerFaction) factions;
 
-            PlayerFaction faction = (PlayerFaction)factions;
-            List<Timer> timerCache = new CopyOnWriteArrayList<>(faction.getTimers());
-
-            for(Timer timers : timerCache) {
-                if(timers.isPaused()) {
+            for(Timer timers : faction.getTimersSnapshot()) {
+                if (timers.isPaused()) {
                     timers.setExpire(System.currentTimeMillis() + timers.getPauseDiff());
                 }
 
-                if(timers.getExpire() <= System.currentTimeMillis()) {
+                if (timers.getExpire() <= System.currentTimeMillis()) {
                     TimerManager.finishTimer(faction, timers.getType());
                 }
             }
         }
 
-        for(FPlayer players : playerCache) {
-            if(players.getTimers().isEmpty()) continue;
+        for(FPlayer players : PlayerManager.getActivePlayersSnapshot()) {
+            if (players.getTimersSnapshot() == null || players.getTimersSnapshot().isEmpty()) continue;
 
-            List<Timer> timerCache = new CopyOnWriteArrayList<>(players.getTimers());
-
-            for(Timer timers : timerCache) {
-                if(timers.isPaused()) {
+            for(Timer timers : players.getTimersSnapshot()) {
+                if (timers.isPaused())
                     timers.setExpire(System.currentTimeMillis() + timers.getPauseDiff());
-                }
 
-                if(timers.getExpire() <= System.currentTimeMillis()) {
+                if (timers.getExpire() <= System.currentTimeMillis()) {
                     TimerManager.finishTimer(players, timers.getType());
 
-                    if(timers.getType().equals(TimerType.HOME)) {
+                    if (timers.getType().equals(TimerType.HOME)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if(Bukkit.getPlayer(players.getUuid()) != null) {
+                                if (Bukkit.getPlayer(players.getUuid()) != null) {
                                     HomeTask.sendHome(players.getUuid());
                                 }
                             }
                         }.runTask(FP.getInstance());
                     }
 
-                    if(timers.getType().equals(TimerType.STUCK)) {
+                    if (timers.getType().equals(TimerType.STUCK)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if(Bukkit.getPlayer(players.getUuid()) != null) {
+                                if (Bukkit.getPlayer(players.getUuid()) != null) {
                                     StuckTask.unstuck(players.getUuid());
                                 }
                             }
                         }.runTask(FP.getInstance());
                     }
 
-                    if(timers.getType().equals(TimerType.LOGOUT)) {
+                    if (timers.getType().equals(TimerType.LOGOUT)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if(Bukkit.getPlayer(players.getUuid()) != null) {
+                                if (Bukkit.getPlayer(players.getUuid()) != null) {
                                     LogoutTask.logoutPlayer(players.getUuid());
                                 }
                             }
                         }.runTask(FP.getInstance());
                     }
 
-                    if(timers.getType().equals(TimerType.ENDERPEARL)) {
+                    if (timers.getType().equals(TimerType.ENDERPEARL)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if(Bukkit.getPlayer(players.getUuid()) != null) {
+                                if (Bukkit.getPlayer(players.getUuid()) != null) {
                                     Bukkit.getPlayer(players.getUuid()).sendMessage(ChatColor.GREEN + "Your enderpearls have been unlocked");
                                 }
                             }
                         }.runTask(FP.getInstance());
                     }
 
-                    if(timers.getType().equals(TimerType.TAG)) {
+                    if (timers.getType().equals(TimerType.TAG)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if(Bukkit.getPlayer(players.getUuid()) != null) {
-                                    // TODO: Perform untagging process such as clearing glass, etc
+                                if (Bukkit.getPlayer(players.getUuid()) != null) {
+                                    Bukkit.getPlayer(players.getUuid()).sendMessage(ChatColor.GREEN + "Your combat-tag has expired");
                                 }
                             }
                         }.runTask(FP.getInstance());
                     }
 
-                    if(timers.getType().equals(TimerType.PVPPROT)) {
+                    if (timers.getType().equals(TimerType.PVPPROT)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if(Bukkit.getPlayer(players.getUuid()) != null) {
+                                if (Bukkit.getPlayer(players.getUuid()) != null) {
                                     CombatProtection.takeProtection(Bukkit.getPlayer(players.getUuid()));
                                 }
                             }
                         }.runTask(FP.getInstance());
                     }
 
-                    if(timers.getType().equals(TimerType.SAFETY)) {
+                    if (timers.getType().equals(TimerType.SAFETY)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if(Bukkit.getPlayer(players.getUuid()) != null) {
+                                if (Bukkit.getPlayer(players.getUuid()) != null) {
                                     CombatProtection.takeSafety(Bukkit.getPlayer(players.getUuid()));
                                 }
                             }

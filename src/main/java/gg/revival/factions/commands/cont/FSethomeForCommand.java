@@ -33,41 +33,41 @@ public class FSethomeForCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(!player.hasPermission(getPermission())) {
+        if (!player.hasPermission(getPermission())) {
             player.sendMessage(Messages.noPermission());
             return;
         }
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
         String factionName = args[1];
 
-        if(FactionManager.getFactionByName(factionName) == null) {
+        if (FactionManager.getFactionByName(factionName) == null) {
             player.sendMessage(Messages.factionNotFound());
             return;
         }
 
         Faction faction = FactionManager.getFactionByName(factionName);
 
-        if(!(faction instanceof PlayerFaction)) {
+        if (!(faction instanceof PlayerFaction)) {
             player.sendMessage(Messages.factionNotFound());
             return;
         }
 
-        PlayerFaction playerFaction = (PlayerFaction)faction;
+        PlayerFaction playerFaction = (PlayerFaction) faction;
 
-        for(Claim claims : playerFaction.getClaims()) {
-            if(!claims.inside(player.getLocation(), true)) continue;
+        for (Claim claims : playerFaction.getClaims()) {
+            if (!claims.inside(player.getLocation(), true)) continue;
 
             playerFaction.setHomeLocation(player.getLocation());
 

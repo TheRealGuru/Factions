@@ -1,20 +1,18 @@
 package gg.revival.factions.commands.cont;
 
-import gg.revival.factions.FP;
 import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.PlayerFaction;
-import gg.revival.factions.tools.*;
-import org.bukkit.Bukkit;
+import gg.revival.factions.tools.Logger;
+import gg.revival.factions.tools.Messages;
+import gg.revival.factions.tools.OfflinePlayerLookup;
+import gg.revival.factions.tools.Permissions;
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
-import java.util.UUID;
 import java.util.logging.Level;
 
 public class FDemoteCommand extends FCommand {
@@ -35,26 +33,26 @@ public class FDemoteCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
-        if(FactionManager.getFactionByPlayer(player.getUniqueId()) == null) {
+        if (FactionManager.getFactionByPlayer(player.getUniqueId()) == null) {
             player.sendMessage(Messages.notInFaction());
             return;
         }
 
-        PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
+        PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
 
-        if(!faction.getLeader().equals(player.getUniqueId()) && !player.hasPermission(Permissions.ADMIN)) {
+        if (!faction.getLeader().equals(player.getUniqueId()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.leaderRequired());
             return;
         }
@@ -62,23 +60,23 @@ public class FDemoteCommand extends FCommand {
         String namedPlayer = args[1];
 
         OfflinePlayerLookup.getOfflinePlayerByName(namedPlayer, (uuid, username) -> {
-            if(uuid == null || username == null)
-            {
+            if (uuid == null || username == null) {
                 player.sendMessage(Messages.playerNotFound());
                 return;
             }
 
-            if(!faction.getRoster(false).contains(player.getUniqueId())) {
+            if (!faction.getRoster(false).contains(player.getUniqueId())) {
                 player.sendMessage(Messages.playerNotInFaction());
                 return;
             }
 
-            if(!faction.getOfficers().contains(uuid)) {
+            if (!faction.getOfficers().contains(uuid)) {
                 player.sendMessage(Messages.notOfficer());
                 return;
             }
 
             faction.getOfficers().remove(player.getUniqueId());
+            faction.getMembers().add(player.getUniqueId());
 
             faction.sendMessage(Messages.removedOfficer(player.getName(), username));
 

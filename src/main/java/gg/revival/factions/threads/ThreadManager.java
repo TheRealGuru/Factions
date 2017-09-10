@@ -13,19 +13,19 @@ public class ThreadManager {
             public void run() {
                 LocationThread.run();
             }
-        }.runTaskTimer(FP.getInstance(), 0L, 20L);
-
-        new BukkitRunnable() {
-            public void run() {
-                TimerThread.run();
-            }
-        }.runTaskTimerAsynchronously(FP.getInstance(), 0L, 1L);
+        }.runTaskTimer(FP.getInstance(), 0L, 10L);
 
         new BukkitRunnable() {
             public void run() {
                 SaveThread.run();
             }
         }.runTaskTimer(FP.getInstance(), 0L, 300 * 20L);
+
+        new BukkitRunnable() {
+            public void run() {
+                TimerThread.run();
+            }
+        }.runTaskTimerAsynchronously(FP.getInstance(), 0L, 1L);
     }
 
 }

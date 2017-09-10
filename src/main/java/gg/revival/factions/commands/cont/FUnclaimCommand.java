@@ -33,72 +33,73 @@ public class FUnclaimCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
-        if(FactionManager.getFactionByPlayer(player.getUniqueId()) == null) {
+        if (FactionManager.getFactionByPlayer(player.getUniqueId()) == null) {
             player.sendMessage(Messages.notInFaction());
             return;
         }
 
-        PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
+        PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
 
-        if(!faction.getLeader().equals(player.getUniqueId()) && !faction.getOfficers().contains(player.getUniqueId())) {
+        if (!faction.getLeader().equals(player.getUniqueId()) && !faction.getOfficers().contains(player.getUniqueId())) {
             player.sendMessage(Messages.officerRequired());
             return;
         }
 
-        if(faction.isFrozen()) {
+        if (faction.isFrozen()) {
             player.sendMessage(Messages.unfrozenRequired());
             return;
         }
 
-        if(faction.getClaims().isEmpty()) {
+        if (faction.getClaims().isEmpty()) {
             player.sendMessage(Messages.noClaims());
             return;
         }
 
-        if(args.length == 1) {
+        if (args.length == 1) {
             Claim claim = null;
 
-            for(Claim claims : faction.getClaims()) {
-                if(!claims.inside(player.getLocation(), true)) continue;
+            for (Claim claims : faction.getClaims()) {
+                if (!claims.inside(player.getLocation(), true)) continue;
 
                 claim = claims;
             }
 
-            if(claim == null) {
+            if (claim == null) {
                 player.sendMessage(Messages.notStandingInClaims());
                 return;
             }
 
-            if(faction.getClaims().size() > 2) {
-                for(Claim claimSetOne : faction.getClaims()) {
+            if (faction.getClaims().size() > 2) {
+                for (Claim claimSetOne : faction.getClaims()) {
                     boolean isTouching = false;
 
-                    if(claimSetOne.getClaimID().equals(claim.getClaimID())) continue;
+                    if (claimSetOne.getClaimID().equals(claim.getClaimID())) continue;
 
-                    for(Claim claimSetTwo : faction.getClaims()) {
-                        if(claimSetTwo.getClaimID().equals(claim.getClaimID()) || claimSetOne.getClaimID().equals(claimSetTwo.getClaimID())) continue;
+                    for (Claim claimSetTwo : faction.getClaims()) {
+                        if (claimSetTwo.getClaimID().equals(claim.getClaimID()) || claimSetOne.getClaimID().equals(claimSetTwo.getClaimID()))
+                            continue;
 
-                        for(Location perimeter : claimSetTwo.getPerimeter(claimSetTwo.getWorldName(), 64)) {
+                        for (Location perimeter : claimSetTwo.getPerimeter(claimSetTwo.getWorldName(), 64)) {
 
-                            if(claimSetOne.isTouching(perimeter)) {
+                            if (claimSetOne.isTouching(perimeter)) {
                                 isTouching = true;
                             }
                         }
                     }
 
-                    if(!isTouching) {
+                    if (!isTouching) {
                         player.sendMessage(Messages.unclaimNotConnected());
                         return;
                     }
@@ -117,20 +118,20 @@ public class FUnclaimCommand extends FCommand {
             return;
         }
 
-        if(args.length == 2) {
-            if(!args[1].equalsIgnoreCase("all")) {
+        if (args.length == 2) {
+            if (!args[1].equalsIgnoreCase("all")) {
                 player.sendMessage(ChatColor.RED + getSyntax());
                 return;
             }
 
-            if(faction.getClaims().isEmpty()) {
+            if (faction.getClaims().isEmpty()) {
                 player.sendMessage(Messages.noClaims());
                 return;
             }
 
             double totalReturned = 0.0;
 
-            for(Claim claims : faction.getClaims()) {
+            for (Claim claims : faction.getClaims()) {
                 totalReturned += claims.getClaimValue();
 
                 ClaimManager.deleteClaim(claims);

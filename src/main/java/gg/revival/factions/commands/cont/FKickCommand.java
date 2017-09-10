@@ -14,11 +14,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class FKickCommand extends FCommand
-{
+public class FKickCommand extends FCommand {
 
-    public FKickCommand()
-    {
+    public FKickCommand() {
         super(
                 "kick",
                 null,
@@ -33,71 +31,60 @@ public class FKickCommand extends FCommand
     }
 
     @Override
-    public void onCommand(CommandSender sender, String args[])
-    {
-        if(!(sender instanceof Player) && isPlayerOnly())
-        {
+    public void onCommand(CommandSender sender, String args[]) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs())
-        {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
         String namedPlayer = args[1];
 
-        if(FactionManager.getFactionByPlayer(player.getUniqueId()) == null)
-        {
+        if (FactionManager.getFactionByPlayer(player.getUniqueId()) == null) {
             player.sendMessage(Messages.notInFaction());
             return;
         }
 
-        PlayerFaction playerFaction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
+        PlayerFaction playerFaction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
 
-        if(!playerFaction.getLeader().equals(player.getUniqueId()) && !playerFaction.getOfficers().contains(player.getUniqueId()))
-        {
+        if (!playerFaction.getLeader().equals(player.getUniqueId()) && !playerFaction.getOfficers().contains(player.getUniqueId())) {
             player.sendMessage(Messages.officerRequired());
             return;
         }
 
-        if(Bukkit.getPlayer(namedPlayer) != null)
-        {
+        if (Bukkit.getPlayer(namedPlayer) != null) {
             Player kickPlayer = Bukkit.getPlayer(namedPlayer);
             FPlayer facPlayer = PlayerManager.getPlayer(kickPlayer.getUniqueId());
 
-            if(facPlayer.isBeingTimed(TimerType.TAG))
-            {
+            if (facPlayer.isBeingTimed(TimerType.TAG)) {
                 player.sendMessage(Messages.cantWhilePlayerIsTagged());
                 return;
             }
         }
 
-        if(playerFaction.isFrozen())
-        {
+        if (playerFaction.isFrozen()) {
             player.sendMessage(Messages.unfrozenRequired());
             return;
         }
 
         OfflinePlayerLookup.getOfflinePlayerByName(namedPlayer, (uuid, username) -> {
-            if(uuid == null || username == null)
-            {
+            if (uuid == null || username == null) {
                 player.sendMessage(Messages.playerNotFound());
                 return;
             }
 
-            if(!playerFaction.getRoster(false).contains(uuid))
-            {
+            if (!playerFaction.getRoster(false).contains(uuid)) {
                 player.sendMessage(Messages.playerNotInFaction());
                 return;
             }
 
-            if(playerFaction.getLeader().equals(uuid))
-            {
+            if (playerFaction.getLeader().equals(uuid)) {
                 player.sendMessage(Messages.cantKickLeader());
                 return;
             }
@@ -105,7 +92,10 @@ public class FKickCommand extends FCommand
             playerFaction.getOfficers().remove(uuid);
             playerFaction.getMembers().remove(uuid);
 
-            player.sendMessage(Messages.playerKickedOther());
+            if(Bukkit.getPlayer(uuid) != null) {
+                Bukkit.getPlayer(uuid).sendMessage(Messages.playerKickedOther());
+            }
+
             playerFaction.sendMessage(Messages.playerKicked(player.getName(), username));
         });
     }

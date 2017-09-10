@@ -11,15 +11,14 @@ import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
 import gg.revival.factions.timers.TimerType;
 import gg.revival.factions.tools.Configuration;
-import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.ToolBox;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import java.util.UUID;
-import java.util.logging.Level;
 
 public class LocationManager {
 
@@ -191,7 +190,7 @@ public class LocationManager {
             }
         }
 
-        if(entering != null && entering.length() > 0 && leaving != null && leaving.length() > 0) {
+        if (entering != null && entering.length() > 0 && leaving != null && leaving.length() > 0) {
             mcPlayer.sendMessage(Messages.enteringClaim(entering.toString()));
             mcPlayer.sendMessage(Messages.leavingClaim(leaving.toString()));
         }
@@ -241,6 +240,74 @@ public class LocationManager {
         mcPlayer.sendMessage(Messages.leavingClaim(leaving.toString()));
     }
 
+    public static boolean checkForInvalidLocation(Player mcPlayer) {
+        FPlayer player = PlayerManager.getPlayer(mcPlayer.getUniqueId());
+
+        if(player == null) return false;
+
+        Location storedLocation = player.getLocation().getLastLocation();
+        Location currentLocation = mcPlayer.getLocation();
+
+        Claim claimAtCurrentLocation = ClaimManager.getClaimAt(currentLocation, true);
+
+        if(claimAtCurrentLocation == null) return false;
+
+        if(claimAtCurrentLocation.getClaimOwner() instanceof PlayerFaction) {
+            PlayerFaction playerFaction = (PlayerFaction)claimAtCurrentLocation.getClaimOwner();
+
+            if(player.isBeingTimed(TimerType.PVPPROT)) {
+                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.2);
+                mcPlayer.getLocation().setDirection(knockback);
+                mcPlayer.setVelocity(knockback);
+                mcPlayer.teleport(storedLocation);
+                mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you have PvP protection");
+                return true;
+            }
+
+            if(player.isBeingTimed(TimerType.PROGRESSION) && !playerFaction.getRoster(true).contains(mcPlayer.getUniqueId())) {
+                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.2);
+                mcPlayer.getLocation().setDirection(knockback);
+                mcPlayer.setVelocity(knockback);
+                mcPlayer.teleport(storedLocation);
+                mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you have unfinished progression");
+                return true;
+            }
+        }
+
+        if(claimAtCurrentLocation.getClaimOwner() instanceof ServerFaction) {
+            ServerFaction serverFaction = (ServerFaction)claimAtCurrentLocation.getClaimOwner();
+
+            if(serverFaction.getType().equals(ServerClaimType.EVENT) && player.isBeingTimed(TimerType.PROGRESSION)) {
+                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.2);
+                mcPlayer.getLocation().setDirection(knockback);
+                mcPlayer.setVelocity(knockback);
+                mcPlayer.teleport(storedLocation);
+                mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you have unfinished progression");
+                return true;
+            }
+
+            if(serverFaction.getType().equals(ServerClaimType.EVENT) && player.isBeingTimed(TimerType.PVPPROT)) {
+                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.2);
+                mcPlayer.getLocation().setDirection(knockback);
+                mcPlayer.setVelocity(knockback);
+                mcPlayer.teleport(storedLocation);
+                mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you have PvP protection");
+                return true;
+            }
+
+            if(serverFaction.getType().equals(ServerClaimType.SAFEZONE) && player.isBeingTimed(TimerType.TAG)) {
+                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.2);
+                mcPlayer.getLocation().setDirection(knockback);
+                mcPlayer.setVelocity(knockback);
+                mcPlayer.teleport(storedLocation);
+                mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you are combat-tagged");
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static void updateLocation(Player mcPlayer) {
         if (!PlayerManager.isLoaded(mcPlayer.getUniqueId()))
             return;
@@ -283,29 +350,29 @@ public class LocationManager {
             }
         }
 
-        if(found != null && found.getClaimOwner() instanceof ServerFaction) {
-            if(player.isBeingTimed(TimerType.PVPPROT) && !player.getTimer(TimerType.PVPPROT).isPaused()) {
+        if (found != null && found.getClaimOwner() instanceof ServerFaction && ((ServerFaction)found.getClaimOwner()).getType().equals(ServerClaimType.SAFEZONE)) {
+            if (player.isBeingTimed(TimerType.PVPPROT) && !player.getTimer(TimerType.PVPPROT).isPaused()) {
                 player.getTimer(TimerType.PVPPROT).setPaused(true);
                 player.getTimer(TimerType.PVPPROT).setPauseDiff(player.getTimer(TimerType.PVPPROT).getExpire() - System.currentTimeMillis());
             }
 
-            if(player.isBeingTimed(TimerType.PROGRESSION) && !player.getTimer(TimerType.PROGRESSION).isPaused()) {
+            if (player.isBeingTimed(TimerType.PROGRESSION) && !player.getTimer(TimerType.PROGRESSION).isPaused()) {
                 player.getTimer(TimerType.PROGRESSION).setPaused(true);
                 player.getTimer(TimerType.PROGRESSION).setPauseDiff(player.getTimer(TimerType.PROGRESSION).getExpire() - System.currentTimeMillis());
             }
-        }
-
-        else if(player.isBeingTimed(TimerType.PVPPROT) || player.isBeingTimed(TimerType.PROGRESSION)) {
-            if(player.isBeingTimed(TimerType.PVPPROT) && player.getTimer(TimerType.PVPPROT).isPaused()) {
+        } else if (player.isBeingTimed(TimerType.PVPPROT) || player.isBeingTimed(TimerType.PROGRESSION)) {
+            if (player.isBeingTimed(TimerType.PVPPROT) && player.getTimer(TimerType.PVPPROT).isPaused()) {
                 player.getTimer(TimerType.PVPPROT).setPaused(false);
             }
 
-            if(player.isBeingTimed(TimerType.PROGRESSION) && player.getTimer(TimerType.PROGRESSION).isPaused()) {
+            if (player.isBeingTimed(TimerType.PROGRESSION) && player.getTimer(TimerType.PROGRESSION).isPaused()) {
                 player.getTimer(TimerType.PROGRESSION).setPaused(false);
             }
         }
 
-        player.getLocation().setLastLocation(currentLocation);
+        if(!checkForInvalidLocation(mcPlayer)) {
+            player.getLocation().setLastLocation(currentLocation);
+        }
 
         PlayerManager.updatePlayer(player);
     }

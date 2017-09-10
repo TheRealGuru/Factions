@@ -15,18 +15,18 @@ public class BalanceCommandExecutor implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String args[]) {
-        if(!(sender instanceof Player)) {
+        if (!(sender instanceof Player)) {
             sender.sendMessage(Messages.noConsole());
             return false;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length == 2 || args.length > 3) {
+        if (args.length == 2 || args.length > 3) {
             player.sendMessage(ChatColor.RED + "/balance");
             player.sendMessage(ChatColor.RED + "/balance [player]");
 
-            if(player.hasPermission(Permissions.ADMIN)) {
+            if (player.hasPermission(Permissions.ADMIN)) {
                 player.sendMessage(ChatColor.RED + "/balance give <player> <amount>");
                 player.sendMessage(ChatColor.RED + "/balance take <player> <amount>");
                 player.sendMessage(ChatColor.RED + "/balance set <player> <amount>");
@@ -35,16 +35,16 @@ public class BalanceCommandExecutor implements CommandExecutor {
             return false;
         }
 
-        if(args.length == 0) {
+        if (args.length == 0) {
             player.sendMessage(Messages.currentBalance(PlayerManager.getPlayer(player.getUniqueId()).getBalance()));
 
             return true;
         }
 
-        if(args.length == 1) {
+        if (args.length == 1) {
             String query = args[0];
 
-            if(Bukkit.getPlayer(query) == null || !Bukkit.getPlayer(query).isOnline()) {
+            if (Bukkit.getPlayer(query) == null || !Bukkit.getPlayer(query).isOnline()) {
                 player.sendMessage(Messages.playerNotFound());
                 return false;
             }
@@ -56,19 +56,19 @@ public class BalanceCommandExecutor implements CommandExecutor {
             return true;
         }
 
-        if(args.length == 3) {
-            if(args[0].equalsIgnoreCase("give")) {
+        if (args.length == 3) {
+            if (args[0].equalsIgnoreCase("give")) {
                 String query = args[1];
                 String amount = args[2];
 
-                if(Bukkit.getPlayer(query) == null || !Bukkit.getPlayer(query).isOnline()) {
+                if (Bukkit.getPlayer(query) == null || !Bukkit.getPlayer(query).isOnline()) {
                     player.sendMessage(Messages.playerNotFound());
                     return false;
                 }
 
                 Player lookupPlayer = Bukkit.getPlayer(query);
 
-                if(!NumberUtils.isNumber(amount)) {
+                if (!NumberUtils.isNumber(amount)) {
                     player.sendMessage(Messages.invalidAmount());
 
                     return false;
@@ -85,18 +85,18 @@ public class BalanceCommandExecutor implements CommandExecutor {
                 return false;
             }
 
-            if(args[0].equalsIgnoreCase("take")) {
+            if (args[0].equalsIgnoreCase("take")) {
                 String query = args[1];
                 String amount = args[2];
 
-                if(Bukkit.getPlayer(query) == null || !Bukkit.getPlayer(query).isOnline()) {
+                if (Bukkit.getPlayer(query) == null || !Bukkit.getPlayer(query).isOnline()) {
                     player.sendMessage(Messages.playerNotFound());
                     return false;
                 }
 
                 Player lookupPlayer = Bukkit.getPlayer(query);
 
-                if(!NumberUtils.isNumber(amount)) {
+                if (!NumberUtils.isNumber(amount)) {
                     player.sendMessage(Messages.invalidAmount());
 
                     return false;
@@ -113,18 +113,18 @@ public class BalanceCommandExecutor implements CommandExecutor {
                 return false;
             }
 
-            if(args[0].equalsIgnoreCase("set")) {
+            if (args[0].equalsIgnoreCase("set")) {
                 String query = args[1];
                 String amount = args[2];
 
-                if(Bukkit.getPlayer(query) == null || !Bukkit.getPlayer(query).isOnline()) {
+                if (Bukkit.getPlayer(query) == null || !Bukkit.getPlayer(query).isOnline()) {
                     player.sendMessage(Messages.playerNotFound());
                     return false;
                 }
 
                 Player lookupPlayer = Bukkit.getPlayer(query);
 
-                if(!NumberUtils.isNumber(amount)) {
+                if (!NumberUtils.isNumber(amount)) {
                     player.sendMessage(Messages.invalidAmount());
 
                     return false;

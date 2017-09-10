@@ -5,7 +5,6 @@ import gg.revival.factions.claims.Claim;
 import gg.revival.factions.subclaims.Subclaim;
 import gg.revival.factions.subclaims.SubclaimManager;
 import gg.revival.factions.tools.*;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -28,10 +27,6 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 
 public class SubclaimEventsListener implements Listener {
 
@@ -207,7 +202,7 @@ public class SubclaimEventsListener implements Listener {
 
             ItemMeta currentItemMeta = currentItem.getItemMeta();
 
-            if(currentItemMeta.getDisplayName() == null) return;
+            if (currentItemMeta.getDisplayName() == null) return;
 
             String title = currentItemMeta.getDisplayName();
             String stripped = ChatColor.stripColor(title);
@@ -275,7 +270,8 @@ public class SubclaimEventsListener implements Listener {
 
                 new BukkitRunnable() {
                     public void run() {
-                        player.closeInventory();;
+                        player.closeInventory();
+                        ;
                     }
                 }.runTaskLater(FP.getInstance(), 1L);
             }
@@ -322,11 +318,11 @@ public class SubclaimEventsListener implements Listener {
 
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
-        if(!(event.getPlayer() instanceof Player)) return;
+        if (!(event.getPlayer() instanceof Player)) return;
 
-        Player player = (Player)event.getPlayer();
+        Player player = (Player) event.getPlayer();
 
-        if(SubclaimManager.getEditedSubclaim(player.getUniqueId()) != null) {
+        if (SubclaimManager.getEditedSubclaim(player.getUniqueId()) != null) {
             SubclaimManager.getSubclaimEditor().remove(player.getUniqueId());
         }
     }

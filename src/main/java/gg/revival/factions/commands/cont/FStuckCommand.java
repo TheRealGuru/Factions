@@ -33,19 +33,19 @@ public class FStuckCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
-        if(ClaimManager.getClaimAt(player.getLocation(), true) == null) {
+        if (ClaimManager.getClaimAt(player.getLocation(), true) == null) {
             player.sendMessage(Messages.notInsideClaim());
             return;
         }

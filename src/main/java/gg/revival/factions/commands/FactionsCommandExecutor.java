@@ -1,8 +1,10 @@
 package gg.revival.factions.commands;
 
+import gg.revival.factions.tools.Messages;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class FactionsCommandExecutor implements CommandExecutor {
 
@@ -14,7 +16,9 @@ public class FactionsCommandExecutor implements CommandExecutor {
                     CommandManager.getFactionCommandByLabel(args[0]).onCommand(sender, args);
                 }
             } else {
-                //TODO: Send help block
+                if(sender instanceof Player) {
+                    Messages.sendHelpPage((Player)sender, null);
+                }
             }
         }
 

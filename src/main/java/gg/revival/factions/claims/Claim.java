@@ -1,7 +1,6 @@
 package gg.revival.factions.claims;
 
 import gg.revival.factions.obj.Faction;
-import gg.revival.factions.tools.Configuration;
 import gg.revival.factions.tools.ToolBox;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +17,17 @@ import java.util.UUID;
 
 public class Claim {
 
-    @Getter UUID claimID;
-    @Getter @Setter double x1, x2, y1, y2, z1, z2, claimValue;
-    @Getter @Setter String worldName;
-    @Getter @Setter Faction claimOwner;
+    @Getter
+    UUID claimID;
+    @Getter
+    @Setter
+    double x1, x2, y1, y2, z1, z2, claimValue;
+    @Getter
+    @Setter
+    String worldName;
+    @Getter
+    @Setter
+    Faction claimOwner;
 
     public Claim(UUID claimID, Faction claimOwner, double x1, double x2, double y1, double y2, double z1, double z2, String worldName, double claimValue) {
         this.claimID = claimID;
@@ -145,11 +151,11 @@ public class Claim {
         double zMin = Math.min(getZ1(), getZ2());
         double zMax = Math.max(getZ1(), getZ2());
 
-        for(int x = (int)xMin; x <= xMax; x++) { //loop x
+        for (int x = (int) xMin; x <= xMax; x++) { //loop x
 
-            for(int z = (int)zMin; z <= zMax; z++) { //loop z
+            for (int z = (int) zMin; z <= zMax; z++) { //loop z
 
-                if(x == xMin || x == xMax || z == zMin || z == zMax) { //checks to see if blocks are in line
+                if (x == xMin || x == xMax || z == zMin || z == zMax) { //checks to see if blocks are in line
                     Location location = new Location(Bukkit.getWorld(worldName), x, yLevel, z);
                     locations.add(location);
                 }
@@ -167,9 +173,9 @@ public class Claim {
         double zMin = Math.min(getZ1(), getZ2());
         double zMax = Math.max(getZ1(), getZ2());
 
-        for(int x = (int)xMin; x <= xMax; x++) {
+        for (int x = (int) xMin; x <= xMax; x++) {
 
-            for(int z = (int)zMin; z <= zMax; z++) {
+            for (int z = (int) zMin; z <= zMax; z++) {
                 Location location = new Location(Bukkit.getWorld(worldName), x, yLevel, z);
                 locations.add(location);
             }
@@ -179,14 +185,14 @@ public class Claim {
     }
 
     public boolean isTouching(Location location) {
-        if(!location.getWorld().equals(getWorld()))
+        if (!location.getWorld().equals(getWorld()))
             return false;
 
-        for(BlockFace directions : ToolBox.getFlatDirections()) {
+        for (BlockFace directions : ToolBox.getFlatDirections()) {
             Block block = location.getBlock().getRelative(directions);
             Location locations = block.getLocation();
 
-            if(inside(locations, false))
+            if (inside(locations, false))
                 return true;
         }
 

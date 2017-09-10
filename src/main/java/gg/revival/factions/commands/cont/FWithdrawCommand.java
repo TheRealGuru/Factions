@@ -32,20 +32,20 @@ public class FWithdrawCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
         PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
-        if(faction == null && !player.hasPermission(Permissions.ADMIN)) {
+        if (faction == null && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.notInFaction());
             return;
         }
@@ -61,7 +61,7 @@ public class FWithdrawCommand extends FCommand {
             return;
         }
 
-        if(amt > bal) {
+        if (amt > bal) {
             player.sendMessage(Messages.notEnoughMoney());
             return;
         }

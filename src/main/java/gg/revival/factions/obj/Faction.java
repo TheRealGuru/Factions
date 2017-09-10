@@ -22,24 +22,25 @@ public class Faction {
     public Faction(UUID factionID, String displayName) {
         this.factionID = factionID;
         this.displayName = displayName;
-        this.claims = new HashSet<Claim>();
-        this.subclaims = new HashSet<Subclaim>();
+        this.claims = new HashSet<>();
+        this.subclaims = new HashSet<>();
     }
 
     /**
      * Mainly used to check if a block is touching the side of a claim
+     *
      * @param location
      * @return
      */
     public boolean isTouching(Location location) {
-        for(Claim claims : getClaims()) {
-            if(!claims.getWorld().equals(location.getWorld())) continue;
+        for (Claim claims : getClaims()) {
+            if (!claims.getWorld().equals(location.getWorld())) continue;
 
-            for(BlockFace directions : ToolBox.getFlatDirections()) {
+            for (BlockFace directions : ToolBox.getFlatDirections()) {
                 Block block = location.getBlock().getRelative(directions);
                 Location locations = block.getLocation();
 
-                if(claims.inside(locations, false))
+                if (claims.inside(locations, false))
                     return true;
             }
         }

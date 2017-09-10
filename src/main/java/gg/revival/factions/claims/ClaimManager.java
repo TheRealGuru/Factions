@@ -29,29 +29,32 @@ import java.util.logging.Level;
 
 public class ClaimManager {
 
-    @Getter static Set<Claim> activeClaims = new HashSet<>();
-    @Getter static Map<UUID, PendingClaim> claimEditors = new HashMap<>();
+    @Getter
+    static Set<Claim> activeClaims = new HashSet<>();
+    @Getter
+    static Map<UUID, PendingClaim> claimEditors = new HashMap<>();
 
     public static void removeFromClaimEditor(UUID uuid) {
-        if(Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
+        if (Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {
             Player player = Bukkit.getPlayer(uuid);
 
-            for(ItemStack contents : player.getInventory().getContents()) {
-                if(contents == null) continue;
-                if(contents.getItemMeta() == null || contents.getItemMeta().getDisplayName() == null) continue;
-                if(!contents.getItemMeta().getDisplayName().equals(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) continue;
+            for (ItemStack contents : player.getInventory().getContents()) {
+                if (contents == null) continue;
+                if (contents.getItemMeta() == null || contents.getItemMeta().getDisplayName() == null) continue;
+                if (!contents.getItemMeta().getDisplayName().equals(ToolBox.getClaimingStick().getItemMeta().getDisplayName()))
+                    continue;
 
                 player.getInventory().remove(contents);
             }
         }
 
-        if(claimEditors.containsKey(uuid)) {
+        if (claimEditors.containsKey(uuid)) {
             claimEditors.remove(uuid);
         }
     }
 
     public static PendingClaim getPendingClaim(UUID uuid) {
-        if(claimEditors.containsKey(uuid)) {
+        if (claimEditors.containsKey(uuid)) {
             return claimEditors.get(uuid);
         }
 
@@ -74,7 +77,7 @@ public class ClaimManager {
         if (Configuration.DB_ENABLED && MongoAPI.isConnected()) {
             new BukkitRunnable() {
                 public void run() {
-                    if(DatabaseManager.getClaimsCollection() == null)
+                    if (DatabaseManager.getClaimsCollection() == null)
                         DatabaseManager.setClaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "claims"));
 
                     MongoCollection<Document> collection = DatabaseManager.getClaimsCollection();
@@ -97,7 +100,7 @@ public class ClaimManager {
 
         new BukkitRunnable() {
             public void run() {
-                if(DatabaseManager.getClaimsCollection() == null)
+                if (DatabaseManager.getClaimsCollection() == null)
                     DatabaseManager.setClaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "claims"));
 
                 MongoCollection<Document> collection = DatabaseManager.getClaimsCollection();
@@ -135,7 +138,7 @@ public class ClaimManager {
 
         new BukkitRunnable() {
             public void run() {
-                if(DatabaseManager.getClaimsCollection() == null)
+                if (DatabaseManager.getClaimsCollection() == null)
                     DatabaseManager.setClaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "claims"));
 
                 MongoCollection<Document> collection = DatabaseManager.getClaimsCollection();
@@ -164,13 +167,14 @@ public class ClaimManager {
 
     /**
      * Used to save a claim on the main thread, should only be used in the onDisable method
+     *
      * @param claim
      */
     public static void unsafeSaveClaim(Claim claim) {
         if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
             return;
 
-        if(DatabaseManager.getClaimsCollection() == null)
+        if (DatabaseManager.getClaimsCollection() == null)
             DatabaseManager.setClaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "claims"));
 
         MongoCollection<Document> collection = DatabaseManager.getClaimsCollection();
@@ -196,20 +200,20 @@ public class ClaimManager {
     }
 
     public static void performClaimAction(Action action, Player player, Location clickedLocation) {
-        if(getPendingClaim(player.getUniqueId()) == null)
+        if (getPendingClaim(player.getUniqueId()) == null)
             return;
 
         PendingClaim pendingClaim = getPendingClaim(player.getUniqueId());
         Faction faction = pendingClaim.getClaimingFor();
 
-        if(action.equals(Action.LEFT_CLICK_BLOCK)) {
+        if (action.equals(Action.LEFT_CLICK_BLOCK)) {
             pendingClaim.setPosA(clickedLocation);
             player.sendMessage(Messages.claimPointSet(1));
 
-            Pillar pillar = new Pillar(player.getUniqueId(), pendingClaim.getPosA(), Material.EMERALD_BLOCK, (byte)0);
+            Pillar pillar = new Pillar(player.getUniqueId(), pendingClaim.getPosA(), Material.EMERALD_BLOCK, (byte) 0);
 
-            for(Pillar pillars : PillarManager.getActivePillars(player.getUniqueId())) {
-                if(!pillars.getLocation().equals(pendingClaim.getPosA()) && !pillars.getLocation().equals(pendingClaim.getPosB())) {
+            for (Pillar pillars : PillarManager.getActivePillars(player.getUniqueId())) {
+                if (!pillars.getLocation().equals(pendingClaim.getPosA()) && !pillars.getLocation().equals(pendingClaim.getPosB())) {
                     pillars.remove();
                     PillarManager.getActivePillars().remove(pillars);
                 }
@@ -218,11 +222,11 @@ public class ClaimManager {
             pillar.build();
             PillarManager.getActivePillars().add(pillar);
 
-            if(pendingClaim.getPosA() != null && pendingClaim.getPosB() != null && faction instanceof PlayerFaction) {
-                PlayerFaction playerFaction = (PlayerFaction)faction;
+            if (pendingClaim.getPosA() != null && pendingClaim.getPosB() != null && faction instanceof PlayerFaction) {
+                PlayerFaction playerFaction = (PlayerFaction) faction;
                 double totalValue = pendingClaim.calculateCost();
 
-                for(Claim claims : playerFaction.getClaims()) {
+                for (Claim claims : playerFaction.getClaims()) {
                     totalValue = totalValue + claims.getClaimValue();
                 }
 
@@ -230,14 +234,14 @@ public class ClaimManager {
             }
         }
 
-        if(action.equals(Action.RIGHT_CLICK_BLOCK)) {
+        if (action.equals(Action.RIGHT_CLICK_BLOCK)) {
             pendingClaim.setPosB(clickedLocation);
             player.sendMessage(Messages.claimPointSet(2));
 
-            Pillar pillar = new Pillar(player.getUniqueId(), pendingClaim.getPosB(), Material.EMERALD_BLOCK, (byte)0);
+            Pillar pillar = new Pillar(player.getUniqueId(), pendingClaim.getPosB(), Material.EMERALD_BLOCK, (byte) 0);
 
-            for(Pillar pillars : PillarManager.getActivePillars(player.getUniqueId())) {
-                if(!pillars.getLocation().equals(pendingClaim.getPosA()) && !pillars.getLocation().equals(pendingClaim.getPosB())) {
+            for (Pillar pillars : PillarManager.getActivePillars(player.getUniqueId())) {
+                if (!pillars.getLocation().equals(pendingClaim.getPosA()) && !pillars.getLocation().equals(pendingClaim.getPosB())) {
                     pillars.remove();
                     PillarManager.getActivePillars().remove(pillars);
                 }
@@ -252,11 +256,11 @@ public class ClaimManager {
 
             PillarManager.getActivePillars().add(pillar);
 
-            if(pendingClaim.getPosA() != null && pendingClaim.getPosB() != null && faction instanceof PlayerFaction) {
-                PlayerFaction playerFaction = (PlayerFaction)faction;
+            if (pendingClaim.getPosA() != null && pendingClaim.getPosB() != null && faction instanceof PlayerFaction) {
+                PlayerFaction playerFaction = (PlayerFaction) faction;
                 double totalValue = pendingClaim.calculateCost();
 
-                for(Claim claims : playerFaction.getClaims()) {
+                for (Claim claims : playerFaction.getClaims()) {
                     totalValue = totalValue + claims.getClaimValue();
                 }
 
@@ -264,9 +268,9 @@ public class ClaimManager {
             }
         }
 
-        if(action.equals(Action.LEFT_CLICK_AIR) && player.isSneaking()) {
+        if (action.equals(Action.LEFT_CLICK_AIR) && player.isSneaking()) {
 
-            if(pendingClaim.getPosA() == null || pendingClaim.getPosB() == null) {
+            if (pendingClaim.getPosA() == null || pendingClaim.getPosB() == null) {
                 player.sendMessage(Messages.claimUnfinished());
                 return;
             }
@@ -281,82 +285,85 @@ public class ClaimManager {
             int z2 = pendingClaim.getZ2();
             String worldName = pendingClaim.getPosA().getWorld().getName();
 
-            if(faction instanceof PlayerFaction) {
-                PlayerFaction playerFaction = (PlayerFaction)faction;
+            if (faction instanceof PlayerFaction) {
+                PlayerFaction playerFaction = (PlayerFaction) faction;
 
-                if(!playerFaction.getClaims().isEmpty()) {
-                    if(!playerFaction.isTouching(pendingClaim.getPosA()) && !playerFaction.isTouching(pendingClaim.getPosB())) {
+                if (!playerFaction.getClaims().isEmpty()) {
+                    if (!playerFaction.isTouching(pendingClaim.getPosA()) && !playerFaction.isTouching(pendingClaim.getPosB())) {
                         player.sendMessage(Messages.claimNotConnected());
                         return;
                     }
                 }
 
-                if(pendingClaim.isTooSmall()) {
+                if (pendingClaim.isTooSmall()) {
                     player.sendMessage(Messages.claimTooSmall());
                     return;
                 }
 
-                for(Claim claims : playerFaction.getClaims()) {
+                for (Claim claims : playerFaction.getClaims()) {
                     totalValue = totalValue + claims.getClaimValue();
                 }
 
-                for(Claim claims : ClaimManager.getActiveClaims()) {
-                    if(claims.overlaps(x1, x2, z1, z2)) {
+                for (Claim claims : ClaimManager.getActiveClaims()) {
+                    if (claims.overlaps(x1, x2, z1, z2)) {
                         player.sendMessage(Messages.claimOverlapping());
                         return;
                     }
 
-                    for(Location blocks : pendingClaim.getPerimeter(worldName, 64)) {
-                        if(claims.nearby(blocks, Configuration.CLAIM_BUFFER) && !claims.getClaimOwner().getFactionID().equals(faction.getFactionID())) {
+                    for (Location blocks : pendingClaim.getPerimeter(worldName, 64)) {
+                        if (claims.nearby(blocks, Configuration.CLAIM_BUFFER) && !claims.getClaimOwner().getFactionID().equals(faction.getFactionID())) {
                             player.sendMessage(Messages.claimTooClose());
                             return;
                         }
                     }
                 }
 
-                if(ToolBox.overlapsWarzone(x1, x2, z1, z2)) {
+                if (ToolBox.overlapsWarzone(x1, x2, z1, z2)) {
                     player.sendMessage(Messages.cantClaimWarzone());
                     return;
                 }
 
-                if(playerFaction.getBalance() < totalValue && !player.hasPermission(Permissions.ADMIN)) {
+                if (playerFaction.getBalance() < totalValue && !player.hasPermission(Permissions.ADMIN)) {
                     player.sendMessage(Messages.claimTooExpensive());
                     return;
                 }
 
-                if(!player.hasPermission(Permissions.ADMIN)) {
+                if (!player.hasPermission(Permissions.ADMIN)) {
                     playerFaction.setBalance(playerFaction.getBalance() - totalValue);
                 }
 
                 playerFaction.sendMessage(Messages.landClaimSuccessOther(player.getName(), totalValue));
 
-                y1 = 0; y2 = 256; //Setting the claims to max height
+                y1 = 0;
+                y2 = 256; //Setting the claims to max height
             }
 
-            if(faction instanceof ServerFaction) {
-                ServerFaction serverFaction = (ServerFaction)faction;
+            if (faction instanceof ServerFaction) {
+                ServerFaction serverFaction = (ServerFaction) faction;
 
-                for(Claim claims : ClaimManager.getActiveClaims()) {
-                    if(claims.overlaps(x1, x2, z1, z2)) {
+                for (Claim claims : ClaimManager.getActiveClaims()) {
+                    if (claims.overlaps(x1, x2, z1, z2)) {
                         player.sendMessage(Messages.claimOverlapping());
                         return;
                     }
                 }
 
-                if(!serverFaction.getType().equals(ServerClaimType.ROAD)) {
-                    y1 = 0; y2 = 256; //Setting the claims to max height UNLESS its a road claim where we want players to go under/over it
+                if (!serverFaction.getType().equals(ServerClaimType.ROAD)) {
+                    y1 = 0;
+                    y2 = 256; //Setting the claims to max height UNLESS its a road claim where we want players to go under/over it
                 }
             }
 
-            for(Pillar pillars : PillarManager.getActivePillars(player.getUniqueId())) {
+            for (Pillar pillars : PillarManager.getActivePillars(player.getUniqueId())) {
                 pillars.remove();
                 PillarManager.getActivePillars().remove(pillars);
             }
 
-            for(ItemStack contents : player.getInventory().getContents()) {
-                if(contents == null ||
+            for (ItemStack contents : player.getInventory().getContents()) {
+                if (contents == null ||
                         !contents.hasItemMeta() ||
-                        !contents.getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) continue;
+                        !contents.getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName()))
+                    continue;
 
                 player.getInventory().remove(contents);
             }
@@ -374,12 +381,12 @@ public class ClaimManager {
             Logger.log(Level.INFO, player.getName() + " has created a new claim for " + faction.getDisplayName());
         }
 
-        if(action.equals(Action.RIGHT_CLICK_AIR) && player.isSneaking()) {
-            if(pendingClaim.getPosA() != null || pendingClaim.getPosB() != null) {
+        if (action.equals(Action.RIGHT_CLICK_AIR) && player.isSneaking()) {
+            if (pendingClaim.getPosA() != null || pendingClaim.getPosB() != null) {
                 pendingClaim.setPosA(null);
                 pendingClaim.setPosB(null);
 
-                for(Pillar pillars : PillarManager.getActivePillars(player.getUniqueId())) {
+                for (Pillar pillars : PillarManager.getActivePillars(player.getUniqueId())) {
                     pillars.remove();
                     PillarManager.getActivePillars().remove(pillars);
                 }

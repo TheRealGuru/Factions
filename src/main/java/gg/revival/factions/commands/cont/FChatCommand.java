@@ -33,35 +33,35 @@ public class FChatCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
 
-        PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
+        PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
         ChatChannel chatChannel = ChatChannelManager.getChannel(player.getUniqueId());
         FactionChatChannelType type = FactionChatChannelType.PUBLIC;
 
-        if(faction != null && faction.getFactionChat().contains(player.getUniqueId()))
+        if (faction != null && faction.getFactionChat().contains(player.getUniqueId()))
             type = FactionChatChannelType.FACTION;
 
-        if(faction != null && faction.getAllyChat().contains(player.getUniqueId()))
+        if (faction != null && faction.getAllyChat().contains(player.getUniqueId()))
             type = FactionChatChannelType.ALLY;
 
-        if(chatChannel != null && chatChannel.getChatroom().contains(player.getUniqueId()))
+        if (chatChannel != null && chatChannel.getChatroom().contains(player.getUniqueId()))
             type = FactionChatChannelType.CUSTOM;
 
-        if(args.length == 1) {
-            if(type.equals(FactionChatChannelType.PUBLIC)) {
+        if (args.length == 1) {
+            if (type.equals(FactionChatChannelType.PUBLIC)) {
 
-                if(faction != null) {
+                if (faction != null) {
                     type = FactionChatChannelType.FACTION;
 
                     faction.getFactionChat().add(player.getUniqueId());
@@ -74,9 +74,9 @@ public class FChatCommand extends FCommand {
                 type = FactionChatChannelType.FACTION;
             }
 
-            if(type.equals(FactionChatChannelType.FACTION)) {
-                if(faction == null) {
-                    if(chatChannel != null) {
+            if (type.equals(FactionChatChannelType.FACTION)) {
+                if (faction == null) {
+                    if (chatChannel != null) {
                         chatChannel.getChatroom().add(player.getUniqueId());
 
                         player.sendMessage(Messages.joinedFactionChannel(ChatColor.BLUE + chatChannel.getChannelName()));
@@ -92,8 +92,8 @@ public class FChatCommand extends FCommand {
 
                 faction.getFactionChat().remove(player.getUniqueId());
 
-                if(faction.getAllies().isEmpty()) {
-                    if(chatChannel != null) {
+                if (faction.getAllies().isEmpty()) {
+                    if (chatChannel != null) {
                         chatChannel.getChatroom().add(player.getUniqueId());
 
                         player.sendMessage(Messages.joinedFactionChannel(ChatColor.BLUE + chatChannel.getChannelName()));
@@ -115,10 +115,10 @@ public class FChatCommand extends FCommand {
                 return;
             }
 
-            if(type.equals(FactionChatChannelType.ALLY)) {
+            if (type.equals(FactionChatChannelType.ALLY)) {
                 faction.getAllyChat().remove(player.getUniqueId());
 
-                if(chatChannel != null) {
+                if (chatChannel != null) {
                     chatChannel.getChatroom().add(player.getUniqueId());
 
                     player.sendMessage(Messages.joinedFactionChannel(ChatColor.BLUE + chatChannel.getChannelName()));
@@ -131,7 +131,7 @@ public class FChatCommand extends FCommand {
                 return;
             }
 
-            if(type.equals(FactionChatChannelType.CUSTOM)) {
+            if (type.equals(FactionChatChannelType.CUSTOM)) {
                 type = FactionChatChannelType.PUBLIC;
 
                 chatChannel.getChatroom().remove(player.getUniqueId());
@@ -144,13 +144,13 @@ public class FChatCommand extends FCommand {
             return;
         }
 
-        if(args[1].equalsIgnoreCase("p") || args[1].equalsIgnoreCase("public") || args[1].equalsIgnoreCase("g") || args[1].equalsIgnoreCase("global")) {
+        if (args[1].equalsIgnoreCase("p") || args[1].equalsIgnoreCase("public") || args[1].equalsIgnoreCase("g") || args[1].equalsIgnoreCase("global")) {
             type = FactionChatChannelType.PUBLIC;
 
             faction.getFactionChat().remove(player.getUniqueId());
             faction.getAllyChat().remove(player.getUniqueId());
 
-            if(chatChannel != null) {
+            if (chatChannel != null) {
                 chatChannel.getChatroom().remove(player.getUniqueId());
             }
 
@@ -159,15 +159,15 @@ public class FChatCommand extends FCommand {
             return;
         }
 
-        if(args[1].equalsIgnoreCase("f") || args[1].equalsIgnoreCase("faction")) {
-            if(faction == null) {
+        if (args[1].equalsIgnoreCase("f") || args[1].equalsIgnoreCase("faction")) {
+            if (faction == null) {
                 player.sendMessage(Messages.notInFaction());
                 return;
             }
 
             type = FactionChatChannelType.FACTION;
 
-            if(faction.getFactionChat().contains(player.getUniqueId())) {
+            if (faction.getFactionChat().contains(player.getUniqueId())) {
                 player.sendMessage(Messages.alreadySpeakingInChannel());
 
                 return;
@@ -175,7 +175,7 @@ public class FChatCommand extends FCommand {
 
             faction.getAllyChat().remove(player.getUniqueId());
 
-            if(chatChannel != null) {
+            if (chatChannel != null) {
                 chatChannel.getChatroom().remove(player.getUniqueId());
             }
 
@@ -186,21 +186,21 @@ public class FChatCommand extends FCommand {
             return;
         }
 
-        if(args[1].equalsIgnoreCase("a") || args[1].equalsIgnoreCase("ally")) {
-            if(faction == null) {
+        if (args[1].equalsIgnoreCase("a") || args[1].equalsIgnoreCase("ally")) {
+            if (faction == null) {
                 player.sendMessage(Messages.notInFaction());
                 return;
             }
 
             type = FactionChatChannelType.ALLY;
 
-            if(faction.getAllies().isEmpty()) {
+            if (faction.getAllies().isEmpty()) {
                 player.sendMessage(Messages.noAlliesInAllyChat());
 
                 return;
             }
 
-            if(faction.getAllyChat().contains(player.getUniqueId())) {
+            if (faction.getAllyChat().contains(player.getUniqueId())) {
                 player.sendMessage(Messages.alreadySpeakingInChannel());
 
                 return;
@@ -208,7 +208,7 @@ public class FChatCommand extends FCommand {
 
             faction.getFactionChat().remove(player.getUniqueId());
 
-            if(chatChannel != null) {
+            if (chatChannel != null) {
                 chatChannel.getChatroom().remove(player.getUniqueId());
             }
 
@@ -219,13 +219,13 @@ public class FChatCommand extends FCommand {
             return;
         }
 
-        if(chatChannel != null && (args[1].equalsIgnoreCase(chatChannel.getChannelName()) || args[1].equalsIgnoreCase("cc"))) {
-            if(faction != null) {
+        if (chatChannel != null && (args[1].equalsIgnoreCase(chatChannel.getChannelName()) || args[1].equalsIgnoreCase("cc"))) {
+            if (faction != null) {
                 faction.getAllyChat().remove(player.getUniqueId());
                 faction.getFactionChat().remove(player.getUniqueId());
             }
 
-            if(chatChannel.getChatroom().contains(player.getUniqueId())) {
+            if (chatChannel.getChatroom().contains(player.getUniqueId())) {
                 player.sendMessage(Messages.alreadySpeakingInChannel());
                 return;
             }

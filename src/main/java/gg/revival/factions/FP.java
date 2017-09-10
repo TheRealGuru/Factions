@@ -28,7 +28,7 @@ public class FP extends JavaPlugin {
     }
 
     public void onDisable() {
-        FactionManager.saveAllFactions(true,true);
-        PlayerManager.saveAllProfiles(true,true);
+        FactionManager.saveAllFactions(true, true);
+        PlayerManager.saveAllProfiles(true, true);
     }
 }

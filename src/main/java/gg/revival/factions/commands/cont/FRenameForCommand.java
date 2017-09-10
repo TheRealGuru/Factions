@@ -37,18 +37,18 @@ public class FRenameForCommand extends FCommand {
     public void onCommand(CommandSender sender, String args[]) {
         String changer = "Console";
 
-        if(sender instanceof Player) {
-            Player player = (Player)sender;
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
 
             changer = player.getName();
 
-            if(!player.hasPermission(getPermission())) {
+            if (!player.hasPermission(getPermission())) {
                 player.sendMessage(Messages.noPermission());
                 return;
             }
         }
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             sender.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
@@ -56,7 +56,7 @@ public class FRenameForCommand extends FCommand {
         String namedFaction = args[1];
         String newName = args[2];
 
-        if(FactionManager.getFactionByName(namedFaction) == null) {
+        if (FactionManager.getFactionByName(namedFaction) == null) {
             sender.sendMessage(Messages.factionNotFound());
             return;
         }

@@ -11,11 +11,18 @@ import java.util.UUID;
 
 public class Subclaim {
 
-    @Getter UUID subclaimID;
-    @Getter Location location;
-    @Getter PlayerFaction subclaimHolder;
-    @Getter @Setter List<UUID> playerAccess = new ArrayList<UUID>();
-    @Getter @Setter boolean officerAccess;
+    @Getter
+    UUID subclaimID;
+    @Getter
+    Location location;
+    @Getter
+    PlayerFaction subclaimHolder;
+    @Getter
+    @Setter
+    List<UUID> playerAccess = new ArrayList<UUID>();
+    @Getter
+    @Setter
+    boolean officerAccess;
 
     public Subclaim(UUID subclaimID, PlayerFaction subclaimHolder, Location location, List<UUID> playerAccess, boolean officerAccess) {
         this.subclaimID = subclaimID;

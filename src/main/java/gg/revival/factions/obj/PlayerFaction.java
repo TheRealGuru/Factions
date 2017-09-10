@@ -4,7 +4,6 @@ import gg.revival.factions.FP;
 import gg.revival.factions.timers.Timer;
 import gg.revival.factions.timers.TimerType;
 import gg.revival.factions.tools.Configuration;
-import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,10 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class PlayerFaction extends Faction {
 
@@ -28,7 +24,7 @@ public class PlayerFaction extends Faction {
     @Getter @Setter BigDecimal dtr;
     @Getter @Setter long regenTime, unfreezeTime;
     @Getter @Setter Location homeLocation;
-    @Getter @Setter HashSet<Timer> timers;
+    @Getter @Setter List<Timer> timers;
 
     public PlayerFaction(UUID factionID, String displayName, Location homeLocation, UUID leader,
                          List<UUID> officers, List<UUID> members, List<UUID> allies,
@@ -52,14 +48,21 @@ public class PlayerFaction extends Faction {
         this.dtr = dtr;
         this.regenTime = System.currentTimeMillis();
         this.unfreezeTime = unfreezeTime;
-        this.timers = new HashSet<>();
+        this.timers = new ArrayList<>();
 
         new BukkitRunnable() {
             public void run() {
                 updateFreeze();
                 updateRegen();
+                updateDTR();
             }
         }.runTaskTimerAsynchronously(FP.getInstance(), 0L, 20L);
+    }
+
+    public List<Timer> getTimersSnapshot() {
+        List<Timer> foundTimers = new ArrayList<>();
+        foundTimers.addAll(timers);
+        return foundTimers;
     }
 
     public List<UUID> getRoster(boolean onlineOnly) {
@@ -83,23 +86,19 @@ public class PlayerFaction extends Faction {
             }
         } else {
             roster.add(leader);
-
-            for (UUID officer : officers) {
-                roster.add(officer);
-            }
-
-            for (UUID member : members) {
-                roster.add(member);
-            }
+            roster.addAll(officers);
+            roster.addAll(members);
         }
 
         return roster;
     }
 
+    public void updateDTR() {
+        if(dtr.doubleValue() > getMaxDTR()) dtr = BigDecimal.valueOf(getMaxDTR());
+    }
+
     public void updateRegen() {
-        if (isFrozen()) return; //They are frozen
-        if (getDtr().doubleValue() >= getMaxDTR()) return; //They have max DTR
-        if (getRegenTime() > System.currentTimeMillis()) return; //Regen time hasnt been reached yet
+        if (isFrozen() || getDtr().doubleValue() >= getMaxDTR() || getRegenTime() > System.currentTimeMillis()) return;
 
         int baseTime = this.getRoster(false).size() * 20;
         int playerMultiplyer = 0, nextRegenInSeconds = 0;
@@ -136,16 +135,28 @@ public class PlayerFaction extends Faction {
     }
 
     public Timer getTimer(TimerType type) {
-        if(!isBeingTimed(type))
+        if (!isBeingTimed(type))
             return null;
 
-        for(Timer activeTimers : timers) {
-            if(activeTimers.getType().equals(type)) {
-                return activeTimers;
+        for(Timer timer : getTimersSnapshot()) {
+            if(timer.getType().equals(type)) {
+                return timer;
             }
         }
 
         return null;
+    }
+
+    public boolean isBeingTimed(TimerType type) {
+        if (timers.isEmpty())
+            return false;
+
+        for(Timer timer : getTimersSnapshot()) {
+            if(timer.getType().equals(type))
+                return true;
+        }
+
+        return false;
     }
 
     public void sendMessage(String message) {
@@ -157,31 +168,10 @@ public class PlayerFaction extends Faction {
     }
 
     public boolean isFrozen() {
-        if (this.unfreezeTime != 0 && this.unfreezeTime > System.currentTimeMillis()) {
-            return true;
-        }
-
-        return false;
+        return this.unfreezeTime != 0 && this.unfreezeTime > System.currentTimeMillis();
     }
 
     public boolean isRaidable() {
-        if (this.dtr.doubleValue() < 0.0) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean isBeingTimed(TimerType type) {
-        if(this.timers.isEmpty())
-            return false;
-
-        for(Timer activeTimers : timers) {
-            if(activeTimers.getType().equals(type)) {
-                return true;
-            }
-        }
-
-        return false;
+        return this.dtr.doubleValue() < 0.0;
     }
 }

@@ -18,15 +18,15 @@ public class PayCommandExecutor implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String args[]) {
-        if(command.getName().equalsIgnoreCase("pay")) {
-            if(!(sender instanceof Player)) {
+        if (command.getName().equalsIgnoreCase("pay")) {
+            if (!(sender instanceof Player)) {
                 sender.sendMessage(Messages.noConsole());
                 return false;
             }
 
-            Player player = (Player)sender;
+            Player player = (Player) sender;
 
-            if(args.length != 2) {
+            if (args.length != 2) {
                 player.sendMessage(ChatColor.RED + "/pay <player> <amount>");
                 return false;
             }
@@ -34,12 +34,12 @@ public class PayCommandExecutor implements CommandExecutor {
             String paidPlayerName = args[0];
             String amountName = args[1];
 
-            if(Bukkit.getPlayer(paidPlayerName) == null || !Bukkit.getPlayer(paidPlayerName).isOnline()) {
+            if (Bukkit.getPlayer(paidPlayerName) == null || !Bukkit.getPlayer(paidPlayerName).isOnline()) {
                 player.sendMessage(Messages.playerNotFound());
                 return false;
             }
 
-            if(!NumberUtils.isNumber(amountName)) {
+            if (!NumberUtils.isNumber(amountName)) {
                 player.sendMessage(Messages.invalidAmount());
                 return false;
             }
@@ -47,7 +47,7 @@ public class PayCommandExecutor implements CommandExecutor {
             Player paidPlayer = Bukkit.getPlayer(paidPlayerName);
             double amount = Double.valueOf(amountName);
 
-            if(paidPlayer.getUniqueId().equals(player.getUniqueId())) {
+            if (paidPlayer.getUniqueId().equals(player.getUniqueId())) {
                 player.sendMessage(Messages.cantPaySelf());
                 return false;
             }
@@ -55,7 +55,7 @@ public class PayCommandExecutor implements CommandExecutor {
             FPlayer factionPlayer = PlayerManager.getPlayer(player.getUniqueId());
             FPlayer factionPaidPlayer = PlayerManager.getPlayer(paidPlayer.getUniqueId());
 
-            if(factionPlayer.getBalance() < amount) {
+            if (factionPlayer.getBalance() < amount) {
                 player.sendMessage(Messages.notEnoughMoney());
                 return false;
             }

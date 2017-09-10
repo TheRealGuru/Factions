@@ -17,37 +17,32 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.projectiles.ProjectileSource;
 
-public class TaskEventsListener implements Listener
-{
+public class TaskEventsListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onPlayerDamage(EntityDamageEvent event)
-    {
-        if(event.isCancelled()) return;
+    public void onPlayerDamage(EntityDamageEvent event) {
+        if (event.isCancelled()) return;
 
-        if(!(event.getEntity() instanceof Player)) return;
+        if (!(event.getEntity() instanceof Player)) return;
 
-        Player player = (Player)event.getEntity();
+        Player player = (Player) event.getEntity();
         FPlayer facPlayer = PlayerManager.getPlayer(player.getUniqueId());
 
-        if(facPlayer.isBeingTimed(TimerType.HOME))
-        {
+        if (facPlayer.isBeingTimed(TimerType.HOME)) {
             facPlayer.removeTimer(TimerType.HOME);
             HomeTask.getStartingLocations().remove(player.getUniqueId());
 
             player.sendMessage(Messages.homeWarpCancelled());
         }
 
-        if(facPlayer.isBeingTimed(TimerType.STUCK))
-        {
+        if (facPlayer.isBeingTimed(TimerType.STUCK)) {
             facPlayer.removeTimer(TimerType.STUCK);
             StuckTask.getStartingLocations().remove(player.getUniqueId());
 
             player.sendMessage(Messages.homeWarpCancelled());
         }
 
-        if(facPlayer.isBeingTimed(TimerType.LOGOUT))
-        {
+        if (facPlayer.isBeingTimed(TimerType.LOGOUT)) {
             facPlayer.removeTimer(TimerType.LOGOUT);
             LogoutTask.getSafeloggers().remove(player.getUniqueId());
             LogoutTask.getStartingLocations().remove(player.getUniqueId());
@@ -57,33 +52,28 @@ public class TaskEventsListener implements Listener
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent event)
-    {
-        if(event.isCancelled()) return;
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        if (event.isCancelled()) return;
 
-        if(event.getDamager() instanceof Player)
-        {
-            Player player = (Player)event.getDamager();
+        if (event.getDamager() instanceof Player) {
+            Player player = (Player) event.getDamager();
             FPlayer facPlayer = PlayerManager.getPlayer(player.getUniqueId());
 
-            if(facPlayer.isBeingTimed(TimerType.HOME))
-            {
+            if (facPlayer.isBeingTimed(TimerType.HOME)) {
                 facPlayer.removeTimer(TimerType.HOME);
                 HomeTask.getStartingLocations().remove(player.getUniqueId());
 
                 player.sendMessage(Messages.homeWarpCancelled());
             }
 
-            if(facPlayer.isBeingTimed(TimerType.STUCK))
-            {
+            if (facPlayer.isBeingTimed(TimerType.STUCK)) {
                 facPlayer.removeTimer(TimerType.STUCK);
                 StuckTask.getStartingLocations().remove(player.getUniqueId());
 
                 player.sendMessage(Messages.homeWarpCancelled());
             }
 
-            if(facPlayer.isBeingTimed(TimerType.LOGOUT))
-            {
+            if (facPlayer.isBeingTimed(TimerType.LOGOUT)) {
                 facPlayer.removeTimer(TimerType.LOGOUT);
                 LogoutTask.getSafeloggers().remove(player.getUniqueId());
                 LogoutTask.getStartingLocations().remove(player.getUniqueId());
@@ -92,33 +82,28 @@ public class TaskEventsListener implements Listener
             }
         }
 
-        if(event.getDamager() instanceof Projectile)
-        {
+        if (event.getDamager() instanceof Projectile) {
             ProjectileSource src = ((Projectile) event.getDamager()).getShooter();
 
-            if(src instanceof Player)
-            {
-                Player player = (Player)src;
+            if (src instanceof Player) {
+                Player player = (Player) src;
                 FPlayer facPlayer = PlayerManager.getPlayer(player.getUniqueId());
 
-                if(facPlayer.isBeingTimed(TimerType.HOME))
-                {
+                if (facPlayer.isBeingTimed(TimerType.HOME)) {
                     facPlayer.removeTimer(TimerType.HOME);
                     HomeTask.getStartingLocations().remove(player.getUniqueId());
 
                     player.sendMessage(Messages.homeWarpCancelled());
                 }
 
-                if(facPlayer.isBeingTimed(TimerType.STUCK))
-                {
+                if (facPlayer.isBeingTimed(TimerType.STUCK)) {
                     facPlayer.removeTimer(TimerType.STUCK);
                     StuckTask.getStartingLocations().remove(player.getUniqueId());
 
                     player.sendMessage(Messages.homeWarpCancelled());
                 }
 
-                if(facPlayer.isBeingTimed(TimerType.LOGOUT))
-                {
+                if (facPlayer.isBeingTimed(TimerType.LOGOUT)) {
                     facPlayer.removeTimer(TimerType.LOGOUT);
                     LogoutTask.getSafeloggers().remove(player.getUniqueId());
                     LogoutTask.getStartingLocations().remove(player.getUniqueId());
@@ -130,12 +115,11 @@ public class TaskEventsListener implements Listener
     }
 
     @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event)
-    {
+    public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         FPlayer facPlayer = PlayerManager.getPlayer(player.getUniqueId());
 
-        if(facPlayer == null) return;
+        if (facPlayer == null) return;
 
         facPlayer.getTimers().clear();
     }

@@ -38,14 +38,14 @@ public class FRenameCommand extends FCommand {
 
     @Override
     public void onCommand(CommandSender sender, String args[]) {
-        if(!(sender instanceof Player) && isPlayerOnly()) {
+        if (!(sender instanceof Player) && isPlayerOnly()) {
             sender.sendMessage(Messages.noConsole());
             return;
         }
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(args.length < getMinArgs() || args.length > getMaxArgs()) {
+        if (args.length < getMinArgs() || args.length > getMaxArgs()) {
             player.sendMessage(ChatColor.RED + getSyntax());
             return;
         }
@@ -57,14 +57,14 @@ public class FRenameCommand extends FCommand {
             return;
         }
 
-        PlayerFaction faction = (PlayerFaction)FactionManager.getFactionByPlayer(player.getUniqueId());
+        PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
 
-        if(!faction.getLeader().equals(player.getUniqueId())) {
+        if (!faction.getLeader().equals(player.getUniqueId())) {
             player.sendMessage(Messages.leaderRequired());
             return;
         }
 
-        if(faction.isBeingTimed(TimerType.RENAME) && faction.getTimer(TimerType.RENAME).getExpire() > System.currentTimeMillis()) {
+        if (faction.isBeingTimed(TimerType.RENAME) && faction.getTimer(TimerType.RENAME).getExpire() > System.currentTimeMillis()) {
             player.sendMessage(Messages.cooldownMessage(ToolBox.getFormattedCooldown(false, faction.getTimer(TimerType.RENAME).getExpire() - System.currentTimeMillis())));
             return;
         }

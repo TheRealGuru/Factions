@@ -10,8 +10,10 @@ import java.util.Set;
 
 public class CommandManager {
 
-    @Getter public static HashSet<FCommand> factionCommands = new HashSet<>();
-    @Getter public static HashSet<CCommand> chatCommands = new HashSet<>();
+    @Getter
+    public static HashSet<FCommand> factionCommands = new HashSet<>();
+    @Getter
+    public static HashSet<CCommand> chatCommands = new HashSet<>();
 
     public static FCommand getFactionCommandByLabel(String label) {
         for (FCommand foundCommands : factionCommands) {
@@ -30,7 +32,7 @@ public class CommandManager {
     }
 
     public static CCommand getChatCommandByLabel(String label) {
-        for(CCommand foundCommands : chatCommands) {
+        for (CCommand foundCommands : chatCommands) {
             if (foundCommands.getLabel().equalsIgnoreCase(label)) {
                 return foundCommands;
             } else if (foundCommands.getAliases() != null && !foundCommands.getAliases().isEmpty()) {
@@ -48,8 +50,8 @@ public class CommandManager {
     public static Set<FCommand> getFactionCommandsByCategory(CmdCategory category) {
         Set<FCommand> result = new HashSet<>();
 
-        for(FCommand commands : factionCommands) {
-            if(!commands.getCategory().equals(category)) continue;
+        for (FCommand commands : factionCommands) {
+            if (!commands.getCategory().equals(category)) continue;
 
             result.add(commands);
         }

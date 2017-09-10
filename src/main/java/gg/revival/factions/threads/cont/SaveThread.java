@@ -8,27 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class SaveThread
-{
+public class SaveThread {
 
-    public static void run()
-    {
+    public static void run() {
         List<FPlayer> toRemove = new ArrayList<FPlayer>();
 
-        for(FPlayer players : PlayerManager.getActivePlayers())
-        {
+        for (FPlayer players : PlayerManager.getActivePlayers()) {
             UUID uuid = players.getUuid();
 
-            if(Bukkit.getPlayer(uuid) == null)
-            {
+            if (Bukkit.getPlayer(uuid) == null) {
                 toRemove.add(players);
             }
         }
 
-        if(toRemove.isEmpty()) return;
+        if (toRemove.isEmpty()) return;
 
-        for(FPlayer removed : toRemove)
-        {
+        for (FPlayer removed : toRemove) {
             PlayerManager.saveProfile(removed, true);
         }
     }
