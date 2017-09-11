@@ -67,7 +67,7 @@ notifications:
   faction-announcement: '&2&lFaction Announcement > &e%announcement%'
   new-leader: '&2%oldleader% &ehas promoted &2%newleader% &eto faction leader'
   new-officer: '&2%leader% &ehas promoted &2%officer% &eto faction officer'
-  removed-officer: '&2%leader% &ehas demoted &2%officer% to faction member'
+  removed-officer: '&2%leader% &ehas demoted &2%officer% &eto faction member'
   dtr-changed: '&eYour factions DTR has been modified to &d%dtr% &eby &9%changer%'
   dtr-changed-other: "&eYou have set &2%faction%&e's DTR to &d%dtr%"
   faction-deposit: '&2%player% &edeposited &2$%amt% &eto the faction balance'
@@ -82,6 +82,8 @@ notifications:
   stuck-warp-started: '&eYou will be teleported to a safe location in &6%dur% &eseconds. Make sure to not move or take damage.'
   player-kicked: '&2%kicker% &ehas kicked &9%kicked% &efrom the faction'
   player-kicked-other: '&eYou have been &ckicked &efrom the faction'
+  player-left: '&2%leaver% &ehas left the faction'
+  player-left-other: '&eYou have left the faction'
 
 chat-formatting:
   global-faction-member: '&2[%fac%]&r%player%&f: %msg%'
@@ -162,7 +164,9 @@ errors:
   logout-cancelled: '&cLogout cancelled'
   cant-home-while-tagged: '&cYou can not warp home while combat tagged'
   cant-while-player-is-tagged: '&cYou can not perform this task while this player is combat-tagged'
+  cant-while-tagged: '&cYou can not perform this task while combat-tagged'
   cant-kick-leader: '&cYou can not kick the leader of the faction'
+  cant-leave-leader: "&cYou can not leave while you're the leader of the faction. Promote someone else to leader and try again"
 
 misc:
   game-tag: '&7[&fFactions&4X&7]&r'

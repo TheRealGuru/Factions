@@ -710,6 +710,23 @@ public class Messages {
         return getValue("notifications.player-kicked-other");
     }
 
+    public static String cantWhileTagged() {
+        return getValue("errors.cant-while-tagged");
+    }
+
+    public static String cantLeaveWhileLeader() {
+        return getValue("errors.cant-leave-leader");
+    }
+
+    public static String playerLeft(String leaver) {
+        return getValue("notifications.player-left")
+                .replace("%leaver%", leaver);
+    }
+
+    public static String playerLeftOther() {
+        return getValue("notifications.player-left-other");
+    }
+
     public static void factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

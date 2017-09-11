@@ -5,6 +5,7 @@ import gg.revival.factions.commands.FCommand;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
+import gg.revival.factions.tools.Logger;
 import gg.revival.factions.tools.Messages;
 import gg.revival.factions.tools.OfflinePlayerLookup;
 import org.bukkit.ChatColor;
@@ -54,6 +55,8 @@ public class FShowCommand extends FCommand {
             PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
 
             Messages.factionInfo(faction, player);
+
+            return;
         }
 
         if (args.length == 2) {
@@ -74,11 +77,13 @@ public class FShowCommand extends FCommand {
                         player.sendMessage(Messages.factionNotFound());
                     } else if (results.size() == 1) {
                         Messages.factionInfo((PlayerFaction) results.get(0), player);
-                    } else if (results.size() > 1) {
+                    } else {
                         Messages.sendMultiFactionList(results, player, query);
                     }
                 }
             });
+
+            return;
         }
 
         if (args.length == 3) {
@@ -97,6 +102,8 @@ public class FShowCommand extends FCommand {
                         }
                     }
                 });
+
+                return;
             }
 
             if (queryType.equalsIgnoreCase("-f")) {

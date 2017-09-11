@@ -75,8 +75,8 @@ public class FDemoteCommand extends FCommand {
                 return;
             }
 
-            faction.getOfficers().remove(player.getUniqueId());
-            faction.getMembers().add(player.getUniqueId());
+            faction.getOfficers().remove(uuid);
+            faction.getMembers().add(uuid);
 
             faction.sendMessage(Messages.removedOfficer(player.getName(), username));
 

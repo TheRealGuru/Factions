@@ -22,8 +22,10 @@ public class OfflinePlayerLookup {
             }
         }
 
-        if (found.size() == queries.size())
+        if (found.size() == queries.size()) {
             callback.onQueryDone(result);
+            return;
+        }
 
         new BukkitRunnable() {
             public void run() {
@@ -90,12 +92,13 @@ public class OfflinePlayerLookup {
             if (Bukkit.getPlayer(toLookup) != null) {
                 result.put(Bukkit.getPlayer(toLookup).getUniqueId(), Bukkit.getPlayer(toLookup).getName());
                 found.add(toLookup);
-                continue;
             }
         }
 
-        if (found.size() == queries.size())
+        if (found.size() == queries.size()) {
             callback.onQueryDone(result);
+            return;
+        }
 
         new BukkitRunnable() {
             public void run() {

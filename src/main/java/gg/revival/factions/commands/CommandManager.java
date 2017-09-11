@@ -101,6 +101,7 @@ public class CommandManager {
         FUnallyCommand unallyCommand = new FUnallyCommand();
         FKickCommand kickCommand = new FKickCommand();
         FHelpCommand helpCommand = new FHelpCommand();
+        FLeaveCommand leaveCommand = new FLeaveCommand();
 
         factionCommands.add(createCommand);
         factionCommands.add(createServerFactionCommand);
@@ -138,6 +139,7 @@ public class CommandManager {
         factionCommands.add(unallyCommand);
         factionCommands.add(kickCommand);
         factionCommands.add(helpCommand);
+        factionCommands.add(leaveCommand);
 
         CCreateCommand chatCreateCommand = new CCreateCommand();
         CDeleteCommand chatDeleteCommand = new CDeleteCommand();
