@@ -16,10 +16,8 @@ import java.util.*;
 
 public class SubclaimGUI {
 
-    @Getter
-    UUID editor;
-    @Getter
-    Subclaim subclaim;
+    @Getter UUID editor;
+    @Getter Subclaim subclaim;
 
     public SubclaimGUI(UUID editor, Subclaim subclaim) {
         this.editor = editor;

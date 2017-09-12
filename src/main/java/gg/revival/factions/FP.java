@@ -12,8 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class FP extends JavaPlugin {
 
-    @Getter
-    private static FP instance;
+    @Getter static FP instance;
 
     public void onEnable() {
         instance = this;

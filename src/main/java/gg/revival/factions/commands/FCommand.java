@@ -12,9 +12,7 @@ public class FCommand {
     @Getter String description;
     @Getter String permission;
     @Getter CmdCategory category;
-
     @Getter List<String> aliases;
-
     @Getter int minArgs;
     @Getter int maxArgs;
 
@@ -32,6 +30,5 @@ public class FCommand {
         this.playerOnly = playerOnly;
     }
 
-    public void onCommand(CommandSender sender, String args[]) {
-    }
+    public void onCommand(CommandSender sender, String args[]) {}
 }

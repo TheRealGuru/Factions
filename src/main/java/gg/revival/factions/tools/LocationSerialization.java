@@ -15,9 +15,8 @@ public class LocationSerialization {
                 .append(":@p;" + location.getPitch())
                 .append(":@yaw;" + location.getYaw());
 
-        if (locationBuilder.length() > 0) {
+        if (locationBuilder.length() > 0)
             return locationBuilder.toString();
-        }
 
         return null;
     }
@@ -25,7 +24,6 @@ public class LocationSerialization {
     public static Location deserializeLocation(String locationString) {
         String[] att;
         String[] arr$ = att = locationString.split(":");
-
         Location location = new Location(Bukkit.getWorlds().get(0), 0.0, 0.0, 0.0);
 
         int len$ = att.length;

@@ -29,10 +29,8 @@ import java.util.logging.Level;
 
 public class ClaimManager {
 
-    @Getter
-    static Set<Claim> activeClaims = new HashSet<>();
-    @Getter
-    static Map<UUID, PendingClaim> claimEditors = new HashMap<>();
+    @Getter static Set<Claim> activeClaims = new HashSet<>();
+    @Getter static Map<UUID, PendingClaim> claimEditors = new HashMap<>();
 
     public static void removeFromClaimEditor(UUID uuid) {
         if (Bukkit.getPlayer(uuid) != null && Bukkit.getPlayer(uuid).isOnline()) {

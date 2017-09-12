@@ -67,10 +67,7 @@ public class FFreezeCommand extends FCommand {
             return;
         }
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.SECOND, time);
-
-        playerFaction.setUnfreezeTime(calendar.getTimeInMillis());
+        playerFaction.setUnfreezeTime(System.currentTimeMillis() + (time * 1000L));
         playerFaction.sendMessage(Messages.powerFrozenByStaff(freezer));
 
         sender.sendMessage(Messages.powerFrozenByStaffOther(playerFaction.getDisplayName()));

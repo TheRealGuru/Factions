@@ -20,12 +20,8 @@ import java.util.*;
 
 public class SubclaimManager {
 
-    @Getter
-    @Setter
-    private static HashSet<Subclaim> activeSubclaims = new HashSet<>();
-    @Getter
-    @Setter
-    private static HashMap<UUID, SubclaimGUI> subclaimEditor = new HashMap<>();
+    @Getter static HashSet<Subclaim> activeSubclaims = new HashSet<>();
+    @Getter static HashMap<UUID, SubclaimGUI> subclaimEditor = new HashMap<>();
 
     public static Subclaim getSubclaimAt(Location location) {
         for (Subclaim subclaims : activeSubclaims) {
@@ -38,9 +34,7 @@ public class SubclaimManager {
     }
 
     public static boolean isEditingSubclaim(UUID uuid) {
-        if (getEditedSubclaim(uuid) != null) return true;
-
-        return false;
+        return getEditedSubclaim(uuid) != null;
     }
 
     public static SubclaimGUI getEditedSubclaim(UUID uuid) {
@@ -74,13 +68,8 @@ public class SubclaimManager {
         List<Subclaim> serverCache = new ArrayList<>();
         List<Subclaim> factionCache = new ArrayList<>();
 
-        for (Subclaim subclaims : activeSubclaims) {
-            serverCache.add(subclaims);
-        }
-
-        for (Subclaim subclaims : subclaim.getSubclaimHolder().getSubclaims()) {
-            factionCache.add(subclaims);
-        }
+        serverCache.addAll(activeSubclaims);
+        factionCache.addAll(subclaim.getSubclaimHolder().getSubclaims());
 
         for (Subclaim subclaims : serverCache) {
             if (subclaims.getSubclaimID().equals(subclaim.getSubclaimID())) {

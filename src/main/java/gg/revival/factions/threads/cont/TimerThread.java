@@ -37,7 +37,7 @@ public class TimerThread {
         }
 
         for(FPlayer players : PlayerManager.getActivePlayersSnapshot()) {
-            if (players.getTimersSnapshot() == null || players.getTimersSnapshot().isEmpty()) continue;
+            if (players == null || players.getTimersSnapshot() == null || players.getTimersSnapshot().isEmpty()) continue;
 
             for(Timer timers : players.getTimersSnapshot()) {
                 if (timers.isPaused())

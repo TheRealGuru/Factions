@@ -76,27 +76,15 @@ public class ToolBox {
     }
 
     public static boolean isNether(Location location) {
-        if (location.getWorld().getEnvironment().equals(World.Environment.NETHER)) {
-            return true;
-        }
-
-        return false;
+        return location.getWorld().getEnvironment().equals(World.Environment.NETHER);
     }
 
     public static boolean isEnd(Location location) {
-        if (location.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
-            return true;
-        }
-
-        return false;
+        return location.getWorld().getEnvironment().equals(World.Environment.THE_END);
     }
 
     public static boolean isOverworld(Location location) {
-        if (!isNether(location) && !isEnd(location)) {
-            return true;
-        }
-
-        return false;
+        return !isNether(location) && !isEnd(location);
     }
 
     public static boolean isWarzone(Location location) {
@@ -192,9 +180,7 @@ public class ToolBox {
 
         while (iterator.hasNext()) {
             lastBlock = iterator.next();
-
             if (lastBlock.getType().equals(Material.AIR)) continue;
-
             break;
         }
 
@@ -228,9 +214,7 @@ public class ToolBox {
             salt.append(SALTCHARS.charAt(index));
         }
 
-        String saltStr = salt.toString();
-
-        return saltStr;
+        return salt.toString();
     }
 
     public static int getTime(String string) {

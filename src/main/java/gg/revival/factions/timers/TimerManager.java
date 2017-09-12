@@ -7,10 +7,7 @@ public class TimerManager {
 
     public static Timer createTimer(TimerType type, int dur) {
         long ms = System.currentTimeMillis() + (dur * 1000);
-
-        Timer timer = new Timer(type, ms);
-
-        return timer;
+        return new Timer(type, ms);
     }
 
     public static void finishTimer(FPlayer player, TimerType type) {

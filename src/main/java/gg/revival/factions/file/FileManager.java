@@ -9,10 +9,10 @@ import java.io.IOException;
 
 public class FileManager {
 
-    public static File configFile;
-    public static File messageFile;
-    public static FileConfiguration configConfig;
-    public static FileConfiguration messageConfig;
+    static File configFile;
+    static File messageFile;
+    static FileConfiguration configConfig;
+    static FileConfiguration messageConfig;
 
     public static void createFiles() {
         try {

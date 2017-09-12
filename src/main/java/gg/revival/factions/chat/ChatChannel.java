@@ -10,22 +10,14 @@ import java.util.UUID;
 
 public class ChatChannel {
 
-    @Getter
-    UUID owner;
-    @Getter
-    @Setter
-    String channelName;
-    @Getter
-    @Setter
-    String channelPassword;
-    @Getter
-    List<UUID> channelMembers;
-    @Getter
-    List<UUID> chatroom;
-    @Getter
-    List<UUID> channelInvites;
+    @Getter UUID owner;
+    @Getter @Setter String channelName;
+    @Getter @Setter String channelPassword;
+    @Getter List<UUID> channelMembers;
+    @Getter List<UUID> chatroom;
+    @Getter List<UUID> channelInvites;
 
-    public ChatChannel(UUID owner, String channelName, String channelPassword) {
+    ChatChannel(UUID owner, String channelName, String channelPassword) {
         this.owner = owner;
         this.channelName = channelName;
         this.channelPassword = channelPassword;

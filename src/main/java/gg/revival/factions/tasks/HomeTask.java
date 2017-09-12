@@ -6,6 +6,7 @@ import gg.revival.factions.core.PlayerManager;
 import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
+import gg.revival.factions.timers.TimerManager;
 import gg.revival.factions.timers.TimerType;
 import gg.revival.factions.tools.Configuration;
 import gg.revival.factions.tools.Messages;
@@ -83,6 +84,7 @@ public class HomeTask {
         }
 
         Faction faction = FactionManager.getFactionByPlayer(player.getUniqueId());
+        FPlayer facPlayer = PlayerManager.getPlayer(uuid);
 
         if (faction == null) {
             player.sendMessage(Messages.notInFaction());
@@ -104,6 +106,10 @@ public class HomeTask {
             }
 
             playerFaction.setBalance(playerFaction.getBalance() - Configuration.HOME_TOO_HIGH_PRICE);
+        }
+
+        if(facPlayer.isBeingTimed(TimerType.PVPPROT)) {
+            TimerManager.finishTimer(facPlayer, TimerType.PVPPROT);
         }
 
         if (player.getVehicle() != null) {

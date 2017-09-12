@@ -1,6 +1,7 @@
 database:
   enabled: true
   db: 'factions'
+
 timers:
   rename-cooldown: 300
   disband-cooldown: 300
@@ -8,10 +9,12 @@ timers:
   home-warmup: 5
   home-warmup-other: 60
   stuck-warmup: 60
+
 chat-channels:
   create:
     min-name-length: 2
     max-name-length: 10
+
 factions:
   dtr:
     regen-time: 60
@@ -45,6 +48,7 @@ factions:
     only-warn-when-visable: true
   subclaims:
     gui-title: '&0Subclaim Editor'
+
 custom-items:
   faction-claiming-stick:
     display-name: '&aFaction Claiming Stick'

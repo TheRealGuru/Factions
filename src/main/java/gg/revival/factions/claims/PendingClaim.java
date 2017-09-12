@@ -13,13 +13,9 @@ import java.util.UUID;
 
 public class PendingClaim {
 
-    @Getter
-    UUID claimer;
-    @Getter
-    @Setter
-    Location posA, posB;
-    @Getter
-    Faction claimingFor;
+    @Getter UUID claimer;
+    @Getter @Setter Location posA, posB;
+    @Getter Faction claimingFor;
 
     public PendingClaim(UUID claimer, Faction faction) {
         this.claimer = claimer;

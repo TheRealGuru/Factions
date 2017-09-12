@@ -10,8 +10,7 @@ import java.util.logging.Level;
 
 public class ChatChannelManager {
 
-    @Getter
-    public static HashSet<ChatChannel> activeChatChannels = new HashSet<>();
+    @Getter static HashSet<ChatChannel> activeChatChannels = new HashSet<>();
 
     public static ChatChannel getChannel(UUID uuid) {
         for (ChatChannel activeChannels : activeChatChannels) {

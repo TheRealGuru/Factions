@@ -7,17 +7,9 @@ import org.bson.Document;
 
 public class DatabaseManager {
 
-    @Getter
-    @Setter
-    static MongoCollection<Document> factionsCollection;
-    @Getter
-    @Setter
-    static MongoCollection<Document> playersCollection;
-    @Getter
-    @Setter
-    static MongoCollection<Document> claimsCollection;
-    @Getter
-    @Setter
-    static MongoCollection<Document> subclaimsCollection;
+    @Getter @Setter static MongoCollection<Document> factionsCollection;
+    @Getter @Setter static MongoCollection<Document> playersCollection;
+    @Getter @Setter static MongoCollection<Document> claimsCollection;
+    @Getter @Setter static MongoCollection<Document> subclaimsCollection;
 
 }

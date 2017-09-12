@@ -17,17 +17,10 @@ import java.util.UUID;
 
 public class Claim {
 
-    @Getter
-    UUID claimID;
-    @Getter
-    @Setter
-    double x1, x2, y1, y2, z1, z2, claimValue;
-    @Getter
-    @Setter
-    String worldName;
-    @Getter
-    @Setter
-    Faction claimOwner;
+    @Getter UUID claimID;
+    @Getter @Setter double x1, x2, y1, y2, z1, z2, claimValue;
+    @Getter @Setter String worldName;
+    @Getter @Setter Faction claimOwner;
 
     public Claim(UUID claimID, Faction claimOwner, double x1, double x2, double y1, double y2, double z1, double z2, String worldName, double claimValue) {
         this.claimID = claimID;
@@ -67,7 +60,7 @@ public class Claim {
         return corner;
     }
 
-    public boolean overlaps(double x1, double x2, double z1, double z2) {
+    boolean overlaps(double x1, double x2, double z1, double z2) {
         double[] vals = new double[2];
 
         double xMin = Math.min(this.x1, this.x2);
@@ -107,10 +100,7 @@ public class Claim {
             ++zMax;
         }
 
-        if (loc.getX() >= xMin && loc.getX() <= xMax && loc.getY() >= yMin && loc.getY() <= yMax && loc.getZ() >= zMin && loc.getZ() <= zMax)
-            return true;
-
-        return false;
+        return loc.getX() >= xMin && loc.getX() <= xMax && loc.getY() >= yMin && loc.getY() <= yMax && loc.getZ() >= zMin && loc.getZ() <= zMax;
     }
 
     public boolean nearby(Location loc, int dist) {
@@ -151,11 +141,11 @@ public class Claim {
         double zMin = Math.min(getZ1(), getZ2());
         double zMax = Math.max(getZ1(), getZ2());
 
-        for (int x = (int) xMin; x <= xMax; x++) { //loop x
+        for (int x = (int) xMin; x <= xMax; x++) {
 
-            for (int z = (int) zMin; z <= zMax; z++) { //loop z
+            for (int z = (int) zMin; z <= zMax; z++) {
 
-                if (x == xMin || x == xMax || z == zMin || z == zMax) { //checks to see if blocks are in line
+                if (x == xMin || x == xMax || z == zMin || z == zMax) {
                     Location location = new Location(Bukkit.getWorld(worldName), x, yLevel, z);
                     locations.add(location);
                 }
@@ -174,7 +164,6 @@ public class Claim {
         double zMax = Math.max(getZ1(), getZ2());
 
         for (int x = (int) xMin; x <= xMax; x++) {
-
             for (int z = (int) zMin; z <= zMax; z++) {
                 Location location = new Location(Bukkit.getWorld(worldName), x, yLevel, z);
                 locations.add(location);

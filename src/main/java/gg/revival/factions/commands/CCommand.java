@@ -7,25 +7,14 @@ import java.util.List;
 
 public class CCommand {
 
-    @Getter
-    String label;
-    @Getter
-    String syntax;
-    @Getter
-    String description;
-    @Getter
-    String permission;
-
-    @Getter
-    List<String> aliases;
-
-    @Getter
-    int minArgs;
-    @Getter
-    int maxArgs;
-
-    @Getter
-    boolean playerOnly;
+    @Getter String label;
+    @Getter String syntax;
+    @Getter String description;
+    @Getter String permission;
+    @Getter List<String> aliases;
+    @Getter int minArgs;
+    @Getter int maxArgs;
+    @Getter boolean playerOnly;
 
     public CCommand(String label, List<String> aliases, String syntax, String description, String permission, int minArgs, int maxArgs, boolean playerOnly) {
         this.label = label;
@@ -38,7 +27,6 @@ public class CCommand {
         this.playerOnly = playerOnly;
     }
 
-    public void onCommand(CommandSender sender, String args[]) {
-    }
+    public void onCommand(CommandSender sender, String args[]) {}
 
 }

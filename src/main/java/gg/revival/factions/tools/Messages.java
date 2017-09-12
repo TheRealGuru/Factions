@@ -19,7 +19,7 @@ import java.util.*;
 
 public class Messages {
 
-    public static String getValue(String path) {
+    private static String getValue(String path) {
         return ChatColor.translateAlternateColorCodes('&', FileManager.getMessages().getString(path));
     }
 
@@ -859,7 +859,7 @@ public class Messages {
 
         for (Faction factions : FactionManager.getActiveFactions()) {
             if (!(factions instanceof PlayerFaction)) continue;
-            if (factionCounts.containsKey(factionCounts)) continue;
+            if (factionCounts.containsKey(factions)) continue;
 
             PlayerFaction playerFactions = (PlayerFaction) factions;
 
@@ -894,11 +894,8 @@ public class Messages {
                 continue;
             }
 
-            if (cursor > finishingPlace) {
+            if (cursor > finishingPlace)
                 break;
-            }
-
-            // 1. FactionName - [16/20] [4.2DTR]
 
             new FancyMessage(cursor + ". ")
                     .color(ChatColor.YELLOW)

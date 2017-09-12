@@ -179,11 +179,7 @@ public class PlayerEventsListener implements Listener {
                 }
 
                 pDamager.sendMessage(Messages.allyDamage());
-
-                return;
             }
-
-            return;
         }
     }
 

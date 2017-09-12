@@ -15,7 +15,9 @@ public class FactionsCommandExecutor implements CommandExecutor {
                 if (CommandManager.getFactionCommandByLabel(args[0]) != null) {
                     CommandManager.getFactionCommandByLabel(args[0]).onCommand(sender, args);
                 }
-            } else {
+            }
+
+            else {
                 if(sender instanceof Player) {
                     Messages.sendHelpPage((Player)sender, null);
                 }

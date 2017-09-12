@@ -9,14 +9,9 @@ import java.util.UUID;
 
 public class FLocation {
 
-    @Getter
-    UUID uuid;
-    @Getter
-    @Setter
-    Claim lastSeen, currentClaim;
-    @Getter
-    @Setter
-    Location lastLocation;
+    @Getter UUID uuid;
+    @Getter @Setter Claim lastSeen, currentClaim;
+    @Getter @Setter Location lastLocation;
 
     public FLocation(UUID uuid) {
         this.uuid = uuid;

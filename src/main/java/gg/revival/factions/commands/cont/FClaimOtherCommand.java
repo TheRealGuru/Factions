@@ -15,12 +15,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Arrays;
+
 public class FClaimOtherCommand extends FCommand {
 
     public FClaimOtherCommand() {
         super(
                 "claimfor",
-                null,
+                Arrays.asList("cf"),
                 "/f claimfor <faction>",
                 "Claim for another faction",
                 Permissions.ADMIN,
