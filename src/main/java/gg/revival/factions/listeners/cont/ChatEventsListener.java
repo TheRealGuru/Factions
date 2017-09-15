@@ -3,8 +3,6 @@ package gg.revival.factions.listeners.cont;
 import gg.revival.core.Revival;
 import gg.revival.core.accounts.Account;
 import gg.revival.core.ranks.Rank;
-import gg.revival.factions.chat.ChatChannel;
-import gg.revival.factions.chat.ChatChannelManager;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
@@ -28,7 +26,6 @@ public class ChatEventsListener implements Listener {
 
         Player player = event.getPlayer();
         PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
-        ChatChannel channel = ChatChannelManager.getChannel(player.getUniqueId());
 
         event.setCancelled(true);
 
@@ -62,11 +59,6 @@ public class ChatEventsListener implements Listener {
                 allyPlayerFaction.sendMessage(Messages.formattedAllyChat(faction.getDisplayName(), tag + player.getName(), event.getMessage()));
             }
 
-            return;
-        }
-
-        if (channel != null && channel.getChatroom().contains(player.getUniqueId())) {
-            channel.sendMessage(Messages.formattedChatChannel(channel.getChannelName(), tag + player.getName(), event.getMessage()));
             return;
         }
 

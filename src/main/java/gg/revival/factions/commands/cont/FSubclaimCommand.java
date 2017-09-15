@@ -236,7 +236,6 @@ public class FSubclaimCommand extends FCommand {
             }
 
             player.sendMessage(Messages.subclaimOutsideClaim());
-            return;
         }
     }
 

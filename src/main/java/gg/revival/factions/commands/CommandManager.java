@@ -10,29 +10,10 @@ import java.util.Set;
 
 public class CommandManager {
 
-    @Getter
-    public static HashSet<FCommand> factionCommands = new HashSet<>();
-    @Getter
-    public static HashSet<CCommand> chatCommands = new HashSet<>();
+    @Getter static HashSet<FCommand> factionCommands = new HashSet<>();
 
     public static FCommand getFactionCommandByLabel(String label) {
         for (FCommand foundCommands : factionCommands) {
-            if (foundCommands.getLabel().equalsIgnoreCase(label)) {
-                return foundCommands;
-            } else if (foundCommands.getAliases() != null && !foundCommands.getAliases().isEmpty()) {
-                for (String aliases : foundCommands.getAliases()) {
-                    if (aliases.equalsIgnoreCase(label)) {
-                        return foundCommands;
-                    }
-                }
-            }
-        }
-
-        return null;
-    }
-
-    public static CCommand getChatCommandByLabel(String label) {
-        for (CCommand foundCommands : chatCommands) {
             if (foundCommands.getLabel().equalsIgnoreCase(label)) {
                 return foundCommands;
             } else if (foundCommands.getAliases() != null && !foundCommands.getAliases().isEmpty()) {
@@ -61,7 +42,6 @@ public class CommandManager {
 
     public static void loadCommands() {
         FP.getInstance().getCommand("faction").setExecutor(new FactionsCommandExecutor());
-        FP.getInstance().getCommand("chatchannel").setExecutor(new ChatChannelsCommandExecutor());
         FP.getInstance().getCommand("balance").setExecutor(new BalanceCommandExecutor());
         FP.getInstance().getCommand("pay").setExecutor(new PayCommandExecutor());
 
@@ -141,14 +121,7 @@ public class CommandManager {
         factionCommands.add(helpCommand);
         factionCommands.add(leaveCommand);
 
-        CCreateCommand chatCreateCommand = new CCreateCommand();
-        CDeleteCommand chatDeleteCommand = new CDeleteCommand();
-
-        chatCommands.add(chatCreateCommand);
-        chatCommands.add(chatDeleteCommand);
-
         Logger.log("Loaded " + factionCommands.size() + " Faction Commands");
-        Logger.log("Loaded " + chatCommands.size() + " Chat Commands");
     }
 
 }

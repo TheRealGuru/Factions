@@ -7,7 +7,6 @@ import gg.revival.driver.MongoAPI;
 import gg.revival.factions.FP;
 import gg.revival.factions.db.DatabaseManager;
 import gg.revival.factions.obj.FPlayer;
-import gg.revival.factions.timers.Timer;
 import gg.revival.factions.tools.Configuration;
 import lombok.Getter;
 import org.bson.Document;
@@ -15,7 +14,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class PlayerManager {
 
@@ -38,7 +39,7 @@ public class PlayerManager {
             }
         }
 
-        return null;
+        return new FPlayer(uuid, 0);
     }
 
     public static void loadPlayer(UUID uuid, double balance) {
