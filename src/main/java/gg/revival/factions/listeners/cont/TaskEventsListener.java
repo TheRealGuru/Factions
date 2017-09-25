@@ -14,7 +14,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.projectiles.ProjectileSource;
 
 public class TaskEventsListener implements Listener {
@@ -112,16 +111,6 @@ public class TaskEventsListener implements Listener {
                 }
             }
         }
-    }
-
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        FPlayer facPlayer = PlayerManager.getPlayer(player.getUniqueId());
-
-        if (facPlayer == null) return;
-
-        facPlayer.getTimers().clear();
     }
 
 }

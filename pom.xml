@@ -27,6 +27,7 @@
                         <configuration>
                             <artifactSet>
                                 <excludes>
+                                    <exclude>gg.revival:mongo-bukkit-driver</exclude>
                                     <exclude>gg.revival:revival</exclude>
                                     <exclude>gg.revival:factionscore</exclude>
                                 </excludes>

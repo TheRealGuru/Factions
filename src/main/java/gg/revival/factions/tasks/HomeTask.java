@@ -1,5 +1,6 @@
 package gg.revival.factions.tasks;
 
+import com.google.common.collect.ImmutableList;
 import gg.revival.factions.FP;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.core.PlayerManager;
@@ -18,18 +19,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class HomeTask {
 
     /**
      * Contains every player who is performing a /f home and the location they started the warp at
      */
-    @Getter
-    static Map<UUID, Location> startingLocations = new HashMap<>();
+    @Getter static Map<UUID, Location> startingLocations = new HashMap<>();
 
     /**
      * Get a players starting location
@@ -48,9 +46,9 @@ public class HomeTask {
      * Checks to make sure every play warping home has not moved too far
      */
     public static void checkLocations() {
-        List<UUID> userCache = new CopyOnWriteArrayList<>(startingLocations.keySet());
+        ImmutableList<UUID> cache = ImmutableList.copyOf(startingLocations.keySet());
 
-        for (UUID uuid : userCache) {
+        for (UUID uuid : cache) {
             if (Bukkit.getPlayer(uuid) == null) {
                 startingLocations.remove(uuid);
                 continue;

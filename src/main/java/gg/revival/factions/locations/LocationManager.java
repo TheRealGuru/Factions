@@ -44,9 +44,7 @@ public class LocationManager {
         StringBuilder entering = new StringBuilder();
 
         if (oldClaim == null && newClaim != null) {
-
             if (ToolBox.isOverworld(mcPlayer.getLocation())) {
-
                 if (ToolBox.isWarzone(mcPlayer.getLocation())) {
                     leaving.append(Configuration.WARZONE_NAME);
                 } else {
@@ -80,15 +78,14 @@ public class LocationManager {
                         entering.append(ChatColor.YELLOW + claimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.DARK_AQUA + "Event" + ChatColor.GOLD + ")");
                         break;
                     case ROAD:
-                        entering.append(ChatColor.YELLOW + claimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.DARK_AQUA + "Road" + ChatColor.GOLD + ")");
+                        entering.append(ChatColor.YELLOW + claimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.YELLOW + "Road" + ChatColor.GOLD + ")");
                         break;
                     case SAFEZONE:
-                        entering.append(ChatColor.YELLOW + claimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.GREEN + "Safezone" + ChatColor.GOLD + ")");
+                        entering.append(ChatColor.YELLOW + claimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.GREEN + "SafeZone" + ChatColor.GOLD + ")");
                         break;
                 }
             }
         } else if (oldClaim != null && newClaim == null) {
-
             if (ToolBox.isOverworld(mcPlayer.getLocation())) {
 
                 if (ToolBox.isWarzone(mcPlayer.getLocation())) {
@@ -124,10 +121,10 @@ public class LocationManager {
                         leaving.append(ChatColor.YELLOW + claimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.DARK_AQUA + "Event" + ChatColor.GOLD + ")");
                         break;
                     case ROAD:
-                        leaving.append(ChatColor.YELLOW + claimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.DARK_AQUA + "Road" + ChatColor.GOLD + ")");
+                        leaving.append(ChatColor.YELLOW + claimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.YELLOW + "Road" + ChatColor.GOLD + ")");
                         break;
                     case SAFEZONE:
-                        leaving.append(ChatColor.YELLOW + claimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.GREEN + "Safezone" + ChatColor.GOLD + ")");
+                        leaving.append(ChatColor.YELLOW + claimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.GREEN + "SafeZone" + ChatColor.GOLD + ")");
                         break;
                 }
             }
@@ -157,10 +154,10 @@ public class LocationManager {
                         leaving.append(ChatColor.YELLOW + serverOldClaimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.DARK_AQUA + "Event" + ChatColor.GOLD + ")");
                         break;
                     case ROAD:
-                        leaving.append(ChatColor.YELLOW + serverOldClaimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.DARK_AQUA + "Road" + ChatColor.GOLD + ")");
+                        leaving.append(ChatColor.YELLOW + serverOldClaimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.YELLOW + "Road" + ChatColor.GOLD + ")");
                         break;
                     case SAFEZONE:
-                        leaving.append(ChatColor.YELLOW + serverOldClaimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.GREEN + "Safezone" + ChatColor.GOLD + ")");
+                        leaving.append(ChatColor.YELLOW + serverOldClaimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.GREEN + "SafeZone" + ChatColor.GOLD + ")");
                         break;
                 }
             }
@@ -181,18 +178,18 @@ public class LocationManager {
                         entering.append(ChatColor.YELLOW + serverNewClaimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.DARK_AQUA + "Event" + ChatColor.GOLD + ")");
                         break;
                     case ROAD:
-                        entering.append(ChatColor.YELLOW + serverNewClaimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.DARK_AQUA + "Road" + ChatColor.GOLD + ")");
+                        entering.append(ChatColor.YELLOW + serverNewClaimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.YELLOW + "Road" + ChatColor.GOLD + ")");
                         break;
                     case SAFEZONE:
-                        entering.append(ChatColor.YELLOW + serverNewClaimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.GREEN + "Safezone" + ChatColor.GOLD + ")");
+                        entering.append(ChatColor.YELLOW + serverNewClaimFaction.getDisplayName() + ChatColor.RESET + " " + ChatColor.GOLD + "(" + ChatColor.GREEN + "SafeZone" + ChatColor.GOLD + ")");
                         break;
                 }
             }
         }
 
         if (entering != null && entering.length() > 0 && leaving != null && leaving.length() > 0) {
-            mcPlayer.sendMessage(Messages.enteringClaim(entering.toString()));
             mcPlayer.sendMessage(Messages.leavingClaim(leaving.toString()));
+            mcPlayer.sendMessage(Messages.enteringClaim(entering.toString()));
         }
     }
 

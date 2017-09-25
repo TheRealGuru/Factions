@@ -1,10 +1,12 @@
 package gg.revival.factions.core;
 
+import com.google.common.collect.ImmutableList;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import gg.revival.driver.MongoAPI;
 import gg.revival.factions.FP;
+import gg.revival.factions.core.tools.Processor;
 import gg.revival.factions.db.DatabaseManager;
 import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.tools.Configuration;
@@ -22,10 +24,8 @@ public class PlayerManager {
 
     @Getter static List<FPlayer> activePlayers = new ArrayList<>();
 
-    public static List<FPlayer> getActivePlayersSnapshot() {
-        List<FPlayer> foundPlayers = new ArrayList<>();
-        foundPlayers.addAll(activePlayers);
-        return foundPlayers;
+    public static ImmutableList<FPlayer> getActivePlayersSnapshot() {
+        return ImmutableList.copyOf(activePlayers);
     }
 
     public static boolean isLoaded(UUID uuid) {
@@ -39,7 +39,7 @@ public class PlayerManager {
             }
         }
 
-        return new FPlayer(uuid, 0);
+        return null;
     }
 
     public static void loadPlayer(UUID uuid, double balance) {
@@ -64,38 +64,72 @@ public class PlayerManager {
 
     public static void saveAllProfiles(boolean unsafe, boolean unload) {
         for (Player players : Bukkit.getOnlinePlayers()) {
-            if (unsafe) {
+            if (unsafe)
                 unsafeSaveProfile(PlayerManager.getPlayer(players.getUniqueId()));
-            } else {
+            else
                 saveProfile(PlayerManager.getPlayer(players.getUniqueId()), unload);
-            }
         }
     }
 
-    public static void loadProfile(UUID uuid) {
+    public static void loadProfile(UUID uuid, boolean unsafe) {
         if (!Configuration.DB_ENABLED) {
             loadPlayer(uuid, 0.0);
             return;
         }
 
-        new BukkitRunnable() {
-            public void run() {
-                if (DatabaseManager.getPlayersCollection() == null)
-                    DatabaseManager.setPlayersCollection(MongoAPI.getCollection(Configuration.DB_NAME, "players"));
+        if(unsafe) {
+            if (DatabaseManager.getPlayersCollection() == null)
+                DatabaseManager.setPlayersCollection(MongoAPI.getCollection(Configuration.DB_NAME, "players"));
 
-                MongoCollection<Document> collection = DatabaseManager.getPlayersCollection();
-                FindIterable<Document> query = collection.find(Filters.eq("uuid", uuid.toString()));
-                Document document = query.first();
+            MongoCollection<Document> collection = DatabaseManager.getPlayersCollection();
+            FindIterable<Document> query;
 
-                if (document != null) {
-                    double balance = document.getDouble("balance");
-
-                    loadPlayer(uuid, balance);
-                } else {
-                    loadPlayer(uuid, 0.0);
-                }
+            try {
+                query = MongoAPI.getQueryByFilter(collection, "uuid", uuid.toString());
+            } catch (LinkageError err) {
+                loadProfile(uuid, unsafe);
+                return;
             }
-        }.runTaskAsynchronously(FP.getInstance());
+
+            Document document = query.first();
+
+            if (document != null) {
+                double balance = document.getDouble("balance");
+
+                loadPlayer(uuid, balance);
+            } else {
+                loadPlayer(uuid, 0.0);
+            }
+        }
+
+        else {
+            new BukkitRunnable() {
+                public void run() {
+                    if (DatabaseManager.getPlayersCollection() == null)
+                        DatabaseManager.setPlayersCollection(MongoAPI.getCollection(Configuration.DB_NAME, "players"));
+
+                    MongoCollection<Document> collection = DatabaseManager.getPlayersCollection();
+                    FindIterable<Document> query;
+
+                    try {
+                        query = MongoAPI.getQueryByFilter(collection, "uuid", uuid.toString());
+                    } catch (LinkageError err) {
+                        loadProfile(uuid, unsafe);
+                        return;
+                    }
+
+                    Document document = query.first();
+
+                    if (document != null) {
+                        double balance = document.getDouble("balance");
+
+                        loadPlayer(uuid, balance);
+                    } else {
+                        loadPlayer(uuid, 0.0);
+                    }
+                }
+            }.runTaskAsynchronously(FP.getInstance());
+        }
     }
 
     public static void saveProfile(FPlayer player, boolean unloadOnCompletion) {
@@ -142,26 +176,30 @@ public class PlayerManager {
      * @param player
      */
     public static void unsafeSaveProfile(FPlayer player) {
-        if (!Configuration.DB_ENABLED)
-            return;
+        Runnable saveTask = () -> {
+            if (!Configuration.DB_ENABLED)
+                return;
 
-        if (player == null)
-            return;
+            if (player == null)
+                return;
 
-        if (DatabaseManager.getPlayersCollection() == null)
-            DatabaseManager.setPlayersCollection(MongoAPI.getCollection(Configuration.DB_NAME, "players"));
+            if (DatabaseManager.getPlayersCollection() == null)
+                DatabaseManager.setPlayersCollection(MongoAPI.getCollection(Configuration.DB_NAME, "players"));
 
-        MongoCollection<Document> collection = DatabaseManager.getPlayersCollection();
-        FindIterable<Document> query = collection.find(Filters.eq("uuid", player.getUuid().toString()));
-        Document document = query.first();
+            MongoCollection<Document> collection = DatabaseManager.getPlayersCollection();
+            FindIterable<Document> query = collection.find(Filters.eq("uuid", player.getUuid().toString()));
+            Document document = query.first();
 
-        Document newDoc = new Document("uuid", player.getUuid().toString())
-                .append("balance", player.getBalance());
+            Document newDoc = new Document("uuid", player.getUuid().toString())
+                    .append("balance", player.getBalance());
 
-        if (document != null) {
-            collection.replaceOne(document, newDoc);
-        } else {
-            collection.insertOne(newDoc);
-        }
+            if (document != null) {
+                collection.replaceOne(document, newDoc);
+            } else {
+                collection.insertOne(newDoc);
+            }
+        };
+
+        Processor.getExecutor().submit(saveTask);
     }
 }

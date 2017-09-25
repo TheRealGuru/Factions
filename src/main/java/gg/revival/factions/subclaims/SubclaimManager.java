@@ -1,5 +1,6 @@
 package gg.revival.factions.subclaims;
 
+import com.google.common.collect.ImmutableList;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
@@ -9,7 +10,6 @@ import gg.revival.factions.db.DatabaseManager;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.tools.Configuration;
 import lombok.Getter;
-import lombok.Setter;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -24,7 +24,9 @@ public class SubclaimManager {
     @Getter static HashMap<UUID, SubclaimGUI> subclaimEditor = new HashMap<>();
 
     public static Subclaim getSubclaimAt(Location location) {
-        for (Subclaim subclaims : activeSubclaims) {
+        ImmutableList<Subclaim> cache = ImmutableList.copyOf(activeSubclaims);
+
+        for (Subclaim subclaims : cache) {
             if (!subclaims.getLocation().equals(location)) continue;
 
             return subclaims;
@@ -46,7 +48,9 @@ public class SubclaimManager {
     }
 
     public static boolean subclaimExists(Subclaim subclaim) {
-        for (Subclaim active : activeSubclaims) {
+        ImmutableList<Subclaim> cache = ImmutableList.copyOf(activeSubclaims);
+
+        for (Subclaim active : cache) {
             if (active.getSubclaimID().equals(subclaim.getSubclaimID())) {
                 return true;
             }
@@ -65,31 +69,25 @@ public class SubclaimManager {
     public static void removeSubclaim(Subclaim subclaim) {
         if (!subclaimExists(subclaim)) return;
 
-        List<Subclaim> serverCache = new ArrayList<>();
-        List<Subclaim> factionCache = new ArrayList<>();
-
-        serverCache.addAll(activeSubclaims);
-        factionCache.addAll(subclaim.getSubclaimHolder().getSubclaims());
+        ImmutableList<Subclaim> serverCache = ImmutableList.copyOf(activeSubclaims);
+        ImmutableList<Subclaim> factionCache = ImmutableList.copyOf(subclaim.getSubclaimHolder().getSubclaims());
 
         for (Subclaim subclaims : serverCache) {
-            if (subclaims.getSubclaimID().equals(subclaim.getSubclaimID())) {
+            if (subclaims.getSubclaimID().equals(subclaim.getSubclaimID()))
                 activeSubclaims.remove(subclaims);
-            }
         }
 
         for (Subclaim subclaims : factionCache) {
-            if (subclaims.getSubclaimID().equals(subclaim.getSubclaimID())) {
+            if (subclaims.getSubclaimID().equals(subclaim.getSubclaimID()))
                 subclaim.getSubclaimHolder().getSubclaims().remove(subclaims);
-            }
         }
     }
 
     public static void performUpdate(Player player, Subclaim subclaim) {
         new BukkitRunnable() {
             public void run() {
-                if (player.getOpenInventory() != null) {
+                if (player.getOpenInventory() != null)
                     player.closeInventory();
-                }
 
                 removeSubclaim(subclaim);
                 addSubclaim(subclaim);

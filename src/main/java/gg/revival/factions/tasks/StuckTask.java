@@ -1,5 +1,6 @@
 package gg.revival.factions.tasks;
 
+import com.google.common.collect.ImmutableList;
 import gg.revival.factions.claims.Claim;
 import gg.revival.factions.claims.ClaimManager;
 import gg.revival.factions.core.PlayerManager;
@@ -12,10 +13,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class StuckTask {
 
@@ -42,9 +41,9 @@ public class StuckTask {
      * Checks to make sure every player currently unstucking has not moved too far
      */
     public static void checkLocations() {
-        List<UUID> userCache = new CopyOnWriteArrayList<>(startingLocations.keySet());
+        ImmutableList<UUID> cache = ImmutableList.copyOf(startingLocations.keySet());
 
-        for (UUID uuid : userCache) {
+        for (UUID uuid : cache) {
             if (Bukkit.getPlayer(uuid) == null) {
                 startingLocations.remove(uuid);
                 continue;

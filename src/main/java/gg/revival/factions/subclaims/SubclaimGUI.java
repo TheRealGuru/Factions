@@ -24,6 +24,7 @@ public class SubclaimGUI {
         this.subclaim = subclaim;
     }
 
+
     public void open() {
         Inventory gui = Bukkit.createInventory(null, 54, Configuration.SUBCLAIM_GUI_NAME);
         PlayerFaction holder = subclaim.getSubclaimHolder();

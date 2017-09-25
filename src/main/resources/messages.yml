@@ -25,6 +25,7 @@ economy:
 notifications:
   member-online: '&aMember Online&f: %player%'
   member-offline: '&cMember Offline&f: %player%'
+  member-death: '&4Member Death&f: %player%'
   friendly-fire: '&cCombat between &fFaction Members &chas been disabled'
   ally-fire: '&cWarning, you are attacking an &dally'
   entering-claim: '&6Entering&e: &r%claim%'

@@ -1,12 +1,15 @@
 package gg.revival.factions.obj;
 
+import com.google.common.collect.ImmutableSet;
 import gg.revival.factions.locations.FLocation;
 import gg.revival.factions.timers.Timer;
 import gg.revival.factions.timers.TimerType;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class FPlayer {
 
@@ -22,10 +25,8 @@ public class FPlayer {
         this.timers = new ArrayList<>();
     }
 
-    public synchronized List<Timer> getTimersSnapshot() {
-        List<Timer> foundTimers = new ArrayList<>();
-        foundTimers.addAll(timers);
-        return foundTimers;
+    public ImmutableSet<Timer> getTimersSnapshot() {
+        return ImmutableSet.copyOf(timers);
     }
 
     public boolean isBeingTimed(TimerType type) {
@@ -51,9 +52,8 @@ public class FPlayer {
     }
 
     public void addTimer(Timer timer) {
-        if (isBeingTimed(timer.getType())) {
+        if (isBeingTimed(timer.getType()))
             removeTimer(timer.getType());
-        }
 
         timers.add(timer);
     }

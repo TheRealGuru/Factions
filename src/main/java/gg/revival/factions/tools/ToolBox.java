@@ -92,9 +92,8 @@ public class ToolBox {
             double x = location.getX();
             double z = location.getZ();
 
-            if (x <= Configuration.WARZONE_RADIUS && z <= Configuration.WARZONE_RADIUS) {
+            if (x <= Configuration.WARZONE_RADIUS && z <= Configuration.WARZONE_RADIUS)
                 return true;
-            }
         }
 
         return false;
@@ -114,11 +113,7 @@ public class ToolBox {
     }
 
     public static boolean isWilderness(Location location) {
-        if (!isWarzone(location) && isOverworld(location)) {
-            return true;
-        }
-
-        return false;
+        return !isWarzone(location) && isOverworld(location);
     }
 
     public static boolean isNetherWarzone(Location location) {
@@ -168,10 +163,7 @@ public class ToolBox {
 
         Arrays.sort(vals);
 
-        if (min > vals[1] || max < vals[0])
-            return false;
-
-        return true;
+        return !(min > vals[1]) && !(max < vals[0]);
     }
 
     public static Block getTargetBlock(Player player, int dist) {
@@ -202,19 +194,6 @@ public class ToolBox {
         }
 
         return sortedMap;
-    }
-
-    public static String getRandomPassword(int length) {
-        String SALTCHARS = "abcdefghijklmnopqrstuvwxyz1234567890";
-        StringBuilder salt = new StringBuilder();
-        Random random = new Random();
-
-        while (salt.length() < length) {
-            int index = (int) (random.nextFloat() * SALTCHARS.length());
-            salt.append(SALTCHARS.charAt(index));
-        }
-
-        return salt.toString();
     }
 
     public static int getTime(String string) {

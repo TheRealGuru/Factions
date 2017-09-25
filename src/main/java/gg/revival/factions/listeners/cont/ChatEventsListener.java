@@ -74,7 +74,7 @@ public class ChatEventsListener implements Listener {
 
             if (playerAccount != null && playerAccount.getBlockedPlayers().contains(players.getUniqueId())) continue;
             if (playersAccounts != null && playersAccounts.getBlockedPlayers().contains(player.getUniqueId())) continue;
-            if (playerAccount != null && playersAccounts.isHideGlobalChat()) continue;
+            if (playersAccounts != null && playersAccounts.isHideGlobalChat()) continue;
 
             if (faction == null) {
                 if (players.getUniqueId().equals(player.getUniqueId())) {

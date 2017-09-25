@@ -13,7 +13,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class PlayerFaction extends Faction {
 
@@ -103,9 +105,8 @@ public class PlayerFaction extends Faction {
         int baseTime = this.getRoster(false).size() * 20;
         int playerMultiplyer = 0, nextRegenInSeconds = 0;
 
-        if (!this.getRoster(false).isEmpty()) {
+        if (!this.getRoster(false).isEmpty())
             playerMultiplyer = this.getRoster(false).size() * 15;
-        }
 
         nextRegenInSeconds = (baseTime - playerMultiplyer) * 1000;
 
@@ -127,9 +128,8 @@ public class PlayerFaction extends Faction {
     public double getMaxDTR() {
         double max = Configuration.DTR_PLAYER_VALUE * getRoster(false).size();
 
-        if (max > Configuration.DTR_MAX) {
+        if (max > Configuration.DTR_MAX)
             max = Configuration.DTR_MAX;
-        }
 
         return max;
     }

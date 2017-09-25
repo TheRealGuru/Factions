@@ -5,6 +5,7 @@ import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.core.PlayerManager;
 import gg.revival.factions.core.bastion.combatprotection.CombatProtection;
 import gg.revival.factions.core.bastion.logout.tasks.LogoutTask;
+import gg.revival.factions.core.classes.Classes;
 import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
@@ -49,9 +50,8 @@ public class TimerThread {
                     if (timers.getType().equals(TimerType.HOME)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if (Bukkit.getPlayer(players.getUuid()) != null) {
+                                if (Bukkit.getPlayer(players.getUuid()) != null)
                                     HomeTask.sendHome(players.getUuid());
-                                }
                             }
                         }.runTask(FP.getInstance());
                     }
@@ -59,9 +59,8 @@ public class TimerThread {
                     if (timers.getType().equals(TimerType.STUCK)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if (Bukkit.getPlayer(players.getUuid()) != null) {
+                                if (Bukkit.getPlayer(players.getUuid()) != null)
                                     StuckTask.unstuck(players.getUuid());
-                                }
                             }
                         }.runTask(FP.getInstance());
                     }
@@ -69,9 +68,8 @@ public class TimerThread {
                     if (timers.getType().equals(TimerType.LOGOUT)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if (Bukkit.getPlayer(players.getUuid()) != null) {
+                                if (Bukkit.getPlayer(players.getUuid()) != null)
                                     LogoutTask.logoutPlayer(players.getUuid());
-                                }
                             }
                         }.runTask(FP.getInstance());
                     }
@@ -79,9 +77,8 @@ public class TimerThread {
                     if (timers.getType().equals(TimerType.ENDERPEARL)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if (Bukkit.getPlayer(players.getUuid()) != null) {
+                                if (Bukkit.getPlayer(players.getUuid()) != null)
                                     Bukkit.getPlayer(players.getUuid()).sendMessage(ChatColor.GREEN + "Your enderpearls have been unlocked");
-                                }
                             }
                         }.runTask(FP.getInstance());
                     }
@@ -89,9 +86,8 @@ public class TimerThread {
                     if (timers.getType().equals(TimerType.TAG)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if (Bukkit.getPlayer(players.getUuid()) != null) {
+                                if (Bukkit.getPlayer(players.getUuid()) != null)
                                     Bukkit.getPlayer(players.getUuid()).sendMessage(ChatColor.GREEN + "Your combat-tag has expired");
-                                }
                             }
                         }.runTask(FP.getInstance());
                     }
@@ -99,9 +95,17 @@ public class TimerThread {
                     if (timers.getType().equals(TimerType.PVPPROT)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if (Bukkit.getPlayer(players.getUuid()) != null) {
+                                if (Bukkit.getPlayer(players.getUuid()) != null)
                                     CombatProtection.takeProtection(Bukkit.getPlayer(players.getUuid()));
-                                }
+                            }
+                        }.runTask(FP.getInstance());
+                    }
+
+                    if (timers.getType().equals(TimerType.PROGRESSION)) {
+                        new BukkitRunnable() {
+                            public void run() {
+                                if (Bukkit.getPlayer(players.getUuid()) != null)
+                                    Bukkit.getPlayer(players.getUuid()).sendMessage(ChatColor.GREEN + "Your progression has been filled");
                             }
                         }.runTask(FP.getInstance());
                     }
@@ -109,9 +113,17 @@ public class TimerThread {
                     if (timers.getType().equals(TimerType.SAFETY)) {
                         new BukkitRunnable() {
                             public void run() {
-                                if (Bukkit.getPlayer(players.getUuid()) != null) {
+                                if (Bukkit.getPlayer(players.getUuid()) != null)
                                     CombatProtection.takeSafety(Bukkit.getPlayer(players.getUuid()));
-                                }
+                            }
+                        }.runTask(FP.getInstance());
+                    }
+
+                    if (timers.getType().equals(TimerType.CLASS)) {
+                        new BukkitRunnable() {
+                            public void run() {
+                                if(Bukkit.getPlayer(players.getUuid()) != null)
+                                    Classes.addToClass(Bukkit.getPlayer(players.getUuid()), Classes.getClassProfile(players.getUuid()).getSelectedClass());
                             }
                         }.runTask(FP.getInstance());
                     }

@@ -1,5 +1,6 @@
 package gg.revival.factions.claims;
 
+import com.google.common.collect.ImmutableList;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
@@ -24,7 +25,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 
 public class ClaimManager {
@@ -60,9 +60,9 @@ public class ClaimManager {
     }
 
     public static Claim getClaimAt(Location location, boolean isEntity) {
-        List<Claim> claimCache = new CopyOnWriteArrayList<>(activeClaims);
+        ImmutableList<Claim> cache = ImmutableList.copyOf(activeClaims);
 
-        for (Claim claims : claimCache) {
+        for (Claim claims : cache) {
             if (!claims.inside(location, isEntity)) continue;
 
             return claims;
@@ -359,7 +359,7 @@ public class ClaimManager {
 
             for (ItemStack contents : player.getInventory().getContents()) {
                 if (contents == null ||
-                        !contents.hasItemMeta() ||
+                        !contents.hasItemMeta() || contents.getItemMeta().getDisplayName() == null ||
                         !contents.getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName()))
                     continue;
 

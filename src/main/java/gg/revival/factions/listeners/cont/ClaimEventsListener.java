@@ -105,7 +105,6 @@ public class ClaimEventsListener implements Listener {
 
     @EventHandler
     public void onEntityTarget(EntityTargetLivingEntityEvent event) {
-        Entity entity = event.getEntity();
         Entity target = event.getTarget();
 
         if (!(target instanceof Player))
@@ -119,6 +118,7 @@ public class ClaimEventsListener implements Listener {
         FLocation location = PlayerManager.getPlayer(player.getUniqueId()).getLocation();
 
         if (location.getCurrentClaim() != null && location.getCurrentClaim().getClaimOwner() instanceof ServerFaction) {
+            event.setTarget(null);
             event.setCancelled(true);
         }
     }

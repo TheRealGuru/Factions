@@ -6,6 +6,7 @@ import gg.revival.factions.claims.ServerClaimType;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.core.PlayerManager;
 import gg.revival.factions.locations.FLocation;
+import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
 import gg.revival.factions.subclaims.SubclaimManager;
@@ -20,7 +21,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
@@ -35,10 +38,13 @@ import java.util.UUID;
 public class PlayerEventsListener implements Listener {
 
     @EventHandler
+    public void onPlayerLoginAttempt(AsyncPlayerPreLoginEvent event) {
+        PlayerManager.loadProfile(event.getUniqueId(), true);
+    }
+
+    @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-
-        PlayerManager.loadProfile(player.getUniqueId());
 
         if (FactionManager.getFactionByPlayer(player.getUniqueId()) != null) {
             PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
@@ -51,14 +57,25 @@ public class PlayerEventsListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
+        FPlayer facPlayer = PlayerManager.getPlayer(player.getUniqueId());
 
         ClaimManager.removeFromClaimEditor(player.getUniqueId());
         SubclaimManager.getSubclaimEditor().remove(player.getUniqueId());
+        PlayerManager.saveProfile(facPlayer, true);
 
         if (FactionManager.getFactionByPlayer(player.getUniqueId()) != null) {
             PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
-
             faction.sendMessage(Messages.memberOffline(player.getName()));
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+
+        if (FactionManager.getFactionByPlayer(player.getUniqueId()) != null) {
+            PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
+            faction.sendMessage(Messages.memberDeath(player.getName()));
         }
     }
 
@@ -224,7 +241,6 @@ public class PlayerEventsListener implements Listener {
 
         new BukkitRunnable() {
             public void run() {
-
                 for (UUID playerID : protectedEntities) {
                     Player players = Bukkit.getPlayer(playerID);
 

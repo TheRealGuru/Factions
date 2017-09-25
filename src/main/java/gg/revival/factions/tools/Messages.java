@@ -727,6 +727,11 @@ public class Messages {
         return getValue("notifications.player-left-other");
     }
 
+    public static String memberDeath(String deadMember) {
+        return getValue("notifications.member-death")
+                .replace("%player%", deadMember);
+    }
+
     public static void factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
         DecimalFormat format = new DecimalFormat("#,###.00");

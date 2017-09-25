@@ -12,9 +12,8 @@ public class LocationThread {
     public static void run() {
         if (Bukkit.getOnlinePlayers().size() == 0) return;
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
+        for (Player player : Bukkit.getOnlinePlayers())
             LocationManager.updateLocation(player);
-        }
 
         HomeTask.checkLocations();
         StuckTask.checkLocations();
