@@ -13,7 +13,7 @@ public class SaveThread {
     public static void run() {
         List<FPlayer> toRemove = new ArrayList<>();
 
-        for (FPlayer players : PlayerManager.getActivePlayersSnapshot()) {
+        for (FPlayer players : PlayerManager.getActivePlayers()) {
             UUID uuid = players.getUuid();
 
             if (Bukkit.getPlayer(uuid) == null)

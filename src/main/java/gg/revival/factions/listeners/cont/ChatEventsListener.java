@@ -29,7 +29,7 @@ public class ChatEventsListener implements Listener {
 
         event.setCancelled(true);
 
-        Rank rank = Revival.getRankManager().getRank(player);
+        Rank rank = Revival.getCore().getRankManager().getRank(player);
         String tag = "";
 
         if (rank != null) {
@@ -62,7 +62,7 @@ public class ChatEventsListener implements Listener {
             return;
         }
 
-        Account playerAccount = Revival.getAccountManager().getAccount(player.getUniqueId());
+        Account playerAccount = Revival.getCore().getAccountManager().getAccount(player.getUniqueId());
 
         if (playerAccount.isHideGlobalChat()) {
             player.sendMessage(ChatColor.RED + "You have global chat toggled off");
@@ -70,7 +70,7 @@ public class ChatEventsListener implements Listener {
         }
 
         for (Player players : event.getRecipients()) {
-            Account playersAccounts = Revival.getAccountManager().getAccount(players.getUniqueId());
+            Account playersAccounts = Revival.getCore().getAccountManager().getAccount(players.getUniqueId());
 
             if (playerAccount != null && playerAccount.getBlockedPlayers().contains(players.getUniqueId())) continue;
             if (playersAccounts != null && playersAccounts.getBlockedPlayers().contains(player.getUniqueId())) continue;

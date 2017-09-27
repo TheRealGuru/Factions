@@ -5,6 +5,7 @@ import gg.revival.factions.claims.ClaimManager;
 import gg.revival.factions.claims.ServerClaimType;
 import gg.revival.factions.core.PlayerManager;
 import gg.revival.factions.locations.FLocation;
+import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.obj.PlayerFaction;
 import gg.revival.factions.obj.ServerFaction;
 import gg.revival.factions.tools.Configuration;
@@ -44,6 +45,24 @@ public class ClaimEventsListener implements Listener {
             Material.REDSTONE_COMPARATOR_ON, Material.TRAP_DOOR, Material.WOODEN_DOOR, Material.WORKBENCH, Material.STONE_BUTTON, Material.WOOD_BUTTON, Material.WOOD_DOOR, Material.STONE_PLATE,
             Material.WOOD_PLATE, Material.IRON_PLATE, Material.GOLD_PLATE, Material.ACACIA_DOOR, Material.BIRCH_DOOR, Material.DARK_OAK_DOOR, Material.JUNGLE_DOOR, Material.SPRUCE_DOOR,
             Material.ACACIA_FENCE_GATE, Material.BIRCH_FENCE_GATE, Material.DARK_OAK_FENCE_GATE, Material.JUNGLE_FENCE_GATE, Material.SPRUCE_FENCE_GATE);
+
+    @EventHandler
+    public void onPlayerHungerChange(FoodLevelChangeEvent event) {
+        if(!(event.getEntity() instanceof Player)) return;
+
+        Player player = (Player)event.getEntity();
+        FPlayer facPlayer = PlayerManager.getPlayer(player.getUniqueId());
+
+        if(facPlayer.getLocation().getCurrentClaim() == null ||
+                (!(facPlayer.getLocation().getCurrentClaim().getClaimOwner() instanceof ServerFaction))) return;
+
+        ServerFaction serverFaction = (ServerFaction)facPlayer.getLocation().getCurrentClaim().getClaimOwner();
+
+        if(!serverFaction.getType().equals(ServerClaimType.SAFEZONE)) return;
+
+        event.setFoodLevel(20);
+        player.setFoodLevel(20);
+    }
 
     @EventHandler
     public void onItemDrop(PlayerDropItemEvent event) {

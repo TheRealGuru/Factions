@@ -49,16 +49,15 @@ public class FMapCommand extends FCommand {
         }
 
         if (PillarManager.getActivePillars(player.getUniqueId()) == null || PillarManager.getActivePillars(player.getUniqueId()).isEmpty()) {
-            HashSet<Faction> nearbyFactions = new HashSet<Faction>();
+            HashSet<Faction> nearbyFactions = new HashSet<>();
 
             for (Claim claims : ClaimManager.getActiveClaims()) {
                 if (!claims.getWorld().equals(player.getWorld())) continue;
 
                 for (int i = 1; i < 5; i++) {
-                    if (claims.getCorner(i).distance(player.getLocation()) <= 100) {
-                        if (!nearbyFactions.contains(claims.getClaimOwner())) {
+                    if (claims.getCorner(i).distanceSquared(player.getLocation()) <= (100 * 100)) {
+                        if (!nearbyFactions.contains(claims.getClaimOwner()))
                             nearbyFactions.add(claims.getClaimOwner());
-                        }
                     }
                 }
             }
@@ -133,7 +132,7 @@ public class FMapCommand extends FCommand {
 
                 for (Claim claims : nearby.getClaims()) {
                     for (int i = 1; i < 5; i++) {
-                        Location corner = claims.getCorner(i);
+                        Location corner = claims.getCorner(i).clone();
                         corner.setY(player.getLocation().getY() - 5.0);
 
                         Pillar pillar = new Pillar(player.getUniqueId(), corner, Material.WOOL, (byte) byteData);

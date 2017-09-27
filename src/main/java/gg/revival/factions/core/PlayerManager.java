@@ -1,6 +1,6 @@
 package gg.revival.factions.core;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Sets;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
@@ -16,24 +16,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class PlayerManager {
 
-    @Getter static List<FPlayer> activePlayers = new ArrayList<>();
-
-    public static ImmutableList<FPlayer> getActivePlayersSnapshot() {
-        return ImmutableList.copyOf(activePlayers);
-    }
+    @Getter static Set<FPlayer> activePlayers = Sets.newConcurrentHashSet();
 
     public static boolean isLoaded(UUID uuid) {
         return getPlayer(uuid) != null;
     }
 
     public static FPlayer getPlayer(UUID uuid) {
-        for (FPlayer players : getActivePlayersSnapshot()) {
+        for (FPlayer players : activePlayers) {
             if (players.getUuid().equals(uuid)) {
                 return players;
             }
