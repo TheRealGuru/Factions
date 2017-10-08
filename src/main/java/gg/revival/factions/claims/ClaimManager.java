@@ -25,6 +25,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.logging.Level;
 
 public class ClaimManager {
@@ -169,32 +171,38 @@ public class ClaimManager {
      * @param claim
      */
     public static void unsafeSaveClaim(Claim claim) {
-        if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
-            return;
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
-        if (DatabaseManager.getClaimsCollection() == null)
-            DatabaseManager.setClaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "claims"));
+        Runnable saveTask = () -> {
+            if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
+                return;
 
-        MongoCollection<Document> collection = DatabaseManager.getClaimsCollection();
-        FindIterable<Document> query = collection.find(Filters.eq("claimID", claim.getClaimID().toString()));
-        Document document = query.first();
+            if (DatabaseManager.getClaimsCollection() == null)
+                DatabaseManager.setClaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "claims"));
 
-        Document newDoc = new Document("claimID", claim.getClaimID().toString())
-                .append("factionID", claim.getClaimOwner().getFactionID().toString())
-                .append("x1", claim.getX1())
-                .append("x2", claim.getX2())
-                .append("y1", claim.getY1())
-                .append("y2", claim.getY2())
-                .append("z1", claim.getZ1())
-                .append("z2", claim.getZ2())
-                .append("worldName", claim.getWorld().getName())
-                .append("claimValue", claim.getClaimValue());
+            MongoCollection<Document> collection = DatabaseManager.getClaimsCollection();
+            FindIterable<Document> query = collection.find(Filters.eq("claimID", claim.getClaimID().toString()));
+            Document document = query.first();
 
-        if (document != null) {
-            collection.replaceOne(document, newDoc);
-        } else {
-            collection.insertOne(newDoc);
-        }
+            Document newDoc = new Document("claimID", claim.getClaimID().toString())
+                    .append("factionID", claim.getClaimOwner().getFactionID().toString())
+                    .append("x1", claim.getX1())
+                    .append("x2", claim.getX2())
+                    .append("y1", claim.getY1())
+                    .append("y2", claim.getY2())
+                    .append("z1", claim.getZ1())
+                    .append("z2", claim.getZ2())
+                    .append("worldName", claim.getWorld().getName())
+                    .append("claimValue", claim.getClaimValue());
+
+            if (document != null) {
+                collection.replaceOne(document, newDoc);
+            } else {
+                collection.insertOne(newDoc);
+            }
+        };
+
+        executorService.execute(saveTask);
     }
 
     public static void performClaimAction(Action action, Player player, Location clickedLocation) {

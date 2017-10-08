@@ -6,7 +6,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import gg.revival.driver.MongoAPI;
 import gg.revival.factions.FP;
-import gg.revival.factions.core.tools.Processor;
 import gg.revival.factions.db.DatabaseManager;
 import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.tools.Configuration;
@@ -18,6 +17,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class PlayerManager {
 
@@ -171,6 +172,8 @@ public class PlayerManager {
      * @param player
      */
     public static void unsafeSaveProfile(FPlayer player) {
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+
         Runnable saveTask = () -> {
             if (!Configuration.DB_ENABLED)
                 return;
@@ -195,6 +198,6 @@ public class PlayerManager {
             }
         };
 
-        Processor.getExecutor().submit(saveTask);
+        executorService.submit(saveTask);
     }
 }

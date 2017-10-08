@@ -1,6 +1,6 @@
 package gg.revival.factions.threads.cont;
 
-import gg.revival.factions.core.bastion.logout.tasks.LogoutTask;
+import gg.revival.factions.core.FC;
 import gg.revival.factions.locations.LocationManager;
 import gg.revival.factions.tasks.HomeTask;
 import gg.revival.factions.tasks.StuckTask;
@@ -17,7 +17,7 @@ public class LocationThread {
 
         HomeTask.checkLocations();
         StuckTask.checkLocations();
-        LogoutTask.checkLocations();
+        FC.getFactionsCore().getBastion().getLogoutTask().checkLocations();
     }
 
 }

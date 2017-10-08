@@ -17,6 +17,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class SubclaimManager {
 
@@ -174,30 +176,36 @@ public class SubclaimManager {
     }
 
     public static void unsafeSaveSubclaim(Subclaim subclaim) {
-        if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
-            return;
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
-        if (DatabaseManager.getSubclaimsCollection() == null)
-            DatabaseManager.setSubclaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "subclaims"));
+        Runnable saveTask = () -> {
+            if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
+                return;
 
-        MongoCollection<Document> collection = DatabaseManager.getSubclaimsCollection();
-        FindIterable<Document> query = collection.find(Filters.eq("subclaimID", subclaim.getSubclaimID().toString()));
-        Document document = query.first();
+            if (DatabaseManager.getSubclaimsCollection() == null)
+                DatabaseManager.setSubclaimsCollection(MongoAPI.getCollection(Configuration.DB_NAME, "subclaims"));
 
-        Document newDoc = new Document("subclaimID", subclaim.getSubclaimID().toString())
-                .append("worldName", subclaim.getLocation().getWorld().getName())
-                .append("x", subclaim.getLocation().getX())
-                .append("y", subclaim.getLocation().getY())
-                .append("z", subclaim.getLocation().getZ())
-                .append("factionID", subclaim.getSubclaimHolder().getFactionID().toString())
-                .append("accessPlayers", subclaim.getPlayerAccess())
-                .append("officerBypass", subclaim.isOfficerAccess());
+            MongoCollection<Document> collection = DatabaseManager.getSubclaimsCollection();
+            FindIterable<Document> query = collection.find(Filters.eq("subclaimID", subclaim.getSubclaimID().toString()));
+            Document document = query.first();
 
-        if (document != null) {
-            collection.replaceOne(document, newDoc);
-        } else {
-            collection.insertOne(newDoc);
-        }
+            Document newDoc = new Document("subclaimID", subclaim.getSubclaimID().toString())
+                    .append("worldName", subclaim.getLocation().getWorld().getName())
+                    .append("x", subclaim.getLocation().getX())
+                    .append("y", subclaim.getLocation().getY())
+                    .append("z", subclaim.getLocation().getZ())
+                    .append("factionID", subclaim.getSubclaimHolder().getFactionID().toString())
+                    .append("accessPlayers", subclaim.getPlayerAccess())
+                    .append("officerBypass", subclaim.isOfficerAccess());
+
+            if (document != null) {
+                collection.replaceOne(document, newDoc);
+            } else {
+                collection.insertOne(newDoc);
+            }
+        };
+
+        executorService.execute(saveTask);
     }
 
     public static void deleteSubclaim(Subclaim subclaim) {

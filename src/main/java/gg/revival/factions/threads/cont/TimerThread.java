@@ -1,11 +1,9 @@
 package gg.revival.factions.threads.cont;
 
 import gg.revival.factions.FP;
+import gg.revival.factions.core.FC;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.core.PlayerManager;
-import gg.revival.factions.core.bastion.combatprotection.CombatProtection;
-import gg.revival.factions.core.bastion.logout.tasks.LogoutTask;
-import gg.revival.factions.core.classes.Classes;
 import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
@@ -21,7 +19,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class TimerThread {
 
     public static void run() {
-        for(Faction factions : FactionManager.getActiveFactionsSnapshot()) {
+        for(Faction factions : FactionManager.getActiveFactions()) {
             if (!(factions instanceof PlayerFaction) || ((PlayerFaction) factions).getTimers().isEmpty()) continue;
 
             PlayerFaction faction = (PlayerFaction) factions;
@@ -69,7 +67,7 @@ public class TimerThread {
                         new BukkitRunnable() {
                             public void run() {
                                 if (Bukkit.getPlayer(players.getUuid()) != null)
-                                    LogoutTask.logoutPlayer(players.getUuid());
+                                    FC.getFactionsCore().getBastion().getLogoutTask().logoutPlayer(players.getUuid());
                             }
                         }.runTask(FP.getInstance());
                     }
@@ -96,7 +94,7 @@ public class TimerThread {
                         new BukkitRunnable() {
                             public void run() {
                                 if (Bukkit.getPlayer(players.getUuid()) != null)
-                                    CombatProtection.takeProtection(Bukkit.getPlayer(players.getUuid()));
+                                    FC.getFactionsCore().getBastion().getCombatProtection().takeProtection(Bukkit.getPlayer(players.getUuid()));
                             }
                         }.runTask(FP.getInstance());
                     }
@@ -114,7 +112,7 @@ public class TimerThread {
                         new BukkitRunnable() {
                             public void run() {
                                 if (Bukkit.getPlayer(players.getUuid()) != null)
-                                    CombatProtection.takeSafety(Bukkit.getPlayer(players.getUuid()));
+                                    FC.getFactionsCore().getBastion().getCombatProtection().takeSafety(Bukkit.getPlayer(players.getUuid()));
                             }
                         }.runTask(FP.getInstance());
                     }
@@ -123,7 +121,7 @@ public class TimerThread {
                         new BukkitRunnable() {
                             public void run() {
                                 if(Bukkit.getPlayer(players.getUuid()) != null)
-                                    Classes.addToClass(Bukkit.getPlayer(players.getUuid()), Classes.getClassProfile(players.getUuid()).getSelectedClass());
+                                    FC.getFactionsCore().getClasses().addToClass(Bukkit.getPlayer(players.getUuid()), FC.getFactionsCore().getClasses().getClassProfile(players.getUuid()).getSelectedClass());
                             }
                         }.runTask(FP.getInstance());
                     }

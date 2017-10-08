@@ -1,6 +1,6 @@
 package gg.revival.factions.core;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Sets;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import gg.revival.driver.MongoAPI;
@@ -8,7 +8,6 @@ import gg.revival.factions.FP;
 import gg.revival.factions.claims.Claim;
 import gg.revival.factions.claims.ClaimManager;
 import gg.revival.factions.claims.ServerClaimType;
-import gg.revival.factions.core.tools.Processor;
 import gg.revival.factions.db.DatabaseManager;
 import gg.revival.factions.obj.Faction;
 import gg.revival.factions.obj.PlayerFaction;
@@ -27,47 +26,42 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.logging.Level;
 
 import static com.mongodb.client.model.Filters.eq;
 
 public class FactionManager {
 
-    @Getter static Set<Faction> activeFactions = new HashSet<>();
-
-    public static ImmutableList<Faction> getActiveFactionsSnapshot() {
-        return ImmutableList.copyOf(activeFactions);
-    }
+    @Getter static Set<Faction> activeFactions = Sets.newConcurrentHashSet();
 
     public static Faction getFactionByName(String query) {
-        for (Faction factions : getActiveFactionsSnapshot()) {
-            if (factions.getDisplayName().equalsIgnoreCase(query)) {
+        for (Faction factions : getActiveFactions()) {
+            if (factions.getDisplayName().equalsIgnoreCase(query))
                 return factions;
-            }
         }
 
         return null;
     }
 
     public static Faction getFactionByUUID(UUID query) {
-        for (Faction factions : getActiveFactionsSnapshot()) {
-            if (factions.getFactionID().equals(query)) {
+        for (Faction factions : getActiveFactions()) {
+            if (factions.getFactionID().equals(query))
                 return factions;
-            }
         }
 
         return null;
     }
 
     public static Faction getFactionByPlayer(UUID query) {
-        for (Faction factions : getActiveFactionsSnapshot()) {
+        for (Faction factions : getActiveFactions()) {
             if (!(factions instanceof PlayerFaction)) continue;
 
             PlayerFaction faction = (PlayerFaction) factions;
 
-            if (faction.getRoster(false).contains(query)) {
+            if (faction.getRoster(false).contains(query))
                 return factions;
-            }
         }
 
         return null;
@@ -79,9 +73,7 @@ public class FactionManager {
         PlayerFaction factionOne = (PlayerFaction) getFactionByPlayer(playerOne);
         PlayerFaction factionTwo = (PlayerFaction) getFactionByPlayer(playerTwo);
 
-        if (factionOne.getFactionID().equals(factionTwo.getFactionID())) return true;
-
-        return false;
+        return factionOne.getFactionID().equals(factionTwo.getFactionID());
     }
 
     public static boolean isAllyMember(UUID playerOne, UUID playerTwo) {
@@ -90,9 +82,7 @@ public class FactionManager {
         PlayerFaction factionOne = (PlayerFaction) getFactionByPlayer(playerOne);
         PlayerFaction factionTwo = (PlayerFaction) getFactionByPlayer(playerTwo);
 
-        if (factionOne.getAllies().contains(factionTwo.getFactionID())) return true;
-
-        return false;
+        return factionOne.getAllies().contains(factionTwo.getFactionID());
     }
 
     public static void createSystemFaction(String creator, String displayName, ServerClaimType type) {
@@ -355,6 +345,8 @@ public class FactionManager {
      * @param faction
      */
     public static void unsafeSaveFaction(Faction faction) {
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+
         Runnable saveTask = () -> {
             if (!Configuration.DB_ENABLED || !MongoAPI.isConnected())
                 return;
@@ -424,6 +416,6 @@ public class FactionManager {
             }
         };
 
-        Processor.getExecutor().submit(saveTask);
+        executorService.submit(saveTask);
     }
 }

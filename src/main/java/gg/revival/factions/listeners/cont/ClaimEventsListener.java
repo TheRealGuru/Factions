@@ -16,10 +16,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -61,7 +58,10 @@ public class ClaimEventsListener implements Listener {
         if(!serverFaction.getType().equals(ServerClaimType.SAFEZONE)) return;
 
         event.setFoodLevel(20);
+
         player.setFoodLevel(20);
+        player.setSaturation(20);
+        player.setExhaustion(0);
     }
 
     @EventHandler
@@ -146,6 +146,8 @@ public class ClaimEventsListener implements Listener {
     public void onEntitySpawn(EntitySpawnEvent event) {
         Location location = event.getLocation();
 
+        if(!(event.getEntity() instanceof Monster)) return;
+
         for (Claim claims : ClaimManager.getActiveClaims()) {
             if (!claims.inside(location, true)) continue;
 
@@ -176,7 +178,7 @@ public class ClaimEventsListener implements Listener {
             if (claims.getClaimOwner() instanceof PlayerFaction) {
                 PlayerFaction faction = (PlayerFaction) claims.getClaimOwner();
 
-                if (!faction.getRoster(false).contains(player.getUniqueId())) {
+                if (!faction.getRoster(true).contains(player.getUniqueId())) {
                     event.setCancelled(true);
                     return;
                 }
@@ -429,15 +431,13 @@ public class ClaimEventsListener implements Listener {
         if (!player.getItemInHand().getItemMeta().getDisplayName().equals(ToolBox.getClaimingStick().getItemMeta().getDisplayName()))
             return;
 
-        if (event.getClickedBlock() != null) {
+        if (event.getClickedBlock() != null)
             clickedLocation = event.getClickedBlock().getLocation();
-        }
 
         ClaimManager.performClaimAction(action, player, clickedLocation);
 
-        if (action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.LEFT_CLICK_BLOCK)) {
+        if (action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.LEFT_CLICK_BLOCK))
             event.setCancelled(true);
-        }
     }
 
     @EventHandler
@@ -446,7 +446,6 @@ public class ClaimEventsListener implements Listener {
 
         for (Block block : blocks) {
             if (ClaimManager.getClaimAt(block.getLocation(), false) == null) continue;
-
             blocks.remove(block);
         }
 
@@ -488,9 +487,8 @@ public class ClaimEventsListener implements Listener {
             if (claim.getClaimOwner() instanceof ServerFaction) {
                 ServerFaction serverFaction = (ServerFaction) claim.getClaimOwner();
 
-                if (serverFaction.getType().equals(ServerClaimType.SAFEZONE)) {
+                if (serverFaction.getType().equals(ServerClaimType.SAFEZONE))
                     event.setCancelled(true);
-                }
             }
         }
     }
@@ -504,7 +502,6 @@ public class ClaimEventsListener implements Listener {
             return;
 
         Entity entity = event.getEntity();
-
         Claim claim = ClaimManager.getClaimAt(entity.getLocation(), true);
 
         if (claim == null)

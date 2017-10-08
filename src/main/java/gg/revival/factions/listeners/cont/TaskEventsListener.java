@@ -1,7 +1,7 @@
 package gg.revival.factions.listeners.cont;
 
+import gg.revival.factions.core.FC;
 import gg.revival.factions.core.PlayerManager;
-import gg.revival.factions.core.bastion.logout.tasks.LogoutTask;
 import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.tasks.HomeTask;
 import gg.revival.factions.tasks.StuckTask;
@@ -43,8 +43,8 @@ public class TaskEventsListener implements Listener {
 
         if (facPlayer.isBeingTimed(TimerType.LOGOUT)) {
             facPlayer.removeTimer(TimerType.LOGOUT);
-            LogoutTask.getSafeloggers().remove(player.getUniqueId());
-            LogoutTask.getStartingLocations().remove(player.getUniqueId());
+            FC.getFactionsCore().getBastion().getLogoutTask().getSafeloggers().remove(player.getUniqueId());
+            FC.getFactionsCore().getBastion().getLogoutTask().getStartingLocations().remove(player.getUniqueId());
 
             player.sendMessage(Messages.logoutCancelled());
         }
@@ -74,8 +74,8 @@ public class TaskEventsListener implements Listener {
 
             if (facPlayer.isBeingTimed(TimerType.LOGOUT)) {
                 facPlayer.removeTimer(TimerType.LOGOUT);
-                LogoutTask.getSafeloggers().remove(player.getUniqueId());
-                LogoutTask.getStartingLocations().remove(player.getUniqueId());
+                FC.getFactionsCore().getBastion().getLogoutTask().getSafeloggers().remove(player.getUniqueId());
+                FC.getFactionsCore().getBastion().getLogoutTask().getStartingLocations().remove(player.getUniqueId());
 
                 player.sendMessage(Messages.logoutCancelled());
             }
@@ -104,8 +104,8 @@ public class TaskEventsListener implements Listener {
 
                 if (facPlayer.isBeingTimed(TimerType.LOGOUT)) {
                     facPlayer.removeTimer(TimerType.LOGOUT);
-                    LogoutTask.getSafeloggers().remove(player.getUniqueId());
-                    LogoutTask.getStartingLocations().remove(player.getUniqueId());
+                    FC.getFactionsCore().getBastion().getLogoutTask().getSafeloggers().remove(player.getUniqueId());
+                    FC.getFactionsCore().getBastion().getLogoutTask().getStartingLocations().remove(player.getUniqueId());
 
                     player.sendMessage(Messages.logoutCancelled());
                 }

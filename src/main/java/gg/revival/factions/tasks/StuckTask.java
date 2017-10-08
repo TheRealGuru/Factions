@@ -70,13 +70,14 @@ public class StuckTask {
      */
     public static void unstuck(UUID uuid) {
         Player player = Bukkit.getPlayer(uuid);
+        FPlayer facPlayer = PlayerManager.getPlayer(uuid);
 
-        if (player == null) {
+        if (player == null || facPlayer == null || facPlayer.getLocation() == null) {
             startingLocations.remove(uuid);
             return;
         }
 
-        Claim inside = ClaimManager.getClaimAt(player.getLocation(), true);
+        Claim inside = facPlayer.getLocation().getCurrentClaim();
 
         if (inside == null) {
             player.sendMessage(Messages.notInsideClaim());
