@@ -100,10 +100,12 @@ public class ClaimEventsListener implements Listener {
             for (Block blocks : event.getBlocks()) {
                 if (claims.inside(blocks.getLocation(), false) && !claims.inside(piston.getLocation(), false)) {
                     event.setCancelled(true);
+                    return;
                 }
 
                 if (claims.nearby(blocks.getLocation(), Configuration.CLAIM_BUFFER) && !claims.inside(piston.getLocation(), false)) {
                     event.setCancelled(true);
+                    return;
                 }
             }
         }
@@ -112,12 +114,16 @@ public class ClaimEventsListener implements Listener {
     @EventHandler
     public void onPistonRetract(BlockPistonRetractEvent event) {
         Block piston = event.getBlock();
-        Location retractLocation = event.getRetractLocation();
+
+        if(event.getBlocks().isEmpty())
+            return;
 
         for (Claim claims : ClaimManager.getActiveClaims()) {
-            if (claims.inside(retractLocation, false) && !claims.inside(piston.getLocation(), false)) {
-                event.setCancelled(true);
-                return;
+            for(Block blocks : event.getBlocks()) {
+                if(claims.inside(blocks.getLocation(), false) && !claims.inside(piston.getLocation(), false)) {
+                    event.setCancelled(true);
+                    return;
+                }
             }
         }
     }
@@ -231,7 +237,6 @@ public class ClaimEventsListener implements Listener {
         if (ToolBox.isEnd(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.landClaimedBy(Configuration.END_NAME));
             event.setCancelled(true);
-            return;
         }
     }
 
@@ -273,7 +278,7 @@ public class ClaimEventsListener implements Listener {
                     List<UUID> roster = faction.getRoster(false);
 
                     if (!roster.contains(player.getUniqueId()) && !faction.isRaidable() && !player.hasPermission(Permissions.ADMIN)) {
-                        player.sendMessage(Messages.landClaimedBy(ChatColor.RED + faction.getDisplayName()));
+                        player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + faction.getDisplayName()));
                         event.setCancelled(true);
                         return;
                     }
@@ -316,7 +321,6 @@ public class ClaimEventsListener implements Listener {
         if (ToolBox.isEnd(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.landClaimedBy(Configuration.END_NAME));
             event.setCancelled(true);
-            return;
         }
     }
 
@@ -335,7 +339,7 @@ public class ClaimEventsListener implements Listener {
                     List<UUID> roster = faction.getRoster(false);
 
                     if (!roster.contains(player.getUniqueId()) && !faction.isRaidable() && !player.hasPermission(Permissions.ADMIN)) {
-                        player.sendMessage(Messages.landClaimedBy(ChatColor.RED + faction.getDisplayName()));
+                        player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + faction.getDisplayName()));
                         event.setCancelled(true);
                         return;
                     }
@@ -378,7 +382,6 @@ public class ClaimEventsListener implements Listener {
         if (ToolBox.isEnd(block.getLocation()) && !player.hasPermission(Permissions.ADMIN)) {
             player.sendMessage(Messages.landClaimedBy(Configuration.END_NAME));
             event.setCancelled(true);
-            return;
         }
     }
 
@@ -395,25 +398,31 @@ public class ClaimEventsListener implements Listener {
         for (Claim claims : ClaimManager.getActiveClaims()) {
             if (!claims.inside(block.getLocation(), false)) continue;
 
-            if (claims.getClaimOwner() instanceof ServerFaction && !player.hasPermission(Permissions.ADMIN)) {
-                if (clickables.contains(block.getType())) {
-                    if (!block.getType().name().contains("PLATE")) {
-                        player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + claims.getClaimOwner().getDisplayName()));
-                    }
+            if(claims.getClaimOwner() instanceof ServerFaction && clickables.contains(block.getType()) && !player.hasPermission(Permissions.ADMIN)) {
+                if(!block.getType().name().contains("PLATE"))
+                    player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + claims.getClaimOwner().getDisplayName()));
 
-                    event.setCancelled(true);
+                if(block.getType().name().contains("PLATE")) {
+                    if(!action.equals(Action.RIGHT_CLICK_BLOCK))
+                        event.setCancelled(true);
                 }
+
+                else
+                    event.setCancelled(true);
             }
 
-            if (claims.getClaimOwner() instanceof PlayerFaction && !player.hasPermission(Permissions.ADMIN)) {
+            if (claims.getClaimOwner() instanceof PlayerFaction && clickables.contains(block.getType()) && !player.hasPermission(Permissions.ADMIN)) {
                 if (!((PlayerFaction) claims.getClaimOwner()).getRoster(false).contains(player.getUniqueId())) {
-                    if (clickables.contains(block.getType())) {
-                        if (!block.getType().name().contains("PLATE")) {
-                            player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + claims.getClaimOwner().getDisplayName()));
-                        }
+                    if(!block.getType().name().contains("PLATE"))
+                        player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + claims.getClaimOwner().getDisplayName()));
 
-                        event.setCancelled(true);
+                    if(block.getType().name().contains("PLATE")) {
+                        if(!action.equals(Action.RIGHT_CLICK_BLOCK))
+                            event.setCancelled(true);
                     }
+
+                    else
+                        event.setCancelled(true);
                 }
             }
         }

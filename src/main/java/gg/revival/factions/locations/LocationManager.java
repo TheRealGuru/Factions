@@ -16,7 +16,6 @@ import gg.revival.factions.tools.ToolBox;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 import java.util.UUID;
 
@@ -253,18 +252,14 @@ public class LocationManager {
             PlayerFaction playerFaction = (PlayerFaction)claimAtCurrentLocation.getClaimOwner();
 
             if(player.isBeingTimed(TimerType.PVPPROT)) {
-                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.2);
-                mcPlayer.getLocation().setDirection(knockback);
-                mcPlayer.setVelocity(knockback);
+                mcPlayer.setHealth(mcPlayer.getHealth() - 1.0);
                 mcPlayer.teleport(storedLocation);
                 mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you have PvP protection");
                 return true;
             }
 
             if(player.isBeingTimed(TimerType.PROGRESSION) && !playerFaction.getRoster(true).contains(mcPlayer.getUniqueId())) {
-                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.2);
-                mcPlayer.getLocation().setDirection(knockback);
-                mcPlayer.setVelocity(knockback);
+                mcPlayer.setHealth(mcPlayer.getHealth() - 1.0);
                 mcPlayer.teleport(storedLocation);
                 mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you have unfinished progression");
                 return true;
@@ -275,27 +270,21 @@ public class LocationManager {
             ServerFaction serverFaction = (ServerFaction)claimAtCurrentLocation.getClaimOwner();
 
             if(serverFaction.getType().equals(ServerClaimType.EVENT) && player.isBeingTimed(TimerType.PROGRESSION)) {
-                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.2);
-                mcPlayer.getLocation().setDirection(knockback);
-                mcPlayer.setVelocity(knockback);
+                mcPlayer.setHealth(mcPlayer.getHealth() - 1.0);
                 mcPlayer.teleport(storedLocation);
                 mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you have unfinished progression");
                 return true;
             }
 
             if(serverFaction.getType().equals(ServerClaimType.EVENT) && player.isBeingTimed(TimerType.PVPPROT)) {
-                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.2);
-                mcPlayer.getLocation().setDirection(knockback);
-                mcPlayer.setVelocity(knockback);
+                mcPlayer.setHealth(mcPlayer.getHealth() - 1.0);
                 mcPlayer.teleport(storedLocation);
                 mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you have PvP protection");
                 return true;
             }
 
             if(serverFaction.getType().equals(ServerClaimType.SAFEZONE) && player.isBeingTimed(TimerType.TAG)) {
-                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.2);
-                mcPlayer.getLocation().setDirection(knockback);
-                mcPlayer.setVelocity(knockback);
+                mcPlayer.setHealth(mcPlayer.getHealth() - 1.0);
                 mcPlayer.teleport(storedLocation);
                 mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you are combat-tagged");
                 return true;
@@ -324,16 +313,16 @@ public class LocationManager {
         Location currentLocation = mcPlayer.getLocation();
 
         if (expected == null && found != null) {
-            performClaimChange(mcPlayer, expected, found);
+            performClaimChange(mcPlayer, null, found);
             return;
         }
 
         if (expected != null && found == null) {
-            performClaimChange(mcPlayer, expected, found);
+            performClaimChange(mcPlayer, expected, null);
             return;
         }
 
-        if (expected != null && found != null && !expected.getClaimID().equals(found.getClaimID())) {
+        if (expected != null && !expected.getClaimID().equals(found.getClaimID())) {
             performClaimChange(mcPlayer, expected, found);
             return;
         }
@@ -342,9 +331,8 @@ public class LocationManager {
             ToolBox.WorldLocations oldLocEnum = ToolBox.getLocationEnum(oldLocation);
             ToolBox.WorldLocations currentLocEnum = ToolBox.getLocationEnum(currentLocation);
 
-            if (oldLocEnum != currentLocEnum) {
+            if (oldLocEnum != currentLocEnum)
                 performZoneChange(mcPlayer, oldLocEnum, currentLocEnum);
-            }
         }
 
         if (found != null && found.getClaimOwner() instanceof ServerFaction && ((ServerFaction)found.getClaimOwner()).getType().equals(ServerClaimType.SAFEZONE)) {
@@ -358,18 +346,15 @@ public class LocationManager {
                 player.getTimer(TimerType.PROGRESSION).setPauseDiff(player.getTimer(TimerType.PROGRESSION).getExpire() - System.currentTimeMillis());
             }
         } else if (player.isBeingTimed(TimerType.PVPPROT) || player.isBeingTimed(TimerType.PROGRESSION)) {
-            if (player.isBeingTimed(TimerType.PVPPROT) && player.getTimer(TimerType.PVPPROT).isPaused()) {
+            if (player.isBeingTimed(TimerType.PVPPROT) && player.getTimer(TimerType.PVPPROT).isPaused())
                 player.getTimer(TimerType.PVPPROT).setPaused(false);
-            }
 
-            if (player.isBeingTimed(TimerType.PROGRESSION) && player.getTimer(TimerType.PROGRESSION).isPaused()) {
+            if (player.isBeingTimed(TimerType.PROGRESSION) && player.getTimer(TimerType.PROGRESSION).isPaused())
                 player.getTimer(TimerType.PROGRESSION).setPaused(false);
-            }
         }
 
-        if(!checkForInvalidLocation(mcPlayer)) {
+        if(!checkForInvalidLocation(mcPlayer))
             player.getLocation().setLastLocation(currentLocation);
-        }
 
         PlayerManager.updatePlayer(player);
     }

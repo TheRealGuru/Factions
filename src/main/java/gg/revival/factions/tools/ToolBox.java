@@ -89,8 +89,8 @@ public class ToolBox {
 
     public static boolean isWarzone(Location location) {
         if (isOverworld(location)) {
-            double x = location.getX();
-            double z = location.getZ();
+            double x = Math.abs(location.getX());
+            double z = Math.abs(location.getZ());
 
             if (x <= Configuration.WARZONE_RADIUS && z <= Configuration.WARZONE_RADIUS)
                 return true;
@@ -101,12 +101,11 @@ public class ToolBox {
 
     public static boolean isNonBuildableWarzone(Location location) {
         if (isWarzone(location)) {
-            double x = location.getX();
-            double z = location.getZ();
+            double x = Math.abs(location.getX());
+            double z = Math.abs(location.getZ());
 
-            if (x <= Configuration.BUILDABLE_WARZONE_RADIUS && z <= Configuration.BUILDABLE_WARZONE_RADIUS) {
+            if (x <= Configuration.BUILDABLE_WARZONE_RADIUS && z <= Configuration.BUILDABLE_WARZONE_RADIUS)
                 return true;
-            }
         }
 
         return false;
@@ -118,8 +117,8 @@ public class ToolBox {
 
     public static boolean isNetherWarzone(Location location) {
         if (isNether(location)) {
-            double x = location.getX();
-            double z = location.getZ();
+            double x = Math.abs(location.getX());
+            double z = Math.abs(location.getZ());
 
             if (x <= Configuration.NETHER_WARZONE_RADIUS && z <= Configuration.NETHER_WARZONE_RADIUS) {
                 return true;
@@ -136,9 +135,8 @@ public class ToolBox {
                 player.getLocation().getCurrentClaim().getClaimOwner() instanceof ServerFaction) {
             ServerFaction serverFaction = (ServerFaction) player.getLocation().getCurrentClaim().getClaimOwner();
 
-            if (serverFaction.getType().equals(ServerClaimType.SAFEZONE)) {
+            if (serverFaction.getType().equals(ServerClaimType.SAFEZONE))
                 return true;
-            }
         }
 
         return false;

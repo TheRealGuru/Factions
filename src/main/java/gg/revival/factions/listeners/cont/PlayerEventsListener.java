@@ -1,10 +1,13 @@
 package gg.revival.factions.listeners.cont;
 
 import gg.revival.factions.FP;
+import gg.revival.factions.claims.Claim;
 import gg.revival.factions.claims.ClaimManager;
 import gg.revival.factions.claims.ServerClaimType;
+import gg.revival.factions.core.FC;
 import gg.revival.factions.core.FactionManager;
 import gg.revival.factions.core.PlayerManager;
+import gg.revival.factions.core.events.obj.Event;
 import gg.revival.factions.locations.FLocation;
 import gg.revival.factions.obj.FPlayer;
 import gg.revival.factions.obj.PlayerFaction;
@@ -31,6 +34,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -75,7 +79,29 @@ public class PlayerEventsListener implements Listener {
 
         if (FactionManager.getFactionByPlayer(player.getUniqueId()) != null) {
             PlayerFaction faction = (PlayerFaction) FactionManager.getFactionByPlayer(player.getUniqueId());
-            faction.sendMessage(Messages.memberDeath(player.getName()));
+            BigDecimal subtractedDTR = BigDecimal.valueOf(1.0);
+
+            if (faction != null)
+
+            for (Event activeEvent : FC.getFactionsCore().getEvents().getEventManager().getActiveEvents()) {
+                if(activeEvent.getHookedFactionId() == null || FactionManager.getFactionByUUID(activeEvent.getHookedFactionId()) == null) continue;
+
+                ServerFaction eventFaction = (ServerFaction) FactionManager.getFactionByUUID(activeEvent.getHookedFactionId());
+
+                if(eventFaction == null || eventFaction.getClaims().isEmpty()) continue;
+
+                for (Claim claim : eventFaction.getClaims()) {
+                    if(!claim.inside(player.getLocation(), true)) continue;
+
+                    subtractedDTR = BigDecimal.valueOf(0.5);
+                }
+            }
+
+            if(faction != null) {
+                faction.setDtr(faction.getDtr().subtract(subtractedDTR));
+                faction.setUnfreezeTime(System.currentTimeMillis() + (Configuration.DTR_FREEZE_TIME * 1000L));
+                faction.sendMessage(Messages.memberDeath(player.getName()));
+            }
         }
     }
 
@@ -97,7 +123,7 @@ public class PlayerEventsListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.isCancelled())
             return;
