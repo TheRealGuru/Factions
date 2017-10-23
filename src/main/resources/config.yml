@@ -10,10 +10,8 @@ timers:
   home-warmup-other: 60
   stuck-warmup: 60
 
-chat-channels:
-  create:
-    min-name-length: 2
-    max-name-length: 10
+economy:
+  starting-balance: 300.0
 
 factions:
   dtr:

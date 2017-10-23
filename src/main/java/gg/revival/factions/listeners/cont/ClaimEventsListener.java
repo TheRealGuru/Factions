@@ -3,6 +3,7 @@ package gg.revival.factions.listeners.cont;
 import gg.revival.factions.claims.Claim;
 import gg.revival.factions.claims.ClaimManager;
 import gg.revival.factions.claims.ServerClaimType;
+import gg.revival.factions.core.FC;
 import gg.revival.factions.core.PlayerManager;
 import gg.revival.factions.locations.FLocation;
 import gg.revival.factions.obj.FPlayer;
@@ -66,6 +67,7 @@ public class ClaimEventsListener implements Listener {
 
     @EventHandler
     public void onItemDrop(PlayerDropItemEvent event) {
+        Player player = event.getPlayer();
         ItemStack item = event.getItemDrop().getItemStack();
 
         if (
@@ -74,6 +76,8 @@ public class ClaimEventsListener implements Listener {
                         item.getItemMeta().getDisplayName().equalsIgnoreCase(ToolBox.getClaimingStick().getItemMeta().getDisplayName())) {
 
             event.getItemDrop().remove();
+
+            ClaimManager.getClaimEditors().remove(player.getUniqueId());
         }
     }
 
@@ -86,6 +90,12 @@ public class ClaimEventsListener implements Listener {
 
             event.setCurrentItem(null);
             event.setCancelled(true);
+
+            if(event.getWhoClicked() instanceof Player) {
+                Player player = (Player)event.getWhoClicked();
+
+                ClaimManager.getClaimEditors().remove(player.getUniqueId());
+            }
         }
     }
 
@@ -399,6 +409,9 @@ public class ClaimEventsListener implements Listener {
             if (!claims.inside(block.getLocation(), false)) continue;
 
             if(claims.getClaimOwner() instanceof ServerFaction && clickables.contains(block.getType()) && !player.hasPermission(Permissions.ADMIN)) {
+                if(FC.getFactionsCore().getEvents().getChestManager().getEventChestByLocation(block.getLocation()) != null) // Returning here because they're probably trying to open an event chest
+                    return;
+
                 if(!block.getType().name().contains("PLATE"))
                     player.sendMessage(Messages.landClaimedBy(ChatColor.YELLOW + claims.getClaimOwner().getDisplayName()));
 

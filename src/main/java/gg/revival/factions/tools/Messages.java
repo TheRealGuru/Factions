@@ -734,7 +734,8 @@ public class Messages {
 
     public static void factionInfo(PlayerFaction faction, Player displayedTo) {
         StringBuilder info = new StringBuilder();
-        DecimalFormat format = new DecimalFormat("#,###.00");
+        DecimalFormat balanceFormat = new DecimalFormat("#,##0.00");
+        DecimalFormat dtrFormat = new DecimalFormat("0.0#");
 
         OfflinePlayerLookup.getManyOfflinePlayersByUUID(faction.getRoster(false), result -> {
             info.append(
@@ -758,28 +759,26 @@ public class Messages {
 
             info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Deaths Until Raidable" + ChatColor.WHITE + ": ");
 
-            if (faction.getDtr().doubleValue() < 0.0) {
-                info.append(ChatColor.DARK_RED + "" + faction.getDtr().doubleValue());
-            } else if (faction.getDtr().doubleValue() < 1.0) {
-                info.append(ChatColor.RED + "" + faction.getDtr().doubleValue());
-            } else {
-                info.append(faction.getDtr().doubleValue());
-            }
+            if (faction.getDtr().doubleValue() < 0.0)
+                info.append(ChatColor.DARK_RED + "" + dtrFormat.format(faction.getDtr().doubleValue()));
+            else if (faction.getDtr().doubleValue() < 1.0)
+                info.append(ChatColor.RED + "" + dtrFormat.format(faction.getDtr().doubleValue()));
+            else
+                info.append(dtrFormat.format(faction.getDtr().doubleValue()));
 
-            if (faction.isFrozen()) {
+            if (faction.isFrozen())
                 info.append(ChatColor.GRAY + " (Frozen)" + "\n");
-            } else if (faction.getDtr().doubleValue() < 0.0) {
+            else if (faction.getDtr().doubleValue() < 0.0)
                 info.append(ChatColor.RED + " (Raid-able)" + "\n");
-            } else if (faction.getDtr().doubleValue() == faction.getMaxDTR()) {
+            else if (faction.getDtr().doubleValue() == faction.getMaxDTR())
                 info.append(ChatColor.BLUE + " (Max)" + "\n");
-            } else {
+            else
                 info.append("\n");
-            }
 
-            info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Balance" + ChatColor.WHITE + ": $" + format.format(faction.getBalance()) + "\n");
+            info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Balance" + ChatColor.WHITE + ": $" + balanceFormat.format(faction.getBalance()) + "\n");
 
             if (!faction.getAllies().isEmpty()) {
-                List<String> allies = new ArrayList<String>();
+                List<String> allies = new ArrayList<>();
 
                 for (UUID allyID : faction.getAllies()) {
                     String factionName = FactionManager.getFactionByUUID(allyID).getDisplayName();
@@ -821,6 +820,10 @@ public class Messages {
                 info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Officers" + ChatColor.WHITE + ": " + "N/A" + "\n");
             } else {
                 info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Officers" + ChatColor.WHITE + ": " + Joiner.on(ChatColor.WHITE + ", ").join(onlineOfficers));
+
+                if(!onlineOfficers.isEmpty() && !offlineOfficers.isEmpty())
+                    info.append(" ");
+
                 info.append(Joiner.on(ChatColor.WHITE + ", ").join(offlineOfficers) + "\n");
             }
 
@@ -828,6 +831,10 @@ public class Messages {
                 info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Members" + ChatColor.WHITE + ": " + "N/A" + "\n");
             } else {
                 info.append(ChatColor.YELLOW + " - " + ChatColor.GOLD + "Members" + ChatColor.WHITE + ": " + Joiner.on(ChatColor.WHITE + ", ").join(onlineMembers));
+
+                if(!onlineMembers.isEmpty() && !offlineMembers.isEmpty())
+                    info.append(" ");
+
                 info.append(Joiner.on(ChatColor.WHITE + ", ").join(offlineMembers) + "\n");
             }
 
@@ -839,7 +846,7 @@ public class Messages {
                 minutes = seconds / 60;
                 hours = minutes / 60;
 
-                String unfreezeTime = null;
+                String unfreezeTime;
 
                 if (hours > 0) {
                     unfreezeTime = hours + " hours";
@@ -875,7 +882,7 @@ public class Messages {
 
         int startingPlace = page * 10;
         int finishingPlace = page + 10;
-        int cursor = 1;
+        int cursor = startingPlace;
 
         if (startingPlace > sortedFactionCounts.size()) {
             player.sendMessage(ChatColor.RED + "Invalid page number");
@@ -888,19 +895,16 @@ public class Messages {
 
         player.sendMessage(ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH +
                 "---------------" + ChatColor.GOLD + "" + ChatColor.BOLD +
-                "[ " + ChatColor.YELLOW + "Faction List (Page #" + (page + 1) + ") " + ChatColor.GOLD + "" + ChatColor.BOLD + "]"
+                "[ " + ChatColor.YELLOW + "Faction List (Page #" + page + ") " + ChatColor.GOLD + "" + ChatColor.BOLD + "]"
                 + ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "---------------");
 
         player.sendMessage("     " + "\n" + ChatColor.YELLOW + "Click a faction name to view more information" + ChatColor.RESET + "\n" + "     ");
 
         for (PlayerFaction factions : sortedFactionCounts.keySet()) {
-            if (cursor < startingPlace) {
-                cursor++;
-                continue;
-            }
-
-            if (cursor > finishingPlace)
+            if(cursor >= finishingPlace)
                 break;
+
+            cursor++;
 
             new FancyMessage(cursor + ". ")
                     .color(ChatColor.YELLOW)

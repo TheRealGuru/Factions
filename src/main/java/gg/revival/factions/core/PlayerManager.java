@@ -69,7 +69,7 @@ public class PlayerManager {
 
     public static void loadProfile(UUID uuid, boolean unsafe) {
         if (!Configuration.DB_ENABLED) {
-            loadPlayer(uuid, 0.0);
+            loadPlayer(uuid, Configuration.STARTING_BALANCE);
             return;
         }
 
@@ -94,7 +94,7 @@ public class PlayerManager {
 
                 loadPlayer(uuid, balance);
             } else {
-                loadPlayer(uuid, 0.0);
+                loadPlayer(uuid, Configuration.STARTING_BALANCE);
             }
         }
 
@@ -121,7 +121,7 @@ public class PlayerManager {
 
                         loadPlayer(uuid, balance);
                     } else {
-                        loadPlayer(uuid, 0.0);
+                        loadPlayer(uuid, Configuration.STARTING_BALANCE);
                     }
                 }
             }.runTaskAsynchronously(FP.getInstance());

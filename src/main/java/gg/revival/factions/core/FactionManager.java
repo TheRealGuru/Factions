@@ -295,11 +295,10 @@ public class FactionManager {
                         newDoc.append("homeLocation", LocationSerialization.serializeLocation(playerFaction.getHomeLocation()));
                     }
 
-                    if (document != null) {
+                    if (document != null)
                         collection.replaceOne(document, newDoc);
-                    } else {
+                    else
                         collection.insertOne(newDoc);
-                    }
 
                     if (!playerFaction.getClaims().isEmpty()) {
                         for (Claim claims : playerFaction.getClaims()) {
@@ -308,9 +307,8 @@ public class FactionManager {
                     }
 
                     if (!playerFaction.getSubclaims().isEmpty()) {
-                        for (Subclaim subclaims : playerFaction.getSubclaims()) {
+                        for (Subclaim subclaims : playerFaction.getSubclaims())
                             SubclaimManager.saveSubclaim(subclaims);
-                        }
                     }
                 } else {
                     ServerFaction serverFaction = (ServerFaction) faction;
@@ -319,11 +317,10 @@ public class FactionManager {
                             .append("displayName", serverFaction.getDisplayName())
                             .append("type", serverFaction.getType().toString());
 
-                    if (document != null) {
+                    if (document != null)
                         collection.replaceOne(document, newDoc);
-                    } else {
+                    else
                         collection.insertOne(newDoc);
-                    }
 
                     if (!serverFaction.getClaims().isEmpty()) {
                         for (Claim claims : serverFaction.getClaims()) {
@@ -402,16 +399,14 @@ public class FactionManager {
                         .append("displayName", serverFaction.getDisplayName())
                         .append("type", serverFaction.getType().toString());
 
-                if (document != null) {
+                if (document != null)
                     collection.replaceOne(document, newDoc);
-                } else {
+                else
                     collection.insertOne(newDoc);
-                }
 
                 if (!serverFaction.getClaims().isEmpty()) {
-                    for (Claim claims : serverFaction.getClaims()) {
+                    for (Claim claims : serverFaction.getClaims())
                         ClaimManager.unsafeSaveClaim(claims);
-                    }
                 }
             }
         };

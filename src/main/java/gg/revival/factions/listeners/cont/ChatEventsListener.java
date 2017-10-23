@@ -33,11 +33,21 @@ public class ChatEventsListener implements Listener {
         String tag = "";
 
         if (rank != null) {
+            String rankName = rank.getName();
             tag = ChatColor.translateAlternateColorCodes('&', rank.getTag());
 
-            if (player.hasPermission(Permissions.ADMIN) || player.hasPermission(Permissions.MOD) || player.hasPermission(Permissions.MANAGER)) {
-                tag = ChatColor.WHITE + "[" + tag + rank.getName() + ChatColor.WHITE + "]" + tag;
+            // Here we're checking to make sure the display name isn't so long it looks funny when people speak
+            if(rankName.length() > 16) {
+                StringBuilder smallRankName = new StringBuilder();
+
+                for(String words : rankName.split(" "))
+                    smallRankName.append(words.substring(0, 1).toUpperCase());
+
+                rankName = smallRankName.toString();
             }
+
+            if (player.hasPermission(Permissions.ADMIN) || player.hasPermission(Permissions.MOD) || player.hasPermission(Permissions.MANAGER))
+                tag = ChatColor.WHITE + "[" + tag + rankName + ChatColor.WHITE + "]" + tag;
         }
 
         if (faction != null && faction.getFactionChat().contains(player.getUniqueId())) {

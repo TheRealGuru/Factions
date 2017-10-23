@@ -8,9 +8,6 @@ commands:
   faction:
     description: Core Faction Command
     aliases: [f, t, team]
-  chatchannel:
-    description: Core Chat Channels Command
-    aliases: [cc]
   balance:
     description: Economy Command
     aliases: [bal, money, cash]

@@ -16,6 +16,7 @@ import gg.revival.factions.tools.ToolBox;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import java.util.UUID;
 
@@ -252,14 +253,18 @@ public class LocationManager {
             PlayerFaction playerFaction = (PlayerFaction)claimAtCurrentLocation.getClaimOwner();
 
             if(player.isBeingTimed(TimerType.PVPPROT)) {
-                mcPlayer.setHealth(mcPlayer.getHealth() - 1.0);
+                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.3);
+                mcPlayer.getLocation().setDirection(knockback);
+                mcPlayer.setVelocity(knockback);
                 mcPlayer.teleport(storedLocation);
                 mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you have PvP protection");
                 return true;
             }
 
             if(player.isBeingTimed(TimerType.PROGRESSION) && !playerFaction.getRoster(true).contains(mcPlayer.getUniqueId())) {
-                mcPlayer.setHealth(mcPlayer.getHealth() - 1.0);
+                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.3);
+                mcPlayer.getLocation().setDirection(knockback);
+                mcPlayer.setVelocity(knockback);
                 mcPlayer.teleport(storedLocation);
                 mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you have unfinished progression");
                 return true;
@@ -270,21 +275,27 @@ public class LocationManager {
             ServerFaction serverFaction = (ServerFaction)claimAtCurrentLocation.getClaimOwner();
 
             if(serverFaction.getType().equals(ServerClaimType.EVENT) && player.isBeingTimed(TimerType.PROGRESSION)) {
-                mcPlayer.setHealth(mcPlayer.getHealth() - 1.0);
+                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.3);
+                mcPlayer.getLocation().setDirection(knockback);
+                mcPlayer.setVelocity(knockback);
                 mcPlayer.teleport(storedLocation);
                 mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you have unfinished progression");
                 return true;
             }
 
             if(serverFaction.getType().equals(ServerClaimType.EVENT) && player.isBeingTimed(TimerType.PVPPROT)) {
-                mcPlayer.setHealth(mcPlayer.getHealth() - 1.0);
+                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.3);
+                mcPlayer.getLocation().setDirection(knockback);
+                mcPlayer.setVelocity(knockback);
                 mcPlayer.teleport(storedLocation);
                 mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you have PvP protection");
                 return true;
             }
 
             if(serverFaction.getType().equals(ServerClaimType.SAFEZONE) && player.isBeingTimed(TimerType.TAG)) {
-                mcPlayer.setHealth(mcPlayer.getHealth() - 1.0);
+                Vector knockback = storedLocation.toVector().subtract(mcPlayer.getLocation().toVector()).multiply(0.3);
+                mcPlayer.getLocation().setDirection(knockback);
+                mcPlayer.setVelocity(knockback);
                 mcPlayer.teleport(storedLocation);
                 mcPlayer.sendMessage(ChatColor.RED + "You are not allowed to enter this claim while you are combat-tagged");
                 return true;

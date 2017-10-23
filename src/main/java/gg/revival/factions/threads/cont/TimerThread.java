@@ -24,7 +24,7 @@ public class TimerThread {
 
             PlayerFaction faction = (PlayerFaction) factions;
 
-            for(Timer timers : faction.getTimersSnapshot()) {
+            for(Timer timers : faction.getTimers()) {
                 if (timers.isPaused()) {
                     timers.setExpire(System.currentTimeMillis() + timers.getPauseDiff());
                 }

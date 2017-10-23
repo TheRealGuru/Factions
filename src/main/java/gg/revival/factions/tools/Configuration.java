@@ -49,6 +49,8 @@ public class Configuration {
     public static int DISBAND_COOLDOWN = 300;
     public static int MAP_COOLDOWN = 15;
 
+    public static double STARTING_BALANCE = 300.0;
+
     public static void loadConfiguration() {
         DB_ENABLED = FileManager.getConfig().getBoolean("database.enabled");
         DB_NAME = FileManager.getConfig().getString("database.db");
@@ -94,6 +96,8 @@ public class Configuration {
         RENAME_COOLDOWN = FileManager.getConfig().getInt("timers.rename-cooldown");
         DISBAND_COOLDOWN = FileManager.getConfig().getInt("timers.disband-cooldown");
         MAP_COOLDOWN = FileManager.getConfig().getInt("timers.map-cooldown");
+
+        STARTING_BALANCE = FileManager.getConfig().getDouble("economy.starting-balance");
 
         Logger.log("Loaded configuration from config.yml");
     }

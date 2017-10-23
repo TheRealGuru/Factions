@@ -12,6 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 
 public class FAcceptCommand extends FCommand {
@@ -19,7 +20,7 @@ public class FAcceptCommand extends FCommand {
     public FAcceptCommand() {
         super(
                 "accept",
-                null,
+                Arrays.asList("join"),
                 "/f accept <faction>",
                 "Accept a faction invitation",
                 null,

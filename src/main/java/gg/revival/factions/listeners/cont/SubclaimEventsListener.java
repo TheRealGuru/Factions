@@ -253,7 +253,7 @@ public class SubclaimEventsListener implements Listener {
 
             if (currentItem.getType().equals(Material.ANVIL)) {
                 if (!subclaim.getSubclaimHolder().getLeader().equals(player.getUniqueId())) {
-                    if ((subclaim.isOfficerAccess() && !subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId())) || !subclaim.isOfficerAccess()) {
+                    if (!subclaim.isOfficerAccess() || !subclaim.getSubclaimHolder().getOfficers().contains(player.getUniqueId())) {
                         new BukkitRunnable() {
                             public void run() {
                                 player.closeInventory();
@@ -271,7 +271,6 @@ public class SubclaimEventsListener implements Listener {
                 new BukkitRunnable() {
                     public void run() {
                         player.closeInventory();
-                        ;
                     }
                 }.runTaskLater(FP.getInstance(), 1L);
             }
@@ -288,11 +287,10 @@ public class SubclaimEventsListener implements Listener {
         if (src instanceof Chest || src instanceof Hopper) {
             Location location;
 
-            if (src instanceof Chest) {
+            if (src instanceof Chest)
                 location = ((Chest) src).getLocation();
-            } else {
+            else
                 location = ((Hopper) src).getLocation();
-            }
 
             if (SubclaimManager.getSubclaimAt(location) != null) {
                 event.setCancelled(true);
@@ -303,16 +301,13 @@ public class SubclaimEventsListener implements Listener {
         if (dest instanceof Chest || dest instanceof Hopper) {
             Location location;
 
-            if (src instanceof Chest) {
+            if (dest instanceof Chest)
                 location = ((Chest) dest).getLocation();
-            } else {
+            else
                 location = ((Hopper) dest).getLocation();
-            }
 
-            if (SubclaimManager.getSubclaimAt(location) != null) {
+            if (SubclaimManager.getSubclaimAt(location) != null)
                 event.setCancelled(true);
-                return;
-            }
         }
     }
 

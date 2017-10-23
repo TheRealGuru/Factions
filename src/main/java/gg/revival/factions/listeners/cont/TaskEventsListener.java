@@ -88,6 +88,8 @@ public class TaskEventsListener implements Listener {
                 Player player = (Player) src;
                 FPlayer facPlayer = PlayerManager.getPlayer(player.getUniqueId());
 
+                if(facPlayer == null) return;
+
                 if (facPlayer.isBeingTimed(TimerType.HOME)) {
                     facPlayer.removeTimer(TimerType.HOME);
                     HomeTask.getStartingLocations().remove(player.getUniqueId());

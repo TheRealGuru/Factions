@@ -78,7 +78,7 @@ public class SubclaimGUI {
                 head.setItemMeta(skullMeta);
 
                 ItemMeta meta = head.getItemMeta();
-                List<String> lore = new ArrayList<String>();
+                List<String> lore = new ArrayList<>();
 
                 if (subclaim.getPlayerAccess().contains(members)) {
                     meta.setDisplayName(ChatColor.GREEN + name);
@@ -93,10 +93,10 @@ public class SubclaimGUI {
                 gui.addItem(head);
             }
 
-            ItemStack officerItem = null;
+            ItemStack officerItem;
             ItemStack delete = new ItemStack(Material.ANVIL);
 
-            ItemMeta officerMeta = null;
+            ItemMeta officerMeta;
             ItemMeta deleteMeta = delete.getItemMeta();
 
             if (subclaim.isOfficerAccess()) {

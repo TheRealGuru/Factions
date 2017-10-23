@@ -1,5 +1,6 @@
 package gg.revival.factions.obj;
 
+import com.google.common.collect.Sets;
 import gg.revival.factions.FP;
 import gg.revival.factions.timers.Timer;
 import gg.revival.factions.timers.TimerType;
@@ -15,6 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class PlayerFaction extends Faction {
@@ -26,7 +28,7 @@ public class PlayerFaction extends Faction {
     @Getter @Setter BigDecimal dtr;
     @Getter @Setter long regenTime, unfreezeTime;
     @Getter @Setter Location homeLocation;
-    @Getter @Setter List<Timer> timers;
+    @Getter @Setter Set<Timer> timers;
 
     public PlayerFaction(UUID factionID, String displayName, Location homeLocation, UUID leader,
                          List<UUID> officers, List<UUID> members, List<UUID> allies,
@@ -50,7 +52,7 @@ public class PlayerFaction extends Faction {
         this.dtr = dtr;
         this.regenTime = System.currentTimeMillis();
         this.unfreezeTime = unfreezeTime;
-        this.timers = new ArrayList<>();
+        this.timers = Sets.newConcurrentHashSet();
 
         new BukkitRunnable() {
             public void run() {
@@ -59,12 +61,6 @@ public class PlayerFaction extends Faction {
                 updateDTR();
             }
         }.runTaskTimerAsynchronously(FP.getInstance(), 0L, 20L);
-    }
-
-    public List<Timer> getTimersSnapshot() {
-        List<Timer> foundTimers = new ArrayList<>();
-        foundTimers.addAll(timers);
-        return foundTimers;
     }
 
     public List<UUID> getRoster(boolean onlineOnly) {
@@ -138,7 +134,7 @@ public class PlayerFaction extends Faction {
         if (!isBeingTimed(type))
             return null;
 
-        for(Timer timer : getTimersSnapshot()) {
+        for(Timer timer : timers) {
             if(timer.getType().equals(type)) {
                 return timer;
             }
@@ -151,7 +147,7 @@ public class PlayerFaction extends Faction {
         if (timers.isEmpty())
             return false;
 
-        for(Timer timer : getTimersSnapshot()) {
+        for(Timer timer : timers) {
             if(timer.getType().equals(type))
                 return true;
         }
