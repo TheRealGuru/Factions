@@ -1,6 +1,7 @@
 package gg.revival.factions.tools;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.Maps;
 import gg.revival.factions.commands.CmdCategory;
 import gg.revival.factions.commands.CommandManager;
 import gg.revival.factions.commands.FCommand;
@@ -15,7 +16,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Messages {
 
@@ -867,35 +871,42 @@ public class Messages {
     }
 
     public static void sendList(Player player, int page) {
-        Map<PlayerFaction, Integer> factionCounts = new HashMap<>();
+        Map<PlayerFaction, Integer> factionCounts = Maps.newHashMap();
 
-        for (Faction factions : FactionManager.getActiveFactions()) {
-            if (!(factions instanceof PlayerFaction)) continue;
-            if (factionCounts.containsKey(factions)) continue;
+        for(Faction factions : FactionManager.getActiveFactions()) {
+            if(!(factions instanceof PlayerFaction) || factionCounts.containsKey(factions)) continue;
 
-            PlayerFaction playerFactions = (PlayerFaction) factions;
+            PlayerFaction playerFaction = (PlayerFaction)factions;
 
-            factionCounts.put(playerFactions, playerFactions.getRoster(true).size());
+            factionCounts.put(playerFaction, playerFaction.getRoster(true).size());
         }
 
         Map<PlayerFaction, Integer> sortedFactionCounts = ToolBox.sortByValue(factionCounts);
 
-        int startingPlace = page * 10;
-        int finishingPlace = page + 10;
-        int cursor = startingPlace;
+        int startingPlace = page * 10, finishingPlace, cursor, displayPage = 1;
 
-        if (startingPlace > sortedFactionCounts.size()) {
-            player.sendMessage(ChatColor.RED + "Invalid page number");
+        if(startingPlace == 0) {
+            startingPlace = 0;
+            cursor = 1;
+        } else {
+            startingPlace -= 10;
+            cursor = startingPlace;
+            displayPage = page;
+        }
+
+        finishingPlace = (startingPlace + 10) + 1;
+
+        if(startingPlace > sortedFactionCounts.size()) {
+            player.sendMessage(ChatColor.RED + "Page not found");
             return;
         }
 
-        if (finishingPlace > sortedFactionCounts.size()) {
+        if(finishingPlace > sortedFactionCounts.size())
             finishingPlace = sortedFactionCounts.size();
-        }
 
         player.sendMessage(ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH +
                 "---------------" + ChatColor.GOLD + "" + ChatColor.BOLD +
-                "[ " + ChatColor.YELLOW + "Faction List (Page #" + page + ") " + ChatColor.GOLD + "" + ChatColor.BOLD + "]"
+                "[ " + ChatColor.YELLOW + "Faction List (Page #" + displayPage + ") " + ChatColor.GOLD + "" + ChatColor.BOLD + "]"
                 + ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "---------------");
 
         player.sendMessage("     " + "\n" + ChatColor.YELLOW + "Click a faction name to view more information" + ChatColor.RESET + "\n" + "     ");
@@ -903,8 +914,6 @@ public class Messages {
         for (PlayerFaction factions : sortedFactionCounts.keySet()) {
             if(cursor >= finishingPlace)
                 break;
-
-            cursor++;
 
             new FancyMessage(cursor + ". ")
                     .color(ChatColor.YELLOW)
@@ -918,6 +927,8 @@ public class Messages {
                     .then(" [" + factions.getDtr().doubleValue() + "/" + factions.getMaxDTR() + "DTR]")
                     .color(ChatColor.YELLOW)
                     .send(player);
+
+            cursor++;
         }
 
         player.sendMessage(ChatColor.DARK_GREEN + "" + ChatColor.STRIKETHROUGH + "-------------------------------------------------");

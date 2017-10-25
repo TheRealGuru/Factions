@@ -38,7 +38,7 @@ public class FListCommand extends FCommand {
             return;
         }
 
-        int page = 1;
+        int page = 0;
 
         if (args.length == 2) {
             if (!NumberUtils.isNumber(args[1])) {
@@ -48,8 +48,8 @@ public class FListCommand extends FCommand {
 
             page = Math.abs(Integer.valueOf(args[1]));
 
-            if (page == 0) //We do this so players could TECHNICALLY type /f list 0 and still view the first page
-                page = 1;
+            if (page == 1) //We do this so players could TECHNICALLY type /f list 1 and still view the first page
+                page = 0;
         }
 
         Messages.sendList(player, page);
