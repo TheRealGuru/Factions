@@ -60,7 +60,9 @@ public class Claim {
         return corner;
     }
 
-    boolean overlaps(double x1, double x2, double z1, double z2) {
+    boolean overlaps(double x1, double x2, double z1, double z2, World world) {
+        if(!world.getUID().equals(getWorld().getUID())) return false;
+
         double[] vals = new double[2];
 
         double xMin = Math.min(this.x1, this.x2);
@@ -80,9 +82,7 @@ public class Claim {
 
         Arrays.sort(vals);
 
-        if (zMin > vals[1] || zMax < vals[0]) return false;
-
-        return true;
+        return !(zMin > vals[1]) && !(zMax < vals[0]);
     }
 
     public boolean inside(Location loc, boolean isEntity) {

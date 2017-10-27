@@ -311,7 +311,7 @@ public class ClaimManager {
                 }
 
                 for (Claim claims : ClaimManager.getActiveClaims()) {
-                    if (claims.overlaps(x1, x2, z1, z2)) {
+                    if (claims.overlaps(x1, x2, z1, z2, pendingClaim.getPosA().getWorld())) {
                         player.sendMessage(Messages.claimOverlapping());
                         return;
                     }
@@ -348,7 +348,7 @@ public class ClaimManager {
                 ServerFaction serverFaction = (ServerFaction) faction;
 
                 for (Claim claims : ClaimManager.getActiveClaims()) {
-                    if (claims.overlaps(x1, x2, z1, z2)) {
+                    if (claims.overlaps(x1, x2, z1, z2, pendingClaim.getPosA().getWorld())) {
                         player.sendMessage(Messages.claimOverlapping());
                         return;
                     }

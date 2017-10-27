@@ -883,14 +883,12 @@ public class Messages {
 
         Map<PlayerFaction, Integer> sortedFactionCounts = ToolBox.sortByValue(factionCounts);
 
-        int startingPlace = page * 10, finishingPlace, cursor, displayPage = 1;
+        int startingPlace = page * 10, finishingPlace, cursor = 1, displayPage = 1;
 
         if(startingPlace == 0) {
             startingPlace = 0;
-            cursor = 1;
         } else {
             startingPlace -= 10;
-            cursor = startingPlace;
             displayPage = page;
         }
 
@@ -914,6 +912,11 @@ public class Messages {
         for (PlayerFaction factions : sortedFactionCounts.keySet()) {
             if(cursor >= finishingPlace)
                 break;
+
+            if(cursor < startingPlace) {
+                cursor++;
+                continue;
+            }
 
             new FancyMessage(cursor + ". ")
                     .color(ChatColor.YELLOW)
